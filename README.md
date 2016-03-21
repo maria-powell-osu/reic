@@ -1,1 +1,1 @@
-# reic
+# Real Estate Investment Calculator
