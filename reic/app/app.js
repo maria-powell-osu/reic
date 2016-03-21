@@ -12,12 +12,12 @@ App.config(['$interpolateProvider', function($interpolateProvider) {
 //Single Page Application Routing Set Up
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '../reic/templates/analyzeadeal.html',
+    templateUrl: '../reic/views/analyzeadeal.html',
   });
   $routeProvider.when('/howitworks', {
-    templateUrl: '../reic/templates/howitworks.html',
+    templateUrl: '../reic/views/howitworks.html',
   });
   $routeProvider.when('/contact', {
-    templateUrl: '../reic/templates/contact.html',
+    templateUrl: '../reic/views/contact.html',
   });
 });

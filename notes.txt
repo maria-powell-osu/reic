@@ -1,12 +1,14 @@
 What I am trying to do:
-	- I am trying to get the initial page set up
+	- create the home page 
 Where I left of:
-	- the routing needs to be properly set up 
-		- app.js, __init__.py
-	- then I can start design the layout
+	- start with navbar and picture background: look at http://leadpropeller.com/about
 
 Notes:
-	- I need to get a github page set up 
 
+Commit Changes:
+	- git add -A
+	- commit -m
+	- git push origin master
 
-http://leadpropeller.com/about 
+Sync with Master:
+	git pull origin master
