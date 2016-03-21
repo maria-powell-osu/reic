@@ -1,0 +1,58 @@
+application: realestatecalculator-1256
+version: test-001
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+
+#To look the browser tab logo
+#- url: /favicon\.ico
+#  static_files: static/images/favicon.ico
+#  upload: static/images/favicon\.ico
+
+- url: /reic
+  static_dir: reic
+
+- url: /static
+  static_dir: static
+
+- url: /js 
+  static_dir: js
+
+- url: /lib 
+  static_dir: lib
+
+- url: /bootstrap 
+  static_dir: bootstrap
+
+- url: /angular
+  static_dir: angular
+
+- url: /jquery
+  static_dir: jquery
+
+- url: /css
+  static_dir: css
+
+- url: /img 
+  static_dir: img
+
+- url: /partials
+  static_dir: partials
+
+- url: /templates
+  static_dir: templates
+
+  # [ the .app was added to specify that we are using a WSGI application
+  #   which is needed to enable threadsafe actions]
+- url: /.*
+  script: main.application 
+
+# [Libraries]
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+

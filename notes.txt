@@ -1,0 +1,12 @@
+What I am trying to do:
+	- I am trying to get the initial page set up
+Where I left of:
+	- the routing needs to be properly set up 
+		- app.js, __init__.py
+	- then I can start design the layout
+
+Notes:
+	- I need to get a github page set up 
+
+
+http://leadpropeller.com/about 

@@ -1,0 +1,19 @@
+.bg-black
+{
+	background-color: #000000;
+}
+.text-white
+{
+	color: white;
+}
+/* customize colors */
+#navBar a 
+{
+  	color:#444;
+  	font-weight:700;
+  	font-size:13pt;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+ }
