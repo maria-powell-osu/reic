@@ -1,3 +1,4 @@
+/*working verion
 body{
     background-image: url('/reic/app/img/portland_skyline_banner_dark.jpg');
     -webkit-background-size: cover;
@@ -6,7 +7,7 @@ body{
     background-size: cover;
     background-repeat: no-repeat; 
     background-color: #E0E0E0 !important; 
-    background-attachment: fixed; /*this makes the background not stretch*/
+    background-attachment: fixed; this makes the background not stretch
 }
 #bg
 {
@@ -14,13 +15,62 @@ body{
     background-size:60% auto;
     background-color: white;
     margin-top: 25%;
+}*/
+body
+{
+	background-color: #E0E0E0 !important; 
+}
+.bg_picture
+{
+	position: absolute;
+	width: 100%;
+	top:0;
+	left: 0;
+	height:500px;
+	background-image:url('/reic/app/img/portland_skyline_banner_dark.jpg');
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+    z-index: 1;
+}
+.content
+{
+	position: relative;
+	margin-top: 25%;
+}
+.content_inside
+{
+	position: relative;
+	z-index: 2;
 }
 .navbar {
 	border: none;
     border-radius: 0;
     background-color: rgba(0,0,0,0.5);
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
+    z-index:3;
 }
+.inpt
+{
+	border: solid 1pt #E0E0E0;
+}
+.dashedPlaceholder {
+    border: 2px dashed #999;
+    width: 100%;
+    height: 300px;
+    background: white;
+    margin: 10px 0px 50px 0px;
+    display: table;
+    text-align: center;
 
+}
+.innerDashedPlaceHolder
+{
+	display: table-cell;
+    vertical-align: middle;
+}

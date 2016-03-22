@@ -1,29 +1,36 @@
-<h1>Basic Property Information</h1>
+<h1 style="text-align: center;">Basic Property Information</h1>
+<br/>
+<form>
+  <div class="col-md-6 form-group">
+      <label for="propTitle">Report Title</label>
+      <input type="text" class="inpt form-control" name="propTitle" placeholder="Title"> 
+      <label for="preparedFor">Prepared For</label>
+      <input type="text" class="inpt form-control" name="preparedFor" placeholder="Prepared For"> 
 
-<span id="userInput">
-  Report Title<br/>
-  <input type="text" style="border:1px solid black" name="reportTitle"/> <br/>
+      <label for="street">Street Address</label>
+      <input type="text" class="inpt form-control" name="street" placeholder="Street Address">
+      
+      <label for="city">City</label>
+      <input type="text" class="inpt form-control" name="city" placeholder="City">
 
-  Prepared For <br/>
-  <input type="text" style="border:1px solid black" name="prepFor"/> <br/>
+      <label for="state">State</label>
+      <input type="text" class="inpt form-control" name="state" placeholder="State">  
 
-  Street Address <br/>
-  <input type="text" style="border:1px solid black" name="streetAddress"/> <br/>
-
-  City <br/>
-  <input type="text" style="border:1px solid black" name="city"/> <br/>
-
-  State <br/>
-  <input type="text" style="border:1px solid black" name="state"/> <br/>
-
-  Zip Code <br/>
-  <input type="text" style="border:1px solid black" name="zipCode"/> <br/>
-</span>
-<span>
-  Upload Photo <br/>
-  <input type="file" style="border:1px solid black" name="photo"/> <br/>
-</span>
-
-  Property Description <br/>
-  <input type="text" style="border:1px solid black" name="propertyDescription"/> <br/>
-</span>
+      <label for="zip">Zip Code</label>
+      <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
+  </div>
+  <div class="col-md-6">
+    <br/>
+    <div class="dashedPlaceholder">
+      <div class="innerDashedPlaceHolder">
+        <div style="color:#999;">Drag and Drop</div>
+        <div style="color:#999;">or</div>
+        <input type="button" value="Upload Picture">
+      </div>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+        <label for="description">Description</label>
+        <textarea name="description" rows="5" class="form-control" placeholder="Description"></textarea>
+  </div>
+</form>
