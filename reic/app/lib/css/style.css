@@ -1,25 +1,13 @@
 body{
-    background: url('/reic/app/img/portland_skyline_banner_dark.jpg') no-repeat center center fixed;
+    background-image: url('/reic/app/img/portland_skyline_banner_dark.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    margin-top: 12%;    
+    background-repeat: no-repeat;   
 }
-
-#bg{
-    
-    height: 500px;
-    background-size:100% auto;
-}
-#navbar 
-{
-    background-color: transparent;
-    background: transparent;
-}
-#navbar li a 
-{
-	color: black;
-	font-weight:700;
-	font-size: 13pt;
+.navbar {
+	border: none;
+    border-radius: 0;
+    background-color: rgba(0,0,0,0.5);
 }

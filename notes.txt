@@ -1,10 +1,9 @@
 What I am trying to do:
-	- 
+	- I need the navigation bar to look better
 Where I left of:
 	- 
 
 Notes:
-	- nav bar should turn a different color when scrolling
 	- change the bottom color
 
 Commit Changes:
@@ -19,7 +18,7 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 2.5
-	Coding: 3.5
+	Coding: 8.5
 
 	<div class="container">
 	       	<div class="row ">
