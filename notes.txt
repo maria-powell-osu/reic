@@ -1,9 +1,11 @@
 What I am trying to do:
-	- create the home page 
+	- 
 Where I left of:
-	- start with navbar and picture background: look at http://leadpropeller.com/about
+	- 
 
 Notes:
+	- nav bar should turn a different color when scrolling
+	- change the bottom color
 
 Commit Changes:
 	- git add -A
@@ -12,3 +14,27 @@ Commit Changes:
 
 Sync with Master:
 	git pull origin master
+
+
+Hours Tracking:
+
+	Research: 2.5
+	Coding: 3.5
+
+	<div class="container">
+	       	<div class="row ">
+	       		<!--moves 6 col wide over by 3 columns-->
+	       		<div class=".col-md-4 .col-md-offset-4 well">
+	       			<ng-view></ng-view>
+	       		</div>
+	       	</div>
+  		</div>
+
+
+  	<div class="container">
+       <div class="row">
+          <div class="col-md-2"></div>
+            <div class="col-md-8 col-sm-6 col-xs-12 well" id="bg"></div>
+            <div class="col-md-2"></div>
+       </div>
+  </div>
