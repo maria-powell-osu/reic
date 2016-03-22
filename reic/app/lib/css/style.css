@@ -4,10 +4,23 @@ body{
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat; 
+    background-color: #E0E0E0 !important; 
+    background-attachment: fixed; /*this makes the background not stretch*/
+}
+#bg
+{
+    background-repeat:  no-repeat ;
+    background-size:60% auto;
+    background-color: white;
+    margin-top: 25%;
 }
 .navbar {
 	border: none;
     border-radius: 0;
     background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
+
