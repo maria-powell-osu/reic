@@ -1,5 +1,5 @@
 What I am trying to do:
-	- I need the navigation bar to look better
+	- add more fields
 Where I left of:
 	- 
 
@@ -18,7 +18,7 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 2.5
-	Coding: 12.5
+	Coding: 15.0
 
 	<div class="container">
 	       	<div class="row ">
