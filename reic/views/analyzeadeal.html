@@ -1,36 +1,111 @@
 <h1 style="text-align: center;">Basic Property Information</h1>
 <br/>
 <form>
-  <div class="col-md-6 form-group">
-      <label for="propTitle">Report Title</label>
-      <input type="text" class="inpt form-control" name="propTitle" placeholder="Title"> 
-      <label for="preparedFor">Prepared For</label>
-      <input type="text" class="inpt form-control" name="preparedFor" placeholder="Prepared For"> 
+  <div class="row">
+    <div class="col-md-6 form-group">
+        <label for="propTitle">Report Title</label>
+        <input type="text" class="inpt form-control" name="propTitle" placeholder="Title"> 
+        <label for="preparedFor">Prepared For</label>
+        <input type="text" class="inpt form-control" name="preparedFor" placeholder="Prepared For"> 
 
-      <label for="street">Street Address</label>
-      <input type="text" class="inpt form-control" name="street" placeholder="Street Address">
-      
-      <label for="city">City</label>
-      <input type="text" class="inpt form-control" name="city" placeholder="City">
+        <label for="street">Street Address</label>
+        <input type="text" class="inpt form-control" name="street" placeholder="Street Address">
+        
+        <label for="city">City</label>
+        <input type="text" class="inpt form-control" name="city" placeholder="City">
 
-      <label for="state">State</label>
-      <input type="text" class="inpt form-control" name="state" placeholder="State">  
+        <label for="state">State</label>
+        <input type="text" class="inpt form-control" name="state" placeholder="State">  
 
-      <label for="zip">Zip Code</label>
-      <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
-  </div>
-  <div class="col-md-6">
-    <br/>
-    <div class="dashedPlaceholder">
-      <div class="innerDashedPlaceHolder">
-        <div style="color:#999;">Drag and Drop</div>
-        <div style="color:#999;">or</div>
-        <input type="button" value="Upload Picture">
+        <label for="zip">Zip Code</label>
+        <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
+    </div>
+    <div class="col-md-6">
+      <br/>
+      <div class="dashedPlaceholder">
+        <div class="innerDashedPlaceHolder">
+          <div style="color:#999;">Drag and Drop</div>
+          <div style="color:#999;">or</div>
+          <input type="button" value="Upload Picture">
+        </div>
       </div>
     </div>
+    <div class="form-group col-md-12">
+          <label for="description">Description</label>
+          <textarea name="description" rows="5" class="form-control" placeholder="Description"></textarea>
+    </div>
   </div>
-  <div class="form-group col-md-12">
-        <label for="description">Description</label>
-        <textarea name="description" rows="5" class="form-control" placeholder="Description"></textarea>
+  
+  <h1 style="text-align: center;">Loan Information</h1><br/>
+  <label class="radio-inline"><input type="radio" name="optradio">All Cash</label>
+  <label class="radio-inline"><input type="radio" name="optradio" checked="checked">Loan - Bank</label>
+  <label class="radio-inline"><input type="radio" name="optradio">Loan - Special Terms</label> 
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <label for="purchasePrice">Purchase Price</label>
+      <input type="text" class="inpt form-control" name="purchasePrice" placeholder="Purchase Price"> 
+      <label for="purchaseDate">Purchase Date</label>
+      <input type="text" class="inpt form-control" name="purchaseDate" placeholder="Purchase Date"> 
+
+      <label for="downPayment">Down Payment ($)</label>
+      <input type="text" class="inpt form-control" name="downPayment" placeholder="Down Payment">
+        
+      <label for="percentageLoan">Percentage of Loan</label>
+       <input type="text" class="inpt form-control" name="percentageLoan" placeholder="Percentage (%)">
+    </div>
+    <div class="col-md-6 form-group">
+      <label for="percentageInterest">Percentage of Interest</label>
+      <input type="text" class="inpt form-control" name="percentageInterest" placeholder="Percentage (%)">  
+
+      <label for="amortization">Amortization (yrs)</label>
+      <input type="text" class="inpt form-control" name="amortization" placeholder="Amortization (yrs)">
+
+      <label for="closingCost">Closing Cost %</label>
+      <input type="text" class="inpt form-control" name="closingCost" placeholder="Amortization">
+    </div>  
   </div>
+  
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <label>Add Second Loan Source</label>
+
+  <h1 style="text-align: center;">Income</h1><br/>
+
+  <div class="row">
+    <div class="col-md-4">
+      <label for="grossMonthlyIncome">Gross Monthly Income</label>
+      <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">
+    </div>
+    <div class="col-md-4">
+      <label for="numberOfUnits">Unit Name</label>
+      <input type="text" class="inpt form-control" name="numberOfUnits" placeholder="# of Unites">
+    </div>
+    <div class="col-md-4">
+      <label for="annualIncrease">Annual Increase</label>
+      <input type="text" class="inpt form-control" name="annualIncrease" placeholder="Annual Increase">
+    </div>
+  </div>
+
+  <br/>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <label>Add Unit</label><br/><br/>
+
+  <h1 style="text-align: center;">Supplemental Income</h1><br/>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label for="supplementalIncomeAmount">Amount</label>
+      <input type="text" class="inpt form-control" name="supplementalIncomeAmount" placeholder="Supplemental Income">
+    </div>
+    <div class="col-md-6">
+      <label for="supplementalIncomeDesc">Description</label>
+      <input type="text" class="inpt form-control" name="supplementalIncomeDesc" placeholder="Supplemental Income">
+    </div>
+  </div>
+
+  <br/>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <label>Add additional income source</label>
+  
 </form>

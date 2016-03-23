@@ -1,10 +1,12 @@
 What I am trying to do:
 	- add more fields
+	- textarea needs maxwidth
+	- colors should change
 Where I left of:
 	- 
 
 Notes:
-	- change the bottom color
+	- add collapse to the rest of the fields
 
 Commit Changes:
 	- git add -A
