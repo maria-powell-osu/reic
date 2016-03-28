@@ -20,15 +20,19 @@
         <label for="zip">Zip Code</label>
         <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
     </div>
-    <div class="col-md-6" ng-controller="FileController">
-      <br/>
-      <input  type="file" filereader="imgUpload.src" id="filereader"/>
-      <div class="dashedPlaceholder" droppable="[image/png, image/jpeg, image/gif]" file="imgUpload.src" file-name="imageFileName">
-        <img ng-src="{{ imgUpload.src }}" class="img-responsive">
+    <div class="col-md-6" ng-controller="FileController"><br/>     
+      <div class="dashedPlaceholder" droppable="[image/png, image/jpeg, image/gif]" file="imgUpload.src" file-name="imageFileName" id="dashedDiv">
+        <img ng-src="{{ imgUpload.src }}" class="img-responsive" id="propertyImage">
         <div class="innerDashedPlaceHolder">
-          <div style="color:#999;" id="dropFileText">Drop Files Here</div>
+          <div style="color:#999;">Drop Files Here</div>
+          <div style="color:#999;">or</div>
+          <!-- the input file button is hidden because i do not like it's styling
+          the second type input button just rerouted to activate the input file type button -->
+          <input  type="file" filereader="imgUpload.src" id="filereader" style="display: none;" />
+          <input type="button" value="Browse..." onclick="document.getElementById('filereader').click();" />
         </div>
       </div>
+      <button type="clear" class="btn" style="display:none" id="removeImage" removeimage="imgUpload.src">Remove Image</button>
     </div>
     <div class="form-group col-md-12">
           <label for="propDescription">Description</label>

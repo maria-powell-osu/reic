@@ -33,8 +33,8 @@ App.directive('droppable', function() {
 				event.originalEvent.dataTransfer.effectAllowed = 'copy';
 
 				//add styling 
-				element.removeClass("dashedPlaceholder");
-                element.addClass("dashedHoverPlaceholder");
+				$( "#dashedDiv").removeClass("dashedPlaceholder");
+                $( "#dashedDiv").addClass("dashedHoverPlaceholder");
 
 				return false;
 			});
@@ -42,8 +42,8 @@ App.directive('droppable', function() {
 			//Add event handler for drag end events for styling only
 			element.bind('dragleave dragend dragexit', function (event) {
 				//add styling 
-				element.removeClass("dashedHoverPlaceholder");
-                element.addClass("dashedPlaceholder");
+				$( "#dashedDiv").removeClass("dashedHoverPlaceholder");
+                $( "#dashedDiv").addClass("dashedPlaceholder");
 			});
 
 			//Add event handler for drop event
@@ -51,10 +51,6 @@ App.directive('droppable', function() {
 				var file, fileName, fileSize, fileType,
 				fileReader = new FileReader();
 
-				//Styling
-				element.removeClass("dashedHoverPlaceholder");
-				$( "#dropFileText" ).hide();
-				$( "#filereader" ).hide();
 
 				if (event != null) {
 					event.preventDefault();
@@ -63,6 +59,8 @@ App.directive('droppable', function() {
 				//triggered when reading completed
 				fileReader.onload = function (event) {
 					if (checkFileType(fileType)) {
+						//New styling after picture added
+						pictureAddedStyling();
 						return scope.$apply(function () {
 							scope.file = event.target.result;
 							if (angular.isString(scope.fileName)) {
@@ -102,6 +100,7 @@ App.directive('droppable', function() {
 		},
 		link: function (scope, element, attrs) {
 			element.bind("change", function (changeEvent) {
+
 				var reader = new FileReader();
 				//triggered when reading completed
 				reader.onload = function (loadEvent) {
@@ -111,7 +110,43 @@ App.directive('droppable', function() {
 				}
 				//Begins reading from blob as a 'data:' url string: for images
 				reader.readAsDataURL(changeEvent.target.files[0]);
+
+				//New styling after picture added
+				pictureAddedStyling();
 			});
 		}
 	}
 }]);
+
+App.directive('removeimage', function() {
+	return {
+		scope: {
+			imageSource: "="
+		},
+		link: function (scope, element, attrs) {
+			element.bind("click", function (event) {
+				$( "#propertyImage").hide();
+				$(".innerDashedPlaceHolder" ).show();
+			});
+		}
+	};
+
+});
+
+
+
+/*
+ * Purpose: Helper method to style the image box after user added picture
+ * Params: 
+ */
+function pictureAddedStyling () {
+	//Remove the hover style effect in case it was invoked before
+	$("#dashedDiv").removeClass("dashedHoverPlaceholder");
+	//Add Styling for original dashed box
+	$("#dashedDiv").addClass("dashedPlaceholder");
+	//Remove the drop text since picture is added
+	$(".innerDashedPlaceHolder" ).hide();
+	//Show delete image button
+	$("#removeImage").show();
+	$( "#propertyImage").show();
+}
