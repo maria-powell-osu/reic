@@ -1,8 +1,7 @@
 What I am trying to do:
-	- drag and drop to work
+	- delete image not working; I am just hiding it from the screen
 Where I left of:
-	- I had added simple jquerui droppable and draggable events but not working with imgs because they are not marked as draggable
-	- I left at looking at this code http://codepen.io/whusterj/pen/ijFgA 
+	- at this point start with the layout additions 
 
 Notes:
 	- 

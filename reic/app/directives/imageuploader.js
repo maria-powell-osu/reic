@@ -120,13 +120,12 @@ App.directive('droppable', function() {
 
 App.directive('removeimage', function() {
 	return {
-		scope: {
-			imageSource: "="
-		},
+		scope: {},
 		link: function (scope, element, attrs) {
 			element.bind("click", function (event) {
 				$( "#propertyImage").hide();
 				$(".innerDashedPlaceHolder" ).show();
+				$( "#removeImage").hide();
 			});
 		}
 	};
