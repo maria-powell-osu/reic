@@ -20,13 +20,13 @@
         <label for="zip">Zip Code</label>
         <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller="FileController">
       <br/>
-      <div class="dashedPlaceholder">
+      <input  type="file" filereader="imgUpload.src" id="filereader"/>
+      <div class="dashedPlaceholder" droppable="[image/png, image/jpeg, image/gif]" file="imgUpload.src" file-name="imageFileName">
+        <img ng-src="{{ imgUpload.src }}" class="img-responsive">
         <div class="innerDashedPlaceHolder">
-          <div style="color:#999;">Drag and Drop</div>
-          <div style="color:#999;">or</div>
-          <input type="button" value="Upload Picture">
+          <div style="color:#999;" id="dropFileText">Drop Files Here</div>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
       <label for="purchasePrice">Purchase Price</label>
       <input type="text" class="inpt form-control" name="purchasePrice" placeholder="Purchase Price"> 
       <label for="purchaseDate">Purchase Date</label>
-      <input type="text" class="inpt form-control" name="purchaseDate" ng-model="date" jqdatepicker> 
+      <input type="text" class="inpt form-control" name="purchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date"> 
 
 
       <label for="downPayment">Down Payment ($)</label>
@@ -201,7 +201,7 @@
     </div>
     <div class="col-md-4">
       <label for="capExpendituresExpenseDate">Date</label>
-      <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker>
+      <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
     </div>
   </div>
 
@@ -217,7 +217,7 @@
     </div>
     <div class="col-md-6">
       <label for="arvDate">ARV Date</label>
-      <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker/> 
+      <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker placeholder="Click to enter date"/> 
       
     </div>
   </div>
