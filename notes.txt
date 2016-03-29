@@ -1,9 +1,8 @@
 What I am trying to do:
-	- Issues 
-			- centering in IE (maybe input image instead?)
-			- delete image not working; I am just hiding it from the screen
+	- I am trying to add a new line
 Where I left of:
-	- at this point start with the layout additions 
+	- I can add line but all ids are the same
+	- let's try to make this work with ng-repeat
 
 Notes:
 	- 
@@ -15,7 +14,11 @@ Discuss with Jason:
  	- extra towards loan ? 
 
 Worklist:
+	- navigation bar display fix
 	- Delete the image properly
+	- center the drag and drop center file
+
+Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
 	- minify all files before final deployment 
 

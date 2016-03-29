@@ -20,6 +20,9 @@
 
           <label for="zip">Zip Code</label>
           <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
+
+          <label for="capRate">Typical Cap Rate</label>
+          <input type="text" class="inpt form-control" name="capRate" placeholder="Typical Cap Rate %">
       </div>
       <div class="col-md-6" ng-controller="FileController"><br/>     
         <div class="dashedPlaceholder" droppable="[image/png, image/jpeg, image/gif]" file="imgUpload.src" file-name="imageFileName" id="dashedDiv">
@@ -42,8 +45,8 @@
     </div>
   </div>
   
-  <h1 style="text-align: center;">Loan Information</h1><br/>
   <div id="loanInformation" ng-controller="RadioController">
+    <h1 style="text-align: center;">Loan Information</h1><br/>
     <div class="row">
       <div class="col-md-12 form-group">
         <md-radio-group ng-model="loanInfoView" layout="row" layout-xs="column" class="md-primary md-hue-2">
@@ -57,7 +60,9 @@
     Which one will be shown is based on the radio buttons above 
     Note that bankLoan is the default-->
     <div id="bankLoanView" ng-show="loanInfoView == 'bankLoan'">
-      <div class="row">
+      <input type="number" id="rwCountBankLoanView" style="display: none;"></input>
+      <div class="row" id="rwBankLoanView">
+        <h4>1. Loan</h4>
         <div class="col-md-6 form-group">
           <label for="purchasePrice">Purchase Price</label>
           <input type="text" class="inpt form-control" name="purchasePrice" placeholder="Purchase Price"> 
@@ -82,15 +87,20 @@
           <input type="text" class="inpt form-control" name="closingCost" placeholder="Amortization">
         </div>  
       </div>
-      
-      <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
-      <label>Add Second Loan Source</label>
+      <div add-bank-loan-view>
+        <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+        <label>Add Second Loan Source</label>
+      </div>
     </div>
     <div id="cashView" ng-show="loanInfoView == 'cash'">
       <div class="row">
         <div class="col-md-6 form-group">
           <label for="purchasePrice">Purchase Price</label>
           <input type="text" class="inpt form-control" name="purchasePrice" placeholder="Purchase Price"> 
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="purchaseDate">Purchase Date</label>
+          <input type="text" class="inpt form-control" name="purchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
         </div>
       </div>
     </div>
@@ -134,25 +144,30 @@
             </div>
           </div>
       </div>
+      <br/>
+      <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+      <label>Add Second Loan Source</label>
     </div>
+    
   </div>
 
-  <h1 style="text-align: center;">Income Sources</h1><br/>
   <div id="incomeSources">
+    <h1 style="text-align: center;">Income Sources</h1><br/>
     <h3>Units Income</h3><br/>
 
     <div class="row">
-      <div class="col-md-4">
-        <label for="grossMonthlyIncome">Gross Monthly Income</label>
-        <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="unitIncome">Unit Name</label>
         <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
+        <label for="grossMonthlyIncome">Gross Monthly Income</label>
+        <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="annualRentIncrease">Annual Rent Increase</label>
         <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
+
+        <label for="desiredReturn">Desired Cash on Cash Return</label>
+        <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
       </div>
     </div>
 
@@ -178,8 +193,8 @@
     <label>Add additional income source</label>
   </div>
   
-  <h1 style="text-align: center;">Expenses</h1><br/>
   <div id="expenses">
+    <h1 style="text-align: center;">Expenses</h1><br/>
     <h3>Utilities</h3><br/>
     <div class="row">
       <div class="col-md-6">
