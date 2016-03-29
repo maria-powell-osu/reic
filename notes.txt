@@ -1,5 +1,7 @@
 What I am trying to do:
-	- delete image not working; I am just hiding it from the screen
+	- Issues 
+			- centering in IE (maybe input image instead?)
+			- delete image not working; I am just hiding it from the screen
 Where I left of:
 	- at this point start with the layout additions 
 
@@ -30,5 +32,5 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 31.5
+	Coding: 32.5
 

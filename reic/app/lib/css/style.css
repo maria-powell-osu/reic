@@ -67,7 +67,6 @@ body
     background: white;
     display: table;
     text-align: center;
-
 }
 .dashedHoverPlaceholder {
     border: 2px dashed #26267f;
@@ -96,4 +95,12 @@ textarea
 {
 	width: auto;
 	height:50px;
+}
+#propertyImage
+{
+	/* Make images fill their parent's space. Solves IE issues. */
+	width: inherit;  
+	max-width: 100%; 
+	height: auto;    
+	max-height: 300px;
 }

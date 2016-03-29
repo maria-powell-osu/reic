@@ -30,7 +30,7 @@ App.directive('droppable', function() {
 					event.preventDefault();
 				}
 				//Specifies that only copies are allowed for drag operation
-				event.originalEvent.dataTransfer.effectAllowed = 'copy';
+				//event.originalEvent.dataTransfer.effectAllowed = 'copy';
 
 				//add styling 
 				$( "#dashedDiv").removeClass("dashedPlaceholder");
