@@ -1,13 +1,6 @@
 'use strict';
 
-var App = angular.module('App', ['ngRoute']);
-
-/*//I change the AngularJS delimiters because JINJA uses the same delimiters and it caused errors
-//In this app just use "{[ ]}" instead of "{{ }}"
-App.config(['$interpolateProvider', function($interpolateProvider) {
-  $interpolateProvider.startSymbol('{[');
-  $interpolateProvider.endSymbol(']}');
-}]);*/
+var App = angular.module('App', ['ngRoute', 'ngMaterial']);
 
 //Single Page Application Routing Set Up
 App.config(function($routeProvider) {
@@ -21,4 +14,11 @@ App.config(function($routeProvider) {
   $routeProvider.when('/contact', {
     templateUrl: '../reic/views/contact.html',
   });
+});
+
+//Set the color theme for ng material (radio buttons)
+//Note: it came with pink and blue only and I wanted black
+App.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('grey');
 });

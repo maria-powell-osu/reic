@@ -6,6 +6,18 @@ Where I left of:
 Notes:
 	- 
 
+Discuss with Jason:
+ 	- required fields
+ 	- have him come up with the ? content
+ 	- have him start on the how to page
+ 	- extra towards loan ? 
+
+Worklist:
+	- Delete the image properly
+	- figure out how to optimized script loading (CDN, combining js files, etc.)
+	- minify all files before final deployment 
+
+
 Commit Changes:
 	- git add -A
 	- commit -m
@@ -18,5 +30,5 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 25
+	Coding: 31.5
 
