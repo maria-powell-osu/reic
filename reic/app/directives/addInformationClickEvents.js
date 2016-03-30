@@ -15,7 +15,7 @@ App.directive('addBankLoanView', function() {
 
     			//Insert Header Element
 
-    			//Clone 
+    			//Clone first row and clear it's values
     			var newRow = $('#rwBankLoanView').clone().find("input:text").val("").end()
 
 				$("#rwBankLoanView").after(newRow);

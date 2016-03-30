@@ -1,21 +1,3 @@
-/*working verion
-body{
-    background-image: url('/reic/app/img/portland_skyline_banner_dark.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-color: #E0E0E0 !important; 
-    background-attachment: fixed; this makes the background not stretch
-}
-#bg
-{
-    background-repeat:  no-repeat ;
-    background-size:60% auto;
-    background-color: white;
-    margin-top: 25%;
-}*/
 body
 {
 	background-color: #f3f3f3 !important; 
@@ -103,4 +85,7 @@ textarea
 	max-width: 100%; 
 	height: auto;    
 	max-height: 300px;
+}
+input[type="radio"]{
+  margin: 0 0px 0 10px;
 }

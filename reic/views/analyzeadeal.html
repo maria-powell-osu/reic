@@ -48,12 +48,13 @@
   <div id="loanInformation" ng-controller="RadioController">
     <h1 style="text-align: center;">Loan Information</h1><br/>
     <div class="row">
-      <div class="col-md-12 form-group">
-        <md-radio-group ng-model="loanInfoView" layout="row" layout-xs="column" class="md-primary md-hue-2">
-          <md-radio-button value="cash">All Cash</md-radio-button>
-          <md-radio-button value="bankLoan">Loan - Bank</md-radio-button>
-          <md-radio-button value="specialTermsLoan">Loan - Special Terms</md-radio-button>
-        </md-radio-group>
+      <div class="col-md-12 form-group" ng-model="loanInfoView">
+          <input type="radio" ng-model="loanInfoView" value="cash" >
+          Cash
+          <input type="radio" value="bankLoan" ng-model="loanInfoView">
+          Loan - Bank
+          <input type="radio" value="specialTermsLoan" ng-model="loanInfoView">
+          Loan - Special Terms
       </div>
     </div>
     <!-- To follow are three divs (bankLoanView, cashView, specialTermsView).
