@@ -1,0 +1,27 @@
+    <h1 style="text-align: center;">Loan Information</h1><br/>
+    <div class="row">
+      <div class="col-md-12 form-group" ng-model="loanInfoView">
+          <input type="radio" ng-model="loanInfoView" value="cash" >
+          Cash
+          <input type="radio" value="bankLoan" ng-model="loanInfoView">
+          Loan - Bank
+          <input type="radio" value="specialTermsLoan" ng-model="loanInfoView">
+          Loan - Special Terms
+      </div>
+    </div>
+
+    <!-- The next three views get loaded based on radio input.
+          ng-disabled: disables the view so that it does not get submitted
+          ng-hide:  hides the view from the user 
+    -->
+    <div id="bankLoanView" ng-disabled="loanInfoView != 'bankLoan'" ng-hide="loanInfoView != 'bankLoan'" bank-loan-view></div>
+    
+    <div id="cashView" ng-show="loanInfoView == 'cash'" cash-view></div>
+    
+    <div id="specialTermsLoanView" ng-show="loanInfoView == 'specialTermsLoan'" special-terms-loan-view></div>
+
+    <!-- Add New Loan Type -->
+    <div add-loan-view ng-show="loanInfoView == 'specialTermsLoan' || loanInfoView == 'bankLoan'">
+        <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+        <label>Add Second Loan Source</label>
+      </div>

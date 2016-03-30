@@ -1,0 +1,120 @@
+
+    <h1 style="text-align: center;">Expenses</h1><br/>
+    <h3>Utilities</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="waterExpense">Water</label>
+        <input type="text" class="inpt form-control" name="waterExpense" placeholder="Water">
+
+        <label for="sewerExpense">Sewer</label>
+        <input type="text" class="inpt form-control" name="sewerExpense" placeholder="Sewer">
+
+        <label for="garbageExpense">Garbage</label>
+        <input type="text" class="inpt form-control" name="garbageExpense" placeholder="Garbage">
+      </div>
+      <div class="col-md-6">
+        <label for="electricityExpense">Electricity</label>
+        <input type="text" class="inpt form-control" name="electricityExpense" placeholder="Electricity">
+
+        <label for="naturalGasExpense">Natural Gas</label>
+        <input type="text" class="inpt form-control" name="naturalGasExpense" placeholder="Natural Gas">
+
+        <label for="internetExpense">Internet</label>
+        <input type="text" class="inpt form-control" name="internetExpense" placeholder="Internet">
+      </div>
+    </div>
+
+    <br/>
+    <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+    <label>Add Utility</label>
+
+    <h3>Maintenance</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="maitenanceExpense">$/Month</label>
+        <input type="text" class="inpt form-control" name="maitenanceExpense" placeholder="Estimated Maitenance Cost">
+      </div>
+      <div class="col-md-6">
+        <label for="percentRentsExpense">% of gross monthly rents</label>
+        <input type="text" class="inpt form-control" name="percentRentsExpense" placeholder="% of gross monthly rents">
+      </div>
+    </div>
+
+    <h3>Other</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="yardMaitenanceExpense">Yard Maintenance</label>
+        <input type="text" class="inpt form-control" name="yardMaitenanceExpense" placeholder="$/Month">
+
+        <label for="percentVacancyRateExpense">% of Vacancy Rate</label>
+        <input type="text" class="inpt form-control" name="percentVacancyRateExpense" placeholder="% of Vacancy Rate">
+      </div>
+      <div class="col-md-6">
+        <label for="insuranceExpense">Insurance Expenses ($/month)</label>
+        <input type="text" class="inpt form-control" name="insuranceExpense" placeholder="Insurance Expenses ($/month)">
+
+        <label for="propTaxExpense">Property Taxes ($/year)</label>
+        <input type="text" class="inpt form-control" name="propTaxExpense" placeholder="Property Taxes ($/year)">
+      </div>
+    </div>
+
+    <br/>
+    <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+    <label>Add Other Expense</label>
+
+    <h3>Property Management</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="propManagmentExpense">$/Month</label>
+        <input type="text" class="inpt form-control" name="propManagmentExpense" placeholder="Dollars per Month">
+        <label for="tenantPlaceMentExpense">Tenant Placement Fee</label>
+        <input type="text" class="inpt form-control" name="tenantPlaceMentExpense" placeholder="Tenant Placement Fee will be converted to monthly cost based on vacancy inputted">
+      </div>
+      <div class="col-md-6">
+        <label for="percentGrossRents">% of gross rents</label>
+        <input type="text" class="inpt form-control" name="percentGrossRents" placeholder="% of gross rents">
+      </div>
+    </div>
+
+    <h3>Capital Expenditures</h3><br/>
+    <div class="row">
+      <div class="col-md-4">
+        <label for="capExpentituresExpenseAmount">Amount (in $)</label>
+        <input type="text" class="inpt form-control" name="capExpentituresExpenseAmount" placeholder="Capital Expenditures Amount">
+
+      </div>
+      <div class="col-md-4">
+        <label for="capExpentituresExpenseDesc">Description</label>
+        <input type="text" class="inpt form-control" name="capExpentituresExpenseDesc" placeholder="Description">
+      </div>
+      <div class="col-md-4">
+        <label for="capExpendituresExpenseDate">Date</label>
+        <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
+      </div>
+    </div>
+
+    <br/>
+    <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+    <label>Add Capital Expediture</label> 
+
+    <h3>Manual Value Entry</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="afterRepairValue">After Repair Value (ARV)</label>
+        <input type="text" class="inpt form-control" name="afterRepairValue" placeholder="After Repair Value">
+      </div>
+      <div class="col-md-6">
+        <label for="arvDate">ARV Date</label>
+        <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker placeholder="Click to enter date"/> 
+        
+      </div>
+    </div>
+
+    <h3>Appreciation</h3><br/>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="assumedAnnualAppreciation">Assumed Annual Appreciation (%)</label>
+        <input type="text" class="inpt form-control" name="assumedAnnualAppreciation" placeholder="Percentage">
+      </div>
+    </div>
+  
