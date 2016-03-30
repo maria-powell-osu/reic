@@ -1,5 +1,6 @@
 App.controller('RadioController', ['$scope', function ($scope){
-	//bank loan is the default view 
+	//set bank loan to be the default radio button 
 	 $scope.loanInfoView = 'bankLoan';
-	 $scope.specialTermsInterestOption = '';
+	 $scope.specialTermsInterestOption1 = 'no';
+	 $scope.specialTermsInterestOption2 = 'no';
 }]);

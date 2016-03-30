@@ -16,6 +16,7 @@ Discuss with Jason:
 Worklist:
 	- navigation bar display fix on hover
 	- radio buttons on small screen
+	- make the radio buttons look nicer
 	- Delete the image properly
 	- center the drag and drop center file
 
