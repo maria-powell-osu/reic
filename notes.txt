@@ -22,6 +22,7 @@ Worklist:
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
+	- how to make loading faster? a loader for website?
 	- minify all files before final deployment 
 
 

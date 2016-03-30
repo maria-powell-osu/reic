@@ -23,7 +23,7 @@ App.directive('loanInformation', function() {
  */
 App.directive('bankLoanView', function() {
   return {
-    templateUrl: '/reic/views/templates/bankLoanView.html'
+    templateUrl: '/reic/views/templates/loanInformationViews/bankLoanView.html'
   };
 });
 
@@ -32,7 +32,7 @@ App.directive('bankLoanView', function() {
  */
 App.directive('cashView', function() {
   return {
-    templateUrl: '/reic/views/templates/cashView.html'
+    templateUrl: '/reic/views/templates/loanInformationViews/cashView.html'
   };
 });
 
@@ -41,7 +41,7 @@ App.directive('cashView', function() {
  */
 App.directive('specialTermsLoanView', function() {
   return {
-    templateUrl: '/reic/views/templates/specialTermsLoanView.html'
+    templateUrl: '/reic/views/templates/loanInformationViews/specialTermsLoanView.html'
   };
 });
 
