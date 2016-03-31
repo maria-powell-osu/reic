@@ -1,6 +1,4 @@
 What I am trying to do:
-	- "Add other expense functionality"
-	- remove two items from income view
 Where I left of:
 	- 
 
