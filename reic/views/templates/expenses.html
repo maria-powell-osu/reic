@@ -1,32 +1,56 @@
-
     <h1 style="text-align: center;">Expenses</h1><br/>
-    <h3>Utilities</h3><br/>
-    <div class="row">
-      <div class="col-md-6">
-        <label for="waterExpense">Water</label>
-        <input type="text" class="inpt form-control" name="waterExpense" placeholder="Water">
+    <div ng-controller="AddUtilityController">
+      <h3>Utilities</h3><br/>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="waterExpense">Water</label>
+          <input type="text" class="inpt form-control" name="waterExpense" placeholder="Water">
 
-        <label for="sewerExpense">Sewer</label>
-        <input type="text" class="inpt form-control" name="sewerExpense" placeholder="Sewer">
+          <label for="sewerExpense">Sewer</label>
+          <input type="text" class="inpt form-control" name="sewerExpense" placeholder="Sewer">
 
-        <label for="garbageExpense">Garbage</label>
-        <input type="text" class="inpt form-control" name="garbageExpense" placeholder="Garbage">
+          <label for="garbageExpense">Garbage</label>
+          <input type="text" class="inpt form-control" name="garbageExpense" placeholder="Garbage">
+        </div>
+        <div class="col-md-6">
+          <label for="electricityExpense">Electricity</label>
+          <input type="text" class="inpt form-control" name="electricityExpense" placeholder="Electricity">
+
+          <label for="naturalGasExpense">Natural Gas</label>
+          <input type="text" class="inpt form-control" name="naturalGasExpense" placeholder="Natural Gas">
+
+          <label for="internetExpense">Internet</label>
+          <input type="text" class="inpt form-control" name="internetExpense" placeholder="Internet">
+        </div>
       </div>
-      <div class="col-md-6">
-        <label for="electricityExpense">Electricity</label>
-        <input type="text" class="inpt form-control" name="electricityExpense" placeholder="Electricity">
+      <br/>
 
-        <label for="naturalGasExpense">Natural Gas</label>
-        <input type="text" class="inpt form-control" name="naturalGasExpense" placeholder="Natural Gas">
-
-        <label for="internetExpense">Internet</label>
-        <input type="text" class="inpt form-control" name="internetExpense" placeholder="Internet">
+      <div ng-repeat="utility in utilities">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="removeUtility()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Utility Name</label>
+              <input type="text" class="inpt form-control"  placeholder="Name">
+            </div>
+            <div class="col-md-6">
+              <label>Utility Amount</label>
+              <input type="text" class="inpt form-control" placeholder="$/month">
+            </div>
+          </div>
+        </fieldset>
+        <br/>
+      </div>
+      <br/>
+      <div ng-click="addUtility()">
+        <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+        <label>Add Utility</label>
       </div>
     </div>
-
-    <br/>
-    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-    <label>Add Utility</label>
 
     <h3>Maintenance</h3><br/>
     <div class="row">
@@ -117,4 +141,3 @@
         <input type="text" class="inpt form-control" name="assumedAnnualAppreciation" placeholder="Percentage">
       </div>
     </div>
-  

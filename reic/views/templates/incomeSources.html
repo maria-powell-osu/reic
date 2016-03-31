@@ -1,54 +1,65 @@
 
-    <h1 style="text-align: center;">Income Sources</h1><br/>
-    <h3>Units Income</h3><br/>
+<h1 style="text-align: center;">Income Sources</h1><br/>
+<div ng-controller="AddUnitController">
+  <h3>Units Income</h3><br/>
 
-    <div ng-repeat="unit in units">
-      
-      <fieldset>
-        <div class="row">
-        <div class="col-md-2 col-md-offset-10" ng-click="removeChoice()">
+  <div ng-repeat="unit in units">
+    <fieldset>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-10" ng-click="removeUnit()">
           <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
-          </div>
         </div>
-        <div class="row">
-            
-          <div class="col-md-6">
-            <label for="unitIncome">Unit Name</label>
-            <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
-            <label for="grossMonthlyIncome">Gross Monthly Income</label>
-            <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
-          </div>
-          <div class="col-md-6">
-            <label for="annualRentIncrease">Annual Rent Increase</label>
-            <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
-
-            <label for="desiredReturn">Desired Cash on Cash Return</label>
-            <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
-          </div>
-          </div>
-        </fieldset>
-        <br/>
-      
-    </div>
-    <br/>
-    <div ng-click="addUnit()">
-      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-      <label>Add Unit</label><br/><br/>
-    </div>
-
-    <h3>Supplemental Income</h3><br/>
-
-    <div class="row">
-      <div class="col-md-6">
-        <label for="supplementalIncomeAmount">Amount</label>
-        <input type="text" class="inpt form-control" name="supplementalIncomeAmount" placeholder="Supplemental Income">
       </div>
-      <div class="col-md-6">
-        <label for="supplementalIncomeDesc">Description</label>
-        <input type="text" class="inpt form-control" name="supplementalIncomeDesc" placeholder="ie. coin laundry, garages, parking">
-      </div>
-    </div>
+      <div class="row">
 
+        <div class="col-md-6">
+          <label for="unitIncome">Unit Name</label>
+          <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
+          <label for="grossMonthlyIncome">Gross Monthly Income</label>
+          <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
+        </div>
+        <div class="col-md-6">
+          <label for="annualRentIncrease">Annual Rent Increase</label>
+          <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
+
+          <label for="desiredReturn">Desired Cash on Cash Return</label>
+          <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
+        </div>
+      </div>
+    </fieldset>
     <br/>
+  </div>
+  <br/>
+  <div ng-click="addUnit()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add Unit</label><br/><br/>
+  </div>
+</div>
+
+<div ng-controller="AddSupplementalIncomeController">
+  <h3>Supplemental Income</h3><br/>
+  <div ng-repeat="income in incomes">
+    <fieldset>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-10" ng-click="removeIncome()">
+          <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="supplementalIncomeAmount">Amount</label>
+          <input type="text" class="inpt form-control" name="supplementalIncomeAmount" placeholder="Supplemental Income">
+        </div>
+        <div class="col-md-6">
+          <label for="supplementalIncomeDesc">Description</label>
+          <input type="text" class="inpt form-control" name="supplementalIncomeDesc" placeholder="ie. coin laundry, garages, parking">
+        </div>
+      </div>
+    </fieldset>
+    <br/>
+  </div>
+  <div ng-click="addIncome()">
     <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
     <label>Add additional income source</label>
+  </div>
+</div>
