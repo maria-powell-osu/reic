@@ -69,7 +69,7 @@ textarea
 {
 	resize: none;
 }
-.glyphiconColor
+.glyphiconGreenColor
 {
 	color:#5cb85c;
 }
@@ -97,5 +97,7 @@ fieldset{
 .glyphiconDeleteForm{  
     float:right;
     color: red;
+    font-size: 1.2em;
+
 }   
 }

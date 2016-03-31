@@ -1,10 +1,17 @@
 
     <h1 style="text-align: center;">Income Sources</h1><br/>
     <h3>Units Income</h3><br/>
+
     <div ng-repeat="unit in units">
-      <div class="row">
-        <fieldset>
-            <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first" ng-click="removeChoice()" aria-hidden="true"></span>
+      
+      <fieldset>
+        <div class="row">
+        <div class="col-md-2 col-md-offset-10" ng-click="removeChoice()">
+          <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="row">
+            
           <div class="col-md-6">
             <label for="unitIncome">Unit Name</label>
             <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
@@ -18,13 +25,14 @@
             <label for="desiredReturn">Desired Cash on Cash Return</label>
             <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
           </div>
+          </div>
         </fieldset>
         <br/>
-      </div>
+      
     </div>
     <br/>
     <div ng-click="addUnit()">
-      <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
       <label>Add Unit</label><br/><br/>
     </div>
 
@@ -42,5 +50,5 @@
     </div>
 
     <br/>
-    <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
     <label>Add additional income source</label>
