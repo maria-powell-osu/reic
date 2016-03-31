@@ -89,3 +89,13 @@ textarea
 input[type="radio"]{
   margin: 0 0px 0 10px;
 }
+fieldset{
+    background: #FCFCFC;
+    padding: 16px;
+    border: 1px solid #D5D5D5;
+}
+.glyphiconDeleteForm{  
+    float:right;
+    color: red;
+}   
+}

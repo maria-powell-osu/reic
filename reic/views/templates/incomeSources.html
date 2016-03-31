@@ -1,26 +1,32 @@
 
     <h1 style="text-align: center;">Income Sources</h1><br/>
     <h3>Units Income</h3><br/>
+    <div ng-repeat="unit in units">
+      <div class="row">
+        <fieldset>
+            <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first" ng-click="removeChoice()" aria-hidden="true"></span>
+          <div class="col-md-6">
+            <label for="unitIncome">Unit Name</label>
+            <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
+            <label for="grossMonthlyIncome">Gross Monthly Income</label>
+            <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
+          </div>
+          <div class="col-md-6">
+            <label for="annualRentIncrease">Annual Rent Increase</label>
+            <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
 
-    <div class="row">
-      <div class="col-md-6">
-        <label for="unitIncome">Unit Name</label>
-        <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
-        <label for="grossMonthlyIncome">Gross Monthly Income</label>
-        <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
-      </div>
-      <div class="col-md-6">
-        <label for="annualRentIncrease">Annual Rent Increase</label>
-        <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
-
-        <label for="desiredReturn">Desired Cash on Cash Return</label>
-        <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
+            <label for="desiredReturn">Desired Cash on Cash Return</label>
+            <input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $">
+          </div>
+        </fieldset>
+        <br/>
       </div>
     </div>
-
     <br/>
-    <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
-    <label>Add Unit</label><br/><br/>
+    <div ng-click="addUnit()">
+      <span class="glyphicon glyphicon-plus-sign glyphiconColor" aria-hidden="true"></span>
+      <label>Add Unit</label><br/><br/>
+    </div>
 
     <h3>Supplemental Income</h3><br/>
 
