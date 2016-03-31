@@ -29,7 +29,7 @@
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="removeUtility()">
-              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
             </div>
           </div>
           <div class="row">
@@ -65,26 +65,51 @@
     </div>
 
     <h3>Other</h3><br/>
-    <div class="row">
-      <div class="col-md-6">
-        <label for="yardMaitenanceExpense">Yard Maintenance</label>
-        <input type="text" class="inpt form-control" name="yardMaitenanceExpense" placeholder="$/Month">
+    <div ng-controller="AddExpenseController">
+      <div class="row">
+        <div class="col-md-6">
+          <label for="yardMaitenanceExpense">Yard Maintenance</label>
+          <input type="text" class="inpt form-control" name="yardMaitenanceExpense" placeholder="$/Month">
 
-        <label for="percentVacancyRateExpense">% of Vacancy Rate</label>
-        <input type="text" class="inpt form-control" name="percentVacancyRateExpense" placeholder="% of Vacancy Rate">
+          <label for="percentVacancyRateExpense">% of Vacancy Rate</label>
+          <input type="text" class="inpt form-control" name="percentVacancyRateExpense" placeholder="% of Vacancy Rate">
+        </div>
+        <div class="col-md-6">
+          <label for="insuranceExpense">Insurance Expenses ($/month)</label>
+          <input type="text" class="inpt form-control" name="insuranceExpense" placeholder="Insurance Expenses ($/month)">
+
+          <label for="propTaxExpense">Property Taxes ($/year)</label>
+          <input type="text" class="inpt form-control" name="propTaxExpense" placeholder="Property Taxes ($/year)">
+        </div>
       </div>
-      <div class="col-md-6">
-        <label for="insuranceExpense">Insurance Expenses ($/month)</label>
-        <input type="text" class="inpt form-control" name="insuranceExpense" placeholder="Insurance Expenses ($/month)">
+      <br/>
+      <div ng-repeat="expense in expenses">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="removeExpense()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Expense Name</label>
+              <input type="text" class="inpt form-control"  placeholder="Name">
+            </div>
+            <div class="col-md-6">
+              <label>Expense Amount</label>
+              <input type="text" class="inpt form-control" placeholder="$/month">
+            </div>
+          </div>
+        </fieldset>
+        <br/>
+      </div>
 
-        <label for="propTaxExpense">Property Taxes ($/year)</label>
-        <input type="text" class="inpt form-control" name="propTaxExpense" placeholder="Property Taxes ($/year)">
+      <br/>
+      <div ng-click="addExpense()">
+        <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+        <label>Add Other Expense</label>
       </div>
     </div>
-
-    <br/>
-    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-    <label>Add Other Expense</label>
 
     <h3>Property Management</h3><br/>
     <div class="row">
@@ -101,25 +126,38 @@
     </div>
 
     <h3>Capital Expenditures</h3><br/>
-    <div class="row">
-      <div class="col-md-4">
-        <label for="capExpentituresExpenseAmount">Amount (in $)</label>
-        <input type="text" class="inpt form-control" name="capExpentituresExpenseAmount" placeholder="Capital Expenditures Amount">
+    <div ng-controller="AddCapitalExpenditureController">
+      <div ng-repeat="capitalExpenditure in capitalExpenditures">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="removeCapitalExpenditure()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="col-md-4">
+              <label for="capExpentituresExpenseAmount">Amount (in $)</label>
+              <input type="text" class="inpt form-control" name="capExpentituresExpenseAmount" placeholder="Capital Expenditures Amount">
+            </div>
+            <div class="col-md-4">
+              <label for="capExpentituresExpenseDesc">Description</label>
+              <input type="text" class="inpt form-control" name="capExpentituresExpenseDesc" placeholder="Description">
+            </div>
+            <div class="col-md-4">
+              <label for="capExpendituresExpenseDate">Date</label>
+              <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
+            </div>
+          </div>
+        </fieldset>
+        <br/>
       </div>
-      <div class="col-md-4">
-        <label for="capExpentituresExpenseDesc">Description</label>
-        <input type="text" class="inpt form-control" name="capExpentituresExpenseDesc" placeholder="Description">
-      </div>
-      <div class="col-md-4">
-        <label for="capExpendituresExpenseDate">Date</label>
-        <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
+      <br/>
+      <div ng-click="addCapitalExpenditure()">
+        <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+        <label>Add Capital Expediture</label> 
       </div>
     </div>
-
-    <br/>
-    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-    <label>Add Capital Expediture</label> 
 
     <h3>Manual Value Entry</h3><br/>
     <div class="row">
@@ -130,7 +168,7 @@
       <div class="col-md-6">
         <label for="arvDate">ARV Date</label>
         <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker placeholder="Click to enter date"/> 
-        
+
       </div>
     </div>
 

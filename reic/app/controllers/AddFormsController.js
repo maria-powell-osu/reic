@@ -42,3 +42,33 @@ App.controller('AddUtilityController', ['$scope', function ($scope){
     $scope.utilities.splice(lastItem);
   };
 }]);
+
+App.controller('AddExpenseController', ['$scope', function ($scope){
+
+	$scope.expenses = [];
+
+	$scope.addExpense = function() {
+	    var newNo = $scope.expenses.length + 1;
+	    $scope.expenses.push({'id':'expense'+ newNo});
+  	};
+
+  	$scope.removeExpense = function() {
+    var lastItem = $scope.expenses.length-1;
+    $scope.expenses.splice(lastItem);
+  };
+}]);
+
+App.controller('AddCapitalExpenditureController', ['$scope', function ($scope){
+
+	$scope.capitalExpenditures = [{id: 'capitalExpenditure1'}];
+
+	$scope.addCapitalExpenditure = function() {
+	    var newNo = $scope.capitalExpenditures.length + 1;
+	    $scope.capitalExpenditures.push({'id':'capitalExpenditure'+ newNo});
+  	};
+
+  	$scope.removeCapitalExpenditure = function() {
+    var lastItem = $scope.capitalExpenditures.length-1;
+    $scope.capitalExpenditures.splice(lastItem);
+  };
+}]);

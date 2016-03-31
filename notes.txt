@@ -1,8 +1,8 @@
 What I am trying to do:
-	- I am trying to add a new line
+	- "Add other expense functionality"
+	- remove two items from income view
 Where I left of:
-	- I can add line but all ids are the same
-	- let's try to make this work with ng-repeat
+	- 
 
 Notes:
 	- 
