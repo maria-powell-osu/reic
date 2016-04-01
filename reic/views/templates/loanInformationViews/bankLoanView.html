@@ -1,41 +1,86 @@
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6 form-group">
-          <label for="bankLoanPurchasePrice">Purchase Price</label>
-          <input type="text" class="inpt form-control" name="bankLoanPurchasePrice" placeholder="Purchase Price"> 
+    <div ng-controller="AddAnotherLoanController">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="bankLoanPurchasePrice">Purchase Price</label>
+            <input type="text" class="inpt form-control" name="bankLoanPurchasePrice" placeholder="Purchase Price"> 
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="bankLoanPurchaseDate">Purchase Date</label>
+            <input type="text" class="inpt form-control" name="bankLoanPurchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">  
+          </div>
         </div>
-        <div class="col-md-6 form-group">
-          <label for="bankLoanPurchaseDate">Purchase Date</label>
-          <input type="text" class="inpt form-control" name="bankLoanPurchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">  
+      </fieldset>
+      <br/>
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6 form-group">
+
+            <label for="bankLoanInterest">Percentage of Interest</label>
+            <input type="text" class="inpt form-control" name="bankLoanInterest" placeholder="Percentage (%)"> 
+
+            <label for="bankLoanDownPayment">Down Payment ($)</label>
+            <input type="text" class="inpt form-control" name="bankLoanDownPayment" placeholder="Down Payment">
+
+            <label for="bankLoanPercentageLoan">Percentage of Loan</label>
+            <input type="text" class="inpt form-control" name="bankLoanPercentageLoan" placeholder="Percentage (%)">
+          </div>
+          <div class="col-md-6 form-group">
+
+
+            <label for="bankLoanAmortization">Amortization (yrs)</label>
+            <input type="text" class="inpt form-control" name="bankLoanAmortization" placeholder="Amortization (yrs)">
+
+            <label for="bankLoanClosingCost">Closing Cost %</label>
+            <input type="text" class="inpt form-control" name="bankLoanClosingCost" placeholder="Amortization">
+          </div>  
         </div>
+      </fieldset>
+      <br/>
+      <div ng-repeat="loan in loans">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="removeLoan()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group">
+
+              <label for="SpecialTermsLoanName">Loan Name</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanName" placeholder="Loan Name">
+
+              <label for="SpecialTermsLoanAmount">Amount</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanAmount" placeholder="Amount in $">
+
+              <label for="SpecialTermsLoanInterest">Interest</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanInterest" placeholder="Interest in %">  
+            </div>
+            <div class="col-md-6 form-group">
+
+              <label for="SpecialTermsLoanAmortization">Amortization</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanAmortization" placeholder="Amortization">
+
+              <label for="SpecialTermsLoanBalloonDate">Balloon Date</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanBalloonDate" ng-model="date" jqdatepicker placeholder="Click to enter date"> 
+
+              <label for="SpecialTermsLoanLenderPoints">Up Front Lender Points</label>
+              <input type="text" class="inpt form-control" name="SpecialTermsLoanLenderPoints" placeholder="Lender Points in $$">
+            </div>
+            <p>Interest only for specified period?</p>
+            <div class="col-md-12 form-group" ng-model="specialTermsInterestOption">
+              <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
+              Yes
+              <input type="radio" value="no" ng-model="specialTermsInterestOption">
+              No
+            </div>
+          </div>
+        </fieldset>
+        <br/>
       </div>
-  </fieldset>
-  <br/>
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6 form-group">
-          
-          <label for="bankLoanInterest">Percentage of Interest</label>
-          <input type="text" class="inpt form-control" name="bankLoanInterest" placeholder="Percentage (%)"> 
-
-          <label for="bankLoanDownPayment">Down Payment ($)</label>
-          <input type="text" class="inpt form-control" name="bankLoanDownPayment" placeholder="Down Payment">
-            
-          <label for="bankLoanPercentageLoan">Percentage of Loan</label>
-           <input type="text" class="inpt form-control" name="bankLoanPercentageLoan" placeholder="Percentage (%)">
-        </div>
-        <div class="col-md-6 form-group">
-          
-
-          <label for="bankLoanAmortization">Amortization (yrs)</label>
-          <input type="text" class="inpt form-control" name="bankLoanAmortization" placeholder="Amortization (yrs)">
-
-          <label for="bankLoanClosingCost">Closing Cost %</label>
-          <input type="text" class="inpt form-control" name="bankLoanClosingCost" placeholder="Amortization">
-        </div>  
+      <br/>
+      <div ng-click="addLoan()">
+        <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+        <label>Add Special Terms Loan</label>
       </div>
-  </fieldset>
-  <br/>
-
-      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-        <label>Add Second Bank Loan</label>
+    </div>
