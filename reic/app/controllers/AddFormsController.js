@@ -28,6 +28,36 @@ App.controller('AddSupplementalIncomeController', ['$scope', function ($scope){
   };
 }]);
 
+App.controller('AddSpecialTermsLoanController', ['$scope', function ($scope){
+
+  $scope.specialTermsLoans = [{id: 'specialTermsLoan'}];
+
+  $scope.addSpecialTermsLoan = function() {
+      var newNo = $scope.specialTermsLoans.length + 1;
+      $scope.specialTermsLoans.push({'id':'specialTermsLoan'+ newNo});
+    };
+
+    $scope.removeSpecialTermsLoan = function() {
+    var lastItem = $scope.specialTermsLoans.length-1;
+    $scope.specialTermsLoans.splice(lastItem);
+  };
+}]);
+
+App.controller('AddBankLoanController', ['$scope', function ($scope){
+
+  $scope.bankLoans = [{id: 'bankLoan'}];
+
+  $scope.addBankLoan = function() {
+      var newNo = $scope.bankLoans.length + 1;
+      $scope.bankLoans.push({'id':'bankLoan'+ newNo});
+    };
+
+    $scope.removeBankLoan = function() {
+    var lastItem = $scope.bankLoans.length-1;
+    $scope.bankLoans.splice(lastItem);
+  };
+}]);
+
 App.controller('AddUtilityController', ['$scope', function ($scope){
 
 	$scope.utilities = [];

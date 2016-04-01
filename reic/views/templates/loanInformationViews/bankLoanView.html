@@ -1,46 +1,41 @@
-
-      <div class="row" id="rwBankLoanView1">
+    <fieldset>
+      <div class="row">
         <div class="col-md-6 form-group">
-          <label for="bankLoanPurchasePrice1">Purchase Price</label>
-          <input type="text" class="inpt form-control" name="bankLoanPurchasePrice1" placeholder="Purchase Price"> 
+          <label for="bankLoanPurchasePrice">Purchase Price</label>
+          <input type="text" class="inpt form-control" name="bankLoanPurchasePrice" placeholder="Purchase Price"> 
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="bankLoanPurchaseDate">Purchase Date</label>
+          <input type="text" class="inpt form-control" name="bankLoanPurchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">  
+        </div>
+      </div>
+  </fieldset>
+  <br/>
+    <fieldset>
+      <div class="row">
+        <div class="col-md-6 form-group">
           
-          <label for="bankLoanInterest1">Percentage of Interest</label>
-          <input type="text" class="inpt form-control" name="bankLoanInterest1" placeholder="Percentage (%)"> 
+          <label for="bankLoanInterest">Percentage of Interest</label>
+          <input type="text" class="inpt form-control" name="bankLoanInterest" placeholder="Percentage (%)"> 
 
-          <label for="bankLoanDownPayment1">Down Payment ($)</label>
-          <input type="text" class="inpt form-control" name="bankLoanDownPayment1" placeholder="Down Payment">
+          <label for="bankLoanDownPayment">Down Payment ($)</label>
+          <input type="text" class="inpt form-control" name="bankLoanDownPayment" placeholder="Down Payment">
             
-          <label for="bankLoanPercentageLoan1">Percentage of Loan</label>
-           <input type="text" class="inpt form-control" name="bankLoanPercentageLoan1" placeholder="Percentage (%)">
+          <label for="bankLoanPercentageLoan">Percentage of Loan</label>
+           <input type="text" class="inpt form-control" name="bankLoanPercentageLoan" placeholder="Percentage (%)">
         </div>
         <div class="col-md-6 form-group">
-          <label for="bankLoanPurchaseDate1">Purchase Date</label>
-          <input type="text" class="inpt form-control" name="bankLoanPurchaseDate1" ng-model="date" jqdatepicker placeholder="Click to enter date">  
+          
 
-          <label for="bankLoanAmortization1">Amortization (yrs)</label>
-          <input type="text" class="inpt form-control" name="bankLoanAmortization1" placeholder="Amortization (yrs)">
+          <label for="bankLoanAmortization">Amortization (yrs)</label>
+          <input type="text" class="inpt form-control" name="bankLoanAmortization" placeholder="Amortization (yrs)">
 
-          <label for="bankLoanClosingCost1">Closing Cost %</label>
-          <input type="text" class="inpt form-control" name="bankLoanClosingCost1" placeholder="Amortization">
+          <label for="bankLoanClosingCost">Closing Cost %</label>
+          <input type="text" class="inpt form-control" name="bankLoanClosingCost" placeholder="Amortization">
         </div>  
       </div>
-      <div class="row" id="rwBankLoanView2">
-        <div class="col-md-6 form-group">
-          <label for="bankLoanInterest2">Percentage of Interest</label>
-          <input type="text" class="inpt form-control" name="bankLoanInterest2" placeholder="Percentage (%)"> 
+  </fieldset>
+  <br/>
 
-          <label for="bankLoanDownPayment2">Down Payment ($)</label>
-          <input type="text" class="inpt form-control" name="bankLoanDownPayment2" placeholder="Down Payment">
-            
-          <label for="bankLoanPercentageLoan2">Percentage of Loan</label>
-           <input type="text" class="inpt form-control" name="bankLoanPercentageLoan2" placeholder="Percentage (%)">
-        </div>
-        <div class="col-md-6 form-group">
-          <label for="bankLoanAmortization2">Amortization (yrs)</label>
-          <input type="text" class="inpt form-control" name="bankLoanAmortization2" placeholder="Amortization (yrs)">
-
-          <label for="bankLoanClosingCost2">Closing Cost %</label>
-          <input type="text" class="inpt form-control" name="bankLoanClosingCost2" placeholder="Amortization">
-        </div>  
-      </div>
-    
+      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+        <label>Add Second Bank Loan</label>

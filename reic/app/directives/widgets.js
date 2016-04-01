@@ -22,50 +22,24 @@ App.directive('jqdatepicker', function() {
 App.directive('jqSlideSection', function($timeout) {
     return {
         link: function(scope, element, attrs, ctrl) {
-            $timeout(function() {   //<--- used $timeout to make sure ng-repeat is REALLY finished
-                var content = $('#accordion .ui-accordion-content ');
+            //$timeout to make sure everything is loaded properly before this
+            $timeout(function() {   
+                //if you want to hide them at some point do:
+                //$('#accordion .ui-accordion-content ').hide();
 
-                // add the accordion functionality
+                // header click event
                 $('#accordion .accordion-header').click(function() {
-                    var panel = $(this).next();
-                    var isOpen = panel.is(':visible');
+                    //gets the sibling element which is the content of the header
+                    var contentOfHeader = $(this).next();
+                    var isContentOpen = contentOfHeader.is(':visible');
                  
-                    panel[isOpen? 'slideUp': 'slideDown']()
+                    contentOfHeader[isContentOpen? 'slideUp': 'slideDown']()
                         // toggle between hide and show
-                        .trigger(isOpen? 'hide': 'show');
+                        .trigger(isContentOpen? 'hide': 'show');
 
                     // this prevents a pagescroll
                     return false;
                 });
-
-                //This function expands all sections
-                //function expandAll (){
-                    /*var isAllOpen = $(this).data('isAllOpen');
-                    
-                    $('#accordion .ui-accordion-content ')[isAllOpen? 'hide': 'show']()
-                        .trigger(isAllOpen? 'hide': 'show');*/
-                //}
-
-                //function hideAll(){
-/*                        var isAllOpen = !content.is(':hidden');
-*/                        /*if(!isAllOpen){
-                            expandLink.text('Expand all')
-                            .data('isAllOpen', false);
-                        } */
-                    //}
-
-                // when panels open or close, check to see if they're all open
-                //content.on({
-                    // whenever we open a panel, check to see if they're all open
-                    // if all open, swap the button to collapser
-                    //show: function(){
-/*                        var isAllOpen = !content.is(':hidden');   
-*/                        /*if(isAllOpen){
-                            expandLink.text('Collapse All')
-                                .data('isAllOpen', true);
-                        }*/
-                  //  }
-                //});
             });
         }
     };
