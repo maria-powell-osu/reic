@@ -27,15 +27,6 @@ App.directive('bankLoanView', function() {
   };
 });
 
-/* Loan Information - Cash View
- * Loads template into loanInformation.html
- */
-App.directive('cashView', function() {
-  return {
-    templateUrl: '/reic/views/templates/loanInformationViews/cashView.html'
-  };
-});
-
 /* Loan Information - Bank Loan View
  * Loads template into loanInformation.html
  */

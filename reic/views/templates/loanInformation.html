@@ -8,12 +8,22 @@
           Loan - Special Terms
       </div>
     </div>
-    <!-- To follow are three divs called bankLoanView, cashView, specialTermsView
+    <fieldset>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="bankLoanPurchasePrice">Purchase Price</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            <input type="text" class="inpt form-control" name="bankLoanPurchasePrice" placeholder="Purchase Price"> 
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="bankLoanPurchaseDate">Purchase Date</label>
+            <input type="text" class="inpt form-control" name="bankLoanPurchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">  
+          </div>
+        </div>
+      </fieldset>
+      <br/>
+    <!-- 
     Which one will be shown is based on the radio buttons above. The ng-disabled prevents the element from getting submitted and the ng-hide makes it disappear when it is disabled -->
     <div id="bankLoanView" ng-disabled="loanInfoView != 'bankLoan'" ng-hide="loanInfoView != 'bankLoan'" bank-loan-view></div>
-
-    <div id="cashView" ng-show="loanInfoView == 'cash'" cash-view>
-      </div>
-    </div>
 
     <div id="specialTermsLoanView" ng-show="loanInfoView == 'specialTermsLoan'" special-terms-loan-view></div>

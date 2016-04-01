@@ -1,17 +1,4 @@
   <div ng-controller="AddSpecialTermsLoanController">
-    <fieldset>
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <label for="SpecialTermsLoanPurchasePrice">Purchase Price</label>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanPurchasePrice" placeholder="Purchase Price"> 
-          </div>
-          <div class="col-md-6 form-group">
-            <label for="SpecialTermsLoanPurchaseDate">Purchase Date</label>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanPurchaseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
-          </div>
-        </div>
-    </fieldset>
-    <br/>
     <div ng-repeat="specialTermsLoan in specialTermsLoans">
       <fieldset>
         <div class="row">
@@ -29,20 +16,25 @@
             <input type="text" class="inpt form-control" name="SpecialTermsLoanAmount" placeholder="Amount in $">
 
             <label for="SpecialTermsLoanInterest">Interest</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
             <input type="text" class="inpt form-control" name="SpecialTermsLoanInterest" placeholder="Interest in %">  
           </div>
           <div class="col-md-6 form-group">
 
             <label for="SpecialTermsLoanAmortization">Amortization</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
             <input type="text" class="inpt form-control" name="SpecialTermsLoanAmortization" placeholder="Amortization">
 
             <label for="SpecialTermsLoanBalloonDate">Balloon Date</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
             <input type="text" class="inpt form-control" name="SpecialTermsLoanBalloonDate" ng-model="date" jqdatepicker placeholder="Click to enter date"> 
 
             <label for="SpecialTermsLoanLenderPoints">Up Front Lender Points</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
             <input type="text" class="inpt form-control" name="SpecialTermsLoanLenderPoints" placeholder="Lender Points in $$">
           </div>
-          <p>Interest only for specified period?</p>
+          <label>Interest only for specified period?</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
           <div class="col-md-12 form-group" ng-model="specialTermsInterestOption">
               <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
               Yes

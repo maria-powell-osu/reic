@@ -69,9 +69,18 @@ textarea
 {
 	resize: none;
 }
+input
+{
+    margin-bottom: 15px;
+}
 .glyphiconGreenColor
 {
 	color:#5cb85c;
+}
+.glyphiconBlueColor
+{
+    color:#0000cc;
+    font-size: 1.0em;
 }
 .navbarImg
 {

@@ -1,4 +1,4 @@
-<form>
+<form id="calculatorInputForm">
 	<!-- All of these templates get loaded by loadTemplates.js and the html for them lives in reic/views/templates -->
 	<div jq-slide-section>
 		<div class="ui-accordion ui-widget ui-helper-reset" id="accordion">
@@ -22,11 +22,18 @@
 					<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Expenses</h1>
 					<div id="expenses" expenses class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
 					<br/>
-				</div>
-			</div>
+		</div>
+	</div>
+
+	<div id="dialog-confirm" title="Clear All Fields" hidden>
+		<p>
+			<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
+			Are you sure you want to clear all fields?
+		</p>
+	</div>
 
 
-			<button type="submit" class="btn btn-success">Calculate Results</button>
-			<button type="clear" class="btn btn-danger">Clear All Fields</button>
-		</form>
+	<button type="submit" class="btn btn-success">Calculate Results</button>
+	<button type="clear" class="btn btn-danger" clear-form>Clear All Fields</button>
+</form>
 

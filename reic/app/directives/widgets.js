@@ -44,3 +44,4 @@ App.directive('jqSlideSection', function($timeout) {
         }
     };
 });
+
