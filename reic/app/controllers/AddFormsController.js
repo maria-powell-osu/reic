@@ -30,7 +30,7 @@ App.controller('AddSupplementalIncomeController', ['$scope', function ($scope){
 
 App.controller('AddSpecialTermsLoanController', ['$scope', function ($scope){
 
-  $scope.specialTermsLoans = [];
+  $scope.specialTermsLoans = [{id: 'specialTermsLoan1'}];
 
   $scope.addSpecialTermsLoan = function() {
       var newNo = $scope.specialTermsLoans.length + 1;
