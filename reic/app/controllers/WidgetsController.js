@@ -9,3 +9,4 @@ App.controller('FileController', ['$scope', function ($scope){
 	 $scope.imgUpload = {};
 	 $scope.imgUpload.src = '';
 }]);
+

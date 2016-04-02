@@ -19,6 +19,16 @@ App.directive('financialMeasures', function() {
 });
 
 
+/* Rental Calculator Input 
+ * Loads template into rentalcalculator.html
+ */
+App.directive('rentalCalculatorInput', function() {
+  return {
+    templateUrl: '/reic/views/templates/rentalCalculatorInput.html'
+  };
+});
+
+
 /* Loan Information
  * Loads template into rentalCalculatorInput.html
  */

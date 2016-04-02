@@ -109,4 +109,21 @@ fieldset{
     font-size: 1.2em;
 
 }   
+.resultDiv
+{
+    height: 100px;
+    width: auto;
+    background-color: #f3f3f3; 
+    color:#444;
+    border:1px solid #CCC;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    cursor:pointer;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+#tabs { border: none;}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 1em 0em 1em 0 !important;
 }

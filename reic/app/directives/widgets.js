@@ -45,3 +45,14 @@ App.directive('jqSlideSection', function($timeout) {
     };
 });
 
+App.directive('jqTabs', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ctrl) {
+            $timeout(function() {  
+                $(element).tabs();
+                $(element).tabs( "disable", 1 );
+            });
+        }
+    };
+});
