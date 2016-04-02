@@ -7,9 +7,9 @@ threadsafe: true
 handlers:
 
 #To look the browser tab logo
-#- url: /favicon\.ico
-#  static_files: static/images/favicon.ico
-#  upload: static/images/favicon\.ico
+- url: /favicon\.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon\.ico
 
 - url: /reic
   static_dir: reic

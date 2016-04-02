@@ -11,7 +11,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 	)
 
 # call the home page html template
-class HomePage(webapp2.RequestHandler):
+class PlanPassive(webapp2.RequestHandler):
 	template_variables = {}
 
 	def get(self):
@@ -21,5 +21,5 @@ class HomePage(webapp2.RequestHandler):
 
 # starts the application
 application = webapp2.WSGIApplication([
-	('/', HomePage),
+	('/', PlanPassive),
 ], debug=True)
