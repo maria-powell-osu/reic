@@ -1,7 +1,7 @@
 'use strict';
 
 /* Basic Property Information
- * Loads template into analyzedeal.html
+ * Loads template into rentalCalculatorInput.html
  */
 App.directive('basicPropertyInformation', function() {
   return {
@@ -9,8 +9,18 @@ App.directive('basicPropertyInformation', function() {
   };
 });
 
+/* Financial Measures 
+ * Loads template into rentalCalculatorInput.html
+ */
+App.directive('financialMeasures', function() {
+  return {
+    templateUrl: '/reic/views/templates/financialMeasures.html'
+  };
+});
+
+
 /* Loan Information
- * Loads template into analyzedeal.html
+ * Loads template into rentalCalculatorInput.html
  */
 App.directive('loanInformation', function() {
   return {
@@ -37,7 +47,7 @@ App.directive('specialTermsLoanView', function() {
 });
 
 /* Income Sources
- * Loads template into analyzedeal.html
+ * Loads template into rentalCalculatorInput.html
  */
 App.directive('incomeSources', function() {
   return {
@@ -46,7 +56,7 @@ App.directive('incomeSources', function() {
 });
 
 /* Expenses
- * Loads template into analyzedeal.html
+ * Loads template into rentalCalculatorInput.html
  */
 App.directive('expenses', function() {
   return {

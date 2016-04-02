@@ -10,7 +10,7 @@ App.directive('clearForm', function() {
 	                modal: true,
 	                buttons: {
 	                    "Clear Fields": function() {
-	                    	$('#calculatorInputForm')[0].reset();
+	                    	$('#rentalCalculatorInputForm')[0].reset();
 	                        $(this).dialog("close");
 	                    },
 	                    Cancel: function() {

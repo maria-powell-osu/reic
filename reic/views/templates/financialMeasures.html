@@ -1,0 +1,28 @@
+<fieldset>
+	<div class="row">
+        <div class="col-md-6">
+        	<label for="capRate">Typical Cap Rate</label>
+		    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+		    <input type="text" class="inpt form-control" name="capRate" placeholder="Typical Cap Rate %">
+
+		    <label for="afterRepairValue">After Repair Value (ARV)</label>
+          	<span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          	<input type="text" class="inpt form-control" name="afterRepairValue" placeholder="After Repair Value">
+
+          	
+          <label for="assumedAnnualAppreciation">Assumed Annual Appreciation (%)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" name="assumedAnnualAppreciation" placeholder="Percentage">
+		    
+        </div>
+        <div class="col-md-6">
+        	<label for="desiredReturn">Desired Cash on Cash Return</label>
+          	<input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $"> 
+          	
+
+	          <label for="arvDate">ARV Date</label>
+	          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+	          <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker placeholder="Click to enter date"/>
+        </div>
+    </div>
+</fieldset>
