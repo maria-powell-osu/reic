@@ -2,28 +2,47 @@
       <fieldset>
         <div class="row">
           <div class="col-md-6 form-group">
+          <label for="bl_loanName">Loan Name</label>
+            <input type="text" class="inpt form-control" name="bl_loanName" placeholder="Loan Name"> 
 
-            <label for="bankLoanInterest">Percentage of Interest</label>
-            <input type="text" class="inpt form-control" name="bankLoanInterest" placeholder="Percentage (%)"> 
-
-            <label for="bankLoanDownPayment">Down Payment ($)</label>
+            <label for="bl_downPaymentDollar">Down Payment ($)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="bankLoanDownPayment" placeholder="Down Payment">
+            <input type="text" class="inpt form-control" name="bl_downPaymentDollar" placeholder="$">
 
-            <label for="bankLoanPercentageLoan">Percentage of Loan</label>
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="bankLoanPercentageLoan" placeholder="Percentage (%)">
+            <label for="bl_closingCost">Closing Cost ($)</label>
+            <input type="text" class="inpt form-control" name="bl_closingCost" placeholder="$">
+            
           </div>
           <div class="col-md-6 form-group">
+            <label for="bl_interest">Interest (%)</label>
+            <input type="text" class="inpt form-control" name="bl_interest" placeholder="%"> 
 
-
-            <label for="bankLoanAmortization">Amortization (yrs)</label>
+            <label for="bl_downPaymentPercent">Down Payment (%)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="bankLoanAmortization" placeholder="Amortization (yrs)">
+            <input type="text" class="inpt form-control" name="bl_downPaymentPercent" placeholder="%">
 
-            <label for="bankLoanClosingCost">Closing Cost %</label>
-            <input type="text" class="inpt form-control" name="bankLoanClosingCost" placeholder="Amortization">
+            <label for="bl_amortization">Amortization (yrs)</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            <input type="text" class="inpt form-control" name="bl_amortization" placeholder="yrs">
+
+            
           </div>  
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="bl_extraPrincipal">Extra Principal Pmt ($/mo)</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
+            <input type="text" class="inpt form-control" name="bl_extraPrincipal" placeholder="$">
+          </div>
+          <div class="col-md-3">
+            <label for="bl_startDate">Start</label>      
+              <input type="text" class="inpt form-control" name="bl_startDate" ng-model="date" jqdatepicker placeholder="Date"> 
+          </div>
+          <div class="col-md-3">
+            <label for="bl_endDate">End</label>      
+              <input type="text" class="inpt form-control" name="bl_endDate" ng-model="date" jqdatepicker placeholder="Date">
+          </div>
+
         </div>
       </fieldset>
       <br/>
@@ -44,26 +63,27 @@
               <label for="SpecialTermsLoanAmount">Amount</label>
               <input type="text" class="inpt form-control" name="SpecialTermsLoanAmount" placeholder="Amount in $">
 
-              <label for="SpecialTermsLoanInterest">Interest</label>
-              <input type="text" class="inpt form-control" name="SpecialTermsLoanInterest" placeholder="Interest in %">  
+              <label for="add_bl_interest">Interest (%)</label>
+              <input type="text" class="inpt form-control" name="add_bl_interest" placeholder="%">  
             </div>
             <div class="col-md-6 form-group">
 
-              <label for="SpecialTermsLoanAmortization">Amortization</label>
+              <label for="add_bl_amortization">Amortization (yrs)</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-              <input type="text" class="inpt form-control" name="SpecialTermsLoanAmortization" placeholder="Amortization">
+              <input type="text" class="inpt form-control" name="add_bl_amortization" placeholder="yrs">
 
-              <label for="SpecialTermsLoanBalloonDate">Balloon Date</label>
+              <label for="add_bl_balloonDate">Balloon Date</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-              <input type="text" class="inpt form-control" name="SpecialTermsLoanBalloonDate" ng-model="date" jqdatepicker placeholder="Click to enter date"> 
+              <input type="text" class="inpt form-control" name="add_bl_balloonDate" ng-model="date" jqdatepicker placeholder="Date"> 
 
-              <label for="SpecialTermsLoanLenderPoints">Up Front Lender Points</label>
+              <label for="add_bl_upFrontLenderPoints">Up Front Lender Points ($)</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-              <input type="text" class="inpt form-control" name="SpecialTermsLoanLenderPoints" placeholder="Lender Points in $$">
+              <input type="text" class="inpt form-control" name="add_bl_upFrontLenderPoints" placeholder="$">
             </div>
-            <label>Interest only for specified period?</label>
+
+            <label>Interest only?</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <div class="col-md-12 form-group" ng-model="specialTermsInterestOption">
+            <div class="col-md-12 form-group" ng-model="add_bl_interestOnly">
               <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
               Yes
               <input type="radio" value="no" ng-model="specialTermsInterestOption">

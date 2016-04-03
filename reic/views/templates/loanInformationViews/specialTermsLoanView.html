@@ -9,33 +9,33 @@
         <div class="row">
           <div class="col-md-6 form-group">
 
-            <label for="SpecialTermsLoanName">Loan Name</label>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanName" placeholder="Loan Name">
+            <label for="stl_loanName">Loan Name</label>
+            <input type="text" class="inpt form-control" name="stl_loanName" placeholder="Loan Name">
 
-            <label for="SpecialTermsLoanAmount">Amount</label>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanAmount" placeholder="Amount in $">
+            <label for="stl_amount">Amount ($)</label>
+            <input type="text" class="inpt form-control" name="stl_amount" placeholder="$">
 
-            <label for="SpecialTermsLoanInterest">Interest</label>
+            <label for="stl_interest">Interest (%)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanInterest" placeholder="Interest in %">  
+            <input type="text" class="inpt form-control" name="stl_interest" placeholder="%">  
           </div>
           <div class="col-md-6 form-group">
 
-            <label for="SpecialTermsLoanAmortization">Amortization</label>
+            <label for="stl_amortization">Amortization (yrs)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanAmortization" placeholder="Amortization">
+            <input type="text" class="inpt form-control" name="stl_amortization" placeholder="yrs">
 
-            <label for="SpecialTermsLoanBalloonDate">Balloon Date</label>
+            <label for="stl_balloonDate">Balloon Date</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanBalloonDate" ng-model="date" jqdatepicker placeholder="Click to enter date"> 
+            <input type="text" class="inpt form-control" name="stl_balloonDate" ng-model="date" jqdatepicker placeholder="Date"> 
 
-            <label for="SpecialTermsLoanLenderPoints">Up Front Lender Points</label>
+            <label for="stl_upFrontLenderPoints">Up Front Lender Points ($)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="SpecialTermsLoanLenderPoints" placeholder="Lender Points in $$">
+            <input type="text" class="inpt form-control" name="stl_upFrontLenderPoints" placeholder="$">
           </div>
-          <label>Interest only for specified period?</label>
+          <label>Interest Only?</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-          <div class="col-md-12 form-group" ng-model="specialTermsInterestOption">
+          <div class="col-md-12 form-group" ng-model="stl_interstOnly">
               <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
               Yes
               <input type="radio" value="no" ng-model="specialTermsInterestOption">

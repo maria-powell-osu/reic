@@ -1,29 +1,30 @@
 <fieldset>
 	<div class="row">
         <div class="col-md-6">
-        	<label for="capRate">Typical Cap Rate</label>
+        	<label for="fm_typicalRapRate">Typical Cap Rate for Area (%)</label>
 		    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-		    <input type="text" class="inpt form-control" name="capRate" placeholder="Typical Cap Rate %">
+		    <input type="text" class="inpt form-control" name="fm_typicalRapRate" placeholder="%">
 
-		    <label for="afterRepairValue">After Repair Value (ARV)</label>
+		    <label for="fm_afterRepairValue">After Repair Value ($)</label>
           	<span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          	<input type="text" class="inpt form-control" name="afterRepairValue" placeholder="After Repair Value">
+          	<input type="text" class="inpt form-control" name="fm_afterRepairValue" placeholder="$">
 		    
+        <label for="fm_assumedAppreciation">Assumed Appreciation (%/yr)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" name="fm_assumedAppreciation" placeholder="%">
         </div>
         <div class="col-md-6">
-        	<label for="desiredReturn">Desired Cash on Cash Return</label>
-          	<input type="text" class="inpt form-control" name="desiredReturn" placeholder="Desired Cash on Cash Return $"> 
-          	
+        	<label for="fm_desiredReturn">Desired Cash on Cash (%)</label>
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          	<input type="text" class="inpt form-control" name="fm_desiredReturn" placeholder="%"> 
 
-	          <label for="arvDate">ARV Date</label>
+	          <label for="fm_arvDate">ARV Date</label>
 	          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-	          <input type="text" class="inpt form-control" name="arvDate" ng-model="date" jqdatepicker placeholder="Click to enter date"/>
+	          <input type="text" class="inpt form-control" name="fm_arvDate" ng-model="date" jqdatepicker placeholder="Date"/>
+
+            <label for="fm_landValue">Land Value ($)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" name="fm_landValue" placeholder="$">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-           <label for="assumedAnnualAppreciation">Assumed Annual Appreciation (%)</label>
-          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="assumedAnnualAppreciation" placeholder="Percentage">
-        </div>
 </fieldset>

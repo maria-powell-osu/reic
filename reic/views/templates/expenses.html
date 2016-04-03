@@ -5,28 +5,29 @@
       <fieldset>
         <div class="row">
           <div class="col-md-6">
-            <label for="waterExpense">Water</label>
-            <input type="text" class="inpt form-control" name="waterExpense" placeholder="Water">
+            <label for="u_water">Water ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_water" placeholder="$">
 
-            <label for="sewerExpense">Sewer</label>
-            <input type="text" class="inpt form-control" name="sewerExpense" placeholder="Sewer">
+            <label for="u_sewer">Sewer ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_sewer" placeholder="$">
 
-            <label for="garbageExpense">Garbage</label>
-            <input type="text" class="inpt form-control" name="garbageExpense" placeholder="Garbage">
+            <label for="u_garbage">Garbage ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_garbage" placeholder="$">
           </div>
           <div class="col-md-6">
-            <label for="electricityExpense">Electricity</label>
-            <input type="text" class="inpt form-control" name="electricityExpense" placeholder="Electricity">
+            <label for="u_electricity">Electricity ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_electricity" placeholder="$">
 
-            <label for="naturalGasExpense">Natural Gas</label>
-            <input type="text" class="inpt form-control" name="naturalGasExpense" placeholder="Natural Gas">
+            <label for="u_naturalGas">Natural Gas ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_naturalGas" placeholder="$">
 
-            <label for="internetExpense">Internet</label>
-            <input type="text" class="inpt form-control" name="internetExpense" placeholder="Internet">
+            <label for="u_internet">Internet ($/mo)</label>
+            <input type="text" class="inpt form-control" name="u_internet" placeholder="$">
           </div>
         </div>
         <br/>
       </fieldset>
+      <br/>
 
       <div ng-repeat="utility in utilities">
         <fieldset>
@@ -37,12 +38,12 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <label>Utility Name</label>
-              <input type="text" class="inpt form-control"  placeholder="Name">
+              <label for="add_u_utility">Utility Name</label>
+              <input type="text" class="inpt form-control" name="add_u_utility"  placeholder="Description">
             </div>
             <div class="col-md-6">
-              <label>Utility Amount</label>
-              <input type="text" class="inpt form-control" placeholder="$/month">
+              <label for="add_u_amount">Utility Amount ($/mo)</label>
+              <input type="text" class="inpt form-control" name="add_u_amount" placeholder="$">
             </div>
           </div>
         </fieldset>
@@ -59,14 +60,14 @@
     <fieldset>
       <div class="row">
         <div class="col-md-6">
-          <label for="maitenanceExpense">$/Month</label>
+          <label for="m_costAmount">Cost ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="maitenanceExpense" placeholder="Estimated Maitenance Cost">
+          <input type="text" class="inpt form-control" name="m_costAmount" placeholder="$">
         </div>
         <div class="col-md-6">
-          <label for="percentRentsExpense">% of gross monthly rents</label>
+          <label for="m_costPercent">Cost (%)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="percentRentsExpense" placeholder="% of gross monthly rents">
+          <input type="text" class="inpt form-control" name="m_costPercent" placeholder="%">
         </div>
       </div>
     </fieldset>
@@ -76,22 +77,22 @@
       <fieldset>
         <div class="row">
           <div class="col-md-6">
-            <label for="yardMaitenanceExpense">Yard Maintenance</label>
+            <label for="o_yardMaintenance">Yard Maintenance ($/mo)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="yardMaitenanceExpense" placeholder="$/Month">
+            <input type="text" class="inpt form-control" name="o_yardMaintenance" placeholder="$">
 
-            <label for="percentVacancyRateExpense">% of Vacancy Rate</label>
+            <label for="o_vacancyRate">Vacancy Rate (%)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="percentVacancyRateExpense" placeholder="% of Vacancy Rate">
+            <input type="text" class="inpt form-control" name="o_vacancyRate" placeholder="%">
           </div>
           <div class="col-md-6">
-            <label for="insuranceExpense">Insurance ($/month)</label>
+            <label for="o_insurance">Insurance ($/mo)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="insuranceExpense" placeholder="Insurance Expenses ($/month)">
+            <input type="text" class="inpt form-control" name="o_insurance" placeholder="$">
 
-            <label for="propTaxExpense">Property Taxes ($/year)</label>
+            <label for="o_propertyTaxes">Property Taxes ($/yr)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            <input type="text" class="inpt form-control" name="propTaxExpense" placeholder="Property Taxes ($/year)">
+            <input type="text" class="inpt form-control" name="o_propertyTaxes" placeholder="$">
           </div>
         </div>
       </fieldset>
@@ -105,12 +106,12 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <label>Expense Name</label>
-              <input type="text" class="inpt form-control"  placeholder="Name">
+              <label for="add_e_name">Expense Name</label>
+              <input type="text" class="inpt form-control" name="add_e_name" placeholder="Description">
             </div>
             <div class="col-md-6">
-              <label>Expense Amount</label>
-              <input type="text" class="inpt form-control" placeholder="$/month">
+              <label for="add_e_cost">Cost ($/mo)</label>
+              <input type="text" class="inpt form-control" name="add_e_cost" placeholder="$">
             </div>
           </div>
         </fieldset>
@@ -128,15 +129,16 @@
     <fieldset>
       <div class="row">
         <div class="col-md-6">
-          <label for="propManagmentExpense">$/Month</label>
-          <input type="text" class="inpt form-control" name="propManagmentExpense" placeholder="Dollars per Month">
-          <label for="tenantPlaceMentExpense">Tenant Placement Fee</label>
+          <label for="pm_managementFeeAmount">Management Fee ($/mo)</label>
+          <input type="text" class="inpt form-control" name="pm_managementFeeAmount" placeholder="$">
+
+          <label for="pm_tenantPlacementFee">Tenant Placement Fee ($)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="tenantPlaceMentExpense" placeholder="Tenant Placement Fee will be converted to monthly cost based on vacancy inputted">
+          <input type="text" class="inpt form-control" name="pm_tenantPlacementFee" placeholder="$">
         </div>
         <div class="col-md-6">
-          <label for="percentGrossRents">% of gross rents</label>
-          <input type="text" class="inpt form-control" name="percentGrossRents" placeholder="% of gross rents">
+          <label for="pm_managementFeePercent">Management Fee (%)</label>
+          <input type="text" class="inpt form-control" name="pm_managementFeePercent" placeholder="%">
         </div>
       </div>
     </fieldset>
@@ -154,16 +156,18 @@
 
           <div class="row">
             <div class="col-md-4">
-              <label for="capExpentituresExpenseAmount">Amount (in $)</label>
-              <input type="text" class="inpt form-control" name="capExpentituresExpenseAmount" placeholder="Capital Expenditures Amount">
+
+              <label for="ce_description">Description</label>
+              <input type="text" class="inpt form-control" name="ce_description" placeholder="Description">
             </div>
             <div class="col-md-4">
-              <label for="capExpentituresExpenseDesc">Description</label>
-              <input type="text" class="inpt form-control" name="capExpentituresExpenseDesc" placeholder="Description">
+              <label for="ce_Cost">Cost ($)</label>
+              <input type="text" class="inpt form-control" name="ce_cost" placeholder="$">
             </div>
+            
             <div class="col-md-4">
-              <label for="capExpendituresExpenseDate">Date</label>
-              <input type="text" class="inpt form-control" name="capExpendituresExpenseDate" ng-model="date" jqdatepicker placeholder="Click to enter date">
+              <label for="ce_date">Date</label>
+              <input type="text" class="inpt form-control" name="ce_date" ng-model="date" jqdatepicker placeholder="Date">
             </div>
           </div>
         </fieldset>

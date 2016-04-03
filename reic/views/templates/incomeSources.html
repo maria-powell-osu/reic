@@ -1,8 +1,18 @@
 
 
 <div ng-controller="AddUnitController">
-  <h3>Units Income</h3><br/>
+  <h3>Rental Income</h3><br/>
 
+  <fieldset>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="ri_annualRentIncrease">Annual Rent Increase (%)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" name="ri_annualRentIncrease" placeholder="%">
+      </div>
+    </div>
+  </fieldset>
+  <br/>
   <div ng-repeat="unit in units">
     <fieldset>
       <div class="row">
@@ -11,19 +21,16 @@
         </div>
       </div>
       <div class="row">
-
         <div class="col-md-6">
-          <label for="unitIncome">Unit Name</label>
+          <label for="ri_unitName">Unit Name</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="unitIncome" placeholder="# of Unites">
-          <label for="grossMonthlyIncome">Gross Monthly Income</label>
-          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="grossMonthlyIncome" placeholder="Gross Monthly Income">        
+          <input type="text" class="inpt form-control" name="ri_unitName" placeholder="i.e. Unit 1, Unit A, etc.">
+                 
         </div>
         <div class="col-md-6">
-          <label for="annualRentIncrease">Annual Rent Increase</label>
+           <label for="ri_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="annualRentIncrease" placeholder="Annual Increase">
+          <input type="text" class="inpt form-control" name="ri_grossMonthlyIncome" placeholder="$">
         </div>
       </div>
     </fieldset>
@@ -47,14 +54,14 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <label for="supplementalIncomeAmount">Amount</label>
+          <label for="si_description">Description</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="supplementalIncomeAmount" placeholder="Supplemental Income">
+          <input type="text" class="inpt form-control" name="si_description" placeholder="i.e. coin laundry, garages, etc.">
         </div>
         <div class="col-md-6">
-          <label for="supplementalIncomeDesc">Description</label>
+          <label for="si_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="supplementalIncomeDesc" placeholder="ie. coin laundry, garages, parking">
+          <input type="text" class="inpt form-control" name="si_grossMonthlyIncome" placeholder="$"> 
         </div>
       </div>
     </fieldset>

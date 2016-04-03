@@ -1,29 +1,29 @@
 
 <div class="row">
   <div class="col-md-6 form-group">    
-    <label for="propTitle">Report Title</label>
-    <input type="text" class="inpt form-control" name="propTitle" placeholder="Title"> 
-    <label for="preparedFor">Prepared For</label>
+    <label for="bp_repTitle">Report Title</label>
+    <input type="text" class="inpt form-control" name="bp_repTitle" placeholder="Title"> 
+    <label for="bp_preparedFor">Prepared For</label>
     <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-    <input type="text" class="inpt form-control" name="preparedFor" placeholder="Prepared For"> 
+    <input type="text" class="inpt form-control" name="bp_preparedFor" placeholder="Prepared For"> 
 
-    <label for="street">Street Address</label>
-    <input type="text" class="inpt form-control" name="street" placeholder="Street Address">
+    <label for="bp_streetAddress">Street Address</label>
+    <input type="text" class="inpt form-control" name="bp_streetAddress" placeholder="Street Address">
 
-    <label for="city">City</label>
-    <input type="text" class="inpt form-control" name="city" placeholder="City">
+    <label for="bp_city">City</label>
+    <input type="text" class="inpt form-control" name="bp_city" placeholder="City">
 
-    <label for="state">State</label>
-    <input type="text" class="inpt form-control" name="state" placeholder="State">  
+    <label for="bp_state">State</label>
+    <input type="text" class="inpt form-control" name="bp_state" placeholder="State">  
 
-    <label for="zip">Zip Code</label>
-    <input type="text" class="inpt form-control" name="zip" placeholder="Zip Code">
+    <label for="bp_zipCode">Zip Code</label>
+    <input type="text" class="inpt form-control" name="bp_zipCode" placeholder="Zip Code">
 
   </div>
   <div class="col-md-6" ng-controller="FileController">
     <br/>
     <div class="dashedPlaceholder" droppable="[image/png, image/jpeg, image/gif]" file="imgUpload.src" file-name="imageFileName" id="dashedDiv">
-      <img ng-src="{{ imgUpload.src }}" class="img-responsive" id="propertyImage">
+      <img ng-src="{{ imgUpload.src }}" class="img-responsive" id="bp_propertyImage">
       <div class="innerDashedPlaceHolder text-center">
         <div style="color:#999;">Drop Files Here</div>
         <div style="color:#999;">or</div>
@@ -38,7 +38,7 @@
 </div>
 <div class="row">
   <div class="form-group col-md-12">
-    <label for="propDescription">Description</label>
-    <textarea name="propDescription" rows="5" class="form-control" placeholder="Description"></textarea>
+    <label for="bp_description">Description</label>
+    <textarea name="bp_description" rows="5" class="form-control" placeholder="Description"></textarea>
   </div>
 </div>

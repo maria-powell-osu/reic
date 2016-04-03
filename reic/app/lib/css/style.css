@@ -121,6 +121,10 @@ fieldset{
     padding: 5px;
     text-align: center;
     margin-bottom: 15px;
+    line-height: 100px;
+}
+.resultDiv:hover {
+    background-color: #dadada;
 }
 #tabs { border: none;}
 

@@ -38,5 +38,5 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 35.5
+	Coding: 50.5
 
