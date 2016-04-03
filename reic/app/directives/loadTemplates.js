@@ -24,7 +24,7 @@ App.directive('financialMeasures', function() {
  */
 App.directive('rentalCalculatorInput', function() {
   return {
-    templateUrl: '/reic/views/templates/rentalCalculatorInput.html'
+    templateUrl: '/reic/views/templates/rentalcalculatorinput.html'
   };
 });
 

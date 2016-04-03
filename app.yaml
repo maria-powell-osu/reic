@@ -50,6 +50,9 @@ handlers:
 - url: /views
   static_dir: views
 
+- url: /templates
+  static_dir: templates
+
 
   # [ the .app was added to specify that we are using a WSGI application
   #   which is needed to enable threadsafe actions]
