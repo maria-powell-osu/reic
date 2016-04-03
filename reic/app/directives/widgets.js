@@ -51,7 +51,6 @@ App.directive('jqTabs', function($timeout) {
         link: function(scope, element, attrs, ctrl) {
             $timeout(function() {  
                 $(element).tabs();
-                $(element).tabs( "disable", 1 );
             });
         }
     };

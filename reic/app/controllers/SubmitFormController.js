@@ -1,5 +1,7 @@
 App.controller("RentalCalculatorSubmitFormController", function($scope, $location) {
     $scope.submit = function() {
-    	$location.path("/results" );
+    	$( "#tabs" ).show().children().show();
+    	 $("#tabs").tabs( "option","active", 1 );
+    	
     };
 });

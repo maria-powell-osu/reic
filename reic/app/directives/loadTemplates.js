@@ -28,6 +28,15 @@ App.directive('rentalCalculatorInput', function() {
   };
 });
 
+/* Rental Calculator Results
+ * Loads template into rentalcalculator.html
+ */
+App.directive('rentalCalculatorResults', function() {
+  return {
+    templateUrl: '/reic/views/rentalcalculatorresults.html'
+  };
+});
+
 
 /* Loan Information
  * Loads template into rentalCalculatorInput.html

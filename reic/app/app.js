@@ -14,8 +14,5 @@ App.config(function($routeProvider) {
   $routeProvider.when('/contact', {
     templateUrl: '../reic/views/contact.html',
   });
-   $routeProvider.when('/results', {
-    templateUrl: '../reic/views/results.html',
-  });
 
 });
