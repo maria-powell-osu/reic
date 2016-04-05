@@ -10,28 +10,28 @@
           <div class="col-md-6 form-group">
 
             <label for="stl_loanName">Loan Name</label>
-            <input type="text" class="inpt form-control" name="stl_loanName" placeholder="Loan Name">
+            <input type="text" class="inpt form-control" ng-model="input.stl_loanName" placeholder="Loan Name">
 
             <label for="stl_amount">Amount ($)</label>
-            <input type="text" class="inpt form-control" name="stl_amount" placeholder="$">
+            <input type="text" class="inpt form-control" ng-model="input.stl_amount" placeholder="$">
 
             <label for="stl_interest">Interest (%)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="stl_interest" placeholder="%">  
+            <input type="text" class="inpt form-control" ng-model="input.stl_interest" placeholder="%">  
           </div>
           <div class="col-md-6 form-group">
 
             <label for="stl_amortization">Amortization (yrs)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="stl_amortization" placeholder="yrs">
+            <input type="text" class="inpt form-control" ng-model="input.stl_amortization" placeholder="yrs">
 
             <label for="stl_balloonDate">Balloon Date</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="stl_balloonDate" ng-model="date" jqdatepicker placeholder="Date"> 
+            <input type="text" class="inpt form-control" ng-model="input.stl_balloonDate" ng-model="date" jqdatepicker placeholder="Date"> 
 
             <label for="stl_upFrontLenderPoints">Up Front Lender Points ($)</label>
             <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <input type="text" class="inpt form-control" name="stl_upFrontLenderPoints" placeholder="$">
+            <input type="text" class="inpt form-control" ng-model="input.stl_upFrontLenderPoints" placeholder="$">
           </div>
           <label>Interest Only?</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>

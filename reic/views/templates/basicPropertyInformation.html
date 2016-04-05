@@ -2,22 +2,22 @@
 <div class="row">
   <div class="col-md-6 form-group">    
     <label for="bp_repTitle">Report Title</label>
-    <input type="text" class="inpt form-control" name="bp_repTitle" placeholder="Title"> 
+    <input type="text" class="inpt form-control" ng-model="input.bp_repTitle" placeholder="Title" ng-model="input.bp_repTitle"> 
     <label for="bp_preparedFor">Prepared For</label>
     <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-    <input type="text" class="inpt form-control" name="bp_preparedFor" placeholder="Prepared For"> 
+    <input type="text" class="inpt form-control" ng-model="input.bp_preparedFor" placeholder="Prepared For"> 
 
     <label for="bp_streetAddress">Street Address</label>
-    <input type="text" class="inpt form-control" name="bp_streetAddress" placeholder="Street Address">
+    <input type="text" class="inpt form-control" ng-model="input.bp_streetAddress" placeholder="Street Address">
 
     <label for="bp_city">City</label>
-    <input type="text" class="inpt form-control" name="bp_city" placeholder="City">
+    <input type="text" class="inpt form-control" ng-model="input.bp_city" placeholder="City">
 
     <label for="bp_state">State</label>
-    <input type="text" class="inpt form-control" name="bp_state" placeholder="State">  
+    <input type="text" class="inpt form-control" ng-model="input.bp_state" placeholder="State">  
 
     <label for="bp_zipCode">Zip Code</label>
-    <input type="text" class="inpt form-control" name="bp_zipCode" placeholder="Zip Code">
+    <input type="text" class="inpt form-control" ng-model="input.bp_zipCode" placeholder="Zip Code">
 
   </div>
   <div class="col-md-6" ng-controller="FileController">
@@ -39,6 +39,6 @@
 <div class="row">
   <div class="form-group col-md-12">
     <label for="bp_description">Description</label>
-    <textarea name="bp_description" rows="5" class="form-control" placeholder="Description"></textarea>
+    <textarea ng-model="input.bp_description" rows="5" class="form-control" placeholder="Description"></textarea>
   </div>
 </div>

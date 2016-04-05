@@ -8,12 +8,12 @@
       <div class="col-md-12">
         <label for="ri_annualRentIncrease">Annual Rent Increase (%)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="ri_annualRentIncrease" placeholder="%">
+          <input type="text" class="inpt form-control" ng-model="input.ri_annualRentIncrease" placeholder="%">
       </div>
     </div>
   </fieldset>
   <br/>
-  <div ng-repeat="unit in units">
+  <div ng-repeat="unit in units track by $index">
     <fieldset>
       <div class="row">
         <div class="col-md-2 col-md-offset-10" ng-click="removeUnit()">
@@ -24,13 +24,13 @@
         <div class="col-md-6">
           <label for="ri_unitName">Unit Name</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="ri_unitName" placeholder="i.e. Unit 1, Unit A, etc.">
+          <input type="text" class="inpt form-control" ng-model="input.units.ri_unitName[$index]" placeholder="i.e. Unit 1, Unit A, etc.">
                  
         </div>
         <div class="col-md-6">
            <label for="ri_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="ri_grossMonthlyIncome" placeholder="$">
+          <input type="text" class="inpt form-control" ng-model="input.units.ri_grossMonthlyIncome[$index]" placeholder="$">
         </div>
       </div>
     </fieldset>
@@ -56,12 +56,12 @@
         <div class="col-md-6">
           <label for="si_description">Description</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="si_description" placeholder="i.e. coin laundry, garages, etc.">
+          <input type="text" class="inpt form-control" ng-model="input.si_description" placeholder="i.e. coin laundry, garages, etc.">
         </div>
         <div class="col-md-6">
           <label for="si_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" name="si_grossMonthlyIncome" placeholder="$"> 
+          <input type="text" class="inpt form-control" ng-model="input.si_grossMonthlyIncome" placeholder="$"> 
         </div>
       </div>
     </fieldset>

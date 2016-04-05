@@ -1,3 +1,23 @@
+App.controller("RentalCalculatorSubmitFormController", function($scope, RentalCalculator) {
+    $scope.submit = function() {
+      //To show and set the tabs view
+      $( "#tabs" ).show().children().show();
+      $("#tabs").tabs( "option","active", 1);
+
+      $scope.input;
+      $scope.RentalCalculator = RentalCalculator.setData($scope.input);
+    };
+});
+
+App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
+  //get the user input
+  $scope.input = RentalCalculator.getData();
+});
+
+App.controller("RentalCalculatorResultsController", function($scope) {
+  $scope.tabCounter = 2;
+});
+
 App.controller('AddUnitController', ['$scope', function ($scope){
 
 	$scope.units = [{id: 'unit1'}];

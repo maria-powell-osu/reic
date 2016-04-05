@@ -9,6 +9,15 @@ App.directive('basicPropertyInformation', function() {
   };
 });
 
+/* Cash Flow View
+ * 
+ */
+App.directive('cashFlow', function() {
+  return {
+    templateUrl: '/reic/views/cashflow.html'
+  };
+});
+
 /* Financial Measures 
  * Loads template into rentalCalculatorInput.html
  */

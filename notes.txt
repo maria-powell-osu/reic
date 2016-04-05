@@ -5,7 +5,8 @@ Where I left of:
 	- 
 
 Notes:
-	- 
+	- add remove glyphicon event
+	- start to get data into cash flow
 
 Discuss with Jason:
  	- required fields
