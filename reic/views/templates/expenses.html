@@ -38,7 +38,7 @@
       </fieldset>
       <br/>
 
-      <div ng-repeat="utility in utilities">
+      <div ng-repeat="addNewUtility in utilities track by $index">
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="removeUtility()">
@@ -48,11 +48,11 @@
           <div class="row">
             <div class="col-md-6">
               <label for="add_u_name">Utility Name</label>
-              <input type="text" class="inpt form-control" ng-model="input.add_u_name"  placeholder="Description">
+              <input type="text" class="inpt form-control" ng-model="input.addNewUtility[$index].add_u_name"  placeholder="Description">
             </div>
             <div class="col-md-6">
               <label for="add_u_amount">Utility Amount ($/mo)</label>
-              <input type="text" class="inpt form-control" ng-model="input.add_u_amount" placeholder="$">
+              <input type="text" class="inpt form-control" ng-model="input.addNewUtility[$index].add_u_amount" placeholder="$">
             </div>
           </div>
         </fieldset>

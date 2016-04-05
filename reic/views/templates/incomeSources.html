@@ -8,7 +8,7 @@
       <div class="col-md-12">
         <label for="ri_annualRentIncrease">Annual Rent Increase (%)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" ng-model="input.ri_annualRentIncrease" placeholder="%">
+          <input type="text" class="inpt form-control" ng-model="$parent.input.ri_annualRentIncrease" placeholder="%">
       </div>
     </div>
   </fieldset>
@@ -24,13 +24,13 @@
         <div class="col-md-6">
           <label for="ri_unitName">Unit Name</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" ng-model="input.units.ri_unitName[$index]" placeholder="i.e. Unit 1, Unit A, etc.">
+          <input type="text" class="inpt form-control" ng-model="$parent.$parent.input.unit[$index].ri_unitName" name="ri_unitName{{$index}}" placeholder="i.e. Unit 1, Unit A, etc.">
                  
         </div>
         <div class="col-md-6">
            <label for="ri_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          <input type="text" class="inpt form-control" ng-model="input.units.ri_grossMonthlyIncome[$index]" placeholder="$">
+          <input type="text" class="inpt form-control" ng-model="$parent.$parent.input.unit[$index].ri_grossMonthlyIncome" name="ri_unitName{{$index}}" placeholder="$">
         </div>
       </div>
     </fieldset>

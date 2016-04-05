@@ -4,14 +4,14 @@ App.controller("RentalCalculatorSubmitFormController", function($scope, RentalCa
       $( "#tabs" ).show().children().show();
       $("#tabs").tabs( "option","active", 1);
 
-      $scope.input;
-      $scope.RentalCalculator = RentalCalculator.setData($scope.input);
+      RentalCalculator.setData($scope.input);
     };
 });
 
 App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
   //get the user input
-  $scope.input = RentalCalculator.getData();
+  $scope.data = RentalCalculator.getData();
+  
 });
 
 App.controller("RentalCalculatorResultsController", function($scope) {
@@ -20,11 +20,12 @@ App.controller("RentalCalculatorResultsController", function($scope) {
 
 App.controller('AddUnitController', ['$scope', function ($scope){
 
-	$scope.units = [{id: 'unit1'}];
+	$scope.units = [{ri_unitName: '', ri_grossMonthlyIncome: ''}];
+
+  var unit = {ri_unitName: '',ri_grossMonthlyIncome: ''};
 
 	$scope.addUnit = function() {
-	    var newUnitNo = $scope.units.length + 1;
-	    $scope.units.push({'id':'unit'+ newUnitNo});
+	    $scope.units.push(unit);
   	};
 
   	$scope.removeUnit = function() {
@@ -82,9 +83,10 @@ App.controller('AddUtilityController', ['$scope', function ($scope){
 
 	$scope.utilities = [];
 
+  var utility = {add_u_name:'', add_u_amount: ''};
+
 	$scope.addUtility = function() {
-	    var newNo = $scope.utilities.length + 1;
-	    $scope.utilities.push({'id':'income'+ newNo});
+	    $scope.utilities.push(utility);
   	};
 
   	$scope.removeUtility = function() {
