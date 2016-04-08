@@ -1,5 +1,6 @@
 App.controller("RentalCalculatorSubmitFormController", function($scope, RentalCalculator) {
-    $scope.submit = function() {
+    var vm = this;
+    vm.submit = function() {
       //To show and set the tabs view
       $( "#tabs" ).show().children().show();
       $("#tabs").tabs( "option","active", 1);
@@ -8,19 +9,9 @@ App.controller("RentalCalculatorSubmitFormController", function($scope, RentalCa
     };
 });
 
-App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
-  //get the user input
-  $scope.data = RentalCalculator.getData();
-  
-});
-
-App.controller("RentalCalculatorResultsController", function($scope) {
-  $scope.tabCounter = 2;
-});
-
 App.controller('AddUnitController', ['$scope', function ($scope){
 
-	$scope.units = [{ri_unitName: '', ri_grossMonthlyIncome: ''}];
+  $scope.units = [{ri_unitName: '', ri_grossMonthlyIncome: ''}];
 
   var unit = {ri_unitName: '',ri_grossMonthlyIncome: ''};
 
@@ -124,3 +115,25 @@ App.controller('AddCapitalExpenditureController', ['$scope', function ($scope){
     $scope.capitalExpenditures.splice(lastItem);
   };
 }]);
+
+App.controller('RadioController', ['$scope', function ($scope){
+	//these values set up the default selection for radio buttons 
+	 $scope.loanInfoView = 'bankLoan';
+	 $scope.specialTermsInterestOption = '';
+}]);
+
+App.controller('FileController', ['$scope', function ($scope){
+	 $scope.imageFileName = '';
+	 $scope.imgUpload = {};
+	 $scope.imgUpload.src = '';
+}]);
+
+App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
+  //get the user input
+  $scope.data = RentalCalculator.getData();
+  
+});
+
+App.controller("RentalCalculatorResultsController", function($scope) {
+  $scope.tabCounter = 2;
+});

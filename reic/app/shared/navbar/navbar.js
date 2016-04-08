@@ -4,6 +4,6 @@
 App.directive('topNavBar', function() {
   return {
   	restrict: 'E',
-    templateUrl: '/reic/views/topnavbar.html'
+    templateUrl: '/reic/app/shared/navbar/navbar.html'
   };
 });

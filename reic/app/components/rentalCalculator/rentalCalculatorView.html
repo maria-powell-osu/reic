@@ -1,0 +1,74 @@
+<div id="tabs" jq-tabs>
+	<!-- JQ UI TABS DEFINED -->
+	<ul style="display:none;">
+		<li><a href="#tabs-input">Input</a></li>
+		<li><a href="#tabs-results">Results</a></li>
+	</ul>
+	<!-- TABS INPUT PAGE -->
+	<div id="tabs-input">
+		<div>
+			<form id="rentalCalculatorInputForm" ng-submit="main.submit()">
+				<div jq-slide-section>
+					<div class="ui-accordion ui-widget ui-helper-reset" id="accordion">
+						<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+							<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+							Basic Property Information
+						</h1>
+						<div id="basicInformation" basic-property-information class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
+
+						<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+							<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+							Loan Information
+						</h1>
+						<div id="loanInformation" ng-controller="RadioController" loan-information class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
+
+						<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+							<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Income Sources</h1>
+							<div id="incomeSources" income-Sources class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>  
+
+							<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+								<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Expenses</h1>
+								<div id="expenses" expenses class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
+
+							<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
+								<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Financial Measures</h1>
+								<div id="financialMeasures" financial-measures class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
+								<br/>
+
+
+					</div>
+				</div>
+
+				<div id="dialog-confirm" title="Clear All Fields" hidden>
+					<p>
+						<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
+						Are you sure you want to clear all fields?
+					</p>
+				</div>
+
+
+				<button type="submit" class="btn btn-success">Calculate Results</button>
+				<button type="clear" class="btn btn-danger" clear-form>Clear All Fields</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- TAB RESULTS PAGE -->
+	<div id="tabs-results">
+		<div class="row" ng-controller="RentalCalculatorResultsController">
+			<div class="col-md-4">
+				<div id="combinedResults" class="resultDiv"> Combined Results</div>
+				<div id="portfolioTracker" class="resultDiv"> Portfolio Tracker</div>
+			</div>
+			<div class="col-md-4">
+				<div id="cashFlow" class="resultDiv" go-to-cash-flow> Cash Flow</div>
+				<div id="totalReturn" class="resultDiv"> Total Return</div>
+			</div>
+			<div class="col-md-4">
+				<div id="equityOverTime" class="resultDiv"> Equity Over Time</div>
+				<div id="Cost Basis" class="resultDiv"> Cost Basis</div>
+			</div>
+		</div>
+	</div>
+</div>
+

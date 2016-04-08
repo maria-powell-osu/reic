@@ -9,7 +9,7 @@ body
 	top:0;
 	left: 0;
 	height:500px;
-	background-image:url('/reic/app/img/portland_skyline_banner_dark.jpg');
+	background-image:url('/reic/app/assets/img/portland_skyline_banner_dark.jpg');
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

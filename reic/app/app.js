@@ -5,14 +5,16 @@ var App = angular.module('App', ['ngRoute']);
 //Single Page Application Routing Set Up
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '../reic/views/rentalcalculator.html',
+    templateUrl: '../reic/app/components/rentalCalculator/rentalCalculatorView.html',
+    controller: 'RentalCalculatorSubmitFormController',
+    controllerAs: 'main',
   });
   //this needs to be switched back to analyzeadeal
   $routeProvider.when('/howitworks', {
-    templateUrl: '../reic/views/howitworks.html',
+    templateUrl: '../reic/app/components/howItWorks/howItWorksView.html',
   });
   $routeProvider.when('/contact', {
-    templateUrl: '../reic/views/contact.html',
+    templateUrl: '../reic/app/components/contact/contactView.html',
   });
 
 });

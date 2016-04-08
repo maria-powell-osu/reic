@@ -1,6 +1,7 @@
 What I am trying to do:
 	- look at embed.plnkr.co/N1bLm0/ as example on how to make the ng-repeat work
 	- add unit is working with $parent.$parent call but how can I remove that?
+	- https://toddmotto.com/opinionated-angular-js-styleguide-for-teams/
 Where I left of:
 	- 
 
