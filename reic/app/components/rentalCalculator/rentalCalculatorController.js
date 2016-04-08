@@ -93,9 +93,93 @@ App.controller('FileController', ['$scope', function ($scope){
 }]);
 
 App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
+  var vm = this;
   //get the user input
-  $scope.data = RentalCalculator.getData();
+  vm.data = RentalCalculator.getData();
   
+  // Load the Visualization API and the table package.
+  google.charts.load('current', {'packages':['table']});
+
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(createTable);
+
+  function createTable() {
+    var data = new google.visualization.DataTable();
+        //Create Columns
+        //var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
+        var columns = ["Year", "Income"];
+        columns.forEach(function(column) {
+            data.addColumn('number', column);
+        });
+
+        //Create Rows
+        data.addRows(createDataRows(columns));
+  
+    var table = new google.visualization.Table(document.getElementById('table_div'));
+
+    table.draw(data, {width: '100%', height: '100%'});
+  }
+
+  function getYears(){
+    var years,
+        view = vm.data.loanInfoView;
+
+    if (view === "cash"){
+      //aribitrarily set the years
+      years = 30;
+    } else if (view = "bankLoan"){
+      years = parseInt(vm.data.bl_amortization) + 1;
+    } else if (view = "specialTermsLoan") {
+      years = parseInt(vm.data.stl_amortization) + 1;
+    }
+    return years;
+  }
+
+  function calculateFirstYearIncome (){
+    var income,
+        supplementalIncomes = vm.data.supplementalIncomes,
+        units = vm.data.units,
+        supplementalIncomesLength = Object.keys(supplementalIncomes).length,
+        unitsLength = Object.keys(units).length,
+        sumOfGrossMonthlySupplementalIncome = 0,
+        sumOfGrossMonthlyUnitIncome = 0;
+
+    for (var i = 0; i < supplementalIncomesLength; i++) {
+        sumOfGrossMonthlySupplementalIncome += parseInt(supplementalIncomes[i].si_grossMonthlyIncome);
+    }
+
+    for (var i = 0; i < unitsLength; i++) {
+      sumOfGrossMonthlyUnitIncome += parseInt(units[i].ri_grossMonthlyIncome);
+    }
+
+    income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
+
+    return income;
+  }
+
+  function createDataRows (columns) {
+    var dataRows = [],
+        years = getYears();
+
+    for (var i = 0; i < years; i++) {
+      var row = [],
+          //represents the income column
+          income = 1;
+      
+      //Year Column Value
+      row.push(i + 1);
+      
+      //Income Column Value
+      if (i == 0){
+        row.push(calculateFirstYearIncome());
+      } else {
+        row.push(dataRows[i-1][income] * ((parseInt(vm.data.ri_annualRentIncrease)/100) + 1));
+      }
+
+      dataRows.push(row);
+    }
+    return dataRows;
+  }
 });
 
 App.controller("RentalCalculatorResultsController", function($scope) {
