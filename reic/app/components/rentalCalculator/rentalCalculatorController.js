@@ -1,5 +1,6 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
+    vm.input = {};
     vm.submit = function() {
       //To show and set the tabs view
       $( "#tabs" ).show().children().show();
@@ -8,8 +9,22 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       RentalCalculator.setData(vm.input);
     };
 
-    //Default Values for the sections
+    //set the default value for loan information
+    vm.input.loanInfoView = 'bankLoan';
+
+    /* 
+     * Setting up defaults values for the rows 
+     *  when the curly braces are added the track by $index knows to add one income form
+     *  When no curly braces the form will not displayed until user adds it
+     */
     vm.units = [{}];
+    vm.supplementalIncomes = [{}];
+    vm.specialTermsLoans = [{}];
+    vm.capitalExpenditures = [{}];
+    vm.loans = [];
+    vm.utilities = [];
+    vm.expenses = [];
+
     vm.addUnit = function() {
       vm.units.push({});
     };
@@ -17,18 +32,6 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         var lastItem = vm.units.length-1;
         vm.units.splice(lastItem);
     };
-
-    /* 
-     * Setting up defaults values for the rows 
-     *  when the curly braces are added the track by $index knows to add one income form
-     *  When no curly braces the form will not displayed until user adds it
-     */
-    vm.supplementalIncomes = [{}];
-    vm.specialTermsLoans = [{}];
-    vm.capitalExpenditures = [{}];
-    vm.loans = [];
-    vm.utilities = [];
-    vm.expenses = [];
 
     //To follow are all add or delete functions
     //I need to look into make them reusable here!!
@@ -82,12 +85,6 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
   };
 
 });
-
-App.controller('RadioController', ['$scope', function ($scope){
-	//these values set up the default selection for radio buttons 
-	 $scope.loanInfoView = 'bankLoan';
-	 $scope.specialTermsInterestOption = '';
-}]);
 
 App.controller('FileController', ['$scope', function ($scope){
 	 $scope.imageFileName = '';

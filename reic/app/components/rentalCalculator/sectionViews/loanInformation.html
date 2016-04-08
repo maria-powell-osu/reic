@@ -1,10 +1,10 @@
     <div class="row">
-      <div class="col-md-12 form-group" ng-model="loanInfoView">
-          <input type="radio" ng-model="loanInfoView" value="cash" >
+      <div class="col-md-12 form-group">
+          <input type="radio" ng-model="rentalCalculator.input.loanInfoView" value="cash" >
           Cash
-          <input type="radio" value="bankLoan" ng-model="loanInfoView">
+          <input type="radio" value="bankLoan" ng-model="rentalCalculator.input.loanInfoView">
           Loan - Bank
-          <input type="radio" value="specialTermsLoan" ng-model="loanInfoView">
+          <input type="radio" value="specialTermsLoan" ng-model="rentalCalculator.input.loanInfoView">
           Loan - Special Terms
       </div>
     </div>
@@ -22,7 +22,7 @@
         </div>
       </fieldset>
       <br/>
-    <div id="bankLoanView" ng-disabled="loanInfoView != 'bankLoan'" ng-hide="loanInfoView != 'bankLoan'">
+    <div id="bankLoanView" ng-disabled="rentalCalculator.input.loanInfoView != 'bankLoan'" ng-hide="rentalCalculator.input.loanInfoView != 'bankLoan'">
         <fieldset>
           <div class="row">
             <div class="col-md-6 form-group">
@@ -108,9 +108,9 @@
               <label>Interest only?</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
               <div class="col-md-12 form-group" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOnly">
-                <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
+                <input type="radio" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOption" value="yes" >
                 Yes
-                <input type="radio" value="no" ng-model="specialTermsInterestOption">
+                <input type="radio" value="no" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOption">
                 No
               </div>
             </div>
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <div id="specialTermsLoanView" ng-show="loanInfoView == 'specialTermsLoan'">
+    <div id="specialTermsLoanView" ng-show="rentalCalculator.input.loanInfoView == 'specialTermsLoan'">
         <div ng-repeat="specialTermsLoans in rentalCalculator.specialTermsLoans">
           <fieldset>
             <div class="row">
@@ -161,10 +161,10 @@
               </div>
               <label>Interest Only?</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-              <div class="col-md-12 form-group" ng-model="rentalCalculator.input.stl_interstOnly">
-                  <input type="radio" ng-model="specialTermsInterestOption" value="yes" >
+              <div class="col-md-12 form-group">
+                  <input type="radio" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption" value="yes" >
                   Yes
-                  <input type="radio" value="no" ng-model="specialTermsInterestOption">
+                  <input type="radio" value="no" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption">
                   No
             </div>
           </div>
