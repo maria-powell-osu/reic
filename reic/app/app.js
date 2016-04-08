@@ -6,8 +6,8 @@ var App = angular.module('App', ['ngRoute']);
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: '../reic/app/components/rentalCalculator/rentalCalculatorView.html',
-    controller: 'RentalCalculatorSubmitFormController',
-    controllerAs: 'main',
+    controller: 'RentalCalculatorController',
+    controllerAs: 'rentalCalculator',
   });
   //this needs to be switched back to analyzeadeal
   $routeProvider.when('/howitworks', {
