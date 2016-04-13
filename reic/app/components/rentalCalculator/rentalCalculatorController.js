@@ -107,7 +107,7 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     var data = new google.visualization.DataTable();
         //Create Columns
         //var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
-        var columns = ["Year", "Income"];
+        var columns = ["Year", "Income", "Expenses"];
         columns.forEach(function(column) {
             data.addColumn('number', column);
         });
@@ -128,33 +128,11 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
       //aribitrarily set the years
       years = 30;
     } else if (view = "bankLoan"){
-      years = parseInt(vm.data.bl_amortization) + 1;
+      years = vm.data.bl_amortization + 1;
     } else if (view = "specialTermsLoan") {
-      years = parseInt(vm.data.stl_amortization) + 1;
+      years = vm.data.stl_amortization + 1;
     }
     return years;
-  }
-
-  function calculateFirstYearIncome (){
-    var income,
-        supplementalIncomes = vm.data.supplementalIncomes,
-        units = vm.data.units,
-        supplementalIncomesLength = Object.keys(supplementalIncomes).length,
-        unitsLength = Object.keys(units).length,
-        sumOfGrossMonthlySupplementalIncome = 0,
-        sumOfGrossMonthlyUnitIncome = 0;
-
-    for (var i = 0; i < supplementalIncomesLength; i++) {
-        sumOfGrossMonthlySupplementalIncome += parseInt(supplementalIncomes[i].si_grossMonthlyIncome);
-    }
-
-    for (var i = 0; i < unitsLength; i++) {
-      sumOfGrossMonthlyUnitIncome += parseInt(units[i].ri_grossMonthlyIncome);
-    }
-
-    income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
-
-    return income;
   }
 
   function createDataRows (columns) {
@@ -163,24 +141,102 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
 
     for (var i = 0; i < years; i++) {
       var row = [],
-          //represents the income column
-          income = 1;
+          //column indexes
+          incomeColumn = 1,
+          expenseColumn = 0;
       
       //Year Column Value
       row.push(i + 1);
       
-      //Income Column Value
       if (i == 0){
-        row.push(calculateFirstYearIncome());
+        //Income Column Value
+        var firstYearIncome = calculateFirstYearIncome();
+        row.push(firstYearIncome);
+
+        //Expense Column Value
+        row.push(calculateFirstYearExpense(firstYearIncome));
+
       } else {
-        row.push(dataRows[i-1][income] * ((parseInt(vm.data.ri_annualRentIncrease)/100) + 1));
+        //Income Column Value
+        row.push(dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1));
+        
+        //Expense Column Value
+        row.push(dataRows[i-1][expenseColumn] * (vm.data.e_annualExpenseIncrease/100));
       }
 
       dataRows.push(row);
     }
     return dataRows;
   }
-});
+
+  function calculateFirstYearExpense (firstYearIncome){
+    var monthlyExpenses = 0,
+        yearlyExpenses = 0,
+        expenseResult = 0,
+        addedUtilities = vm.data.addedUtilities || [],
+        //DO TO HERE SHOULD BE ERROR HANDLING INSTEAD
+        water = vm.data.u_water || 0,
+        sewer = vm.data.u_sewer || 0,
+        garbage = vm.data.u_garbage || 0,
+        electricity = vm.data.u_electricity || 0,
+        naturalGas = vm.data.u_naturalGas || 0,
+        internet = vm.data.u_internet || 0,
+        maintenanceCost = vm.data.m_costAmount || 0,
+        yardMaitenance = vm.data.o_yardMaintenance || 0,
+        insurance = vm.data.o_insurance || 0,
+        managementFee = vm.data.pm_managementFeeAmount || 0,
+        tenantPlacementFee = vm.data.pm_tenantPlacementFee || 0,
+        propertyTaxes = vm.data.o_propertyTaxes || 0,
+        addedUtilitiesLength = Object.keys(addedUtilities).length,
+        vacancyRate = (vm.data.o_vacancyRate || 0) / 100;
+
+        //add up all monthly default utility costs and 
+        monthlyExpenses = water + sewer + garbage
+                  + electricity + naturalGas
+                  + internet + maintenanceCost
+                  + yardMaitenance + insurance
+                  + managementFee;
+
+        //add up all monthly custom utility costs added by User
+        for (var i = 0; i < addedUtilitiesLength; i++) {
+          monthlyExpenses += addedUtilities[i].add_u_amount;
+        }
+
+        //convert all monthly expenses to yearly cost 
+        yearlyExpenses = 12 * ((tenantPlacementFee * vacancyRate)
+                        + monthlyExpenses);
+
+        //add the rest of yearly expenses
+        expenseResult = yearlyExpenses + propertyTaxes
+                        + (vacancyRate * firstYearIncome);
+
+    return expenseResult;
+  }
+
+
+  function calculateFirstYearIncome (){
+      var income,
+          supplementalIncomes = vm.data.supplementalIncomes || [],
+          units = vm.data.units || [],
+          supplementalIncomesLength = Object.keys(supplementalIncomes).length,
+          unitsLength = Object.keys(units).length,
+          sumOfGrossMonthlySupplementalIncome = 0,
+          sumOfGrossMonthlyUnitIncome = 0;
+
+      for (var i = 0; i < supplementalIncomesLength; i++) {
+          sumOfGrossMonthlySupplementalIncome += supplementalIncomes[i].si_grossMonthlyIncome;
+      }
+
+      for (var i = 0; i < unitsLength; i++) {
+        sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
+      }
+
+      income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
+
+      return income;
+    }
+  });
+
 
 App.controller("RentalCalculatorResultsController", function($scope) {
   $scope.tabCounter = 2;
