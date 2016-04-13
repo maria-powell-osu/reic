@@ -107,7 +107,7 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     var data = new google.visualization.DataTable();
         //Create Columns
         //var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
-        var columns = ["Year", "Income", "Expenses"];
+        var columns = ["Year", "Income", "Expenses", "CAPEX"];
         columns.forEach(function(column) {
             data.addColumn('number', column);
         });
@@ -137,36 +137,54 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
 
   function createDataRows (columns) {
     var dataRows = [],
-        years = getYears();
+        years = getYears(),
+        capitalExpenditures = calculateCapitalExpenditures(years),
+        incomeColumn = 1,
+        expenseColumn = 2;
+
 
     for (var i = 0; i < years; i++) {
-      var row = [],
-          //column indexes
-          incomeColumn = 1,
-          expenseColumn = 0;
-      
-      //Year Column Value
-      row.push(i + 1);
+      var column = [],
+          yearData = i + 1,  //the +1 is to display years starting at 1
+          capExData = capitalExpenditures[i],
+          incomeData,
+          expenseData;
       
       if (i == 0){
-        //Income Column Value
-        var firstYearIncome = calculateFirstYearIncome();
-        row.push(firstYearIncome);
+        incomeData = calculateFirstYearIncome();
 
-        //Expense Column Value
-        row.push(calculateFirstYearExpense(firstYearIncome));
+        expenseData = calculateFirstYearExpense(incomeData);
 
       } else {
-        //Income Column Value
-        row.push(dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1));
-        
-        //Expense Column Value
-        row.push(dataRows[i-1][expenseColumn] * (vm.data.e_annualExpenseIncrease/100));
+        incomeData = dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1);
+        expenseData = dataRows[i-1][expenseColumn] * (vm.data.e_annualExpenseIncrease/100);
       }
 
-      dataRows.push(row);
+      column.push(yearData);
+      column.push(incomeData);
+      column.push(expenseData);
+      column.push(capExData);
+      dataRows.push(column);
     }
     return dataRows;
+  }
+
+  function calculateCapitalExpenditures (years) {
+    var capitalExpenditures = vm.data.capitalExpenditures || [],
+        capitalExpendituresLength = Object.keys(capitalExpenditures).length,
+        purchasDateYear = new Date(vm.data.li_purchaseDate).getFullYear();
+
+    //Initialize the result array to 0 and set length of array to how many years
+    var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
+    
+    for (var i = 0; i < capitalExpendituresLength; i++) {
+      var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
+      var capExpPosition = capExpYear - purchasDateYear;
+      if(capExpPosition <= capExpArray.length){
+        capExpArray[capExpPosition] = vm.data.capitalExpenditures[i].ce_cost;
+      }
+    }
+    return capExpArray;
   }
 
   function calculateFirstYearExpense (firstYearIncome){

@@ -103,7 +103,7 @@
         </div>
       </fieldset>
       <br/>
-      <div ng-repeat="addedExpenses in rentalCalculator.expenses">
+      <div ng-repeat="addedExpenses in rentalCalculator.expenses track by $index">
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeExpense()">
@@ -122,13 +122,13 @@
           </div>
         </fieldset>
         <br/>
-
+      </div>
       <br/>
       <div ng-click="rentalCalculator.addExpense()">
         <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
         <label>Add Other Expense</label>
       </div>
-    </div>
+    
 
     <h3>Property Management</h3><br/>
     <fieldset>
@@ -164,7 +164,7 @@
             </div>
             <div class="col-md-4">
               <label for="ce_Cost">Cost ($)</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$">
             </div>
             
             <div class="col-md-4">
