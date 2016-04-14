@@ -1,0 +1,26 @@
+TEST VALUES BANK LOAN
+
+	purchase price: 415 000
+	interest: 4
+	down payment: 50 000
+	closing cost: 5000
+	amortization: 30
+
+TEST VALUES SPECIAL TERMS LOAN
+	amortizaion: 30
+	amount: 100 000
+	interest: 7
+
+TEST COMBINATIONS
+	1. Cash Only
+	2. Bank Loan Only : 
+		= 20,910.79
+	3. Bank Loan + Special Terms Loan (interest only = yes)
+		= 20,910.79 + 7000 = 27,910.79 
+	4. Bank Loan + Special Terms Loan (interest only = no)
+		= 20,910.79 + 7983.6 = 28894.39 
+	5. Special Terms Loan (interest only = yes)
+		= 7000
+	6. Special Terms Loan (interest only = no)
+		= 7983.6
+

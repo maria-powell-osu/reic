@@ -107,7 +107,7 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     var data = new google.visualization.DataTable();
         //Create Columns
         //var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
-        var columns = ["Year", "Income", "Expenses", "CAPEX"];
+        var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT"];
         columns.forEach(function(column) {
             data.addColumn('number', column);
         });
@@ -120,6 +120,13 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     table.draw(data, {width: '100%', height: '100%'});
   }
 
+  /*
+   * Helper Function
+   * Gets the amount of years for the data results
+   * Years pretty much mean rows in the table
+   * for special terms loans and bank loans the highest
+   *  amortization get chosen
+   */
   function getYears(){
     var years,
         view = vm.data.loanInfoView;
@@ -127,18 +134,41 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     if (view === "cash"){
       //aribitrarily set the years
       years = 30;
-    } else if (view = "bankLoan"){
-      years = vm.data.bl_amortization + 1;
-    } else if (view = "specialTermsLoan") {
-      years = vm.data.stl_amortization + 1;
+    } else if (view === "bankLoan"){
+      var maxValue = vm.data.bl_amortization,
+          addedBankLoans = vm.data.addedLoans || [],
+          addedBankLoansLength = Object.keys(addedBankLoans).length;
+
+      for (var i = 0; i < addedBankLoansLength; i++) {
+          if (addedBankLoans[i].add_bl_amortization > maxValue) {
+              maxValue = addedBankLoans[i].add_bl_amortization;
+          }
+      }
+      years = maxValue + 1;
+    } else if (view === "specialTermsLoan") {
+      var maxValue = 0,
+          specialTermsLoans = vm.data.specialTermsLoans || [],
+          specialTermsLoansLength = Object.keys(specialTermsLoans).length;
+
+      for (var i = 0; i < specialTermsLoansLength; i++) {
+          if (specialTermsLoans[i].stl_amortization > maxValue) {
+              maxValue = specialTermsLoans[i].stl_amortization;
+          }
+      }
+      years = maxValue + 1;
     }
     return years;
   }
 
+  /*
+   * Helper Function:
+   * Creates the data that goes into each columns
+   */
   function createDataRows (columns) {
     var dataRows = [],
         years = getYears(),
         capitalExpenditures = calculateCapitalExpenditures(years),
+        loanPmts = calculateLoanPmts(years),
         incomeColumn = 1,
         expenseColumn = 2;
 
@@ -147,6 +177,7 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
       var column = [],
           yearData = i + 1,  //the +1 is to display years starting at 1
           capExData = capitalExpenditures[i],
+          loanPaymentData = loanPmts[i],
           incomeData,
           expenseData;
       
@@ -157,16 +188,74 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
 
       } else {
         incomeData = dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1);
-        expenseData = dataRows[i-1][expenseColumn] * (vm.data.e_annualExpenseIncrease/100);
+        expenseData = dataRows[i-1][expenseColumn] * ((vm.data.e_annualExpenseIncrease/100) + 1);
       }
 
       column.push(yearData);
       column.push(incomeData);
       column.push(expenseData);
       column.push(capExData);
+      column.push(loanPaymentData)
       dataRows.push(column);
     }
     return dataRows;
+  }
+
+  function amortizationCalculation (r, p, n) {
+    var dividend = (r * (Math.pow((1 + r),n)));
+    var divisor = ((Math.pow((1 + r), n)) - 1);
+
+    return p * (dividend / divisor);
+  }
+
+  function calculateLoanPmts (years) {
+    var loanPmtResult = 0,
+        view = vm.data.loanInfoView,
+        addedBankLoans = vm.data.addedLoans || [],
+        addedBankLoansLength = Object.keys(addedBankLoans).length,
+        specialTermsLoans = vm.data.specialTermsLoans || [],
+        specialTermsLoansLength = Object.keys(specialTermsLoans).length,
+        r,
+        p,
+        n;
+
+    if(view == "cash"){
+         loanPmtResult = 0;
+
+    } else if (view == "bankLoan"){
+        //Add Bank Loan
+        p = vm.data.li_purchasePrice - vm.data.bl_downPaymentDollar;
+        r = (vm.data.bl_interest /100) / 12; 
+        n = vm.data.bl_amortization * 12;
+        loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+
+        //Added Bank Loans
+        for (var i = 0; i < addedBankLoansLength; i++) {
+          if (addedBankLoans[i].add_bl_interestOption == "yes"){
+            loanPmtResult += addedBankLoans[i].add_bl_loanAmount * (addedBankLoans[i].add_bl_interest / 100);
+          } else if (addedBankLoans[i].add_bl_interestOption == "no"){
+            p = addedBankLoans[i].add_bl_loanAmount;
+            r = (addedBankLoans[i].add_bl_interest/100) / 12;
+            n = addedBankLoans[i].add_bl_amortization * 12;
+            loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+          }
+        }
+    } else if (view == "specialTermsLoan"){
+        for (var i = 0; i < specialTermsLoansLength; i++) {
+          if (vm.data.specialTermsLoans[i].stl_interestOption == "yes"){
+            loanPmtResult += vm.data.specialTermsLoans[i].stl_amount * (vm.data.specialTermsLoans[i].stl_interest / 100);
+          } else if (vm.data.specialTermsLoans[i].stl_interestOption == "no"){
+            p = vm.data.specialTermsLoans[i].stl_amount;
+            r = (vm.data.specialTermsLoans[i].stl_interest /100)/ 12;
+            n = vm.data.specialTermsLoans[i].stl_amortization * 12;
+            loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+          }
+        }
+    }
+
+    var result = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+
+    return result;
   }
 
   function calculateCapitalExpenditures (years) {
