@@ -106,8 +106,7 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
   function createTable() {
     var data = new google.visualization.DataTable();
         //Create Columns
-        //var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
-        var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT"];
+        var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
         columns.forEach(function(column) {
             data.addColumn('number', column);
         });
@@ -118,6 +117,60 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     var table = new google.visualization.Table(document.getElementById('table_div'));
 
     table.draw(data, {width: '100%', height: '100%'});
+  }
+  
+
+  /*
+   * Helper Function:
+   * Creates the data that goes into each columns
+   */
+  function createDataRows (columns) {
+    var dataRows = [],
+        years = getYears(),
+        capitalExpenditures = calculateCapitalExpenditures(years),
+        capExSumData = 0,
+        loanPmts = calculateLoanPmts(years),
+        incomeColumn = 1,
+        expenseColumn = 2,
+        lenderPointsSum = sumOfSpecialTermsLenderPoints(),
+        loanSum = sumOfSpecialTermsLoanAmounts();
+
+
+    for (var i = 0; i < years; i++) {
+      var column = [],
+          yearData = i + 1,  //the +1 is to display years starting at 1
+          capExData = capitalExpenditures[i],
+          loanPaymentData = loanPmts[i],
+          incomeData,
+          cashFlowData,
+          cashOnCashData,
+          expenseData;
+      
+      if (i == 0){
+        incomeData = calculateFirstYearIncome();
+
+        expenseData = calculateFirstYearExpense(incomeData);
+
+      } else {
+        incomeData = dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1);
+        expenseData = dataRows[i-1][expenseColumn] * ((vm.data.e_annualExpenseIncrease/100) + 1);
+      }
+
+      cashFlowData = incomeData - expenseData - capExData - loanPaymentData;
+      
+      capExSumData += capExData;
+      cashOnCashData = calculateCashOnCash(cashFlowData, capExSumData, lenderPointsSum, loanSum);
+
+      column.push(yearData);
+      column.push(incomeData);
+      column.push(expenseData);
+      column.push(capExData);
+      column.push(loanPaymentData)
+      column.push(cashFlowData);
+      column.push(cashOnCashData);
+      dataRows.push(column);
+    }
+    return dataRows;
   }
 
   /*
@@ -160,46 +213,61 @@ App.controller("RentalCalculatorCashFlowViewController", function($scope, Rental
     return years;
   }
 
-  /*
-   * Helper Function:
-   * Creates the data that goes into each columns
-   */
-  function createDataRows (columns) {
-    var dataRows = [],
-        years = getYears(),
-        capitalExpenditures = calculateCapitalExpenditures(years),
-        loanPmts = calculateLoanPmts(years),
-        incomeColumn = 1,
-        expenseColumn = 2;
+  function calculateCashOnCash (cashFlowData, capExSumData, lenderPointsSum, loanSum){
+    var cashOnCashResult,
+        view = vm.data.loanInfoView,
+        addedBankLoans = vm.data.addedLoans || [],
+        addedBankLoansLength = Object.keys(addedBankLoans).length;
 
+    if (view === "cash"){
+      cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.li_purchasePrice);
 
-    for (var i = 0; i < years; i++) {
-      var column = [],
-          yearData = i + 1,  //the +1 is to display years starting at 1
-          capExData = capitalExpenditures[i],
-          loanPaymentData = loanPmts[i],
-          incomeData,
-          expenseData;
-      
-      if (i == 0){
-        incomeData = calculateFirstYearIncome();
-
-        expenseData = calculateFirstYearExpense(incomeData);
-
+    } else if (view === "bankLoan"){
+      //If there is only one bankloan
+      if (addedBankLoansLength == 0){
+        cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.bl_downPaymentDollar + vm.data.bl_closingCost);
       } else {
-        incomeData = dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1);
-        expenseData = dataRows[i-1][expenseColumn] * ((vm.data.e_annualExpenseIncrease/100) + 1);
+        cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + vm.data.bl_closingCost);
       }
 
-      column.push(yearData);
-      column.push(incomeData);
-      column.push(expenseData);
-      column.push(capExData);
-      column.push(loanPaymentData)
-      dataRows.push(column);
+    } else if (view === "specialTermsLoan")
+      cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + (li_purchasePrice - loanSum));
     }
-    return dataRows;
+
+    //to display it as percentage
+    cashOnCashResult = cashOnCashResult * 100;
+    return cashOnCashResult;
   }
+
+  function sumOfSpecialTermsLenderPoints(){
+    var lenderPointsSumResult = 0,
+        addedBankLoans = vm.data.addedLoans || [],
+        addedBankLoansLength = Object.keys(addedBankLoans).length;
+
+    for (var i = 0; i < addedBankLoansLength; i ++){
+      lenderPointsSumResult += addedBankLoans[i].add_bl_upFrontLenderPoints;
+    }
+    return lenderPointsSumResult;
+  }
+
+  function sumOfSpecialTermsLoanAmounts(){
+    var specialTermsLoanAmountsResult = 0,
+        addedBankLoans = vm.data.addedLoans || [],
+        addedBankLoansLength = Object.keys(addedBankLoans).length;
+
+    for (var i = 0; i < addedBankLoansLength; i ++){
+      lenderPointsSumResult += addedBankLoans[i].add_bl_loanAmount;
+    }
+    return specialTermsLoanAmountsResult;
+  }
+
+ /* function sumCapExUpToYear (endPoint, capExArray){
+    var sumOfCapExResult = 0;
+      for (var i = 0; i <= endPoint; i++){
+        sumOfCapExResult += capExpArray[i];
+      }
+    return sumOfCapExResult;
+  }*/
 
   function amortizationCalculation (r, p, n) {
     var dividend = (r * (Math.pow((1 + r),n)));
