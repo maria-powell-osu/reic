@@ -75,16 +75,17 @@ App.directive('clearForm', function() {
       $timeout(function() {
         //to make sure bindings get applied
         scope.$apply( function () { 
+          google.charts.load('current', {'packages':['table']});
           $("#tabs").tabs({
             activate: function (event, ui) {
               if(ui.newTab.index() == 1){
                 var vm = this;
                 vm.data = RentalCalculator.getData();
                 // Load the Visualization API and the table package.
-                google.charts.load('current', {'packages':['table']});
-
+                
+                createTable();
                 // Set a callback to run when the Google Visualization API is loaded.
-                google.charts.setOnLoadCallback(createTable);
+                //google.charts.setOnLoadCallback(createTable);
 
                 function createTable() {
                   var data = new google.visualization.DataTable();

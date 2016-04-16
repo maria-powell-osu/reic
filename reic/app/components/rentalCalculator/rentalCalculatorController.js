@@ -92,13 +92,13 @@ App.controller('FileController', ['$scope', function ($scope){
 	 $scope.imgUpload.src = '';
 }]);
 
-App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
+/*App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
   var vm = this;
   //get the user input
   vm.data = RentalCalculator.getData();
   $scope.test = "test";
   
-  });
+  });*/
 
 
 /*App.controller("RentalCalculatorResultsController", function($scope) {
