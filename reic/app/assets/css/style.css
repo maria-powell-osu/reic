@@ -131,3 +131,21 @@ fieldset{
 .ui-tabs .ui-tabs-panel {
     padding: 1em 0em 1em 0 !important;
 }
+#loaderBody
+{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    top:0; 
+    overflow: visible;
+    opacity: 0.80;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+#loaderImg
+{
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+}

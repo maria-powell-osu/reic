@@ -79,11 +79,17 @@ App.directive('clearForm', function() {
           $("#tabs").tabs({
             activate: function (event, ui) {
               if(ui.newTab.index() == 1){
+                $("#loaderBody").fadeIn(100);
                 var vm = this;
                 vm.data = RentalCalculator.getData();
                 // Load the Visualization API and the table package.
                 
-                createTable();
+                //setTimeout(function(){
+                  createTable();
+                  $('#loaderBody').fadeOut('slow', function () {
+                  });
+                //},5000);
+                
                 // Set a callback to run when the Google Visualization API is loaded.
                 //google.charts.setOnLoadCallback(createTable);
 
