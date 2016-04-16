@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-6 form-group">
               <label for="bl_interest">Interest (%)</label>
-              <input type="number" step="0.01" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%"> 
+              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%"> 
 
               <label for="bl_downPaymentPercent">Down Payment (%)</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
@@ -88,7 +88,7 @@
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_loanAmount" placeholder="Amount in $">
 
                 <label for="add_bl_interest">Interest (%)</label>
-                <input type="number" step="0.01" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interest" placeholder="%">  
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interest" placeholder="%">  
               </div>
               <div class="col-md-6 form-group">
 
@@ -143,7 +143,7 @@
 
                 <label for="stl_interest">Interest (%)</label>
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-                <input type="number" step="0.01" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%">  
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%">  
               </div>
               <div class="col-md-6 form-group">
 

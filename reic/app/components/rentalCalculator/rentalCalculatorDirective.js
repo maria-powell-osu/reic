@@ -74,21 +74,23 @@ App.directive('clearForm', function() {
       //timeout to make sure digest ends before calling scope.apply again
       $timeout(function() {
         //to make sure bindings get applied
-        scope.$apply( function () { 
+        scope.$apply( function () {
+
+          // Load the Visualization API and the table package. 
           google.charts.load('current', {'packages':['table']});
+          
           $("#tabs").tabs({
             activate: function (event, ui) {
               if(ui.newTab.index() == 1){
+                //loader to ensure user does not intefer with calculations
+                //ToDo: add error handling 
                 $("#loaderBody").fadeIn(100);
                 var vm = this;
                 vm.data = RentalCalculator.getData();
-                // Load the Visualization API and the table package.
                 
-                //setTimeout(function(){
-                  createTable();
-                  $('#loaderBody').fadeOut('slow', function () {
-                  });
-                //},5000);
+                createTable();
+                //When table creation completed take away the loader
+                $('#loaderBody').fadeOut('slow', function () {});
                 
                 // Set a callback to run when the Google Visualization API is loaded.
                 //google.charts.setOnLoadCallback(createTable);
@@ -96,7 +98,7 @@ App.directive('clearForm', function() {
                 function createTable() {
                   var data = new google.visualization.DataTable();
                       //Create Columns
-                      var columns = ["Year", "Income", "Expenses", "CAPEX", "Loan PMT", "Cash Flow ($)", "Cash on Cash (%)"];
+                      var columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
                       columns.forEach(function(column) {
                           data.addColumn('number', column);
                       });
@@ -123,7 +125,7 @@ App.directive('clearForm', function() {
                       incomeColumn = 1,
                       expenseColumn = 2,
                       lenderPointsSum = sumOfSpecialTermsLenderPoints(),
-                      loanSum = sumOfSpecialTermsLoanAmounts();
+                      loanSum = sumOfSpecialTermsLoanAmounts(vm.data.loanInfoView);
 
 
                   for (var i = 0; i < years; i++) {
@@ -134,7 +136,9 @@ App.directive('clearForm', function() {
                         incomeData,
                         cashFlowData,
                         cashOnCashData,
-                        expenseData;
+                        expenseData,
+                        rentIncrease = vm.data.ri_annualRentIncrease || 0,
+                        expenseIncrease = vm.data.e_annualExpenseIncrease || 0;
                     
                     if (i == 0){
                       incomeData = calculateFirstYearIncome();
@@ -142,8 +146,8 @@ App.directive('clearForm', function() {
                       expenseData = calculateFirstYearExpense(incomeData);
 
                     } else {
-                      incomeData = dataRows[i-1][incomeColumn] * ((vm.data.ri_annualRentIncrease/100) + 1);
-                      expenseData = dataRows[i-1][expenseColumn] * ((vm.data.e_annualExpenseIncrease/100) + 1);
+                      incomeData = dataRows[i-1][incomeColumn] * ((rentIncrease/100) + 1);
+                      expenseData = dataRows[i-1][expenseColumn] * ((expenseIncrease/100) + 1);
                     }
 
                     cashFlowData = incomeData - expenseData - capExData - loanPaymentData;
@@ -157,7 +161,7 @@ App.directive('clearForm', function() {
                     column.push(capExData);
                     column.push(loanPaymentData)
                     column.push(cashFlowData);
-                    column.push(cashOnCashData);
+                    column.push(cashOnCashData );
                     dataRows.push(column);
                   }
                   return dataRows;
@@ -207,6 +211,7 @@ App.directive('clearForm', function() {
                   var cashOnCashResult,
                       view = vm.data.loanInfoView,
                       addedBankLoans = vm.data.addedLoans || [],
+                      closingCost = vm.data.bl_closingCost || 0;
                       addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                   if (view === "cash"){
@@ -215,13 +220,13 @@ App.directive('clearForm', function() {
                   } else if (view === "bankLoan"){
                     //If there is only one bankloan
                     if (addedBankLoansLength == 0){
-                      cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.bl_downPaymentDollar + vm.data.bl_closingCost);
+                      cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.bl_downPaymentDollar + closingCost);
                     } else {
                       cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + vm.data.bl_closingCost);
                     }
 
                   } else if (view === "specialTermsLoan"){
-                    cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + (li_purchasePrice - loanSum));
+                    cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + (vm.data.li_purchasePrice - loanSum));
                   }
 
                   //to display it as percentage
@@ -240,13 +245,21 @@ App.directive('clearForm', function() {
                   return lenderPointsSumResult;
                 }
 
-                function sumOfSpecialTermsLoanAmounts(){
+                function sumOfSpecialTermsLoanAmounts(view ){
                   var specialTermsLoanAmountsResult = 0,
                       addedBankLoans = vm.data.addedLoans || [],
-                      addedBankLoansLength = Object.keys(addedBankLoans).length;
+                      addedBankLoansLength = Object.keys(addedBankLoans).length,
+                      specialTermsLoans = vm.data.specialTermsLoans || [],
+                      specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
-                  for (var i = 0; i < addedBankLoansLength; i ++){
-                    lenderPointsSumResult += addedBankLoans[i].add_bl_loanAmount;
+                  if (view == "bankLoan"){
+                    for (var i = 0; i < addedBankLoansLength; i ++){
+                      specialTermsLoanAmountsResult += addedBankLoans[i].add_bl_loanAmount;
+                    }
+                  }else if (view == "specialTermsLoan"){
+                    for (var i = 0; i < specialTermsLoansLength; i ++){
+                      specialTermsLoanAmountsResult += specialTermsLoans[i].stl_amount;
+                    }
                   }
                   return specialTermsLoanAmountsResult;
                 }
