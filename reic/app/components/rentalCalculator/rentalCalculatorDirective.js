@@ -222,7 +222,7 @@ App.directive('clearForm', function() {
                     if (addedBankLoansLength == 0){
                       cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.bl_downPaymentDollar + closingCost);
                     } else {
-                      cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + vm.data.bl_closingCost);
+                      cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + closingCost);
                     }
 
                   } else if (view === "specialTermsLoan"){
@@ -240,7 +240,7 @@ App.directive('clearForm', function() {
                       addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                   for (var i = 0; i < addedBankLoansLength; i ++){
-                    lenderPointsSumResult += addedBankLoans[i].add_bl_upFrontLenderPoints;
+                    lenderPointsSumResult += addedBankLoans[i].add_bl_upFrontLenderPoints || 0;
                   }
                   return lenderPointsSumResult;
                 }
