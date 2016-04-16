@@ -77,7 +77,7 @@ App.directive('clearForm', function() {
         scope.$apply( function () {
 
           // Load the Visualization API and the table package. 
-          google.charts.load('current', {'packages':['table']});
+          google.charts.load('current', {'packages':['table', 'corechart']});
           
           $("#tabs").tabs({
             activate: function (event, ui) {
@@ -89,11 +89,54 @@ App.directive('clearForm', function() {
                 vm.data = RentalCalculator.getData();
                 
                 createTable();
+                createCashFlowProjectionComboChart();
                 //When table creation completed take away the loader
                 $('#loaderBody').fadeOut('slow', function () {});
                 
                 // Set a callback to run when the Google Visualization API is loaded.
                 //google.charts.setOnLoadCallback(createTable);
+
+                function createCashFlowProjectionComboChart() {
+                  var cashFlowProjectionChart = new google.visualization.ComboChart(document.getElementById('cashFlowProjection_div')),
+                      rawDataArray = vm.data.cashFlowTableData,
+                      cashFlow = 5,
+                      year = 0,
+                      cashOnCash = 6,
+                      chartData = [];
+                     /*: {title: 'Cash Flow ($)'},
+                    hAxis: {title: 'Years'},
+                    seriesType: 'bars',*/
+                  //specify axis information
+                  var options = {
+                    series: {
+                      0: {axis: 'CashFlow', type: 'bars'}, 
+                      1: {axis: 'CashOnCash', type: 'line', targetAxisIndex:1}
+                    },
+                    axes: {
+                      y: {
+                        CashFlow: {label: 'Cash Flow ($)'},
+                        CashOnCash: {label: 'Cash on Cash (%)'}
+                      }
+                    },
+                    hAxis: {title: 'Years'},
+                    width: '100%', 
+                    height: '100%'
+                  };
+                 
+                  //add columns to the data 
+                  chartData.push(["Year", "Cash Flow ($)", "Cash on Cash (%)"]);
+
+                  //Add data rows to the data
+                  rawDataArray.forEach(function(row) {
+                    var dataRow = [];
+                    dataRow.push(row[year]);
+                    dataRow.push(row[cashFlow]);
+                    dataRow.push(row[cashOnCash]);
+                    chartData.push(dataRow);
+                  });
+                  var data = google.visualization.arrayToDataTable(chartData);
+                  cashFlowProjectionChart.draw(data, options);
+                }
 
                 function createTable() {
                   var data = new google.visualization.DataTable();
@@ -108,7 +151,7 @@ App.directive('clearForm', function() {
                 
                   var table = new google.visualization.Table(document.getElementById('table_div'));
 
-                  table.draw(data, {width: '100%', height: '100%'});
+                  table.draw(data, {width: '100%', height: '300px'});
                 }
                 
 
@@ -164,6 +207,7 @@ App.directive('clearForm', function() {
                     column.push(cashOnCashData );
                     dataRows.push(column);
                   }
+                  vm.data.cashFlowTableData = dataRows;
                   return dataRows;
                 }
 
@@ -175,14 +219,14 @@ App.directive('clearForm', function() {
                  *  amortization get chosen
                  */
                 function getYears(){
-                  var years,
+                  var years = 0,
                       view = vm.data.loanInfoView;
 
                   if (view === "cash"){
                     //aribitrarily set the years
                     years = 30;
                   } else if (view === "bankLoan"){
-                    var maxValue = vm.data.bl_amortization,
+                    var maxValue = vm.data.bl_amortization || 0,
                         addedBankLoans = vm.data.addedLoans || [],
                         addedBankLoansLength = Object.keys(addedBankLoans).length;
 
@@ -198,8 +242,9 @@ App.directive('clearForm', function() {
                         specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
                     for (var i = 0; i < specialTermsLoansLength; i++) {
-                        if (specialTermsLoans[i].stl_amortization > maxValue) {
-                            maxValue = specialTermsLoans[i].stl_amortization;
+                        var amortization = specialTermsLoans[i].stl_amortization || 0;
+                        if (amortization > maxValue) {
+                            maxValue = amortization;
                         }
                     }
                     years = maxValue + 1;
