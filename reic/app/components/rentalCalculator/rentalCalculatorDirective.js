@@ -24,33 +24,6 @@ App.directive('clearForm', function() {
 
 });
 
-/*App.directive('goToCashFlow', function($compile) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs, ctrl) {  
-      $(element).click( function () {
-       scope.$apply( function () {
-            		//elements to add to the tabs (compile is needed so that the directives get attached)
-            		var li = $compile('<li><a href="#tabs-cashFlow">Cash Flow</a> <span class="glyphicon glyphicon-remove" aria-hidden="true" remove-tab></span></li>')(scope);
-                var div = $compile('<div id="tabs-cashFlow" cash-flow></div>')(scope);
-
-                var tabs = $('#tabs').tabs();
-                var tabCounter = scope['tabCounter'];
-                tabCounter++;
-
-                tabs.find(".ui-tabs-nav").append(li);
-                tabs.append(div);
-                tabs.tabs('refresh');
-                $("#tabs").tabs( "option","active", tabCounter - 1);
-
-                alert("here");
-                alert("this is it");
-              });
-     });
-    }
-  }
-});*/
-
 'use strict';
 
 /* Basic Property Information
@@ -90,22 +63,134 @@ App.directive('clearForm', function() {
                 
                 createTable();
                 createCashFlowProjectionComboChart();
+                createIncomePieChart();
+                createExpensePieChart();
+
                 //When table creation completed take away the loader
                 $('#loaderBody').fadeOut('slow', function () {});
-                
-                // Set a callback to run when the Google Visualization API is loaded.
-                //google.charts.setOnLoadCallback(createTable);
+              
+                function createExpensePieChart(){
+                  var expensePieChart = new google.visualization.PieChart(document.getElementById('expensePieChart')),
+                      dataArray = [],
+                      monthlyExpenses = 0,
+                      yearlyExpenses = 0,
+                      expenseResult = 0,
+                      addedUtilities = vm.data.addedUtilities || [],
+                      addedUtilitiesLength = Object.keys(addedUtilities).length;
+
+                      //add columns to the data 
+                      dataArray.push(["Description", "ExpenseAmount"]);
+
+                      if (vm.data.u_water){
+                        dataArray.push(["Water", vm.data.u_water]);
+                      }
+                      if (vm.data.u_sewer){
+                        dataArray.push(["Sewer", vm.data.u_sewer]);
+                      }
+                      if (vm.data.u_garbage){
+                        dataArray.push(["Garbage", vm.data.u_garbage]);
+                      }
+                      if (vm.data.u_electricity){
+                        dataArray.push(["Electricity", vm.data.u_electricity]);
+                      }
+                      if (vm.data.u_naturalGas){
+                        dataArray.push(["Natural Gas", vm.data.u_naturalGas]);
+                      }
+                      if (vm.data.u_internet){
+                        dataArray.push(["Internet", vm.data.u_internet]);
+                      }
+                      if (vm.data.m_costAmount){
+                        dataArray.push(["Cost Amount", vm.data.m_costAmount]);
+                      }
+                      if (vm.data.o_yardMaintenance){
+                        dataArray.push(["Yard Maintenance", vm.data.o_yardMaintenance]);
+                      }
+                      if (vm.data.o_insurance){
+                        dataArray.push(["Insurance", vm.data.o_insurance]);
+                      }
+                      if (vm.data.pm_managementFeeAmount || (vm.data.pm_tenantPlacementFee && vm.data.o_vacancyRate)){
+                        var tenantFee = vm.data.pm_tenantPlacementFee || 0,
+                            vacancyRate = vm.data.o_vacancyRate || 0,
+                            monthlyTenantFee = tenantFee * vacancyRate,
+                            managementFee = vm.data.pm_managementFeeAmount + monthlyTenantFee;
+                        
+                        dataArray.push(["Property Management", managementFee]);
+                      }
+                      if (vm.data.o_propertyTaxes){
+                        var propTaxes = vm.data.o_propertyTaxes / 12;
+                        dataArray.push(["Property Taxes", propTaxes]);
+                      }
+                      if (vm.data.o_vacancyRate){
+                        var vacancyRate = vm.data.o_vacancyRate / 100,
+                            //we are dividing by 12 because the function return income per year
+                            income = calculateFirstYearIncome() /12,
+                            vacancyPerMonth = income * vacancyRate;
+                            dataArray.push(["Vacancy", vacancyPerMonth]);
+                      }
+
+                      //add up all monthly custom utility costs added by User
+                      for (var i = 0; i < addedUtilitiesLength; i++) {
+                        dataArray.push([addedUtilities[i].add_u_name, addedUtilities[i].add_u_amount]);
+                      }
+
+                var data = google.visualization.arrayToDataTable(dataArray);
+
+                var options = {
+                    width: '100%', 
+                    height: '100%',
+                    is3D: true,
+                    legend: "none",
+                    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+                };
+
+                  incomePieChart.draw(data, options);
+                }
+
+                function createIncomePieChart(){
+                  var incomePieChart = new google.visualization.PieChart(document.getElementById('incomePieChart')),
+                      dataArray = [],
+                      units = vm.data.units || []
+                      unitsLength = Object.keys(units).length,
+                      supplementalIncomes = vm.data.supplementalIncomes || [],
+                      supplementalIncomesLength = Object.keys(supplementalIncomes).length,
+                      sumOfGrossMonthlyUnitIncome = 0;
+
+                  //add columns to the data 
+                  dataArray.push(["Description", "IncomeAmount"]);
+
+                  //add unit income
+                  for (var i = 0; i < unitsLength; i++) {
+                    sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
+                  }
+                  dataArray.push(["Rental Income", sumOfGrossMonthlyUnitIncome]);
+
+                  //add new row for each supplemental income
+                  for (var i = 0; i < supplementalIncomesLength; i++) {
+                    var description = supplementalIncomes[i].si_description,
+                        value = supplementalIncomes[i].si_grossMonthlyIncome;
+                    dataArray.push([description, value]);
+                  }
+                  var data = google.visualization.arrayToDataTable(dataArray);
+
+                  var options = {
+                    width: '100%', 
+                    height: '100%',
+                    is3D: true,
+                    legend: "none",
+                    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+                  };
+
+                  incomePieChart.draw(data, options);
+                }
 
                 function createCashFlowProjectionComboChart() {
                   var cashFlowProjectionChart = new google.visualization.ComboChart(document.getElementById('cashFlowProjection_div')),
-                      rawDataArray = vm.data.cashFlowTableData,
-                      cashFlow = 5,
-                      year = 0,
-                      cashOnCash = 6,
-                      chartData = [];
-                     /*: {title: 'Cash Flow ($)'},
-                    hAxis: {title: 'Years'},
-                    seriesType: 'bars',*/
+                  rawDataArray = vm.data.cashFlowTableData,
+                  cashFlow = 5,
+                  year = 0,
+                  cashOnCash = 6,
+                  chartData = [];
+
                   //specify axis information
                   var options = {
                     series: {
@@ -122,7 +207,7 @@ App.directive('clearForm', function() {
                     width: '100%', 
                     height: '100%'
                   };
-                 
+
                   //add columns to the data 
                   chartData.push(["Year", "Cash Flow ($)", "Cash on Cash (%)"]);
 
@@ -143,72 +228,85 @@ App.directive('clearForm', function() {
                       //Create Columns
                       var columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
                       columns.forEach(function(column) {
-                          data.addColumn('number', column);
+                        data.addColumn('number', column);
                       });
 
                       //Create Rows
                       data.addRows(createDataRows(columns));
-                
-                  var table = new google.visualization.Table(document.getElementById('table_div'));
 
-                  table.draw(data, {width: '100%', height: '300px'});
-                }
-                
+                      var table = new google.visualization.Table(document.getElementById('table_div'));
+
+                      table.draw(data, {width: '100%', height: '300px'});
+                    }
+
 
                 /*
                  * Helper Function:
                  * Creates the data that goes into each columns
                  */
-                function createDataRows (columns) {
+                 function createDataRows (columns) {
                   var dataRows = [],
-                      years = getYears(),
-                      capitalExpenditures = calculateCapitalExpenditures(years),
-                      capExSumData = 0,
-                      loanPmts = calculateLoanPmts(years),
-                      incomeColumn = 1,
-                      expenseColumn = 2,
-                      lenderPointsSum = sumOfSpecialTermsLenderPoints(),
-                      loanSum = sumOfSpecialTermsLoanAmounts(vm.data.loanInfoView);
+                  years = getYears(),
+                  capitalExpenditures = calculateCapitalExpenditures(years),
+                  capExSumUpUntilNow = 0,
+                  loanPmts = calculateLoanPmts(years),
+                  incomeColumn = 1,
+                  expenseColumn = 2,
+                  lenderPointsSum = sumOfSpecialTermsLenderPoints(),
+                  loanSum = sumOfSpecialTermsLoanAmounts(vm.data.loanInfoView);
 
 
                   for (var i = 0; i < years; i++) {
                     var column = [],
-                        yearData = i + 1,  //the +1 is to display years starting at 1
-                        capExData = capitalExpenditures[i],
-                        loanPaymentData = loanPmts[i],
                         incomeData,
                         cashFlowData,
                         cashOnCashData,
-                        expenseData,
-                        rentIncrease = vm.data.ri_annualRentIncrease || 0,
-                        expenseIncrease = vm.data.e_annualExpenseIncrease || 0;
-                    
-                    if (i == 0){
-                      incomeData = calculateFirstYearIncome();
+                        expenseData;
 
-                      expenseData = calculateFirstYearExpense(incomeData);
+                        yearData = i + 1;
+                        incomeData = calculateIncome(i, dataRows, incomeColumn);
+                        expenseData = calculateExpenses(i, dataRows, expenseColumn, incomeData);
+                        capExData = capitalExpenditures[i],
+                        loanPaymentData = loanPmts[i],
+                        cashFlowData = incomeData - expenseData - capExData - loanPaymentData;
 
-                    } else {
-                      incomeData = dataRows[i-1][incomeColumn] * ((rentIncrease/100) + 1);
-                      expenseData = dataRows[i-1][expenseColumn] * ((expenseIncrease/100) + 1);
+                        capExSumUpUntilNow += capExData;
+                        cashOnCashData = calculateCashOnCash(cashFlowData, capExSumUpUntilNow, lenderPointsSum, loanSum);
+
+                        column.push(yearData);
+                        column.push(incomeData);
+                        column.push(expenseData);
+                        column.push(capExData);
+                        column.push(loanPaymentData)
+                        column.push(cashFlowData);
+                        column.push(cashOnCashData );
+                        dataRows.push(column);
+                      }
+                      vm.data.cashFlowTableData = dataRows;
+                      return dataRows;
                     }
 
-                    cashFlowData = incomeData - expenseData - capExData - loanPaymentData;
-                    
-                    capExSumData += capExData;
-                    cashOnCashData = calculateCashOnCash(cashFlowData, capExSumData, lenderPointsSum, loanSum);
+                function calculateIncome (year, dataRows, incomeColumn) {
+                  var incomeResult,
+                      rentIncrease = vm.data.ri_annualRentIncrease || 0;
 
-                    column.push(yearData);
-                    column.push(incomeData);
-                    column.push(expenseData);
-                    column.push(capExData);
-                    column.push(loanPaymentData)
-                    column.push(cashFlowData);
-                    column.push(cashOnCashData );
-                    dataRows.push(column);
+                    if (year == 0){
+                          incomeResult = calculateFirstYearIncome();
+                        } else {
+                          incomeResult = dataRows[year-1][incomeColumn] * ((rentIncrease/100) + 1);
+                        }
+                  return incomeResult;
+                }
+
+                function calculateExpenses (year, dataRows, expenseColumn, incomeData){
+                  var expenseResult,
+                      expenseIncrease = vm.data.e_annualExpenseIncrease || 0;
+                  if (year == 0){
+                    expenseResult = calculateFirstYearExpense(incomeData);
+                  } else {
+                    expenseResult = dataRows[year-1][expenseColumn] * ((expenseIncrease/100) + 1);
                   }
-                  vm.data.cashFlowTableData = dataRows;
-                  return dataRows;
+                  return expenseResult;
                 }
 
                 /*
@@ -218,34 +316,34 @@ App.directive('clearForm', function() {
                  * for special terms loans and bank loans the highest
                  *  amortization get chosen
                  */
-                function getYears(){
+                 function getYears(){
                   var years = 0,
-                      view = vm.data.loanInfoView;
+                  view = vm.data.loanInfoView;
 
                   if (view === "cash"){
                     //aribitrarily set the years
                     years = 30;
                   } else if (view === "bankLoan"){
                     var maxValue = vm.data.bl_amortization || 0,
-                        addedBankLoans = vm.data.addedLoans || [],
-                        addedBankLoansLength = Object.keys(addedBankLoans).length;
+                    addedBankLoans = vm.data.addedLoans || [],
+                    addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                     for (var i = 0; i < addedBankLoansLength; i++) {
-                        if (addedBankLoans[i].add_bl_amortization > maxValue) {
-                            maxValue = addedBankLoans[i].add_bl_amortization;
-                        }
+                      if (addedBankLoans[i].add_bl_amortization > maxValue) {
+                        maxValue = addedBankLoans[i].add_bl_amortization;
+                      }
                     }
                     years = maxValue + 1;
                   } else if (view === "specialTermsLoan") {
                     var maxValue = 0,
-                        specialTermsLoans = vm.data.specialTermsLoans || [],
-                        specialTermsLoansLength = Object.keys(specialTermsLoans).length;
+                    specialTermsLoans = vm.data.specialTermsLoans || [],
+                    specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
                     for (var i = 0; i < specialTermsLoansLength; i++) {
-                        var amortization = specialTermsLoans[i].stl_amortization || 0;
-                        if (amortization > maxValue) {
-                            maxValue = amortization;
-                        }
+                      var amortization = specialTermsLoans[i].stl_amortization || 0;
+                      if (amortization > maxValue) {
+                        maxValue = amortization;
+                      }
                     }
                     years = maxValue + 1;
                   }
@@ -254,35 +352,46 @@ App.directive('clearForm', function() {
 
                 function calculateCashOnCash (cashFlowData, capExSumData, lenderPointsSum, loanSum){
                   var cashOnCashResult,
-                      view = vm.data.loanInfoView,
-                      addedBankLoans = vm.data.addedLoans || [],
-                      closingCost = vm.data.bl_closingCost || 0;
-                      addedBankLoansLength = Object.keys(addedBankLoans).length;
+                  view = vm.data.loanInfoView,
+                  addedBankLoans = vm.data.addedLoans || [],
+                  closingCost = vm.data.bl_closingCost || 0,
+                  dividend = cashFlowData,
+                  divisor,
+                  addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                   if (view === "cash"){
-                    cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.li_purchasePrice);
+                    divisor = capExSumData + vm.data.li_purchasePrice;
 
                   } else if (view === "bankLoan"){
                     //If there is only one bankloan
                     if (addedBankLoansLength == 0){
-                      cashOnCashResult = (cashFlowData) / (capExSumData + vm.data.bl_downPaymentDollar + closingCost);
+                      divisor = capExSumData + vm.data.bl_downPaymentDollar + closingCost;
                     } else {
-                      cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + closingCost);
+                      divisor = capExSumData + lenderPointsSum + vm.data.bl_downPaymentDollar + closingCost;
                     }
-
                   } else if (view === "specialTermsLoan"){
-                    cashOnCashResult = (cashFlowData) / (capExSumData + lenderPointsSum + (vm.data.li_purchasePrice - loanSum));
+                    divisor = capExSumData + lenderPointsSum + (vm.data.li_purchasePrice - loanSum);
                   }
 
-                  //to display it as percentage
-                  cashOnCashResult = cashOnCashResult * 100;
+                  if (divisor <= 0){
+                    cashOnCashResult = 0;
+                  }else {
+                    //* 100 to display in percentage format                
+                    cashOnCashResult = (dividend / divisor) * 100;
+                  }
                   return cashOnCashResult;
+                }
+
+                function calculateBalloonPayoff (){
+                  var ballonPayoffResult;
+
+                  return ballonPayoffResult;
                 }
 
                 function sumOfSpecialTermsLenderPoints(){
                   var lenderPointsSumResult = 0,
-                      addedBankLoans = vm.data.addedLoans || [],
-                      addedBankLoansLength = Object.keys(addedBankLoans).length;
+                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                   for (var i = 0; i < addedBankLoansLength; i ++){
                     lenderPointsSumResult += addedBankLoans[i].add_bl_upFrontLenderPoints || 0;
@@ -292,10 +401,10 @@ App.directive('clearForm', function() {
 
                 function sumOfSpecialTermsLoanAmounts(view ){
                   var specialTermsLoanAmountsResult = 0,
-                      addedBankLoans = vm.data.addedLoans || [],
-                      addedBankLoansLength = Object.keys(addedBankLoans).length,
-                      specialTermsLoans = vm.data.specialTermsLoans || [],
-                      specialTermsLoansLength = Object.keys(specialTermsLoans).length;
+                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoansLength = Object.keys(addedBankLoans).length,
+                  specialTermsLoans = vm.data.specialTermsLoans || [],
+                  specialTermsLoansLength = Object.keys(specialTermsLoans).length;
 
                   if (view == "bankLoan"){
                     for (var i = 0; i < addedBankLoansLength; i ++){
@@ -309,14 +418,6 @@ App.directive('clearForm', function() {
                   return specialTermsLoanAmountsResult;
                 }
 
-                function sumCapExUpToYear (endPoint, capExArray){
-                  var sumOfCapExResult = 0;
-                    for (var i = 0; i <= endPoint; i++){
-                      sumOfCapExResult += capExpArray[i];
-                    }
-                  return sumOfCapExResult;
-                }
-
                 function amortizationCalculation (r, p, n) {
                   var dividend = (r * (Math.pow((1 + r),n)));
                   var divisor = ((Math.pow((1 + r), n)) - 1);
@@ -326,19 +427,19 @@ App.directive('clearForm', function() {
 
                 function calculateLoanPmts (years) {
                   var loanPmtResult = 0,
-                      view = vm.data.loanInfoView,
-                      addedBankLoans = vm.data.addedLoans || [],
-                      addedBankLoansLength = Object.keys(addedBankLoans).length,
-                      specialTermsLoans = vm.data.specialTermsLoans || [],
-                      specialTermsLoansLength = Object.keys(specialTermsLoans).length,
-                      r,
-                      p,
-                      n;
+                  view = vm.data.loanInfoView,
+                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoansLength = Object.keys(addedBankLoans).length,
+                  specialTermsLoans = vm.data.specialTermsLoans || [],
+                  specialTermsLoansLength = Object.keys(specialTermsLoans).length,
+                  r,
+                  p,
+                  n;
 
                   if(view == "cash"){
-                       loanPmtResult = 0;
+                   loanPmtResult = 0;
 
-                  } else if (view == "bankLoan"){
+                 } else if (view == "bankLoan"){
                       //Add Bank Loan
                       p = vm.data.li_purchasePrice - vm.data.bl_downPaymentDollar;
                       r = (vm.data.bl_interest /100) / 12; 
@@ -356,7 +457,7 @@ App.directive('clearForm', function() {
                           loanPmtResult += (amortizationCalculation(r, p, n) * 12);
                         }
                       }
-                  } else if (view == "specialTermsLoan"){
+                    } else if (view == "specialTermsLoan"){
                       for (var i = 0; i < specialTermsLoansLength; i++) {
                         if (vm.data.specialTermsLoans[i].stl_interestOption == "yes"){
                           loanPmtResult += vm.data.specialTermsLoans[i].stl_amount * (vm.data.specialTermsLoans[i].stl_interest / 100);
@@ -367,17 +468,17 @@ App.directive('clearForm', function() {
                           loanPmtResult += (amortizationCalculation(r, p, n) * 12);
                         }
                       }
+                    }
+
+                    var result = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+
+                    return result;
                   }
 
-                  var result = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
-
-                  return result;
-                }
-
-                function calculateCapitalExpenditures (years) {
-                  var capitalExpenditures = vm.data.capitalExpenditures || [],
-                      capitalExpendituresLength = Object.keys(capitalExpenditures).length,
-                      purchasDateYear = new Date(vm.data.li_purchaseDate).getFullYear();
+                  function calculateCapitalExpenditures (years) {
+                    var capitalExpenditures = vm.data.capitalExpenditures || [],
+                    capitalExpendituresLength = Object.keys(capitalExpenditures).length,
+                    purchasDateYear = new Date(vm.data.li_purchaseDate).getFullYear();
 
                   //Initialize the result array to 0 and set length of array to how many years
                   var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
@@ -394,9 +495,9 @@ App.directive('clearForm', function() {
 
                 function calculateFirstYearExpense (firstYearIncome){
                   var monthlyExpenses = 0,
-                      yearlyExpenses = 0,
-                      expenseResult = 0,
-                      addedUtilities = vm.data.addedUtilities || [],
+                  yearlyExpenses = 0,
+                  expenseResult = 0,
+                  addedUtilities = vm.data.addedUtilities || [],
                       //DO TO HERE SHOULD BE ERROR HANDLING INSTEAD
                       water = vm.data.u_water || 0,
                       sewer = vm.data.u_sewer || 0,
@@ -415,10 +516,10 @@ App.directive('clearForm', function() {
 
                       //add up all monthly default utility costs and 
                       monthlyExpenses = water + sewer + garbage
-                                + electricity + naturalGas
-                                + internet + maintenanceCost
-                                + yardMaitenance + insurance
-                                + managementFee;
+                      + electricity + naturalGas
+                      + internet + maintenanceCost
+                      + yardMaitenance + insurance
+                      + managementFee;
 
                       //add up all monthly custom utility costs added by User
                       for (var i = 0; i < addedUtilitiesLength; i++) {
@@ -427,45 +528,45 @@ App.directive('clearForm', function() {
 
                       //convert all monthly expenses to yearly cost 
                       yearlyExpenses = 12 * ((tenantPlacementFee * vacancyRate)
-                                      + monthlyExpenses);
+                        + monthlyExpenses);
 
                       //add the rest of yearly expenses
                       expenseResult = yearlyExpenses + propertyTaxes
-                                      + (vacancyRate * firstYearIncome);
+                      + (vacancyRate * firstYearIncome);
 
-                  return expenseResult;
-                }
+                      return expenseResult;
+                    }
 
 
-                function calculateFirstYearIncome (){
-                    var income,
-                        supplementalIncomes = vm.data.supplementalIncomes || [],
-                        units = vm.data.units || [],
-                        supplementalIncomesLength = Object.keys(supplementalIncomes).length,
-                        unitsLength = Object.keys(units).length,
-                        sumOfGrossMonthlySupplementalIncome = 0,
-                        sumOfGrossMonthlyUnitIncome = 0;
+                    function calculateFirstYearIncome (){
+                      var income,
+                      supplementalIncomes = vm.data.supplementalIncomes || [],
+                      units = vm.data.units || [],
+                      supplementalIncomesLength = Object.keys(supplementalIncomes).length,
+                      unitsLength = Object.keys(units).length,
+                      sumOfGrossMonthlySupplementalIncome = 0,
+                      sumOfGrossMonthlyUnitIncome = 0;
 
-                    for (var i = 0; i < supplementalIncomesLength; i++) {
+                      for (var i = 0; i < supplementalIncomesLength; i++) {
                         sumOfGrossMonthlySupplementalIncome += supplementalIncomes[i].si_grossMonthlyIncome;
+                      }
+
+                      for (var i = 0; i < unitsLength; i++) {
+                        sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
+                      }
+
+                      income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
+
+                      return income;
                     }
-
-                    for (var i = 0; i < unitsLength; i++) {
-                      sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
-                    }
-
-                    income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
-
-                    return income;
                   }
-              }
-            }
+                }
+              });
+            });
           });
-        });
-      });
-    }
-  }
-});
+        }
+      }
+    });
 
 /* Financial Measures 
  * Loads template into rentalCalculatorInput.html

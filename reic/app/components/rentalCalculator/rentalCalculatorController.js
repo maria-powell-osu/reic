@@ -40,7 +40,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.supplementalIncomes.push({});
     };
     vm.removeSupplementalIncome = function() {
-      var lastItem = vm.incomes.length-1;
+      var lastItem = vm.supplementalIncomes.length-1;
       vm.supplementalIncomes.splice(lastItem);
     };  
 
@@ -80,7 +80,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.capitalExpenditures.push({});
     };
     vm.removeCapitalExpenditure = function() {
-    var lastItem = $scope.capitalExpenditures.length-1;
+    var lastItem = vm.capitalExpenditures.length-1;
     vm.capitalExpenditures.splice(lastItem);
   };
 

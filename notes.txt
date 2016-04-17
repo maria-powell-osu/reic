@@ -1,18 +1,16 @@
 What I am trying to do:
-	- let user input decimals
+	- add other expense array cal to firstyearExpensearray
+	- add the same to the pie chart
+	- test the pie chart
+	- ask Jason about the upront lender points in CoC
 Where I left of:
 	- 
 
 Notes:
 	- 
-ng-model="input.unit[$index].ri_unitName"
 
 Worklist:
-	- navigation bar display fix on hover
-	- radio buttons on small screen
-	- make the radio buttons look nicer
-	- Delete the image properly
-	- center the drag and drop center file
+	- rentalCalculation directive split up instead of accessing divs
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
@@ -32,5 +30,5 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 74
+	Coding: 76
 
