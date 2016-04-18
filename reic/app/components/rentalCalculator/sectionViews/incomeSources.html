@@ -9,7 +9,7 @@
     </div>
   </fieldset>
   <br/>
-  <div ng-repeat="units in rentalCalculator.units track by $index">
+  <div ng-repeat="units in rentalCalculator.input.units track by $index">
     <fieldset>
       <div class="row">
         <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeUnit()">
@@ -41,7 +41,7 @@
 
 
   <h3>Supplemental Income</h3><br/>
-  <div ng-repeat="supplementalIncomes in rentalCalculator.supplementalIncomes track by $index">
+  <div ng-repeat="supplementalIncomes in rentalCalculator.input.supplementalIncomes track by $index">
     <fieldset>
       <div class="row">
         <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeSupplementalIncome()">

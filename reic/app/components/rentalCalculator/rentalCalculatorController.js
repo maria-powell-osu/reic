@@ -17,71 +17,71 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
      *  when the curly braces are added the track by $index knows to add one income form
      *  When no curly braces the form will not displayed until user adds it
      */
-    vm.units = [{}];
-    vm.supplementalIncomes = [{}];
-    vm.specialTermsLoans = [{}];
-    vm.capitalExpenditures = [{}];
-    vm.loans = [];
-    vm.utilities = [];
-    vm.expenses = [];
+    vm.input.units = [{}];
+    vm.input.supplementalIncomes = [{}];
+    vm.input.specialTermsLoans = [{}];
+    vm.input.capitalExpenditures = [{}];
+    vm.input.loans = [];
+    vm.input.utilities = [];
+    vm.input.expenses = [];
 
     vm.addUnit = function() {
-      vm.units.push({});
+      vm.input.units.push({});
     };
     vm.removeUnit = function() {
-        var lastItem = vm.units.length-1;
-        vm.units.splice(lastItem);
+        var lastItem = vm.input.units.length-1;
+        vm.input.units.splice(lastItem);
     };
 
     //To follow are all add or delete functions
     //I need to look into make them reusable here!!
 
     vm.addSupplementalIncome = function() {
-      vm.supplementalIncomes.push({});
+      vm.input.supplementalIncomes.push({});
     };
     vm.removeSupplementalIncome = function() {
-      var lastItem = vm.supplementalIncomes.length-1;
-      vm.supplementalIncomes.splice(lastItem);
+      var lastItem = vm.input.supplementalIncomes.length-1;
+      vm.input.supplementalIncomes.splice(lastItem);
     };  
 
     vm.addSpecialTermsLoan = function() {
-      vm.specialTermsLoans.push({});
+      vm.input.specialTermsLoans.push({});
     };
     vm.removeSpecialTermsLoan = function() {
-      var lastItem = vm.specialTermsLoans.length-1;
-      vm.specialTermsLoans.splice(lastItem);
+      var lastItem = vm.input.specialTermsLoans.length-1;
+      vm.input.specialTermsLoans.splice(lastItem);
     }; 
 
     vm.addLoan = function() {
-        vm.loans.push({});
+        vm.input.loans.push({});
       };
     vm.removeLoan = function() {
-      var lastItem = vm.loans.length-1;
-      vm.loans.splice(lastItem);
+      var lastItem = vm.input.loans.length-1;
+      vm.input.loans.splice(lastItem);
     };
 
     vm.addUtility = function() {
-        vm.utilities.push({});
+        vm.input.utilities.push({});
       };
     vm.removeUtility = function() {
-      var lastItem = vm.utilities.length-1;
-      vm.utilities.splice(lastItem);
+      var lastItem = vm.input.utilities.length-1;
+      vm.input.utilities.splice(lastItem);
     };
 
     vm.addExpense = function() {
-      vm.expenses.push({});
+      vm.input.expenses.push({});
     };
     vm.removeExpense = function() {
-      var lastItem = vm.expenses.length-1;
-      vm.expenses.splice(lastItem);
+      var lastItem = vm.input.expenses.length-1;
+      vm.input.expenses.splice(lastItem);
     };
 
     vm.addCapitalExpenditure = function() {
-      vm.capitalExpenditures.push({});
+      vm.input.capitalExpenditures.push({});
     };
     vm.removeCapitalExpenditure = function() {
-    var lastItem = vm.capitalExpenditures.length-1;
-    vm.capitalExpenditures.splice(lastItem);
+    var lastItem = vm.input.capitalExpenditures.length-1;
+    vm.input.capitalExpenditures.splice(lastItem);
   };
 
 });

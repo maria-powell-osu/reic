@@ -70,7 +70,7 @@
           </div>
         </fieldset>
         <br/>
-        <div ng-repeat="addedLoans in rentalCalculator.loans">
+        <div ng-repeat="addedLoans in rentalCalculator.input.loans">
           <fieldset>
             <div class="row">
               <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeLoan()">
@@ -125,7 +125,7 @@
     </div>
 
     <div id="specialTermsLoanView" ng-show="rentalCalculator.input.loanInfoView == 'specialTermsLoan'">
-        <div ng-repeat="specialTermsLoans in rentalCalculator.specialTermsLoans">
+        <div ng-repeat="specialTermsLoans in rentalCalculator.input.specialTermsLoans">
           <fieldset>
             <div class="row">
                 <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeSpecialTermsLoan()">

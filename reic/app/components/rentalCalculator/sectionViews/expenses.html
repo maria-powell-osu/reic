@@ -37,7 +37,7 @@
       </fieldset>
       <br/>
 
-      <div ng-repeat="addedUtilities in rentalCalculator.utilities track by $index">
+      <div ng-repeat="addedUtilities in rentalCalculator.input.utilities track by $index">
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeUtility()">
@@ -103,7 +103,7 @@
         </div>
       </fieldset>
       <br/>
-      <div ng-repeat="addedExpenses in rentalCalculator.expenses track by $index">
+      <div ng-repeat="addedExpenses in rentalCalculator.input.expenses track by $index">
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeExpense()">
@@ -150,7 +150,7 @@
 
     <h3>Capital Expenditures
     <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
-      <div ng-repeat="capitalExpenditures in rentalCalculator.capitalExpenditures">
+      <div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
         <fieldset>
           <div class="row">
             <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeCapitalExpenditure()">
