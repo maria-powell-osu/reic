@@ -57,9 +57,9 @@ App.directive('clearForm', function() {
               if(ui.newTab.index() == 1){
                 //loader to ensure user does not intefer with calculations
                 //ToDo: add error handling 
-                $("#loaderBody").fadeIn(100);
                 var vm = this;
-                vm.data = RentalCalculator.getData();
+                vm.data = scope.rentalCalculator.input;
+                //vm.data = RentalCalculator.getData();
                 
                 createTable();
                 createCashFlowProjectionComboChart();
@@ -76,7 +76,21 @@ App.directive('clearForm', function() {
                       yearlyExpenses = 0,
                       expenseResult = 0,
                       addedUtilities = vm.data.addedUtilities || [],
-                      addedUtilitiesLength = Object.keys(addedUtilities).length;
+                      addedUtilitiesLength = Object.keys(addedUtilities).length,
+                      colorArray = [
+                      '#FF3349', 
+                      '#FF8333', 
+                      '#FFE933', 
+                      '#AFFF33', 
+                      '#49FF33', 
+                      '#33FF83', 
+                      '#333CFF', 
+                      '#11580C', 
+                      '#090405', 
+                      '#A4B2A3', 
+                      '#BB7D10', 
+                      '#650C86'
+                    ];
 
                       //add columns to the data 
                       dataArray.push(["Description", "ExpenseAmount"]);
@@ -135,15 +149,20 @@ App.directive('clearForm', function() {
 
                 var data = google.visualization.arrayToDataTable(dataArray);
 
+                //Since we do not like the google charts legend label display, 
+                //I am creating our own (create the label array and bind to the view)
+                scope.expensePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
+
+
                 var options = {
                     width: '100%', 
                     height: '100%',
                     is3D: true,
                     legend: "none",
-                    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+                    colors: colorArray
                 };
 
-                  incomePieChart.draw(data, options);
+                  expensePieChart.draw(data, options);
                 }
 
                 function createIncomePieChart(){
@@ -153,7 +172,21 @@ App.directive('clearForm', function() {
                       unitsLength = Object.keys(units).length,
                       supplementalIncomes = vm.data.supplementalIncomes || [],
                       supplementalIncomesLength = Object.keys(supplementalIncomes).length,
-                      sumOfGrossMonthlyUnitIncome = 0;
+                      sumOfGrossMonthlyUnitIncome = 0,
+                      colorArray = [
+                      '#FF3349', 
+                      '#FF8333', 
+                      '#FFE933', 
+                      '#AFFF33', 
+                      '#49FF33', 
+                      '#33FF83', 
+                      '#333CFF', 
+                      '#11580C', 
+                      '#090405', 
+                      '#A4B2A3', 
+                      '#BB7D10', 
+                      '#650C86'
+                    ];
 
                   //add columns to the data 
                   dataArray.push(["Description", "IncomeAmount"]);
@@ -162,7 +195,7 @@ App.directive('clearForm', function() {
                   for (var i = 0; i < unitsLength; i++) {
                     sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
                   }
-                  dataArray.push(["Rental Income", sumOfGrossMonthlyUnitIncome]);
+                  dataArray.push(["Rental Income", sumOfGrossMonthlyUnitIncome]);              
 
                   //add new row for each supplemental income
                   for (var i = 0; i < supplementalIncomesLength; i++) {
@@ -171,18 +204,70 @@ App.directive('clearForm', function() {
                     dataArray.push([description, value]);
                   }
                   var data = google.visualization.arrayToDataTable(dataArray);
+                  
+                  //Since we do not like the google charts legend label display, 
+                  //I am creating our own (create the label array and bind to the view)
+                  scope.incomePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
 
                   var options = {
                     width: '100%', 
                     height: '100%',
                     is3D: true,
                     legend: "none",
-                    colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+                    fontSize: 11,
+                    colors: colorArray
                   };
 
                   incomePieChart.draw(data, options);
                 }
 
+                /*
+                 * Description: Helper function to create labels for pie charts
+                 *                This was create because default goog chart labels suck
+                 * Params:      Colors: colors used in the pie chart so I can add color coding)
+                 *              Data: the sections added into the pie charts
+                 *              headerDescription: e.g. for the pie charts we set up the array to contain description
+                 *                                 of the data in the first position of the array and we would not want
+                 *                                 this for our labels so we need to take it out if flag is true       
+                 */
+                function createLabelArray (colors, data, headerDescriptionIsSet){
+                  var result = [],
+                      errormsg,
+                      descIndex = 0,
+                      valueIndex = 1;
+
+                      //if the data array contains description header
+                      //then take out the first row
+                      if(headerDescriptionIsSet){
+                        data.shift();
+                      }
+
+                      //Create the label array with colors in it
+                      for (var i = 0; i < data.length; i++){ 
+                          //check data format
+                          if(typeof(data[i][descIndex]) == 'undefined' 
+                            || typeof(data[i][valueIndex]) == 'undefined'){
+                            //TODO: throw error
+                          }else {
+                            var description = data[i][descIndex],
+                                value = data[i][valueIndex],
+                                colorIndex = 0,
+                                temp;
+                                
+                                //when we have more data sections then colors
+                                //we start to reloop the colors
+                                if(colors.length >= i) {
+                                  colorIndex = i;
+                                } else {
+                                  colorIndex = i - (colors.length - 1);
+                                }
+
+                            result.push({description:description, value:value, color:colors[colorIndex]});
+                          }
+                    
+                      }
+                  return result;
+                }
                 function createCashFlowProjectionComboChart() {
                   var cashFlowProjectionChart = new google.visualization.ComboChart(document.getElementById('cashFlowProjection_div')),
                   rawDataArray = vm.data.cashFlowTableData,

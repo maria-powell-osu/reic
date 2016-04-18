@@ -1,11 +1,13 @@
 What I am trying to do:
-	- add other expense array cal to firstyearExpensearray
-	- add the same to the pie chart
-	- test the pie chart
+	- keep adding labels
 	- ask Jason about the upront lender points in CoC
 Where I left of:
 	- 
-
+To Discuss with Jason:
+	- color too neo like
+	- color order should be different (especially the green shades)
+	- I need testing that the color orders are right
+	- 
 Notes:
 	- 
 
@@ -30,5 +32,5 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 76
+	Coding: 85
 
