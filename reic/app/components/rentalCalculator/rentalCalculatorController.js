@@ -9,8 +9,9 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       $("#tabs").tabs( "option","active", 1); 
     };
 
-    //set the default value for loan information
+    //set up all input default values
     vm.input.loanInfoView = 'bankLoan';
+    vm.input.loanInfoView
 
     /* 
      * Setting up defaults values for the rows 
@@ -19,7 +20,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
      */
     vm.input.units = [{}];
     vm.input.supplementalIncomes = [{}];
-    vm.input.specialTermsLoans = [{}];
+    vm.input.specialTermsLoans = [{stl_interestOption: "no"}];
     vm.input.capitalExpenditures = [{}];
     vm.input.loans = [];
     vm.input.utilities = [];
@@ -45,7 +46,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     };  
 
     vm.addSpecialTermsLoan = function() {
-      vm.input.specialTermsLoans.push({});
+      vm.input.specialTermsLoans.push({stl_interestOption: "no"});
     };
     vm.removeSpecialTermsLoan = function() {
       var lastItem = vm.input.specialTermsLoans.length-1;
@@ -53,7 +54,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     }; 
 
     vm.addLoan = function() {
-        vm.input.loans.push({});
+        vm.input.loans.push({add_bl_interestOnly: "no"});
       };
     vm.removeLoan = function() {
       var lastItem = vm.input.loans.length-1;

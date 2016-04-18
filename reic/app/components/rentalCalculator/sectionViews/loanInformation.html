@@ -82,35 +82,35 @@
 
                 <label for="add_bl_loanName">Loan Name</label>
 
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_loanName" placeholder="Loan Name">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name">
 
                 <label for="add_bl_loanAmount">Amount</label>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_loanAmount" placeholder="Amount in $">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanAmount" placeholder="Amount in $">
 
                 <label for="add_bl_interest">Interest (%)</label>
-                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interest" placeholder="%">  
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_interest" placeholder="%">  
               </div>
               <div class="col-md-6 form-group">
 
                 <label for="add_bl_amortization">Amortization (yrs)</label>
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_amortization" placeholder="yrs">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs">
 
                 <label for="add_bl_balloon">Year Until Balloon Pmt</label>
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_balloon"  placeholder="Yrs"> 
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_balloon"  placeholder="Yrs"> 
 
                 <label for="add_bl_upFrontLenderPoints">Up Front Lender Points ($)</label>
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_upFrontLenderPoints" placeholder="$">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_upFrontLenderPoints" placeholder="$">
               </div>
 
               <label>Interest only?</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-              <div class="col-md-12 form-group" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOnly">
-                <input type="radio" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOption" value="yes" >
+              <div class="col-md-12 form-group" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
+                <input type="radio" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly" value="yes" >
                 Yes
-                <input type="radio" value="no" ng-model="rentalCalculator.input.addedLoans[$index].add_bl_interestOption">
+                <input type="radio" value="no" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
                 No
               </div>
             </div>
@@ -162,7 +162,7 @@
               <label>Interest Only?</label>
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
               <div class="col-md-12 form-group">
-                  <input type="radio" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption" value="yes" >
+                  <input type="radio" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption"  value="yes" >
                   Yes
                   <input type="radio" value="no" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption">
                   No

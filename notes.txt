@@ -1,4 +1,5 @@
 What I am trying to do:
+	- round all output to nearest dollar
 	- ask Jason about the upront lender points in CoC
 
 Where I left of:

@@ -159,6 +159,7 @@ App.directive('clearForm', function() {
                     height: '100%',
                     is3D: true,
                     legend: "none",
+                    pieSliceText: 'none',
                     colors: colorArray
                 };
 
@@ -215,6 +216,7 @@ App.directive('clearForm', function() {
                     is3D: true,
                     legend: "none",
                     fontSize: 11,
+                    pieSliceText: 'none',
                     colors: colorArray
                   };
 
@@ -410,7 +412,7 @@ App.directive('clearForm', function() {
                     years = 30;
                   } else if (view === "bankLoan"){
                     var maxValue = vm.data.bl_amortization || 0,
-                    addedBankLoans = vm.data.addedLoans || [],
+                    addedBankLoans = vm.data.loans || [],
                     addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                     for (var i = 0; i < addedBankLoansLength; i++) {
@@ -438,7 +440,7 @@ App.directive('clearForm', function() {
                 function calculateCashOnCash (cashFlowData, capExSumData, lenderPointsSum, loanSum){
                   var cashOnCashResult,
                   view = vm.data.loanInfoView,
-                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoans = vm.data.loans || [],
                   closingCost = vm.data.bl_closingCost || 0,
                   dividend = cashFlowData,
                   divisor,
@@ -475,7 +477,7 @@ App.directive('clearForm', function() {
 
                 function sumOfSpecialTermsLenderPoints(){
                   var lenderPointsSumResult = 0,
-                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoans = vm.data.loans || [],
                   addedBankLoansLength = Object.keys(addedBankLoans).length;
 
                   for (var i = 0; i < addedBankLoansLength; i ++){
@@ -486,7 +488,7 @@ App.directive('clearForm', function() {
 
                 function sumOfSpecialTermsLoanAmounts(view ){
                   var specialTermsLoanAmountsResult = 0,
-                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoans = vm.data.loans || [],
                   addedBankLoansLength = Object.keys(addedBankLoans).length,
                   specialTermsLoans = vm.data.specialTermsLoans || [],
                   specialTermsLoansLength = Object.keys(specialTermsLoans).length;
@@ -513,7 +515,7 @@ App.directive('clearForm', function() {
                 function calculateLoanPmts (years) {
                   var loanPmtResult = 0,
                   view = vm.data.loanInfoView,
-                  addedBankLoans = vm.data.addedLoans || [],
+                  addedBankLoans = vm.data.loans || [],
                   addedBankLoansLength = Object.keys(addedBankLoans).length,
                   specialTermsLoans = vm.data.specialTermsLoans || [],
                   specialTermsLoansLength = Object.keys(specialTermsLoans).length,
@@ -533,9 +535,9 @@ App.directive('clearForm', function() {
 
                       //Added Bank Loans
                       for (var i = 0; i < addedBankLoansLength; i++) {
-                        if (addedBankLoans[i].add_bl_interestOption == "yes"){
+                        if (addedBankLoans[i].add_bl_interestOnly == "yes"){
                           loanPmtResult += addedBankLoans[i].add_bl_loanAmount * (addedBankLoans[i].add_bl_interest / 100);
-                        } else if (addedBankLoans[i].add_bl_interestOption == "no"){
+                        } else if (addedBankLoans[i].add_bl_interestOnly == "no"){
                           p = addedBankLoans[i].add_bl_loanAmount;
                           r = (addedBankLoans[i].add_bl_interest/100) / 12;
                           n = addedBankLoans[i].add_bl_amortization * 12;
