@@ -137,7 +137,7 @@ App.directive('clearForm', function() {
                       if (vm.data.o_vacancyRate){
                         var vacancyRate = vm.data.o_vacancyRate / 100,
                             //we are dividing by 12 because the function return income per year
-                            income = calculateFirstYearIncome() /12,
+                            income = Math.round(calculateFirstYearIncome() /12),
                             vacancyPerMonth = income * vacancyRate;
                             dataArray.push(["Vacancy", vacancyPerMonth]);
                       }
@@ -382,7 +382,7 @@ App.directive('clearForm', function() {
                         } else {
                           incomeResult = dataRows[year-1][incomeColumn] * ((rentIncrease/100) + 1);
                         }
-                  return incomeResult;
+                  return Math.round(incomeResult);
                 }
 
                 function calculateExpenses (year, dataRows, expenseColumn, incomeData){
@@ -393,7 +393,7 @@ App.directive('clearForm', function() {
                   } else {
                     expenseResult = dataRows[year-1][expenseColumn] * ((expenseIncrease/100) + 1);
                   }
-                  return expenseResult;
+                  return Math.round(expenseResult);
                 }
 
                 /*
@@ -466,7 +466,7 @@ App.directive('clearForm', function() {
                     //* 100 to display in percentage format                
                     cashOnCashResult = (dividend / divisor) * 100;
                   }
-                  return cashOnCashResult;
+                  return Math.round(cashOnCashResult);
                 }
 
                 function calculateBalloonPayoff (){
@@ -483,7 +483,7 @@ App.directive('clearForm', function() {
                   for (var i = 0; i < addedBankLoansLength; i ++){
                     lenderPointsSumResult += addedBankLoans[i].add_bl_upFrontLenderPoints || 0;
                   }
-                  return lenderPointsSumResult;
+                  return Math.round(lenderPointsSumResult);
                 }
 
                 function sumOfSpecialTermsLoanAmounts(view ){
@@ -557,6 +557,8 @@ App.directive('clearForm', function() {
                       }
                     }
 
+                    //round result to nearest integer
+                    loanPmtResult = Math.round(loanPmtResult);
                     var result = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
 
                     return result;
@@ -567,18 +569,18 @@ App.directive('clearForm', function() {
                     capitalExpendituresLength = Object.keys(capitalExpenditures).length,
                     purchasDateYear = new Date(vm.data.li_purchaseDate).getFullYear();
 
-                  //Initialize the result array to 0 and set length of array to how many years
-                  var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
-                  
-                  for (var i = 0; i < capitalExpendituresLength; i++) {
-                    var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
-                    var capExpPosition = capExpYear - purchasDateYear;
-                    if(capExpPosition <= capExpArray.length){
-                      capExpArray[capExpPosition] = vm.data.capitalExpenditures[i].ce_cost;
+                    //Initialize the result array to 0 and set length of array to how many years
+                    var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
+                    
+                    for (var i = 0; i < capitalExpendituresLength; i++) {
+                      var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
+                      var capExpPosition = capExpYear - purchasDateYear;
+                      if(capExpPosition <= capExpArray.length){
+                        capExpArray[capExpPosition] = Math.round(vm.data.capitalExpenditures[i].ce_cost);
+                      }
                     }
+                    return capExpArray;
                   }
-                  return capExpArray;
-                }
 
                 function calculateFirstYearExpense (firstYearIncome){
                   var monthlyExpenses = 0,
@@ -643,6 +645,9 @@ App.directive('clearForm', function() {
                       }
 
                       income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
+
+                      //round result to the nearest dollar
+                      income =  income;
 
                       return income;
                     }
