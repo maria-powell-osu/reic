@@ -1,5 +1,5 @@
 What I am trying to do:
-	- round all output to nearest dollar: Math.round
+	- input validation: display all inputs needing to be entered
 	- ask Jason about the upront lender points in CoC
 
 Where I left of:

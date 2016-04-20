@@ -19,6 +19,25 @@ App.directive('jqdatepicker', function() {
     };
 });
 
+App.directive('mpValidation', function($timeout) {
+    return {
+        restrict: 'A',
+        scope: { formName: '=' },
+        link: function(scope, element, attrs, ctrl) {
+        	$timeout(function() {
+        		var test = scope['formName'];
+        		var resultArray = [];   
+            	var t = $('#rentalCalculatorInputForm *').filter(':input').each(function(index, element){
+            		if(element.required && element.value == ""){
+            			resultArray.push(element);
+            		}
+            	});
+            });
+        }
+    };
+});
+
+
 App.directive('jqSlideSection', function($timeout) {
     return {
         link: function(scope, element, attrs, ctrl) {

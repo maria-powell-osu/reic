@@ -7,7 +7,8 @@
 	<!-- TABS INPUT PAGE -->
 	<div id="tabs-input">
 		<div>
-			<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()">
+			<!-- Name was added for the dis-disabled in submit button -->
+			<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()" name="rentalCalculatorInputForm">
 				<div jq-slide-section>
 					<div class="ui-accordion ui-widget ui-helper-reset" id="accordion">
 						<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
@@ -45,7 +46,9 @@
 					</p>
 				</div>
 
+				<div mp-validation formName="rentalCalculatorInputForm"></div>
 
+				<!-- ng-disabled="rentalCalculatorInputForm.$invalid" -->
 				<button type="submit" class="btn btn-success">Calculate Results</button>
 				<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button>
 			</form>
@@ -105,6 +108,5 @@
 			</div>
 		</div>
 	</div>
-		
 </div>
 

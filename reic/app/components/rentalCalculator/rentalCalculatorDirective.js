@@ -468,10 +468,17 @@ App.directive('clearForm', function() {
                   }
                   return Math.round(cashOnCashResult);
                 }
+                /* Dont judge the naming convention here..terrible at naming things*/
+                function calculateBalloonPayoff (loanAmount, interest, balloonYear, loanPayment){
+                  var ballonPayoffResult,
+                      interestPerMonth = (interest/100) / 12,
+                      temp = Math.pow(1 + interestPerMonth, balloonYear * 12),
+                      monthlyLoanPayment = loanPayment / 12;
 
-                function calculateBalloonPayoff (){
-                  var ballonPayoffResult;
+                  var valueOne = loanAmount * temp;
+                  var valueTwo = monthlyLoanPayment * ((temp - 1)/(interestPerMonth));
 
+                  ballonPayoffResult = valueOne - valueTwo;
                   return ballonPayoffResult;
                 }
 
@@ -512,6 +519,11 @@ App.directive('clearForm', function() {
                   return p * (dividend / divisor);
                 }
 
+                function calculateBankLoanPayments () {
+                  var loanResult;
+                  return loanResult;
+                }
+
                 function calculateLoanPmts (years) {
                   var loanPmtResult = 0,
                   view = vm.data.loanInfoView,
@@ -521,27 +533,67 @@ App.directive('clearForm', function() {
                   specialTermsLoansLength = Object.keys(specialTermsLoans).length,
                   r,
                   p,
-                  n;
+                  n,
+                  curStlPaymentAmount;
 
                   if(view == "cash"){
                    loanPmtResult = 0;
 
                  } else if (view == "bankLoan"){
-                      //Add Bank Loan
+                      //Calculate Bank Loan Payment
                       p = vm.data.li_purchasePrice - vm.data.bl_downPaymentDollar;
                       r = (vm.data.bl_interest /100) / 12; 
                       n = vm.data.bl_amortization * 12;
-                      loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+                      loanPmtResult = (amortizationCalculation(r, p, n) * 12);
+                      //Creates the array of loan payments to make each year
+                      yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
 
-                      //Added Bank Loans
+                      //Add the other loans the user added which have a different format than reg. bank loan
                       for (var i = 0; i < addedBankLoansLength; i++) {
+                        var yearlyLoanPayments;
                         if (addedBankLoans[i].add_bl_interestOnly == "yes"){
-                          loanPmtResult += addedBankLoans[i].add_bl_loanAmount * (addedBankLoans[i].add_bl_interest / 100);
+                          //Calculate loan payments to make for all years
+                          curStlPaymentAmount = addedBankLoans[i].add_bl_loanAmount * (addedBankLoans[i].add_bl_interest / 100);
+                          loanPmtResult = curStlPaymentAmount + loanPmtResult;
+                          
+                          //Creates the array of loan payments to make each year
+                          yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+
+                          //if ballon pmt. was added, then the yearly loan payments change
+                          if(addedBankLoans[i].add_bl_balloon){
+
+                            //Adds the Ballon Payment to the given ballon year
+                            var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
+                            yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + addedBankLoans[i].add_bl_loanAmount;
+                            
+                            //All loanpayments after ballon payment are 0 
+                            for(var j = ballonYear + 1; j < years; j ++){
+                              yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
+                            }
+                          }
                         } else if (addedBankLoans[i].add_bl_interestOnly == "no"){
+                          //Calculate Loan Payment
                           p = addedBankLoans[i].add_bl_loanAmount;
                           r = (addedBankLoans[i].add_bl_interest/100) / 12;
                           n = addedBankLoans[i].add_bl_amortization * 12;
-                          loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+                          curStlPaymentAmount = (amortizationCalculation(r, p, n) * 12);
+                          loanPmtResult = curStlPaymentAmount + loanPmtResult;
+
+                          //Creates the array of loan payments to make each year
+                          yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+
+                          //if ballon pmt. was added, then the yearly loan payments change
+                          if(addedBankLoans[i].add_bl_balloon){
+                            //Adds the Ballon Payment to the given ballon year
+                            var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
+                            yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + calculateBalloonPayoff(addedBankLoans[i].add_bl_loanAmount, addedBankLoans[i].add_bl_interest, addedBankLoans[i].add_bl_balloon, curStlPaymentAmount);
+                          
+                            //The current special terms loan after ballon payment should be 0
+                            //that means we have to subtract it  
+                            for(var j = ballonYear + 1; j < years; j ++){
+                              yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
+                            }
+                          }
                         }
                       }
                     } else if (view == "specialTermsLoan"){
@@ -557,11 +609,7 @@ App.directive('clearForm', function() {
                       }
                     }
 
-                    //round result to nearest integer
-                    loanPmtResult = Math.round(loanPmtResult);
-                    var result = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
-
-                    return result;
+                    return yearlyLoanPayments;
                   }
 
                   function calculateCapitalExpenditures (years) {
