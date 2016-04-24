@@ -78,19 +78,19 @@ App.directive('clearForm', function() {
                       addedUtilities = vm.data.addedUtilities || [],
                       addedUtilitiesLength = Object.keys(addedUtilities).length,
                       colorArray = [
-                      '#FF3349', 
-                      '#FF8333', 
-                      '#FFE933', 
-                      '#AFFF33', 
-                      '#49FF33', 
-                      '#33FF83', 
-                      '#333CFF', 
-                      '#11580C', 
-                      '#090405', 
-                      '#A4B2A3', 
-                      '#BB7D10', 
-                      '#650C86'
-                    ];
+                      '#008000',
+                      '#004080',
+                      '#990000',
+                      '#660066',
+                      '#00004d',
+                      '#cccc00',
+                      '#999966',
+                      '#1f1f14',
+                      '#00cccc',
+                      '#ff80ff',
+                      '#cc6666',
+                      '#ff6600'
+                      ];
 
                       //add columns to the data 
                       dataArray.push(["Description", "ExpenseAmount"]);
@@ -175,19 +175,19 @@ App.directive('clearForm', function() {
                       supplementalIncomesLength = Object.keys(supplementalIncomes).length,
                       sumOfGrossMonthlyUnitIncome = 0,
                       colorArray = [
-                      '#FF3349', 
-                      '#FF8333', 
-                      '#FFE933', 
-                      '#AFFF33', 
-                      '#49FF33', 
-                      '#33FF83', 
-                      '#333CFF', 
-                      '#11580C', 
-                      '#090405', 
-                      '#A4B2A3', 
-                      '#BB7D10', 
-                      '#650C86'
-                    ];
+                      '#008000',
+                      '#004080',
+                      '#990000',
+                      '#660066',
+                      '#00004d',
+                      '#cccc00',
+                      '#999966',
+                      '#1f1f14',
+                      '#00cccc',
+                      '#ff80ff',
+                      '#cc6666',
+                      '#ff6600'
+                      ];
 
                   //add columns to the data 
                   dataArray.push(["Description", "IncomeAmount"]);
@@ -525,8 +525,7 @@ App.directive('clearForm', function() {
                 }
 
                 function calculateLoanPmts (years) {
-                  var loanPmtResult = 0,
-                  view = vm.data.loanInfoView,
+                  var view = vm.data.loanInfoView,
                   addedBankLoans = vm.data.loans || [],
                   addedBankLoansLength = Object.keys(addedBankLoans).length,
                   specialTermsLoans = vm.data.specialTermsLoans || [],
@@ -534,82 +533,143 @@ App.directive('clearForm', function() {
                   r,
                   p,
                   n,
-                  curStlPaymentAmount;
+                  curStlPaymentAmount,
+                  yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
-                  if(view == "cash"){
-                   loanPmtResult = 0;
-
-                 } else if (view == "bankLoan"){
+                  if (view == "bankLoan"){
                       //Calculate Bank Loan Payment
                       p = vm.data.li_purchasePrice - vm.data.bl_downPaymentDollar;
                       r = (vm.data.bl_interest /100) / 12; 
                       n = vm.data.bl_amortization * 12;
-                      loanPmtResult = (amortizationCalculation(r, p, n) * 12);
+                      bankLoanPmt = (amortizationCalculation(r, p, n) * 12);
+
+                      //Create array of bank loan payments
+                      var bankLoanAmort = vm.data.bl_amortization;
+                      var bankLoanPmts = Array.apply(null, Array(bankLoanAmort)).map(Number.prototype.valueOf, bankLoanPmt);
+
                       //Creates the array of loan payments to make each year
-                      yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+                      yearlyLoanPayments = combineArrays(yearlyLoanPayments, bankLoanPmts);
 
                       //Add the other loans the user added which have a different format than reg. bank loan
                       for (var i = 0; i < addedBankLoansLength; i++) {
-                        var yearlyLoanPayments;
                         if (addedBankLoans[i].add_bl_interestOnly == "yes"){
-                          //Calculate loan payments to make for all years
+                          //current loan payment for the year
                           curStlPaymentAmount = addedBankLoans[i].add_bl_loanAmount * (addedBankLoans[i].add_bl_interest / 100);
-                          loanPmtResult = curStlPaymentAmount + loanPmtResult;
                           
-                          //Creates the array of loan payments to make each year
-                          yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+                          //Creates the array for the current loan payments for length of its amortization
+                          var currentLoanAmort = addedBankLoans[i].add_bl_amortization;
+                          var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
+                          
+                          //Add the currentLoanArray to the rest of the loan arrays
+                          //since they might all have different amortizations I wrote a special function
+                          yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
 
-                          //if ballon pmt. was added, then the yearly loan payments change
-                          if(addedBankLoans[i].add_bl_balloon){
-
-                            //Adds the Ballon Payment to the given ballon year
-                            var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
-                            yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + addedBankLoans[i].add_bl_loanAmount;
-                            
-                            //All loanpayments after ballon payment are 0 
-                            for(var j = ballonYear + 1; j < years; j ++){
-                              yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
-                            }
-                          }
                         } else if (addedBankLoans[i].add_bl_interestOnly == "no"){
                           //Calculate Loan Payment
                           p = addedBankLoans[i].add_bl_loanAmount;
                           r = (addedBankLoans[i].add_bl_interest/100) / 12;
                           n = addedBankLoans[i].add_bl_amortization * 12;
+
+                          //Current year's loan payment
                           curStlPaymentAmount = (amortizationCalculation(r, p, n) * 12);
-                          loanPmtResult = curStlPaymentAmount + loanPmtResult;
 
-                          //Creates the array of loan payments to make each year
-                          yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, loanPmtResult);
+                          //Creates the array for the current loan payments for length of its amortization
+                          var currentLoanAmort = addedBankLoans[i].add_bl_amortization;
+                          var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
-                          //if ballon pmt. was added, then the yearly loan payments change
-                          if(addedBankLoans[i].add_bl_balloon){
-                            //Adds the Ballon Payment to the given ballon year
-                            var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
-                            yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + calculateBalloonPayoff(addedBankLoans[i].add_bl_loanAmount, addedBankLoans[i].add_bl_interest, addedBankLoans[i].add_bl_balloon, curStlPaymentAmount);
-                          
-                            //The current special terms loan after ballon payment should be 0
-                            //that means we have to subtract it  
-                            for(var j = ballonYear + 1; j < years; j ++){
-                              yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
-                            }
+                          //Add the currentLoanArray to the rest of the loan arrays
+                          //since they might all have different amortizations I wrote a special function
+                          yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
+                        }
+                        //if ballon pmt. was added, then the yearly loan payments change
+                        if(addedBankLoans[i].add_bl_balloon){
+
+                          //Adds the Ballon Payment to the given ballon year
+                          var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
+                          yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + addedBankLoans[i].add_bl_loanAmount;
+                            
+                          //All loanpayments after ballon payment are 0 
+                          for(var j = ballonYear + 1; j < currentLoanAmort; j ++){
+                            yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
                           }
                         }
                       }
                     } else if (view == "specialTermsLoan"){
                       for (var i = 0; i < specialTermsLoansLength; i++) {
-                        if (vm.data.specialTermsLoans[i].stl_interestOption == "yes"){
-                          loanPmtResult += vm.data.specialTermsLoans[i].stl_amount * (vm.data.specialTermsLoans[i].stl_interest / 100);
-                        } else if (vm.data.specialTermsLoans[i].stl_interestOption == "no"){
-                          p = vm.data.specialTermsLoans[i].stl_amount;
-                          r = (vm.data.specialTermsLoans[i].stl_interest /100)/ 12;
-                          n = vm.data.specialTermsLoans[i].stl_amortization * 12;
-                          loanPmtResult += (amortizationCalculation(r, p, n) * 12);
+                        if (specialTermsLoans[i].stl_interestOption == "yes"){
+
+                          //Current year's loan payment
+                          curStlPaymentAmount = specialTermsLoans[i].stl_amount * (specialTermsLoans[i].stl_interest / 100);
+                          
+                          //Creates the array for the current loan payments for length of its amortization
+                          var currentLoanAmort = specialTermsLoans[i].stl_amortization;
+                          var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
+
+                          //Add the currentLoanArray to the rest of the loan arrays
+                          //since they might all have different amortizations I wrote a special function
+                          yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
+
+                        } else if (specialTermsLoans[i].stl_interestOption == "no"){
+                          //calculate current year's amortization
+                          p = specialTermsLoans[i].stl_amount;
+                          r = (specialTermsLoans[i].stl_interest /100)/ 12;
+                          n = specialTermsLoans[i].stl_amortization * 12;
+                          
+                          //Current Year's loan payment
+                          curStlPaymentAmount = (amortizationCalculation(r, p, n) * 12);
+
+                          //Creates the array for the current loan payments for length of its amortization
+                          var currentLoanAmort = specialTermsLoans[i].stl_amortization;
+                          var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
+
+                          //Add the currentLoanArray to the rest of the loan arrays
+                          //since they might all have different amortizations I wrote a special function
+                          yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
                         }
+                        //if the current loan has a ballon payment
+                        if (specialTermsLoans[i].stl_balloon){
+                          //Adds the Ballon Payment to the given ballon year
+                          var ballonYear = specialTermsLoans[i].stl_balloon - 1;
+                          yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + specialTermsLoans[i].stl_amount;
+                            
+                          //All loanpayments after ballon payment are 0 
+                          for(var j = ballonYear + 1; j < currentLoanAmort; j ++){
+                            yearlyLoanPayments[j] = yearlyLoanPayments[j] - curStlPaymentAmount;
+                          }
+                        }      
                       }
                     }
-
                     return yearlyLoanPayments;
+                  }
+
+                  /*
+                   * Description: Helper function which adds each item of an array to another
+                   *              Since the arrays can have different lengths the shorter array will get 
+                   *              added to the longer array
+                   * Parameters:  Int arrays expected, could have different lengths
+                   */
+                  function combineArrays(firstArray, secondArray){
+                    var length,
+                        resultArray,
+                        shorterArray;
+
+                    //Assign variables based on array length
+                    if (firstArray.length > secondArray.length) {
+                      length = secondArray.length;
+                      resultArray = firstArray;
+                      shorterArray = secondArray;
+                    } else {
+                      length = firstArray.length;
+                      resultArray = secondArray;
+                      shorterArray = firstArray;
+                    }
+
+                    //add each item of the shorterArray to the resultArray
+                    for (var i = 0; i < length; i++){
+                      resultArray[i] += shorterArray[i];
+                    }
+
+                    return resultArray;
                   }
 
                   function calculateCapitalExpenditures (years) {

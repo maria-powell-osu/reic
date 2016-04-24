@@ -1,4 +1,6 @@
 What I am trying to do:
+	- the special terms loans that have different amortization
+		--ask Jason if forgotten
 	- input validation: display all inputs needing to be entered
 	- ask Jason about the upront lender points in CoC
 
