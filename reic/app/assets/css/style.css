@@ -29,6 +29,23 @@ body
 	z-index: 2;
 	background-color: white;
 }
+/*Give the collapsed navbar custom height*/
+.navbar-header {
+   line-height: 70px;
+    height: 70px;
+    padding-top: 0; 
+}
+/*Give the navbar custom height*/
+.navbar-nav li a {
+    line-height: 70px;
+    height: 70px;
+    padding-top: 0;
+}
+.navbarImg
+{
+    width: auto;
+    height:35px;
+}
 .navbar {
 	border: none;
     border-radius: 0;
@@ -80,12 +97,6 @@ input
 .glyphiconBlueColor
 {
     font-size: 1.0em;
-}
-.navbarImg
-{
-	width: auto;
-	height:40px;
-    padding-top: 7px;
 }
 #propertyImage
 {

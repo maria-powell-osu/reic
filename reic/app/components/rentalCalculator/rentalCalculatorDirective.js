@@ -299,11 +299,7 @@ App.directive('clearForm', function() {
                     },
                     hAxis: {title: 'Years'},
                     width: '100%', 
-                    height: '100%',
-                    animation:{
-                          duration: 1000,
-                          easing: 'out',
-                        }
+                    height: '100%'
                   };
 
                   //add columns to the data 
