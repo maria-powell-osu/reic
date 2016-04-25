@@ -32,5 +32,11 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 85
+	Coding: 89
 
+
+Questions:
+
+1) How much logic should be in directive
+2) How do controller service and directive relate
+3) about the digest in apply, digest etc.

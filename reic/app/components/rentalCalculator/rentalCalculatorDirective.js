@@ -148,23 +148,26 @@ App.directive('clearForm', function() {
                         dataArray.push([addedUtilities[i].add_u_name, addedUtilities[i].add_u_amount]);
                       }
 
-                var data = google.visualization.arrayToDataTable(dataArray);
+                  var data = google.visualization.arrayToDataTable(dataArray);
 
-                //Since we do not like the google charts legend label display, 
-                //I am creating our own (create the label array and bind to the view)
-                scope.expensePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
+                  //Since we do not like the google charts legend label display, 
+                  //I am creating our own (create the label array and bind to the view)
+                  scope.expensePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
 
 
-                var options = {
-                    width: '100%', 
-                    height: '100%',
-                    is3D: true,
-                    legend: "none",
-                    pieSliceText: 'none',
-                    colors: colorArray
-                };
+                  var options = {
+                      width: '100%', 
+                      height: '100%',
+                      is3D: true,
+                      legend: "none",
+                      pieSliceText: 'none',
+                      colors: colorArray
+                  };
 
-                  expensePieChart.draw(data, options);
+                  //to ensure that the data gets update properly
+                  $timeout(function() {
+                    expensePieChart.draw(data, options);
+                  });
                 }
 
                 function createIncomePieChart(){
@@ -221,7 +224,10 @@ App.directive('clearForm', function() {
                     colors: colorArray
                   };
 
-                  incomePieChart.draw(data, options);
+                  //to ensure that the data gets update properly
+                  $timeout(function() {
+                    incomePieChart.draw(data, options);
+                  });
                 }
 
                 /*
@@ -293,7 +299,11 @@ App.directive('clearForm', function() {
                     },
                     hAxis: {title: 'Years'},
                     width: '100%', 
-                    height: '100%'
+                    height: '100%',
+                    animation:{
+                          duration: 1000,
+                          easing: 'out',
+                        }
                   };
 
                   //add columns to the data 
@@ -308,7 +318,11 @@ App.directive('clearForm', function() {
                     chartData.push(dataRow);
                   });
                   var data = google.visualization.arrayToDataTable(chartData);
-                  cashFlowProjectionChart.draw(data, options);
+                  
+                  //to ensure that the data gets update properly
+                  $timeout(function() {
+                    cashFlowProjectionChart.draw(data, options);
+                  });
                 }
 
                 function createTable() {
@@ -324,7 +338,10 @@ App.directive('clearForm', function() {
 
                       var table = new google.visualization.Table(document.getElementById('table_div'));
 
-                      table.draw(data, {width: '100%', height: '300px'});
+                      //to ensure that the data gets update properly
+                      $timeout(function() {
+                        table.draw(data, {width: '100%', height: '300px'});
+                      });
                     }
 
 
