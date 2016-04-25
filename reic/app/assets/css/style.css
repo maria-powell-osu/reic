@@ -2,32 +2,10 @@ body
 {
 	background-color: #f3f3f3 !important; 
 }
-.bg_picture
-{
-	position: absolute;
-	width: 100%;
-	top:0;
-	left: 0;
-	height:500px;
-	background-image:url('/reic/app/assets/img/portland_skyline_banner_dark.jpg');
-	-webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% top;
-    z-index: 1;
-}
 .content
 {
 	position: relative;
-	margin-top: 25%;
-}
-.content_inside
-{
-	position: relative;
-	z-index: 2;
-	background-color: white;
+	margin-top: 10%;
 }
 /*Give the collapsed navbar custom height*/
 .navbar-header {

@@ -5,7 +5,10 @@ var App = angular.module('App', ['ngRoute']);
 //Single Page Application Routing Set Up
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '../reic/app/components/rentalCalculator/rentalCalculatorView.html',
+    templateUrl: '../reic/app/components/about/about.html',
+  });
+  $routeProvider.when('/tools', {
+    templateUrl: '../reic/app/components/tools/rentalCalculator/rentalCalculatorView.html',
     controller: 'RentalCalculatorController',
     controllerAs: 'rentalCalculator',
   });

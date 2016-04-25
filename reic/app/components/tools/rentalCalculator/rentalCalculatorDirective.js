@@ -31,7 +31,7 @@ App.directive('clearForm', function() {
  */
  App.directive('basicPropertyInformation', function() {
   return {
-    templateUrl: '/reic/app/components/rentalCalculator/sectionViews/basicPropertyInformation.html'
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/basicPropertyInformation.html'
   };
 });
 
@@ -49,9 +49,6 @@ App.directive('clearForm', function() {
         //to make sure bindings get applied
         scope.$apply( function () {
 
-          // Load the Visualization API and the table package. 
-          google.charts.load('current', {'packages':['table', 'corechart']});
-          
           $("#tabs").tabs({
             activate: function (event, ui) {
               if(ui.newTab.index() == 1){
@@ -914,7 +911,7 @@ App.directive('clearForm', function() {
  */
  App.directive('financialMeasures', function() {
   return {
-    templateUrl: '/reic/app/components/rentalCalculator/sectionViews/financialMeasures.html'
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/financialMeasures.html'
   };
 });
 
@@ -924,7 +921,7 @@ App.directive('clearForm', function() {
  */
  App.directive('loanInformation', function() {
   return {
-    templateUrl: '/reic/app/components/rentalCalculator/sectionViews/loanInformation.html'
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
   };
 });
 
@@ -934,7 +931,7 @@ App.directive('clearForm', function() {
  */
  App.directive('incomeSources', function() {
   return {
-    templateUrl: '/reic/app/components/rentalCalculator/sectionViews/incomeSources.html'
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
   };
 });
 
@@ -943,7 +940,7 @@ App.directive('clearForm', function() {
  */
  App.directive('expenses', function() {
   return {
-    templateUrl: '/reic/app/components/rentalCalculator/sectionViews/expenses.html'
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/expenses.html'
   };
 });
 
