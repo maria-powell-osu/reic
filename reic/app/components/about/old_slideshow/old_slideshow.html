@@ -1,0 +1,20 @@
+<div mp-slide-show>
+  <div class="row rowHeight" id="arrowPrev">
+    <div class="col-md-1 col-md-offset-1 arrow columnsAlign">
+      <img class="img-responsive" src="/reic/app/assets/img/arrow-prev.png" />
+    </div>
+    <div class="col-md-8 columnsAlign">
+      <div ng-repeat="slide in aboutController.slideShow.slides | orderBy:'order'" class="slideShow">
+        <div class="slide ">
+          <img ng-src="{{slide.src}}" ng-if="slide.type == 'img'" ng-show="slide.visible" class="img-responsive " width="100%" height="350"/>
+        </div>
+        <div class="slide">
+          <iframe src="{{aboutController.trustSrc(slide.src)}}" frameborder="0" allowfullscreen ng-if="slide.type == 'video'" type="text/html" ng-show="slide.visible" width="100%" height="300"></iframe>
+        </div> 
+      </div>
+    </div>
+    <div class="col-md-1 arrow columnsAlign" id="arrowNext">
+          <img class="img-responsive" src="/reic/app/assets/img/arrow-next.png" />
+    </div>
+  </div>
+</div>

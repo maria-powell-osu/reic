@@ -12,26 +12,36 @@ App.controller("AboutController", function ($scope, $sce, SlideShow) {
   	vm.slideShow.currSlideIndex = 0;
     vm.slideShow.slides = 
 	[{
-	    src: '/reic/app/assets/img/passive-income.jpg',
+	    src: '/reic/app/assets/img/portland_skyline_banner_dark.jpg',
 	    title: 'What is passive income?',
 	    type: 'img',
-	    order: '0',
+	    index: 0,
 	    visible: false
 	  },
+	  {
+	    src: '/reic/app/assets/img/portland_skyline_banner.jpg',
+	    title: 'What is passive income?',
+	    type: 'img',
+	    index: 1,
+	    visible: false
+	  },
+	  
 	  {  	
 	  	/*orig url: https://m.youtube.com/watch?v=nqwziYu-Fb8*/
 		src: 'https://www.youtube.com/embed/nqwziYu-Fb8',
 	    title: '10 Ways to Earn Passive',
 	    type: 'video',
-	    order: '2',
+	    index: 3,
 	    visible: false
-	  }, {
+	  }, 
+	  {
 	  	/*orig url: https://m.youtube.com/watch?v=nyja-RbIEHA*/
 	    src: 'https://www.youtube.com/embed/nyja-RbIEHA',
 	    title: 'Personal Capital Cash Flow and Budgeting Tools',
 	    type: 'video',
-	    order: '1',
+	    index: 2,
 	    visible: false
 	}];
 	SlideShow.setData(vm.slideShow);
 });
+
