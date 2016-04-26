@@ -1,1 +1,11 @@
 <h2>About</h2>
+<div mp-slide-show>
+	<div ng-repeat="slide in aboutController.slideShow.slides | orderBy:'order'">
+		<img ng-src="{{slide.src}}" ng-if="slide.type == 'img'"  width="560" height="315" ng-show="slide.visible"/>
+		<iframe src="{{aboutController.trustSrc(slide.src)}}" frameborder="0" allowfullscreen ng-if="slide.type == 'video'" type="text/html" width="560" height="315" ng-show="slide.visible"></iframe> 
+	</div>
+	<div class="arrows">
+	    <img src="/reic/app/assets/img/arrow-prev.png" id="arrowPrev"/>
+	    <img src="/reic/app/assets/img/arrow-next.png" id="arrowNext"/>
+  	</div>
+</div>

@@ -1,5 +1,5 @@
 What I am trying to do:
-	- why pie chart not updating
+	- change the rental calculate to use service instead of scope 
 
 Where I left of:
 	- 
@@ -37,6 +37,18 @@ Hours Tracking:
 
 Questions:
 
-1) How much logic should be in directive
+1) How much logic should be in directive, controller, service
 2) How do controller service and directive relate
+	- how to get data from controller, or from service?
+	- should directive get data from controller or service?
+		- e.g. slideshow, google charts
 3) about the digest in apply, digest etc.
+4) primitives in controller
+5) which directive type to use
+6) timeout, apply, always in directive link?
+
+
+How to create transparent img:
+powerpoint:
+1) create shape and group it
+2) right click and save as image
