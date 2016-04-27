@@ -1,5 +1,7 @@
 What I am trying to do:
 	- change the rental calculate to use service instead of scope 
+	- do I still need jquery ui?
+	-the height needs to be set different under navbar
 
 Where I left of:
 	- 
@@ -32,7 +34,7 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 89
+	Coding: 100
 
 
 Questions:

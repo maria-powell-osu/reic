@@ -1,6 +1,7 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
     vm.input = {};
+    vm.step = 'step1';
     vm.submit = function() {
       RentalCalculator.setData(vm.input);
 

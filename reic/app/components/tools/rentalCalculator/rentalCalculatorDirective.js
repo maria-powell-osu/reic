@@ -24,7 +24,33 @@ App.directive('clearForm', function() {
 
 });
 
-'use strict';
+App.directive('mpProgressbar', function ($timeout) {
+  return {
+    link: function (scope, element, attrs) {
+      //timeout to make sure digest ends before calling scope.apply again
+      $timeout(function() {
+        //to make sure bindings get applied
+        scope.$apply( function () {
+          $(".progressbar li").bind("click", function (event) {
+            var step = event.target.id;
+            if (step === "step1"){   
+              //Here: add the click event here         
+              var test = scope.rentalCalculator.step;
+            } else if (step === "step2"){
+
+            } else if (step === "step3"){
+
+            } else if (step === "step4"){
+
+            } else if (step === "step5"){
+
+            }
+          });
+        });
+      });
+    }
+  };
+});
 
 /* Basic Property Information
  * Loads template into rentalCalculatorInput.html
@@ -35,10 +61,52 @@ App.directive('clearForm', function() {
   };
 });
 
-/* Cash Flow View
- * Calcul
- * 
+/* Loan Information
+ * Loads template into rentalCalculatorInput.html
  */
+ App.directive('loanInformation', function() {
+  return {
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
+  };
+});
+
+
+/* Income Sources
+ * Loads template into rentalCalculatorInput.html
+ */
+ App.directive('incomeSources', function() {
+  return {
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
+  };
+});
+
+/* Expenses
+ * Loads template into rentalCalculatorInput.html
+ */
+ App.directive('expenses', function() {
+  return {
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/expenses.html'
+  };
+});
+
+/* Financial Measures 
+ * Loads template into rentalCalculatorInput.html
+ */
+ App.directive('financialMeasures', function() {
+  return {
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/financialMeasures.html'
+  };
+});
+
+ /* Results
+ * Loads template into result.html
+ */
+ App.directive('results', function() {
+  return {
+    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/results.html'
+  };
+});
+
  App.directive('rentalCalculations', function($timeout, RentalCalculator) {
   return {
     restrict: 'A',
@@ -905,61 +973,3 @@ App.directive('clearForm', function() {
         }
       }
     });
-
-/* Financial Measures 
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('financialMeasures', function() {
-  return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/financialMeasures.html'
-  };
-});
-
-
-/* Loan Information
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('loanInformation', function() {
-  return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
-  };
-});
-
-
-/* Income Sources
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('incomeSources', function() {
-  return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
-  };
-});
-
-/* Expenses
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('expenses', function() {
-  return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/expenses.html'
-  };
-});
-
- App.directive('removeTab', function($compile) {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs, ctrl) {  
-      $(element).click( function () {
-        scope.$apply( function () {
-          var tabs = $("#tabs").tabs();
-          var panelId = tabs.find(".ui-tabs-active").remove().attr("aria-controls");
-          $('#' + panelId).remove();
-          $("#tabs").tabs('refresh');
-        });
-      });
-    }
-  }
-});
-
-
-
-

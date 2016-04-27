@@ -1,130 +1,49 @@
 <div class="container page-content">
 	<div class="row">
-		<div class="progressbarContainer">
+		<div class="progressbarContainer" mp-progressbar>
 			<ul class="progressbar">
-				<li class="active">Property Info</li>
-				<li>Loan Info</li>
-				<li>Income</li>
-				<li>Expense</li>
-				<li>Results</li>
+				<li class="active" id="step1">Property Info</li>
+				<li id="step2">Loan Info</li>
+				<li id="step3">Income</li>
+				<li id="step4">Expense</li>
+				<li id="step5">Results</li>
 			</ul>
 		</div>
 	</div>
 	<br/>
 	<br/>
+	<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()" name="rentalCalculatorInputForm">
+		<div>
+			<!-- Basic Property Information -->
+			<div id="basicInformation" basic-property-information></div>
+			
+			<!-- Loan Information -->
+			<div id="loanInformation" loan-information></div>
 
+			<!-- Income Sources -->
+			<div id="incomeSources" income-Sources></div>  
 
+			<!-- Expenses -->
+			<div id="expenses" expenses></div>
 
-
-	<div id="tabs" jq-tabs>
-		<!-- JQ UI TABS DEFINED -->
-		<ul style="display:none;">
-			<li><a href="#tabs-input">Input</a></li>
-			<li><a href="#tabs-results">Results</a></li>
-		</ul>
-		<!-- TABS INPUT PAGE -->
-		<div id="tabs-input">
-			<div>
-				<!-- Name was added for the dis-disabled in submit button -->
-				<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()" name="rentalCalculatorInputForm">
-					<div jq-slide-section>
-						<div class="ui-accordion ui-widget ui-helper-reset" id="accordion">
-							<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-								<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
-								Basic Property Information
-							</h1>
-							<div id="basicInformation" basic-property-information class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
-
-							<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-								<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
-								Loan Information
-							</h1>
-							<div id="loanInformation" loan-information class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
-
-							<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-								<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Income Sources</h1>
-								<div id="incomeSources" income-Sources class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>  
-
-								<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-									<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Expenses</h1>
-									<div id="expenses" expenses class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
-
-								<h1 style="text-align: center;" class="accordion-header ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all">
-									<span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>Financial Measures</h1>
-									<div id="financialMeasures" financial-measures class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom"></div>
-									<br/>
-
-
-						</div>
-					</div>
-					<div id="dialog-confirm" title="Clear All Fields" hidden>
-						<p>
-							<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
-							Are you sure you want to clear all fields?
-						</p>
-					</div>
-
-					<div mp-validation formName="rentalCalculatorInputForm"></div>
-
-					<!-- ng-disabled="rentalCalculatorInputForm.$invalid" -->
-					<button type="submit" class="btn btn-success">Calculate Results</button>
-					<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button>
-				</form>
+			<!-- Financial Measures -->
+			<div id="financialMeasures" financial-measures></div>
+			
+			<br/>
 			</div>
 		</div>
-
-		<!-- TAB RESULTS PAGE -->
-		<div id="tabs-results">
-			<div rental-calculations>
-				<h1>Cash Flow Projection</h1>
-				<div id="cashFlowProjection_div"></div>
-				<div id="table_div"></div>
-				<h1>Income vs. Expenses</h1>
-					<div class="row">
-						<div class="col-md-6">
-							<h4>Monthly Income</h4>			
-							<div id="incomePieChart"></div>
-						</div>
-						<div class="col-md-6">
-							<br/>
-							<br/>
-							<div ng-repeat="incomeLabels in incomePieChartsLabels track by $index">
-								<div class="row">
-									<div class="col-md-6">
-										<span class="glyphicon glyphicon-stop" aria-hidden="true" style="color:{{incomeLabels.color}}"></span>
-										<span>{{incomeLabels.description}}:</span>
-									</div>
-									<div class="col-md-6">
-										<span>{{incomeLabels.value}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<h4>Monthly Expenses</h4>			
-							<div id="expensePieChart"></div>
-						</div>
-						<div class="col-md-6">
-							<br/>
-							<br/>
-							<div ng-repeat="expenseLabels in expensePieChartsLabels track by $index">
-								<div class="row">
-									<div class="col-md-6">
-										<span class="glyphicon glyphicon-stop" aria-hidden="true" style="color:{{expenseLabels.color}}"></span>
-										<span>{{expenseLabels.description}}:</span>
-									</div>
-									<div class="col-md-6">
-										<span>{{expenseLabels.value}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
+		<div id="dialog-confirm" title="Clear All Fields" hidden>
+			<p>
+				<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
+				Are you sure you want to clear all fields?
+			</p>
 		</div>
-	</div>
+
+		<div mp-validation formName="rentalCalculatorInputForm"></div>
+
+		<!-- ng-disabled="rentalCalculatorInputForm.$invalid" -->
+		<button type="submit" class="btn btn-success">Calculate Results</button>
+		<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button>
+	</form>
 </div>
+

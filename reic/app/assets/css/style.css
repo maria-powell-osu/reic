@@ -18,11 +18,11 @@
     background-repeat: no-repeat;
     background-position: 50% top;
 }
-.content
+/*.content
 {
 	position: relative;
 	/*margin-top: 10%;*/
-}
+/*}*/
 /*Give the collapsed navbar custom height*/
 .navbar-header {
    line-height: 70px;

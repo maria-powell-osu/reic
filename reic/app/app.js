@@ -7,7 +7,7 @@ var App = angular.module('App', ['ngRoute', 'ngSanitize']);
 //to call the controller instead of calling $parent
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '../reic/app/components/about/about.html',
+    templateUrl: '../reic/app/components/about/aboutView.html',
     /*controller: 'AboutController',
     controllerAs: 'aboutController',*/
   });
