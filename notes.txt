@@ -46,9 +46,11 @@ Questions:
 4) primitives in controller
 5) which directive type to use
 6) timeout, apply, always in directive link?
+7) what if you want to add ids in the directive
 
 
 How to create transparent img:
 powerpoint:
 1) create shape and group it
 2) right click and save as image
+ 

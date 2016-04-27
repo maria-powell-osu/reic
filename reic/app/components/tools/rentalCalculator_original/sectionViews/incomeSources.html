@@ -1,0 +1,69 @@
+  <h3>Rental Income</h3><br/>
+  <fieldset>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="ri_annualRentIncrease">Annual Rent Increase (%)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.ri_annualRentIncrease" placeholder="%">
+      </div>
+    </div>
+  </fieldset>
+  <br/>
+  <div ng-repeat="units in rentalCalculator.input.units track by $index">
+    <fieldset>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeUnit()">
+          <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="ri_unitName">Unit Name</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_unitName" name="ri_unitName{{$index}}" placeholder="i.e. Unit 1, Unit A, etc.">
+                 
+        </div>
+        <div class="col-md-6">
+           <label for="ri_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="number" step="0.01"class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_grossMonthlyIncome" name="ri_unitName{{$index}}" placeholder="$">
+        </div>
+      </div>
+    </fieldset>
+    <br/>
+  </div>
+  <br/>
+  <div ng-click="rentalCalculator.addUnit()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add Unit</label><br/><br/>
+  </div>
+
+
+
+  <h3>Supplemental Income</h3><br/>
+  <div ng-repeat="supplementalIncomes in rentalCalculator.input.supplementalIncomes track by $index">
+    <fieldset>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeSupplementalIncome()">
+          <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="si_description">Description</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.supplementalIncomes[$index].si_description" placeholder="i.e. coin laundry, garages, etc.">
+        </div>
+        <div class="col-md-6">
+          <label for="si_grossMonthlyIncome">Gross Monthly Income ($/mo)</label>
+          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          <input type="number" step="0.01" class="inpt form-control" ng-model="rentalCalculator.input.supplementalIncomes[$index].si_grossMonthlyIncome" placeholder="$"> 
+        </div>
+      </div>
+    </fieldset>
+    <br/>
+  </div>
+  <div ng-click="rentalCalculator.addSupplementalIncome()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add additional income source</label>
+  </div>

@@ -1,11 +1,27 @@
-body
+/*body
 {
 	background-color: #f3f3f3 !important; 
+}*/
+.page-content
+{
+    margin-top: 10%;
+}
+.bg_picture
+{
+    background-image:url('/reic/app/assets/img/passive-income.jpg');
+    width: 100%;
+    height:400px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
 }
 .content
 {
 	position: relative;
-	margin-top: 10%;
+	/*margin-top: 10%;*/
 }
 /*Give the collapsed navbar custom height*/
 .navbar-header {
@@ -27,7 +43,8 @@ body
 .navbar {
 	border: none;
     border-radius: 0;
-    background-color: rgba(0,0,0,0.5);
+    /*background-color: rgba(0,0,0,0.5);*/
+    background-color: black;
     position: fixed;
     top: 0;
     width: 100%;
@@ -137,4 +154,65 @@ fieldset{
     position: absolute;
     top: 50%;
     left: 50%; 
+}
+.progressbarContainer {
+    width: 100%;
+}
+.progressbar{
+    list-style: none;           /*take out list bullet*/
+    counter-reset: step;        /*a way to number sections*/
+}
+.progressbar li {
+    width: 20%;                 /*How much space each item gets based on how many steps*/
+    float: left;                /*vertical align list*/
+    position: relative;         /*Position an element relative to its normal position*/
+    text-align: center;         /*Centers the steps*/  
+}
+
+/*Everything right before list item*/
+.progressbar li:before {
+    content: counter(step);     /*Adds the numbering*/
+    counter-increment: step;    /*Define our step to be counter increment*/
+    width: 30px;
+    height: 30px;
+    line-height: 30px;          /*to vertically align the content*/
+    border: 1px solid #ddd;
+    display: block;             /*In order to move the steps above writing*/
+    text-align: center;         /*Center the numbering*/
+    margin: 0 auto 10px auto;   /*Center the writing under steps*/
+    border-radius: 50%;         /*Create Circle Steps*/
+    background-color: white;    /*to make the line disappear and not show*/
+}
+
+/*Everything right after list item*/
+.progressbar li:after {
+    content: '';                /*without this it will not show; done for element without content but should show*/
+    position: absolute;         /*positioned relative to 1st ancestor element >> li*/
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    top: 15px;                  /*for the line to display halfway through the circle 30/2*/
+    /*since position = absolute: the left edge position in % of containing element*/
+    left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
+    z-index: -1;                /*The lines should show behind the circle*/
+}
+
+/*To remove to the line before the first step*/
+.progressbar li:first-child:after {
+    content: none;
+}
+
+/*Sets the active element to be green (number and description)*/
+.progressbar li.active {
+    color: green;
+}
+
+/*Sets the active circle to be green*/
+.progressbar li.active:before {
+    border-color: green;
+}
+
+/*Sets the line after the active item to be green*/
+.progressbar li.active + li:after {
+    background-color: green;
 }
