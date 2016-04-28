@@ -49,6 +49,8 @@ Questions:
 5) which directive type to use
 6) timeout, apply, always in directive link?
 7) what if you want to add ids in the directive
+8) e.g. progress bar click event which needs to be accessed by directive link but
+   then how to get data or save data back into the view
 
 
 How to create transparent img:

@@ -1,18 +1,22 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
     vm.input = {};
-    vm.step = 'step1';
+    vm.views = [
+      {step: 'step1', view: 'basicInformation'},
+      {step: 'step2', view: 'loanInformation'},
+      {step: 'step3', view: 'incomeSources'}, 
+      {step: 'step4', view: 'expenses'},
+      {step: 'step5', view: 'financialMeasures'},
+      {step: 'step6', view: 'results'}
+      ];
     vm.submit = function() {
       RentalCalculator.setData(vm.input);
 
-      //To show and set the tabs view
-      $( "#tabs" ).show().children().show();
-      $("#tabs").tabs( "option","active", 1); 
+      //To DO: show results step
     };
 
     //set up all input default values
     vm.input.loanInfoView = 'bankLoan';
-    vm.input.loanInfoView
 
     /* 
      * Setting up defaults values for the rows 

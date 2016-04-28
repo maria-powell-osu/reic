@@ -21,36 +21,8 @@ App.directive('clearForm', function() {
 			});
 		}
 	};
-
 });
 
-App.directive('mpProgressbar', function ($timeout) {
-  return {
-    link: function (scope, element, attrs) {
-      //timeout to make sure digest ends before calling scope.apply again
-      $timeout(function() {
-        //to make sure bindings get applied
-        scope.$apply( function () {
-          $(".progressbar li").bind("click", function (event) {
-            var step = event.target.id;
-            if (step === "step1"){   
-              //Here: add the click event here         
-              var test = scope.rentalCalculator.step;
-            } else if (step === "step2"){
-
-            } else if (step === "step3"){
-
-            } else if (step === "step4"){
-
-            } else if (step === "step5"){
-
-            }
-          });
-        });
-      });
-    }
-  };
-});
 
 /* Basic Property Information
  * Loads template into rentalCalculatorInput.html

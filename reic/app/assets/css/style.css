@@ -57,7 +57,7 @@
 .dashedPlaceholder {
     border: 2px dashed #999;
     width: 100%;
-    height: 300px;
+    height: 250px;
     background: white;
     display: table;
     text-align: center;
@@ -155,42 +155,57 @@ fieldset{
     top: 50%;
     left: 50%; 
 }
+.elemIndent{
+    padding-left: 1%;
+}
 .progressbarContainer {
-    width: 100%;
+    width: 85%;
 }
 .progressbar{
     list-style: none;           /*take out list bullet*/
     counter-reset: step;        /*a way to number sections*/
+    padding: 0;                 /*Align the UL to the left*/
 }
 .progressbar li {
-    width: 20%;                 /*How much space each item gets based on how many steps*/
-    float: left;                /*vertical align list*/
+    width: 16.66%;              /*How much space each item gets based on how many steps*/
+    float: left;                /*Vertical align list*/
     position: relative;         /*Position an element relative to its normal position*/
-    text-align: center;         /*Centers the steps*/  
+    text-align: center;         /*Centers the steps*/ 
+    color: #545454;
 }
 
-/*Everything right before list item*/
+/* 
+ * On extra small devices remove the step labels
+ * Because otherwhise the text just does not look good
+ */
+@media screen and (max-width: 600px){
+    .progressbar li {
+        font-size: 0;
+    }
+}
+
+/*Everything right before list item (circle*/
 .progressbar li:before {
     content: counter(step);     /*Adds the numbering*/
     counter-increment: step;    /*Define our step to be counter increment*/
-    width: 30px;
-    height: 30px;
-    line-height: 30px;          /*to vertically align the content*/
-    border: 1px solid #ddd;
+    width: 40px;
+    font-size: 1.5em;             /*To make sure number don't get hidden like labels on small devices*/
+    height: 40px;
+    line-height: 40px;          /*To vertically align the content*/
     display: block;             /*In order to move the steps above writing*/
     text-align: center;         /*Center the numbering*/
     margin: 0 auto 10px auto;   /*Center the writing under steps*/
     border-radius: 50%;         /*Create Circle Steps*/
-    background-color: white;    /*to make the line disappear and not show*/
+    background-color: #d3d3d3;    /*to make the line disappear and not show*/
 }
 
-/*Everything right after list item*/
+/*Everything right after list item (line)*/
 .progressbar li:after {
     content: '';                /*without this it will not show; done for element without content but should show*/
     position: absolute;         /*positioned relative to 1st ancestor element >> li*/
     width: 100%;
-    height: 2px;
-    background-color: #ddd;
+    height: 4px;
+    background-color: #C0C0C0;
     top: 15px;                  /*for the line to display halfway through the circle 30/2*/
     /*since position = absolute: the left edge position in % of containing element*/
     left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
@@ -202,17 +217,18 @@ fieldset{
     content: none;
 }
 
-/*Sets the active element to be green (number and description)*/
-.progressbar li.active {
-    color: green;
-}
-
 /*Sets the active circle to be green*/
 .progressbar li.active:before {
-    border-color: green;
+    /*border-color: dodgerblue;*/
+    background: #5bc0de;
+    color:white;
 }
 
 /*Sets the line after the active item to be green*/
-.progressbar li.active + li:after {
-    background-color: green;
+li.active + li:after {
+    background-color: #5bc0de;/*dodgerblue;*/
+}
+
+.fieldSetWidth {
+    display: inline-block;
 }

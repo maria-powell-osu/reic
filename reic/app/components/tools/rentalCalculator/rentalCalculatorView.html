@@ -1,15 +1,17 @@
 <div class="container page-content">
 	<div class="row">
-		<div class="progressbarContainer" mp-progressbar>
-			<ul class="progressbar">
-				<li class="active" id="step1">Property Info</li>
+		<div class="progressbarContainer">
+			<ul class="progressbar" mp-progressbar step-views="rentalCalculator.views">
+				<li id="step1">Property Info</li>
 				<li id="step2">Loan Info</li>
 				<li id="step3">Income</li>
-				<li id="step4">Expense</li>
-				<li id="step5">Results</li>
+				<li id="step4">Expenses</li>
+				<li id="step5">Financial Measures</li>
+				<li id="step6">Results</li>
 			</ul>
 		</div>
 	</div>
+	<br/>
 	<br/>
 	<br/>
 	<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()" name="rentalCalculatorInputForm">
@@ -18,32 +20,49 @@
 			<div id="basicInformation" basic-property-information></div>
 			
 			<!-- Loan Information -->
-			<div id="loanInformation" loan-information></div>
+			<div id="loanInformation" loan-information hidden></div>
 
 			<!-- Income Sources -->
-			<div id="incomeSources" income-Sources></div>  
+			<div id="incomeSources" income-Sources hidden></div>  
 
 			<!-- Expenses -->
-			<div id="expenses" expenses></div>
+			<div id="expenses" expenses hidden></div>
 
 			<!-- Financial Measures -->
-			<div id="financialMeasures" financial-measures></div>
-			
+			<div id="financialMeasures" financial-measures hidden></div>
+
+			<!-- Results -->
+			<div id="results" results hidden></div>
 			<br/>
+
+		</div>
+		<div class="row elemIndent">
+			<div class="col-md-10">
+				<hr/>
 			</div>
 		</div>
-		<div id="dialog-confirm" title="Clear All Fields" hidden>
+		<div class="row elemIndent">
+			<div class="col-md-4">
+				Step 1 of 7
+			</div>
+			<div class="col-md-offset-4 col-md-4">
+		  		<button type="button" class="btn btn-info">Previous</button>
+		    	<button type="button" class="btn btn-info">Next</button>
+		    	<br/>
+		  </div>
+		</div>
+
+				<!-- <div id="dialog-confirm" title="Clear All Fields" hidden>
 			<p>
 				<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
 				Are you sure you want to clear all fields?
 			</p>
-		</div>
+		</div> -->
 
-		<div mp-validation formName="rentalCalculatorInputForm"></div>
-
+		<!-- <div mp-validation formName="rentalCalculatorInputForm"></div> -->
 		<!-- ng-disabled="rentalCalculatorInputForm.$invalid" -->
-		<button type="submit" class="btn btn-success">Calculate Results</button>
-		<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button>
+		<!-- <button type="submit" class="btn btn-success">Calculate Results</button>
+		<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button> -->
 	</form>
 </div>
 
