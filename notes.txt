@@ -1,9 +1,16 @@
-What I am trying to do:
-	- change the rental calculate to use service instead of scope 
-	- do I still need jquery ui?
-	-the height needs to be set different under navbar
 
 Where I left of:
+- disable next and prev button in right circumstances
+- validation
+
+What I am trying to do:
+
+	- do we need clear button functionality?
+	- change the rental calculate to use service instead of scope 
+	- do I still need jquery ui?
+	- You need to add test handler
+	- the height needs to be set different under navbar
+
 	- 
 To Discuss with Jason:
 	- color too neo like
@@ -47,10 +54,11 @@ Questions:
 3) about the digest in apply, digest etc.
 4) primitives in controller
 5) which directive type to use
-6) timeout, apply, always in directive link?
+6) timeout, apply, always in directive link??
 7) what if you want to add ids in the directive
 8) e.g. progress bar click event which needs to be accessed by directive link but
    then how to get data or save data back into the view
+   button click events
 
 
 How to create transparent img:

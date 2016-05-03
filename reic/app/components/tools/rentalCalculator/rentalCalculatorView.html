@@ -1,13 +1,16 @@
 <div class="container page-content">
 	<div class="row">
 		<div class="progressbarContainer">
-			<ul class="progressbar" mp-progressbar step-views="rentalCalculator.views">
-				<li id="step1">Property Info</li>
-				<li id="step2">Loan Info</li>
-				<li id="step3">Income</li>
-				<li id="step4">Expenses</li>
-				<li id="step5">Financial Measures</li>
-				<li id="step6">Results</li>
+			<!-- <ul class="progressbar" mp-progressbar step-views="rentalCalculator.views" ng-attr-id="{{rentalCalculator.progressbarId}}" ng-repeat="view in rentalCalculator.views track by $index">
+				<li ng-attr-id="view.step" ng-attr-class="{{rentalCalculator.currentView.step == '1' && 'active'}}">{{view.displayName}}</li>
+			</ul> -->
+			<ul class="progressbar" mp-progressbar step-views="rentalCalculator.views" ng-attr-id="{{rentalCalculator.progressbarId}}">
+				<li id="1" class="selected">Property Info</li>
+				<li id="2">Loan Info</li>
+				<li id="3">Income</li>
+				<li id="4">Expenses</li>
+				<li id="5">Financial Measures</li>
+				<li id="6">Results</li> 
 			</ul>
 		</div>
 	</div>
@@ -43,11 +46,11 @@
 		</div>
 		<div class="row elemIndent">
 			<div class="col-md-4">
-				Step 1 of 7
+				Step {{rentalCalculator.currentView}} of {{rentalCalculator.totalViews}}
 			</div>
 			<div class="col-md-offset-4 col-md-4">
-		  		<button type="button" class="btn btn-info">Previous</button>
-		    	<button type="button" class="btn btn-info">Next</button>
+		  		<button type="button" class="btn btn-info" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" prev-step>Previous</button>
+		    	<button type="button" class="btn btn-info" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" next-step>Next</button>
 		    	<br/>
 		  </div>
 		</div>

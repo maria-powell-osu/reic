@@ -2,13 +2,16 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     var vm = this;
     vm.input = {};
     vm.views = [
-      {step: 'step1', view: 'basicInformation'},
-      {step: 'step2', view: 'loanInformation'},
-      {step: 'step3', view: 'incomeSources'}, 
-      {step: 'step4', view: 'expenses'},
-      {step: 'step5', view: 'financialMeasures'},
-      {step: 'step6', view: 'results'}
+      {step: '1', view: 'basicInformation', displayName: 'Property Info'},
+      {step: '2', view: 'loanInformation', displayName: 'Loan Info'},
+      {step: '3', view: 'incomeSources', displayName: 'Income'}, 
+      {step: '4', view: 'expenses', displayName: 'Expenses'},
+      {step: '5', view: 'financialMeasures', displayName: 'Financial Measures'},
+      {step: '6', view: 'results', displayName: 'Results'}
       ];
+    vm.totalViews = vm.views.length + 1;
+    vm.progressbarId = "mpProgressBar";
+    vm.currentView = 1;
     vm.submit = function() {
       RentalCalculator.setData(vm.input);
 
