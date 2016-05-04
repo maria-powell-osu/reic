@@ -9,14 +9,13 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       {step: '5', view: 'financialMeasures', displayName: 'Financial Measures'},
       {step: '6', view: 'results', displayName: 'Results'}
       ];
-    vm.totalViews = vm.views.length + 1;
+    vm.totalViews = vm.views.length;
     vm.progressbarId = "mpProgressBar";
     vm.currentView = 1;
-    vm.submit = function() {
+    /*vm.submit = function() {
       RentalCalculator.setData(vm.input);
-
-      //To DO: show results step
-    };
+      var test = RentalCalculator.calculate();
+    };*/
 
     //set up all input default values
     vm.input.loanInfoView = 'bankLoan';
@@ -100,16 +99,3 @@ App.controller('FileController', ['$scope', function ($scope){
 	 $scope.imgUpload = {};
 	 $scope.imgUpload.src = '';
 }]);
-
-/*App.controller("RentalCalculatorCashFlowViewController", function($scope, RentalCalculator) {
-  var vm = this;
-  //get the user input
-  vm.data = RentalCalculator.getData();
-  $scope.test = "test";
-  
-  });*/
-
-
-/*App.controller("RentalCalculatorResultsController", function($scope) {
-  $scope.tabCounter = 2;
-});*/

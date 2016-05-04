@@ -1,15 +1,14 @@
 
 Where I left of:
-- disable next and prev button in right circumstances
-- validation
+- the labeling is return now I need to bind it to the results page
+- test the functionality
 
 What I am trying to do:
-
-	- do we need clear button functionality?
+	- add errpr handling on what the service returns
+	- #loaderbody: there should be a better way to call this
 	- change the rental calculate to use service instead of scope 
 	- do I still need jquery ui?
 	- You need to add test handler
-	- the height needs to be set different under navbar
 
 	- 
 To Discuss with Jason:
@@ -59,6 +58,8 @@ Questions:
 8) e.g. progress bar click event which needs to be accessed by directive link but
    then how to get data or save data back into the view
    button click events
+9) should a directive ever have access to a service
+10) what if the controller get it from the service and hands it to directive
 
 
 How to create transparent img:

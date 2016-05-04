@@ -4,11 +4,11 @@
 }*/
 .page-content
 {
-    margin-top: 10%;
+    margin-top: 13%;
 }
 .bg_picture
 {
-    background-image:url('/reic/app/assets/img/passive-income.jpg');
+    background-image:url('/reic/app/assets/img/portland_skyline_banner_dark.jpg');
     width: 100%;
     height:400px;
     -webkit-background-size: cover;
@@ -179,8 +179,26 @@ fieldset{
  * Because otherwhise the text just does not look good
  */
 @media screen and (max-width: 600px){
+    /*To hide the step descriptions on small screens*/
     .progressbar li {
         font-size: 0;
+    }
+    /*To make sure number don't get hidden like labels on small devices*/
+    /*Important was added to avoid it getting overridden by my class below it*/
+    .progressbar li:before {
+        font-size: 10px !important;  
+        width: 30px !important;
+        height: 30px !important;
+        line-height: 30px !important;           
+    }
+    /*After resizing the circles for small screens let's also re-center lines and width*/
+    .progressbar li:after {
+        top: 15px !important; 
+        height: 2px !important;
+    }
+    /*To make sure the navbar doesnt overlap the page content*/
+    .page-content {
+        margin-top: 25%;
     }
 }
 
@@ -189,7 +207,6 @@ fieldset{
     content: counter(step);     /*Adds the numbering*/
     counter-increment: step;    /*Define our step to be counter increment*/
     width: 40px;
-    font-size: 1.5em;             /*To make sure number don't get hidden like labels on small devices*/
     height: 40px;
     line-height: 40px;          /*To vertically align the content*/
     display: block;             /*In order to move the steps above writing*/
@@ -206,7 +223,7 @@ fieldset{
     width: 100%;
     height: 4px;
     background-color: #C0C0C0;
-    top: 15px;                  /*for the line to display halfway through the circle 30/2*/
+    top: 20px;                  /*for the line to display halfway through the circle*/
     /*since position = absolute: the left edge position in % of containing element*/
     left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
     z-index: -1;                /*The lines should show behind the circle*/

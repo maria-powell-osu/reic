@@ -19,7 +19,7 @@ App.directive('jqdatepicker', function() {
     };
 });
 
-App.directive('mpValidation', function($timeout) {
+/*App.directive('mpValidation', function($timeout) {
     return {
         restrict: 'A',
         scope: { formName: '=' },
@@ -36,9 +36,9 @@ App.directive('mpValidation', function($timeout) {
         }
     };
 });
+*/
 
-
-App.directive('jqSlideSection', function($timeout) {
+/*App.directive('jqSlideSection', function($timeout) {
     return {
         link: function(scope, element, attrs, ctrl) {
             //$timeout to make sure everything is loaded properly before this
@@ -62,9 +62,9 @@ App.directive('jqSlideSection', function($timeout) {
             });
         }
     };
-});
+});*/
 
-App.directive('jqTabs', function($timeout) {
+/*App.directive('jqTabs', function($timeout) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs, ctrl) {
@@ -73,7 +73,7 @@ App.directive('jqTabs', function($timeout) {
             });
         }
     };
-});
+});*/
 
 /*
  * Purpose: Handles drag and drop events

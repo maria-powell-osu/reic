@@ -1,10 +1,7 @@
 <div class="container page-content">
 	<div class="row">
 		<div class="progressbarContainer">
-			<!-- <ul class="progressbar" mp-progressbar step-views="rentalCalculator.views" ng-attr-id="{{rentalCalculator.progressbarId}}" ng-repeat="view in rentalCalculator.views track by $index">
-				<li ng-attr-id="view.step" ng-attr-class="{{rentalCalculator.currentView.step == '1' && 'active'}}">{{view.displayName}}</li>
-			</ul> -->
-			<ul class="progressbar" mp-progressbar step-views="rentalCalculator.views" ng-attr-id="{{rentalCalculator.progressbarId}}">
+			<ul class="progressbar" mp-progressbar form="rentalCalculator.input" step-views="rentalCalculator.views" calculator="rentalCalculatorButton" ng-attr-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView">
 				<li id="1" class="selected">Property Info</li>
 				<li id="2">Loan Info</li>
 				<li id="3">Income</li>
@@ -17,7 +14,8 @@
 	<br/>
 	<br/>
 	<br/>
-	<form id="rentalCalculatorInputForm" ng-submit="rentalCalculator.submit()" name="rentalCalculatorInputForm">
+	<!--  ng-submit="rentalCalculator.submit()"  -->
+	<form id="rentalCalculatorInputForm"name="rentalCalculatorInputForm">
 		<div>
 			<!-- Basic Property Information -->
 			<div id="basicInformation" basic-property-information></div>
@@ -45,13 +43,22 @@
 			</div>
 		</div>
 		<div class="row elemIndent">
-			<div class="col-md-4">
+		<div class="col-md-10">
+			<div class="col-md-6">
 				Step {{rentalCalculator.currentView}} of {{rentalCalculator.totalViews}}
 			</div>
-			<div class="col-md-offset-4 col-md-4">
-		  		<button type="button" class="btn btn-info" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" prev-step>Previous</button>
-		    	<button type="button" class="btn btn-info" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" next-step>Next</button>
+			<div class="col-md-offset-4 col-md-2">
+				<div class="col-md-3">
+		  			<button type="button" class="btn btn-info pull-right" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" prev-step ng-hide="rentalCalculator.currentView == 1">Previous</button>
+		  		</div>
+		  		<div class="col-md-9">
+		  			<!-- Next gets shown when user is not on the last input step-->
+		    		<button type="button" class="btn btn-info pull-right" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" next-step ng-hide="rentalCalculator.currentView == (rentalCalculator.totalViews - 1)">Next</button>
+		    		<!-- Calculate gets shown when user is on the last input step-->
+		    		<button type="button" class="btn btn-info pull-right" ng-show="rentalCalculator.currentView == (rentalCalculator.totalViews - 1)" rental-calculations form="rentalCalculator.input" id="rentalCalculatorButton">Calculate</button>
+		    	</div>
 		    	<br/>
+		  	</div>
 		  </div>
 		</div>
 

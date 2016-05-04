@@ -2,6 +2,9 @@ App.directive('mpProgressbar', function ($timeout) {
   return {
     scope: {
       stepViews: '=stepViews',
+      currentStep: '=currentStep',
+      form: '=form',
+      calculator: '@calculator',
     },
     link: function (scope, element, attrs) {
       //timeout to make sure digest ends before calling scope.apply again
@@ -9,7 +12,15 @@ App.directive('mpProgressbar', function ($timeout) {
         //to make sure bindings get applied
         scope.$apply( function () {
           $(element).bind("click", function (event) {
-            activateStep(scope.stepViews, 'jumpTo', element[0].id, event.target);
+            scope.currentStep = activateStep(scope.stepViews, 'jumpTo', element[0].id, scope.currentStep, event.target);
+            
+            //if we are on the last step, reactivate whatever calculate function is put in place
+            if(scope.currentStep == scope.stepViews.length){
+              $( "#" + scope.calculator).trigger( "click" );
+            }
+
+            //to ensure the new currentStep gets applied to front end UI view
+            scope.$apply();
           });
         });
       });
@@ -31,8 +42,8 @@ App.directive('prevStep', function($timeout) {
         //to make sure bindings get applied
         scope.$apply( function () {
           element.bind("click", function (event) {
-            activateStep(scope.stepViews, 'prev', scope.progressbarId);
-            scope.currentStep--;
+            scope.currentStep =  activateStep(scope.stepViews, 'prev', scope.progressbarId, scope.currentStep);
+            //to ensure the new currentStep gets applied to front end UI view
             scope.$apply();
           });
         });
@@ -55,10 +66,9 @@ App.directive('nextStep', function($timeout) {
         scope.$apply( function () {
           element.bind("click", function (event) {
             //we have multiple li.active so we have to determine the active item differently
-            activateStep(scope.stepViews, 'next', scope.progressbarId);
-            scope.currentStep++;
+            scope.currentStep = activateStep(scope.stepViews, 'next', scope.progressbarId, scope.currentStep);
+            //to ensure the new currentStep gets applied to front end UI view
             scope.$apply();
-            //compile or something needs to get called her for it to show up in UI
           });
         });
       });
@@ -71,10 +81,13 @@ App.directive('nextStep', function($timeout) {
  * Params:  steps:  list of steps the user defined in controller
  *          action: next, prev, jumpTo
  *          ulElementId: id of list element holding progress bar
- *          jumpToElement: optional param to specific which step to jump to    
+ *          jumpToElement: optional param to specific which step to jump to   
+ *          currentStep: is the current view the user is on 
+ * Returns: The current index of the view step (stays the same in case of error)
  */
-function activateStep(steps, action, ulElementId, jumpToElement){
-  var stepIndexToActivate;
+function activateStep(steps, action, ulElementId, currentStep, jumpToElement){
+  var stepIndexToActivate,
+      resultIndex;
 
   //get currently selected list item
   var activeStep = $("#" + ulElementId + ' li.selected'); 
@@ -99,6 +112,9 @@ function activateStep(steps, action, ulElementId, jumpToElement){
     //(in the array we will take out all classes after the activated step)
     $("#" + ulElementId +' li').addClass('active');
     
+    //set the current stepper
+    currentStep = stepIndexToActivate;
+
     for (var i = 0; i < steps.length; i++){
       //If this is the step to activate
       if(i === stepIndexToActivate){
@@ -119,5 +135,13 @@ function activateStep(steps, action, ulElementId, jumpToElement){
         }
       }        
     }
+    //+1 to get rid of 0 index start for front end UI view
+    resultIndex = stepIndexToActivate + 1;
+  } else {
+    //Error Handling to go here
+
+    //if the function did not work properly keep the current view at same index
+    resultIndex = currentStep;
   }
+  return resultIndex;
 }
