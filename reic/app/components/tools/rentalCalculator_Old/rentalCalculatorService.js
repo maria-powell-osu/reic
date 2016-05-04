@@ -16,43 +16,33 @@ App.factory('RentalCalculator', function() {
 
 function rentalCalculations(form) {     
     var labels = {};
-    var result = {};
 
-    result.cashFlowProjectionTable = createTable(form);
-    //createCashFlowProjectionComboChart(form);
-    //labels.income = createIncomePieChart(form);
-	//labels.expenses = createExpensePieChart(form);
+    createTable(form);
+    createCashFlowProjectionComboChart(form);
+    labels.income = createIncomePieChart(form);
+	labels.expenses = createExpensePieChart(form);
 
-	return result;
+	return labels;
 }
 
 function createTable(form) {
-	//RightHere
-	//var data = new google.visualization.DataTable();
-
-	var tableData = {};
+	var data = new google.visualization.DataTable();
 	
 	//Create Columns
-	tableData.columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
-  	//Right Here
-  	/*columns.forEach(function(column) {
+	var columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
+  	columns.forEach(function(column) {
     	data.addColumn('number', column);
-  	});*/
+  	});
 
   	//Create Rows
-  	//RightHere
-  	//data.addRows(createDataRows(columns, form));
-  	tableData.rows = createDataRows(tableData.columns, form);
+  	data.addRows(createDataRows(columns, form));
 
-  	//RightHere
-  	//var table = new google.visualization.Table(document.getElementById('table_div'));
+  	var table = new google.visualization.Table(document.getElementById('table_div'));
 
   	//to ensure that the data gets update properly
-  	//RightHere
-    //table.draw(data, {width: '100%', height: '300px'});
-    tableData.options = {width: '100%', height: '300px'};
-
-    return tableData;
+  	//$timeout(function() {
+    	table.draw(data, {width: '100%', height: '300px'});
+  	//});
 }
 
 function createCashFlowProjectionComboChart(form) {

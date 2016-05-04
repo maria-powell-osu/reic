@@ -1,39 +1,38 @@
 <div class="container page-content">
 	<div class="row">
 		<div class="progressbarContainer">
-			<ul class="progressbar" mp-progressbar form="rentalCalculator.input" step-views="rentalCalculator.views" calculator="rentalCalculatorButton" ng-attr-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView">
-				<li id="1" class="selected">Property Info</li>
-				<li id="2">Loan Info</li>
-				<li id="3">Income</li>
-				<li id="4">Expenses</li>
-				<li id="5">Financial Measures</li>
-				<li id="6">Results</li> 
+			<ul class="progressbar">
+				<li id="1" ng-class="{active: rentalCalculator.currStep>=1}" ng-click="rentalCalculator.jumpTo(1)">Property Info</li>
+				<li id="2" ng-class="{active: rentalCalculator.currStep>=2}" ng-click="rentalCalculator.jumpTo(2)">Loan Info</li>
+				<li id="3" ng-class="{active: rentalCalculator.currStep>=3}" ng-click="rentalCalculator.jumpTo(3)">Income</li>
+				<li id="4" ng-class="{active: rentalCalculator.currStep>=4}" ng-click="rentalCalculator.jumpTo(4)">Expenses</li>
+				<li id="5" ng-class="{active: rentalCalculator.currStep>=5}" ng-click="rentalCalculator.jumpTo(5)">Financial Measures</li>
+				<li id="6" ng-class="{active: rentalCalculator.currStep>=6}" ng-click="rentalCalculator.calculate()">Results</li> 
 			</ul>
 		</div>
 	</div>
 	<br/>
 	<br/>
 	<br/>
-	<!--  ng-submit="rentalCalculator.submit()"  -->
-	<form id="rentalCalculatorInputForm"name="rentalCalculatorInputForm">
+	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
 		<div>
 			<!-- Basic Property Information -->
-			<div id="basicInformation" basic-property-information></div>
+			<div id="basicInformation" basic-property-information ng-show="rentalCalculator.currStep == 1"></div>
 			
 			<!-- Loan Information -->
-			<div id="loanInformation" loan-information hidden></div>
+			<div id="loanInformation" loan-information ng-show="rentalCalculator.currStep == 2"></div>
 
 			<!-- Income Sources -->
-			<div id="incomeSources" income-Sources hidden></div>  
+			<div id="incomeSources" income-Sources ng-show="rentalCalculator.currStep == 3"></div>  
 
 			<!-- Expenses -->
-			<div id="expenses" expenses hidden></div>
+			<div id="expenses" expenses ng-show="rentalCalculator.currStep == 4"></div>
 
 			<!-- Financial Measures -->
-			<div id="financialMeasures" financial-measures hidden></div>
+			<div id="financialMeasures" financial-measures ng-show="rentalCalculator.currStep == 5"></div>
 
 			<!-- Results -->
-			<div id="results" results hidden></div>
+			<div id="results" results ng-show="rentalCalculator.currStep == 6"></div>
 			<br/>
 
 		</div>
@@ -45,34 +44,25 @@
 		<div class="row elemIndent">
 		<div class="col-md-10">
 			<div class="col-md-6">
-				Step {{rentalCalculator.currentView}} of {{rentalCalculator.totalViews}}
+				Step {{rentalCalculator.currStep}} of {{rentalCalculator.totalSteps}}
 			</div>
 			<div class="col-md-offset-4 col-md-2">
 				<div class="col-md-3">
-		  			<button type="button" class="btn btn-info pull-right" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" prev-step ng-hide="rentalCalculator.currentView == 1">Previous</button>
+		  			<button type="button" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep == 1" ng-click="rentalCalculator.prev()">Previous</button>
 		  		</div>
-		  		<div class="col-md-9">
-		  			<!-- Next gets shown when user is not on the last input step-->
-		    		<button type="button" class="btn btn-info pull-right" step-views="rentalCalculator.views" progressbar-id="{{rentalCalculator.progressbarId}}" current-step="rentalCalculator.currentView" next-step ng-hide="rentalCalculator.currentView == (rentalCalculator.totalViews - 1)">Next</button>
-		    		<!-- Calculate gets shown when user is on the last input step-->
-		    		<button type="button" class="btn btn-info pull-right" ng-show="rentalCalculator.currentView == (rentalCalculator.totalViews - 1)" rental-calculations form="rentalCalculator.input" id="rentalCalculatorButton">Calculate</button>
+		  		<div class="col-md-9">		 
+		  			<!-- Next Step --> 			
+		    		<button type="button" ng-click="rentalCalculator.next()" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps -1)">Next</button>
+
+		    		<!-- Calculate -->
+		    		<button type="button" ng-click="rentalCalculator.calculate()" class="btn btn-info pull-right" ng-show="rentalCalculator.currStep == (rentalCalculator.totalSteps - 1)">Calculate</button>
 		    	</div>
 		    	<br/>
 		  	</div>
 		  </div>
 		</div>
-
-				<!-- <div id="dialog-confirm" title="Clear All Fields" hidden>
-			<p>
-				<span class="ui-icon ui-icon-alert" style="float: left; margin:  7px 20px 0;"></span>
-				Are you sure you want to clear all fields?
-			</p>
-		</div> -->
-
-		<!-- <div mp-validation formName="rentalCalculatorInputForm"></div> -->
-		<!-- ng-disabled="rentalCalculatorInputForm.$invalid" -->
-		<!-- <button type="submit" class="btn btn-success">Calculate Results</button>
-		<button type="button" class="btn btn-danger" clear-form>Clear All Fields</button> -->
 	</form>
 </div>
 
+<!-- Loader showing when calculations are running -->
+<mp-loader ng-show="rentalCalculator.calculating"></mp-loader>

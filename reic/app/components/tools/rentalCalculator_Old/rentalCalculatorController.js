@@ -1,28 +1,26 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
     vm.input = {};
-    
-    vm.currStep = 1;
-    vm.totalSteps = 6;
-
-    vm.next = function (){
-      vm.currStep++;
+    vm.views = [
+      {step: '1', view: 'basicInformation', displayName: 'Property Info'},
+      {step: '2', view: 'loanInformation', displayName: 'Loan Info'},
+      {step: '3', view: 'incomeSources', displayName: 'Income'}, 
+      {step: '4', view: 'expenses', displayName: 'Expenses'},
+      {step: '5', view: 'financialMeasures', displayName: 'Financial Measures'},
+      {step: '6', view: 'results', displayName: 'Results'}
+      ];
+    vm.totalViews = vm.views.length;
+    vm.currentView = 1;
+    vm.calcButtonId = 'rentalCalculatorButton';
+    vm.incomePieChartsLabels;
+    vm.expensePieChartsLabels;
+    vm.calculation = function (message) {
+      alert(message);
     };
-    vm.jumpTo = function (jumpToIndex){
-      vm.currStep = jumpToIndex;
-    };
-    vm.prev = function (){
-      vm.currStep--;
-    };
-    vm.calculate = function (){
-      vm.calculating = true;
-      var results = RentalCalculator.calculate(vm.input);
+    /*vm.rentalCalculations = RentalCalculator.calculate();*/
 
-      vm.cashFlowProjectionTable = results.cashFlowProjectionTable;
-
-      vm.currStep = vm.totalSteps;
-      vm.calculating = false;
-    }
+    //This is used in progressbar.js to set the active progess bar
+    vm.progressbarId = "mpProgressBar";
     
     //set up all input default values
     vm.input.loanInfoView = 'bankLoan';

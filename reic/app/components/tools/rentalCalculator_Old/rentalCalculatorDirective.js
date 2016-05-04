@@ -53,15 +53,38 @@
   };
 });
 
- App.directive('mpCashFlowProjectionTable', function() {
+App.directive('rentalCalculations', function($timeout, RentalCalculator) {
   return {
-    restrict: 'E',  /*only matches directive with element name*/
+    restrict: 'A',  /*only matches directive with attribute name*/
     scope: {
-      data: '=data',
+      form: '=form',
+      calculator: '@calculator',
+      expLabels: '=expLabels',
+      incomeLabels: '=incomeLabels',
     },
-    link: function (scope, $elm, $attr) {
-      var data = scope.data;
+    link: function(scope, element, attrs, formCtrl) { 
+      //timeout to make sure digest ends before calling scope.apply again
+      $timeout(function() {
+        //to make sure bindings get applied
+        scope.$apply( function () {
+          var calculateButton = "#" + scope.calculator;
+
+          /*Create a button click event for the calculate button*/
+          $(calculateButton).bind("click", function (event) {
+            //loader to ensure user does not intefer with calculations
+            $("#loaderBody").fadeIn(100);
+            var labels = RentalCalculator.calculate(scope.form);
+            scope.incomeLabels = labels.income;
+            scope.expLabels = labels.expenses;
+
+            //When table creation completed take away the loader
+            $('#loaderBody').fadeOut('slow', function () {});
+
+            //Route to the results page
+            $( "#" + scope.calculator).trigger( "click" );
+          });
+        });  
+      });
     }
   };
 });
-

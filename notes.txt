@@ -1,6 +1,8 @@
 
 Where I left of:
-- the labeling is return now I need to bind it to the results page
+- the directive link function should get called on the click event
+ 	-->ng-click event through controller
+
 - test the functionality
 
 What I am trying to do:
@@ -40,12 +42,13 @@ Sync with Master:
 Hours Tracking:
 
 	Research: 4.5
-	Coding: 100
+	Coding: 115
 
 
 Questions:
 
 1) How much logic should be in directive, controller, service
+loading performance on all the scripts
 2) How do controller service and directive relate
 	- how to get data from controller, or from service?
 	- should directive get data from controller or service?
