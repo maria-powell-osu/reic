@@ -1,7 +1,6 @@
 
 Where I left of:
-- the directive link function should get called on the click event
- 	-->ng-click event through controller
+- 
 
 - test the functionality
 

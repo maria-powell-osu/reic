@@ -1,12 +1,12 @@
 App.factory('RentalCalculator', function() {
 	var RentalCalculator = {};
 	return {
-		getData: function(){
+		/*getData: function(){
 			return RentalCalculator;
 		},
 		setData: function (rentalCalculatorData){
 			RentalCalculator = rentalCalculatorData;
-		},
+		},*/
 		calculate: function (userInput){
 			return rentalCalculations(userInput);
 		}
@@ -15,56 +15,41 @@ App.factory('RentalCalculator', function() {
 
 
 function rentalCalculations(form) {     
-    var labels = {};
     var result = {};
 
     result.cashFlowProjectionTable = createTable(form);
-    //createCashFlowProjectionComboChart(form);
-    //labels.income = createIncomePieChart(form);
-	//labels.expenses = createExpensePieChart(form);
+    result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
+    result.incomePieChart = createIncomePieChart(form);
+    result.expensePieChart = createExpensePieChart(form);
 
 	return result;
 }
 
 function createTable(form) {
-	//RightHere
-	//var data = new google.visualization.DataTable();
-
 	var tableData = {};
 	
 	//Create Columns
 	tableData.columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
-  	//Right Here
-  	/*columns.forEach(function(column) {
-    	data.addColumn('number', column);
-  	});*/
 
   	//Create Rows
-  	//RightHere
-  	//data.addRows(createDataRows(columns, form));
   	tableData.rows = createDataRows(tableData.columns, form);
 
-  	//RightHere
-  	//var table = new google.visualization.Table(document.getElementById('table_div'));
-
-  	//to ensure that the data gets update properly
-  	//RightHere
-    //table.draw(data, {width: '100%', height: '300px'});
+  	//Table display options
     tableData.options = {width: '100%', height: '300px'};
 
     return tableData;
 }
 
 function createCashFlowProjectionComboChart(form) {
-	var cashFlowProjectionChart = new google.visualization.ComboChart(document.getElementById('cashFlowProjection_div')),
-		rawDataArray = form.cashFlowTableData,
+	var	rawDataArray = form.cashFlowTableData,
 		cashFlow = 5,
 		year = 0,
 		cashOnCash = 6,
-		chartData = [];
+		chartData = [],
+		result = {};
 
-	//specify axis information
-	var options = {
+	//Specify axis information
+	result.options = {
 		series: {
 			0: {axis: 'CashFlow', type: 'bars'}, 
 			1: {axis: 'CashOnCash', type: 'line', targetAxisIndex:1}
@@ -80,7 +65,7 @@ function createCashFlowProjectionComboChart(form) {
 		height: '100%'
 	};
 
-	//add columns to the data 
+	//Add columns to the data 
 	chartData.push(["Year", "Cash Flow ($)", "Cash on Cash (%)"]);
 
 	//Add data rows to the data
@@ -92,19 +77,16 @@ function createCashFlowProjectionComboChart(form) {
 		chartData.push(dataRow);
 	});
 
-	var data = google.visualization.arrayToDataTable(chartData);
+	result.data = chartData;
 
-	//to ensure that the data gets update properly
-	//$timeout(function() {
-		cashFlowProjectionChart.draw(data, options);
-	//});
+	return result;
 }
 
 
 function createIncomePieChart(form){
-	var incomePieChart = new google.visualization.PieChart(document.getElementById('incomePieChart')),
+	var	result = {},
 		dataArray = [],
-		units = form.units || []
+		units = form.units || [],
 		unitsLength = Object.keys(units).length,
 		supplementalIncomes = form.supplementalIncomes || [],
 		supplementalIncomesLength = Object.keys(supplementalIncomes).length,
@@ -136,16 +118,17 @@ function createIncomePieChart(form){
 	//add new row for each supplemental income
 	for (var i = 0; i < supplementalIncomesLength; i++) {
 		var description = supplementalIncomes[i].si_description,
-		value = supplementalIncomes[i].si_grossMonthlyIncome;
+			value = supplementalIncomes[i].si_grossMonthlyIncome;
 		dataArray.push([description, value]);
 	}
-  	var data = google.visualization.arrayToDataTable(dataArray);
-  
-  	//Since we do not like the google charts legend label display, 
-  	//I am creating our own (create the label array and bind to the view)
-  	var incomePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
 
-  	var options = {
+  	result.data = dataArray;
+  
+  	//Since we do not like the google charts legend label display, let's make our own 
+  	result.labels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
+
+  	//Set up display preferences
+  	result.options = {
 	    width: '100%', 
 	    height: '100%',
 	    is3D: true,
@@ -155,22 +138,18 @@ function createIncomePieChart(form){
 	    colors: colorArray
   	};
 
-	//to ensure that the data gets update properly
-	//$timeout(function() {
-		incomePieChart.draw(data, options);
-	//});
-	return incomePieChartsLabels;
+	return result;
 }
 
 function createExpensePieChart(form){
-	var expensePieChart = new google.visualization.PieChart(document.getElementById('expensePieChart')),
-		  dataArray = [],
-		  monthlyExpenses = 0,
-		  yearlyExpenses = 0,
-		  expenseResult = 0,
-		  addedUtilities = form.utilities || [],
-		  addedUtilitiesLength = Object.keys(addedUtilities).length,
-		  colorArray = [
+	var	result = {},  
+		dataArray = [],
+		monthlyExpenses = 0,
+		yearlyExpenses = 0,
+		expenseResult = 0,
+		addedUtilities = form.utilities || [],
+		addedUtilitiesLength = Object.keys(addedUtilities).length,
+		colorArray = [
 			  '#008000',
 			  '#004080',
 			  '#990000',
@@ -183,7 +162,7 @@ function createExpensePieChart(form){
 			  '#ff80ff',
 			  '#cc6666',
 			  '#ff6600'
-		  ];
+		];
 
     //add columns to the data 
     dataArray.push(["Description", "ExpenseAmount"]);
@@ -239,29 +218,21 @@ function createExpensePieChart(form){
     for (var i = 0; i < addedUtilitiesLength; i++) {
         dataArray.push([addedUtilities[i].add_u_name, addedUtilities[i].add_u_amount]);
     }
+    result.data = dataArray;
 
-    var data = google.visualization.arrayToDataTable(dataArray);
+	//Since google charts legend label display sucks I am creating our own 
+	result.labels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
 
-	//Since we do not like the google charts legend label display, 
-	//I am creating our own 
-	var expensePieChartsLabels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
-
-
-	var options = {
-	width: '100%', 
-	height: '100%',
-	is3D: true,
-	legend: "none",
-	pieSliceText: 'none',
-	colors: colorArray
+	result.options = {
+		width: '100%', 
+		height: '100%',
+		is3D: true,
+		legend: "none",
+		pieSliceText: 'none',
+		colors: colorArray
 	};
 
-	//to ensure that the data gets updated properly
-	//$timeout(function() {
-		expensePieChart.draw(data, options);
-	//});
-
-	return expensePieChartsLabels;
+	return result;
 }
 
 /*
@@ -277,16 +248,17 @@ function createLabelArray (colors, data, headerDescriptionIsSet){
 	var result = [],
   		errormsg,
   		descIndex = 0,
-  		valueIndex = 1;
+  		valueIndex = 1,
+  		i = 0;
 
     //if the data array contains description header
-    //then take out the first row
+    //then take out the first row which is the header
     if(headerDescriptionIsSet){
-        data.shift();
+        i = 1;
     }
 
 	//Create the label array with colors in it
-	for (var i = 0; i < data.length; i++){ 
+	for (i; i < data.length; i++){ 
 		//check data format
 		if(typeof(data[i][descIndex]) == 'undefined' 
 			|| typeof(data[i][valueIndex]) == 'undefined'){

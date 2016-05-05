@@ -4,6 +4,8 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     
     vm.currStep = 1;
     vm.totalSteps = 6;
+    vm.cashFlowProjectionTable;
+    vm.calculating = false;
 
     vm.next = function (){
       vm.currStep++;
@@ -15,13 +17,15 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.currStep--;
     };
     vm.calculate = function (){
-      vm.calculating = true;
+
+      //Get the data for the tables, graphs etc.
       var results = RentalCalculator.calculate(vm.input);
 
-      vm.cashFlowProjectionTable = results.cashFlowProjectionTable;
+      //A watch has been added in the mp-charts directive that triggers drawing of the graphs
+      vm.chartData = results;
 
+      //Route to the results page
       vm.currStep = vm.totalSteps;
-      vm.calculating = false;
     }
     
     //set up all input default values

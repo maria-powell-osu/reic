@@ -53,15 +53,180 @@
   };
 });
 
- App.directive('mpCashFlowProjectionTable', function() {
+ App.directive('mpCharts', function($timeout) {
   return {
     restrict: 'E',  /*only matches directive with element name*/
     scope: {
       data: '=data',
+      calculating: '=calculating',
+      incomePieChartLabels: '=incomePieChartLabels',
+      expensePieChartLabels: '=expensePieChartLabels',
     },
-    link: function (scope, $elm, $attr) {
-      var data = scope.data;
+    link: function (scope, element, attrs, ctrl) {
+
+      //Added to ensure that google loads charts fully before drawing charts
+      google.charts.setOnLoadCallback(processTable);
+
+      //Callback function
+      function processTable(){
+
+        //Watches, to refresh the chart when data object changes
+        scope.$watch('data', function (newValue, oldValue) {
+          /*
+           * https://docs.angularjs.org/api/ng/type/$rootScope.Scope
+           * If these two values are identical (===) then the listener was called due to initialization.
+           */
+          if (newValue !== oldValue) {
+
+            //For Error Handling
+            if(scope.data){
+
+              //Start the Loader so this calculation will not get interrupted
+              scope.calculating = true;      
+               
+              //Create all the charts, tables, etc.
+              createCashFlowTable();
+              createCashFlowChart();
+              createIncomePieChart();
+              createExpensePieChart();
+
+              //Stop the page loader
+              scope.calculating = false;
+            }
+          }
+        }, true); //deep object equlity checking
+      }
+
+      function createExpensePieChart() {
+        var chartElement = $('#expensePieChart')[0],
+            rawData = scope.data.expensePieChart;
+
+        //Initialize Chart
+        var expensePieChart = new google.visualization.PieChart(chartElement);
+
+        //Create data table for chart
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        //Set up the custom pie chart labels
+        scope.expensePieChartLabels = rawData.labels;
+
+        //to ensure that the data gets updated properly
+        $timeout(function() {
+          //draw table
+          expensePieChart.draw(data, rawData.options);
+        });
+      }
+
+      function createIncomePieChart() {
+        var chartElement = $("#incomePieChart")[0],
+            rawData = scope.data.incomePieChart;
+
+        //Intialize chart
+        var incomePieChart = new google.visualization.PieChart(chartElement);
+
+        //Create data table for chart
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        //Set up the custom pie chart labels
+        scope.incomePieChartLabels = rawData.labels;
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function() {
+          incomePieChart.draw(data, rawData.options);
+        });
+      }
+
+      function createCashFlowChart() {
+        var chartElement = $("#cashFlowProjectionChart")[0],
+            rawData = scope.data.cashFlowProjectionChart;
+        
+        //Initialize chart
+        var chart = new google.visualization.ComboChart(chartElement);
+
+        //Create data table for chart   
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          //Draw Chart
+          chart.draw(data, rawData.options);
+        });
+      }
+
+      function createCashFlowTable (){
+        var table,
+            data = new google.visualization.DataTable(),
+            tableElement = $("#cashFlowProjectionTable")[0],
+            rawData = scope.data.cashFlowProjectionTable;
+
+        //Add Table Columns
+        (rawData.columns).forEach(function(column) {
+          data.addColumn('number', column);
+        });
+
+        //Add Table Rows
+        data.addRows(rawData.rows);
+
+        //Initialize Table
+        table = new google.visualization.Table(tableElement);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          table.draw(data, rawData.options);
+        });
+      }
     }
   };
 });
+
+/* App.directive('mpCashFlowProjectionTable', function($timeout) {
+  return {
+    restrict: 'E', 
+    scope: {
+      data: '=data',
+      calculating: '=calculating',
+    },
+    link: function (scope, element, attrs, ctrl) {
+
+      //Added to ensure that google loads charts fully before drawing charts
+      google.charts.setOnLoadCallback(processTable);
+
+      //Callback function
+      function processTable(){
+        
+        //Watches, to refresh the chart when data object changes
+        scope.$watch('data', function (newValue, oldValue) {
+          
+          if (newValue !== oldValue) {
+            var table,
+              data = new google.visualization.DataTable(),
+              tableElement = element[0];
+
+            //For Error Handling
+            if(scope.data){
+              scope.calculating = true;      
+     
+              //Add Table Columns
+              (scope.data.columns).forEach(function(column) {
+                data.addColumn('number', column);
+              });
+
+              //Add Table Rows
+              data.addRows(scope.data.rows);
+
+              //Create Table
+              table = new google.visualization.Table(tableElement);
+
+              $timeout(function () {
+                table.draw(data, scope.options);
+              });
+
+              scope.calculating = false;
+            }
+          }
+        });
+      }
+    }
+  };
+});*/
 
