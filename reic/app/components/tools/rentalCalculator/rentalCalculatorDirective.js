@@ -53,6 +53,22 @@
   };
 });
 
+App.directive("mpRequired", function() {
+   return {
+       restrict: 'A', //only want it triggered for attributes
+       //compile used because we want it evaluated at compile time
+       compile: function(element) {
+           //Add the asterix to all required fields
+           element.prepend("<b class='text-danger'>* </b>");
+
+           //Give the sibling element (the input) a red border
+           $(element[0].nextElementSibling).css("border", "0.5px solid #843534");
+       }
+   };
+});
+
+/*  Takes in the data from the calculation in the controller and draws charts, tables, pie charts etc.
+ *  This is using google charts */
  App.directive('mpCharts', function($timeout) {
   return {
     restrict: 'E',  /*only matches directive with element name*/
@@ -64,7 +80,7 @@
     },
     link: function (scope, element, attrs, ctrl) {
 
-      //Added to ensure that google loads charts fully before drawing charts
+      //Added to ensure that google loads library fully before drawing charts
       google.charts.setOnLoadCallback(processTable);
 
       //Callback function

@@ -7,12 +7,51 @@ App.factory('RentalCalculator', function() {
 		setData: function (rentalCalculatorData){
 			RentalCalculator = rentalCalculatorData;
 		},*/
+		nextStep: function (currStep, lastStep) {
+
+			return (currStep < lastStep) ? currStep++ : currStep;
+		},
+		prevStep: function (currStep) {
+			return (currStep !== 1) ? currStep-- : currStep;
+		},
+		jumpTo: function (jumpToIndex){
+			return jumpToIndex;
+		},
+		validateStep: function (currStep, userInput){
+			var canProceed = false; 
+
+			switch(currStep) {
+			    case 1:
+			        canProceed = validatePropertyInfo(userInput);
+			        break;
+			    case 2:
+			        canProceed = validateLoanInfo(userInput);
+			        break;
+			    case 3:
+			        canProceed = validateIncome(userInput);
+			        break;
+			    case 4:
+			        canProceed = validateExpenses(userInput);
+			        break;
+			    case 5:
+			        //validate financial measure but may not need it
+			        break;
+			    default:
+			        canProceed = false;
+			}
+			return canProceed;
+		},
 		calculate: function (userInput){
 			return rentalCalculations(userInput);
 		}
 	}
 });
 
+function validatePropertyInfo(userInput){
+	var result = false;
+
+	return result;
+}
 
 function rentalCalculations(form) {     
     var result = {};

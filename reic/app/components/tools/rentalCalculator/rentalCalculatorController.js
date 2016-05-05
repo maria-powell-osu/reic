@@ -8,13 +8,19 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.calculating = false;
 
     vm.next = function (){
-      vm.currStep++;
+      var canProceed = RentalCalculator.validateStep(currStep, vm.input);
+      
+      if(canProceed){
+        vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
+      }else {
+        //active error list to user
+      }
     };
     vm.jumpTo = function (jumpToIndex){
-      vm.currStep = jumpToIndex;
+      vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
     };
     vm.prev = function (){
-      vm.currStep--;
+      vm.currStep = RentalCalculator.prevStep(vm.currStep);
     };
     vm.calculate = function (){
 
