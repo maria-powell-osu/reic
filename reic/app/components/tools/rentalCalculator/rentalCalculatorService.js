@@ -8,11 +8,10 @@ App.factory('RentalCalculator', function() {
 			RentalCalculator = rentalCalculatorData;
 		},*/
 		nextStep: function (currStep, lastStep) {
-
-			return (currStep < lastStep) ? currStep++ : currStep;
+			return currStep < lastStep ? currStep + 1 : currStep;
 		},
 		prevStep: function (currStep) {
-			return (currStep !== 1) ? currStep-- : currStep;
+			return (currStep !== 1) ? currStep - 1 : currStep;
 		},
 		jumpTo: function (jumpToIndex){
 			return jumpToIndex;
@@ -39,7 +38,7 @@ App.factory('RentalCalculator', function() {
 			    default:
 			        canProceed = false;
 			}
-			return canProceed;
+			return true;//canProceed;
 		},
 		calculate: function (userInput){
 			return rentalCalculations(userInput);

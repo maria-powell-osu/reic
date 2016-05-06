@@ -20,8 +20,7 @@
 	<br/>
 	<br/>
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
-		<div>Invalid Fields Warning Will go here</div>
-		<br/>
+		
 		<div>
 			<!-- Basic Property Information -->
 			<div id="basicInformation" basic-property-information ng-show="rentalCalculator.currStep == 1"></div>
@@ -59,7 +58,7 @@
 		  		</div>
 		  		<div class="col-md-9">		 
 		  			<!-- Next Step --> 			
-		    		<button type="button" ng-click="rentalCalculator.next()" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps -1)">Next</button>
+		    		<button type="button" ng-click="rentalCalculator.next()" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps -1)" ng-disabled="rentalCalculatorInputForm.{{rentalCalculator.currView}}.$invalid">Next</button>
 
 		    		<!-- Calculate -->
 		    		<button type="button" ng-click="rentalCalculator.calculate()" class="btn btn-info pull-right" ng-show="rentalCalculator.currStep == (rentalCalculator.totalSteps - 1)">Calculate</button>

@@ -2,13 +2,18 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     var vm = this;
     vm.input = {};
     
-    vm.currStep = 1;
-    vm.totalSteps = 6;
+    
     vm.cashFlowProjectionTable;
     vm.calculating = false;
+    vm.views = ["bp", "li", "in", "exp" ,"fm"];
+
+    //Initialize default Views
+    vm.currView = vm.views[0];
+    vm.currStep = 1;
+    vm.totalSteps = 6;
 
     vm.next = function (){
-      var canProceed = RentalCalculator.validateStep(currStep, vm.input);
+      var canProceed = RentalCalculator.validateStep(vm.currStep, vm.input);
       
       if(canProceed){
         vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);

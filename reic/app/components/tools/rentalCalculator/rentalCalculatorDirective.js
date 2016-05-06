@@ -53,19 +53,41 @@
   };
 });
 
-App.directive("mpRequired", function() {
+App.directive("mpRequired", function($timeout) {
    return {
-       restrict: 'A', //only want it triggered for attributes
-       //compile used because we want it evaluated at compile time
-       compile: function(element) {
-           //Add the asterix to all required fields
-           element.prepend("<b class='text-danger'>* </b>");
+      require: 'ngModel',
+      restrict: 'A', //only want it triggered for attributes
+      link: function(scope, element, attrs, ctrl) {
 
-           //Give the sibling element (the input) a red border
-           $(element[0].nextElementSibling).css("border", "0.5px solid #843534");
-       }
+        //Give the required field a thick black border
+        $(element).css("border", "2px solid black");
+        
+        //If the req. field has a label, prepend asterix to label
+        if($(element[0].previousElementSibling).is('label')){
+          $(element[0].previousElementSibling).prepend("<b>* </b>");
+        }
+
+        //If the user never enters a value it should be marked as invalid
+        /*if(!ctrl.viewValue || ctrl.viewValue == ""){
+          //ctrl.$setValidity('isBlank', false);
+        }*/
+
+        //to ensure that the data gets updated properly
+        //$timeout(function() {
+          //This runs whenever the value changes to make sure that
+          //the user did not enter a value and then delete it
+          //ctrl.$parsers.unshift(function (viewValue) {
+            //ctrl.$setValidity('isBlank', !(viewValue === ""));
+           // if(viewValue === ""){
+          //    $(element).css("border", "2px solid red");
+           // }
+          //});
+        //});
+      }
    };
 });
+
+
 
 /*  Takes in the data from the calculation in the controller and draws charts, tables, pie charts etc.
  *  This is using google charts */

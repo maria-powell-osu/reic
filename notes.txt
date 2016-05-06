@@ -1,6 +1,6 @@
 
 Where I left of:
-- 
+- need to have a check that required fields only show when steps is activated
 
 - test the functionality
 
