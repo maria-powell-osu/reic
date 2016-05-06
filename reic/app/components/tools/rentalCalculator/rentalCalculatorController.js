@@ -1,46 +1,64 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
     vm.input = {};
-    
-    
-    vm.cashFlowProjectionTable;
     vm.calculating = false;
-    vm.views = ["bp", "li", "in", "exp" ,"fm"];
-
-    //Initialize default Views
-    vm.currView = vm.views[0];
-    vm.currStep = 1;
-    vm.totalSteps = 6;
-
+    vm.steps = [
+      {
+        index: 0, view: "bp", display: "Property Info"
+      },
+      {
+        index: 1, view: "li", display: "Loan Info"
+      },
+      {
+        index: 2, view: "in", display: "Income"
+      },
+      {
+        index: 3, view: "exp", display: "Expenses"
+      },
+      {
+        index: 4, view: "fm", display: "Financial Measures"
+      },
+      {
+        index: 5, view: "res", display: "Result"
+      },
+    ];
+    vm.totalSteps = vm.steps.length;
+    vm.currStep = vm.steps[0].index; //Initialize default Views
+    vm.currView = vm.steps[vm.currStep].view;
+    
+    //Progress Step Bar Functions
     vm.next = function (){
-      var canProceed = RentalCalculator.validateStep(vm.currStep, vm.input);
-      
-      if(canProceed){
-        vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
-      }else {
-        //active error list to user
-      }
+      vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
+      vm.currView = vm.steps[vm.currStep].view;
     };
-    vm.jumpTo = function (jumpToIndex){
-      vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
+    vm.jumpTo = function (jumpToIndex, form){
+      if(form[vm.steps[jumpToIndex].view].$valid)  {
+        if(jumpToIndex === vm.totalSteps - 2){
+          vm.calculate(form);
+        } else {
+          vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
+          vm.currView = vm.steps[vm.currStep].view;
+        }
+      }
     };
     vm.prev = function (){
       vm.currStep = RentalCalculator.prevStep(vm.currStep);
+      vm.currView = vm.steps[vm.currStep].view;
     };
-    vm.calculate = function (){
+    vm.calculate = function (form){
+      if(form.$valid)  {
+        //Get the data for the tables, graphs etc.
+        var results = RentalCalculator.calculate(vm.input);
 
-      //Get the data for the tables, graphs etc.
-      var results = RentalCalculator.calculate(vm.input);
+        //A watch has been added in the mp-charts directive that triggers drawing of the graphs
+        vm.chartData = results;
 
-      //A watch has been added in the mp-charts directive that triggers drawing of the graphs
-      vm.chartData = results;
-
-      //Route to the results page
-      vm.currStep = vm.totalSteps;
+        //Route to the results page
+        vm.currStep = vm.totalSteps;
+        vm.currView = vm.steps[vm.currStep].view;
+      }
     }
     
-    //set up all input default values
-    vm.input.loanInfoView = 'bankLoan';
 
     /* 
      * Setting up defaults values for the rows 
@@ -54,6 +72,9 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.input.loans = [];
     vm.input.utilities = [];
     vm.input.expenses = [];
+
+    //set up all input default values
+    vm.input.loanInfoView = 'bankLoan';
 
     vm.addUnit = function() {
       vm.input.units.push({});

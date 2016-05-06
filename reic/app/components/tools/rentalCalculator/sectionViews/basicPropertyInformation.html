@@ -1,11 +1,8 @@
 <!-- Ng-form used for step validation (so the whole form does not get validated) -->
-<ng-form name="{{rentalCalculator.views[0]}}">
+<ng-form name="{{rentalCalculator.steps[0].view}}">
   <!-- Error Messages -->
-  <div class="text-danger elemIndent" ng-show="!!rentalCalculatorInputForm.bp.$invalid">
-    Required Fields:
-    <ul>
-      <li ng-show="!!rentalCalculatorInputForm.bp.bp_zipCode.$invalid">Zip Code</li>
-    </ul>
+  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[0].view}}.$invalid}">
+    <b>Please Enter Required Fields Below</b>
   </div>
   <br/>
   <!-- Form Input -->
@@ -31,7 +28,7 @@
       <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bp_city" placeholder="City">
 
       <label>Zip Code</label>
-      <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bp_zipCode" placeholder="Zip Code" name="bp_zipCode" required mp-required>
+      <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bp_zipCode" placeholder="Zip Code" name="bp_zipCode" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[0].view}}.bp_zipCode.$invalid}">
     </div>
   </div>
 

@@ -1,3 +1,9 @@
+<!-- Ng-form used for step validation (so the whole form does not get validated) -->
+<ng-form name="{{rentalCalculator.steps[1].view}}">
+  <!-- Error Messages -->
+  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[1].view}}.$invalid}">
+    <b>Please Enter Required Fields Below</b>
+  </div>
   <h3>Rental Income</h3><br/>
   <div class="row">
     <div class="col-md-10">
@@ -26,11 +32,11 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-              <label req>
+              <label>
                 Unit Name
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label> 
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_unitName" placeholder="i.e. Unit 1, Unit A, etc.">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_unitName" placeholder="i.e. Unit 1, Unit A, etc." required mp-required name="ri_unitName{{$index}}" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.ri_unitName{{$index}}.$invalid}">
                      
             </div>
             <div class="col-md-6">
@@ -38,7 +44,7 @@
                   Gross Monthly Income ($/mo)
                   <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
                </label>
-              <input type="number" step="0.01"class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_grossMonthlyIncome" placeholder="$">
+              <input type="number" step="0.01"class="inpt form-control" ng-model="rentalCalculator.input.units[$index].ri_grossMonthlyIncome" placeholder="$" required mp-required name="ri_grossMonthlyIncome{{$index}}" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.ri_grossMonthlyIncome{{$index}}.$invalid}">
             </div>
           </div>
         </fieldset>
@@ -88,3 +94,4 @@
     <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
     <label>Add additional income source</label>
   </div>
+</ng-form>

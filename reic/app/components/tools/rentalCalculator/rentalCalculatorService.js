@@ -11,34 +11,10 @@ App.factory('RentalCalculator', function() {
 			return currStep < lastStep ? currStep + 1 : currStep;
 		},
 		prevStep: function (currStep) {
-			return (currStep !== 1) ? currStep - 1 : currStep;
+			return (currStep !== 0) ? currStep - 1 : currStep;
 		},
 		jumpTo: function (jumpToIndex){
 			return jumpToIndex;
-		},
-		validateStep: function (currStep, userInput){
-			var canProceed = false; 
-
-			switch(currStep) {
-			    case 1:
-			        canProceed = validatePropertyInfo(userInput);
-			        break;
-			    case 2:
-			        canProceed = validateLoanInfo(userInput);
-			        break;
-			    case 3:
-			        canProceed = validateIncome(userInput);
-			        break;
-			    case 4:
-			        canProceed = validateExpenses(userInput);
-			        break;
-			    case 5:
-			        //validate financial measure but may not need it
-			        break;
-			    default:
-			        canProceed = false;
-			}
-			return true;//canProceed;
 		},
 		calculate: function (userInput){
 			return rentalCalculations(userInput);
