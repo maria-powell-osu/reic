@@ -32,7 +32,9 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.currView = vm.steps[vm.currStep].view;
     };
     vm.jumpTo = function (jumpToIndex, form){
-      if(form[vm.steps[jumpToIndex].view].$valid)  {
+      var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex; 
+      if(form[vm.steps[previousIndex].view].$valid)  {
+        //Here we need to see if the step was ac
         if(jumpToIndex === vm.totalSteps - 2){
           vm.calculate(form);
         } else {

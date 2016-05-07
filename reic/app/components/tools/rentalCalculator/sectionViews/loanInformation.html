@@ -1,215 +1,216 @@
-<!-- Error Messages -->
-<div class="text-danger elemIndent" ng-show="!!rentalCalculatorInputForm.li_purchasePrice.$error.isBlank">
-  Required Fields:
-  <ul>
-    <li ng-show="!!rentalCalculatorInputForm.li_purchasePrice.$error.isBlank">Purchase Price</li>
-  </ul>
-</div>
-<div class="row">
-  <div class="col-md-12 form-group">
-    <input type="radio" ng-model="rentalCalculator.input.loanInfoView" value="cash" >
-    Cash
-    <input type="radio" value="bankLoan" ng-model="rentalCalculator.input.loanInfoView">
-    Loan - Bank
-    <input type="radio" value="specialTermsLoan" ng-model="rentalCalculator.input.loanInfoView">
-    Loan - Special Terms
+<!-- Ng-form used for step validation (so the whole form does not get validated) -->
+<ng-form name="{{rentalCalculator.steps[1].view}}">
+  <!-- Error Messages -->
+  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[1].view}}.$invalid}">
+    <b>Please Enter Required Fields Below</b>
   </div>
-</div>     
-<div class="row">
-  <div class="col-md-10">
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6 form-group">
-          <label>Purchase Price ($)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice"> 
-        </div>
-        <div class="col-md-6 form-group">
-          <label req>Purchase Date</label>
-          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.li_purchaseDate" jqdatepicker placeholder="Date">  
-        </div>
-      </div>
-    </fieldset>
-  </div>
-</div>
-<br/>
-<div id="bankLoanView" ng-disabled="rentalCalculator.input.loanInfoView != 'bankLoan'" ng-hide="rentalCalculator.input.loanInfoView != 'bankLoan'">
+  <br/>
+  <div class="row">
+    <div class="col-md-12 form-group">
+      <input type="radio" ng-model="rentalCalculator.input.loanInfoView" value="cash" >
+      Cash
+      <input type="radio" value="bankLoan" ng-model="rentalCalculator.input.loanInfoView">
+      Loan - Bank
+      <input type="radio" value="specialTermsLoan" ng-model="rentalCalculator.input.loanInfoView">
+      Loan - Special Terms
+    </div>
+  </div>     
   <div class="row">
     <div class="col-md-10">
       <fieldset>
         <div class="row">
           <div class="col-md-6 form-group">
-            <label>Loan Name</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name"> 
-
-            <label req>
-              Down Payment ($)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            </label>
-            
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$">
-
-            <label>Closing Cost ($)</label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_closingCost" placeholder="$">        
+            <label>Purchase Price ($)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchasePrice.$invalid}"> 
           </div>
           <div class="col-md-6 form-group">
-            <label req>Interest (%)</label>
-            <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%"> 
-
-            <label req>
-              Down Payment (%)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            </label>     
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%">
-
-            <label req>
-              Amortization (yrs)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-            </label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_amortization" placeholder="yrs">             
-          </div>  
-        </div>
-        <div class="col-md-6">
-          <label>
-            Extra Principal Pmt ($/mo)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_extraPrincipal" placeholder="$">
-        </div>
-        <div class="col-md-3">
-          <label>Start</label>      
-          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_startDate" jqdatepicker placeholder="Date"> 
-        </div>
-        <div class="col-md-3">
-          <label>End</label>      
-          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_endDate" jqdatepicker placeholder="Date">
+            <label req>Purchase Date</label>
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.li_purchaseDate" jqdatepicker placeholder="Date">  
+          </div>
         </div>
       </fieldset>
     </div>
   </div>
   <br/>
-        
-  <div ng-repeat="addedLoans in rentalCalculator.input.loans">
+  <div id="bankLoanView" ng-disabled="rentalCalculator.input.loanInfoView != 'bankLoan'" ng-hide="rentalCalculator.input.loanInfoView != 'bankLoan'">
     <div class="row">
       <div class="col-md-10">
         <fieldset>
           <div class="row">
-            <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeLoan()">
-              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
-            </div>
-          </div>
-          <div class="row">
             <div class="col-md-6 form-group">
               <label>Loan Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name"> 
 
-              <label req>Amount</label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanAmount" placeholder="Amount in $">
-
-              <label req>Interest (%)</label>
-              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_interest" placeholder="%">  
-            </div>
-            <div class="col-md-6 form-group">
               <label req>
-                Amortization (yrs)
+                Down Payment ($)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs">
+              
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$">
 
-              <label>
-                Year Until Balloon Pmt
+              <label>Closing Cost ($)</label>
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_closingCost" placeholder="$">        
+            </div>
+            <div class="col-md-6 form-group">
+              <label req>Interest (%)</label>
+              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%"> 
+
+              <label req>
+                Down Payment (%)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>     
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_balloon"  placeholder="Yrs"> 
-              <label>
-                Up Front Lender Points ($)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_upFrontLenderPoints" placeholder="$">
-            </div>
-
-            <label>Interest only?</label>
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            
-            <div class="col-md-12 form-group" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
-              <input type="radio" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly" value="yes" >
-              Yes
-              <input type="radio" value="no" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
-              No
-            </div>
-          </div>
-        </fieldset>
-      </div>
-    </div>
-    <br/>
-  </div>
-  <br/>
-  
-  <div ng-click="rentalCalculator.addLoan()">
-    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-    <label>Add Another Loan</label>
-  </div>
-</div>
-
-<div id="specialTermsLoanView" ng-show="rentalCalculator.input.loanInfoView == 'specialTermsLoan'">
-  <div ng-repeat="specialTermsLoans in rentalCalculator.input.specialTermsLoans">
-    <div class="row">
-      <div class="col-md-10">
-        <fieldset>
-          <div class="row">
-              <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeSpecialTermsLoan()">
-                <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
-              </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 form-group">
-              <label>Loan Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name">
-
-              <label req>Amount ($)</label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amount" placeholder="$">
-
-              <label req>
-                Interest (%)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </label>
-              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%">  
-            </div>
-            <div class="col-md-6 form-group">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%">
 
               <label req>
                 Amortization (yrs)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amortization" placeholder="yrs">
-
-              <label>
-                Years Until Balloon Pmt
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_balloon" placeholder="Yrs"> 
-
-              <label>
-                Up Front Lender Points ($)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_upFrontLenderPoints" placeholder="$">
-            </div>
-            <label>Interest Only?</label>
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
-            <div class="col-md-12 form-group">
-              <input type="radio" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption"  value="yes" >
-              Yes
-              <input type="radio" value="no" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption">
-              No
-            </div>
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_amortization" placeholder="yrs">             
+            </div>  
+          </div>
+          <div class="col-md-6">
+            <label>
+              Extra Principal Pmt ($/mo)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_extraPrincipal" placeholder="$">
+          </div>
+          <div class="col-md-3">
+            <label>Start</label>      
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_startDate" jqdatepicker placeholder="Date"> 
+          </div>
+          <div class="col-md-3">
+            <label>End</label>      
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_endDate" jqdatepicker placeholder="Date">
           </div>
         </fieldset>
       </div>
     </div>
     <br/>
+          
+    <div ng-repeat="addedLoans in rentalCalculator.input.loans">
+      <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <div class="row">
+              <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeLoan()">
+                <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Loan Name</label>
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name">
+
+                <label req>Amount</label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanAmount" placeholder="Amount in $">
+
+                <label req>Interest (%)</label>
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_interest" placeholder="%">  
+              </div>
+              <div class="col-md-6 form-group">
+                <label req>
+                  Amortization (yrs)
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs">
+
+                <label>
+                  Year Until Balloon Pmt
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>     
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_balloon"  placeholder="Yrs"> 
+                <label>
+                  Up Front Lender Points ($)
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_upFrontLenderPoints" placeholder="$">
+              </div>
+
+              <label>Interest only?</label>
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
+              
+              <div class="col-md-12 form-group" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
+                <input type="radio" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly" value="yes" >
+                Yes
+                <input type="radio" value="no" ng-model="rentalCalculator.input.loans[$index].add_bl_interestOnly">
+                No
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br/>
+    </div>
+    <br/>
+    
+    <div ng-click="rentalCalculator.addLoan()">
+      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+      <label>Add Another Loan</label>
+    </div>
   </div>
-  <div ng-click="rentalCalculator.addSpecialTermsLoan()">
-    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-    <label>Add Special Terms Loan</label>
+
+  <div id="specialTermsLoanView" ng-show="rentalCalculator.input.loanInfoView == 'specialTermsLoan'">
+    <div ng-repeat="specialTermsLoans in rentalCalculator.input.specialTermsLoans">
+      <div class="row">
+        <div class="col-md-10">
+          <fieldset>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeSpecialTermsLoan()">
+                  <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Loan Name</label>
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name">
+
+                <label req>Amount ($)</label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amount" placeholder="$">
+
+                <label req>
+                  Interest (%)
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%">  
+              </div>
+              <div class="col-md-6 form-group">
+
+                <label req>
+                  Amortization (yrs)
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amortization" placeholder="yrs">
+
+                <label>
+                  Years Until Balloon Pmt
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_balloon" placeholder="Yrs"> 
+
+                <label>
+                  Up Front Lender Points ($)
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_upFrontLenderPoints" placeholder="$">
+              </div>
+              <label>Interest Only?</label>
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span><br/>
+              <div class="col-md-12 form-group">
+                <input type="radio" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption"  value="yes" >
+                Yes
+                <input type="radio" value="no" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interestOption">
+                No
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <br/>
+    </div>
+    <div ng-click="rentalCalculator.addSpecialTermsLoan()">
+      <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+      <label>Add Special Terms Loan</label>
+    </div>
   </div>
-</div>
+</ng-form>

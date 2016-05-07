@@ -58,31 +58,11 @@ App.directive("mpRequired", function($timeout) {
       require: 'ngModel',
       restrict: 'A', //only want it triggered for attributes
       link: function(scope, element, attrs, ctrl) {
-
-        //Give the required field a thick black border
-        //$(element).css("border", "2px solid black");
         
         //If the req. field has a label, prepend asterix to label
         if($(element[0].previousElementSibling).is('label')){
           $(element[0].previousElementSibling).prepend("<b class='text-danger'>* </b>");
         }
-
-        //If the user never enters a value it should be marked as invalid
-        /*if(!ctrl.viewValue || ctrl.viewValue == ""){
-          //ctrl.$setValidity('isBlank', false);
-        }*/
-
-        //to ensure that the data gets updated properly
-        //$timeout(function() {
-          //This runs whenever the value changes to make sure that
-          //the user did not enter a value and then delete it
-          //ctrl.$parsers.unshift(function (viewValue) {
-            //ctrl.$setValidity('isBlank', !(viewValue === ""));
-           // if(viewValue === ""){
-          //    $(element).css("border", "2px solid red");
-           // }
-          //});
-        //});
       }
    };
 });
