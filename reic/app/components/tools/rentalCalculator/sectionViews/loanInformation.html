@@ -72,15 +72,15 @@
               Extra Principal Pmt ($/mo)
               <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
             </label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_extraPrincipal" placeholder="$">
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_extraPrincipal" placeholder="$" name="bl_extraPrincipal" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan' && (rentalCalculator.input.bl_startDate || rentalCalculator.input.bl_endDate)" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_extraPrincipal.$invalid}">
           </div>
           <div class="col-md-3">
             <label>Start</label>      
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_startDate" jqdatepicker placeholder="Date"> 
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_startDate" jqdatepicker placeholder="Date" name="bl_startDate" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan' && (rentalCalculator.input.bl_extraPrincipal || rentalCalculator.input.bl_endDate)" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_startDate.$invalid}"> 
           </div>
           <div class="col-md-3">
             <label>End</label>      
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_endDate" jqdatepicker placeholder="Date">
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_endDate" jqdatepicker placeholder="Date" name="bl_endDate" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan' && (rentalCalculator.input.bl_extraPrincipal || rentalCalculator.input.bl_startDate)" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_endDate.$invalid}">
           </div>
         </fieldset>
       </div>

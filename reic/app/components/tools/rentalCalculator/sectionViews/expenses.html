@@ -64,11 +64,11 @@
           <div class="row">
             <div class="col-md-6">
               <label>Utility Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description" name="add_u_name{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_name{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description" name="add_u_name{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_amount" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_name{{$index}}.$invalid}">
             </div>
             <div class="col-md-6">
               <label>Utility Amount ($/mo)</label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$" name="add_u_amount{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_amount{{$index}}.$invalid}">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$" name="add_u_amount{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_name" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_amount{{$index}}.$invalid}">
             </div>
           </div>
         </fieldset>
@@ -154,11 +154,11 @@
           <div class="row">
             <div class="col-md-6">
               <label>Expense Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description" name="add_e_name{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_name{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description" name="add_e_name{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_name{{$index}}.$invalid}">
             </div>
             <div class="col-md-6">
               <label>Cost ($/mo)</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$" name="add_e_cost{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_cost{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$" name="add_e_cost{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_name" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_cost{{$index}}.$invalid}">
             </div>
           </div>
         </fieldset>
@@ -211,16 +211,16 @@
           <div class="row">
             <div class="col-md-4">
               <label>Description</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="ce_description{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_description{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="ce_description{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_description{{$index}}.$invalid}">
             </div>
             <div class="col-md-4">
               <label>Cost ($)</label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="ce_cost{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_cost{{$index}}.$invalid}">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="ce_cost{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_cost{{$index}}.$invalid}">
             </div>
             
             <div class="col-md-4">
               <label>Date</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="ce_date{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_date{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="ce_date{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_date{{$index}}.$invalid}">
             </div>
           </div>
         </fieldset>

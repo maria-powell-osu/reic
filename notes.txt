@@ -39,8 +39,13 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 128
+	Coding: 130
 
+Rachael:
+	- calculator
+	- validation for conditional required fields
+	- calculator header
+	- calculator sampled
 
 Questions:
 

@@ -236,6 +236,12 @@ fieldset{
     color:white;
 }
 
+/*Sets the currently selected circle to darker blue*/
+.progressbar li.selected:before {
+    background: #51acc7;
+    color: white;
+}
+
 /*Sets the line after the active item to be green*/
 li.active + li:after {
     background-color: #5bc0de;/*dodgerblue;*/
