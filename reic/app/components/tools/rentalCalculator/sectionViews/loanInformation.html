@@ -24,8 +24,8 @@
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchasePrice.$invalid}"> 
           </div>
           <div class="col-md-6 form-group">
-            <label req>Purchase Date</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.li_purchaseDate" jqdatepicker placeholder="Date">  
+            <label>Purchase Date</label>
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.li_purchaseDate" jqdatepicker placeholder="Date" name="li_purchaseDate" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchaseDate.$invalid}">  
           </div>
         </div>
       </fieldset>
@@ -39,33 +39,32 @@
           <div class="row">
             <div class="col-md-6 form-group">
               <label>Loan Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name"> 
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name" name="bl_loanName" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_loanName.$invalid}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'"> 
 
-              <label req>
+              <label>
                 Down Payment ($)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </label>
-              
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$">
+              </label> 
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$" name="bl_downPaymentDollar" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentDollar.$invalid}">
 
               <label>Closing Cost ($)</label>
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_closingCost" placeholder="$">        
             </div>
             <div class="col-md-6 form-group">
-              <label req>Interest (%)</label>
-              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%"> 
+              <label>Interest (%)</label>
+              <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.bl_interest" placeholder="%" name="bl_interest" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_interest.$invalid}"> 
 
-              <label req>
+              <label>
                 Down Payment (%)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>     
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%" name="bl_downPaymentPercent" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentPercent.$invalid}">
 
-              <label req>
+              <label>
                 Amortization (yrs)
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_amortization" placeholder="yrs">             
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_amortization" placeholder="yrs" name="bl_amortization" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_amortization.$invalid}">             
             </div>  
           </div>
           <div class="col-md-6">
@@ -100,20 +99,20 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Loan Name</label>
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name" name="add_bl_loanName{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_loanName{{$index}}.$invalid}">
 
-                <label req>Amount</label>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanAmount" placeholder="Amount in $">
+                <label>Amount</label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanAmount" placeholder="Amount in $" name="add_bl_loanAmount{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_loanAmount{{$index}}.$invalid}">
 
-                <label req>Interest (%)</label>
-                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_interest" placeholder="%">  
+                <label>Interest (%)</label>
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_interest" placeholder="%" name="add_bl_interest{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_interest{{$index}}.$invalid}">  
               </div>
               <div class="col-md-6 form-group">
-                <label req>
+                <label>
                   Amortization (yrs)
                   <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
                 </label>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs" name="add_bl_amortization{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_amortization{{$index}}.$invalid}">
 
                 <label>
                   Year Until Balloon Pmt
@@ -163,24 +162,24 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Loan Name</label>
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name" name="stl_loanName{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_loanName{{$index}}.$invalid}">
 
-                <label req>Amount ($)</label>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amount" placeholder="$">
+                <label>Amount ($)</label>
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amount" placeholder="$" name="stl_amount{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_amount{{$index}}.$invalid}">
 
-                <label req>
+                <label>
                   Interest (%)
                   <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
                 </label>
-                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%">  
+                <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_interest" placeholder="%" name="stl_interest{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_interest{{$index}}.$invalid}">  
               </div>
               <div class="col-md-6 form-group">
 
-                <label req>
+                <label>
                   Amortization (yrs)
                   <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
                 </label>
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amortization" placeholder="yrs">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amortization" placeholder="yrs" name="stl_amortization{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_amortization{{$index}}.$invalid}">
 
                 <label>
                   Years Until Balloon Pmt

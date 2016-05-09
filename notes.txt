@@ -39,9 +39,7 @@ Sync with Master:
 
 
 Hours Tracking:
-
-	Research: 4.5
-	Coding: 115
+	Coding: 128
 
 
 Questions:

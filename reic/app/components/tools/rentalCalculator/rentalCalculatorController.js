@@ -16,10 +16,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         index: 3, view: "exp", display: "Expenses"
       },
       {
-        index: 4, view: "fm", display: "Financial Measures"
-      },
-      {
-        index: 5, view: "res", display: "Result"
+        index: 4, view: "res", display: "Result"
       },
     ];
     vm.totalSteps = vm.steps.length;
@@ -35,7 +32,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex; 
       if(form[vm.steps[previousIndex].view].$valid)  {
         //Here we need to see if the step was ac
-        if(jumpToIndex === vm.totalSteps - 2){
+        if(jumpToIndex === vm.totalSteps - 1){
           vm.calculate(form);
         } else {
           vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
@@ -56,7 +53,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         vm.chartData = results;
 
         //Route to the results page
-        vm.currStep = vm.totalSteps;
+        vm.currStep = vm.totalSteps - 1;
         vm.currView = vm.steps[vm.currStep].view;
       }
     }

@@ -1,228 +1,236 @@
-<div class="row">
-  <div class="col-md-10">      
-    <fieldset>
-    <div class="row">
-      <div class="col-md-6">
-        <label>
-          Annual Expense Increase (%)
-          <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-        </label>
-        <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.e_annualExpenseIncrease" placeholder="%">
-      </div>
-    </div>
-    </fieldset>
+<!-- Ng-form used for step validation (so the whole form does not get validated) -->
+<ng-form name="{{rentalCalculator.steps[3].view}}">
+  <!-- Error Messages -->
+  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[3].view}}.$invalid}">
+    <b>Please Enter Required Fields Below</b>
   </div>
-</div>
-<h3>Utilities
-<span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
-<div class="row">
-  <div class="col-md-10">
-    <fieldset>
+  <br/>
+  <div class="row">
+    <div class="col-md-10">      
+      <fieldset>
       <div class="row">
         <div class="col-md-6">
-          <label>Water ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_water" placeholder="$">
-
-          <label>Sewer ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_sewer" placeholder="$">
-
-          <label>Garbage ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_garbage" placeholder="$">
-        </div>
-        <div class="col-md-6">
-          <label>Electricity ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_electricity" placeholder="$">
-
-          <label>Natural Gas ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_naturalGas" placeholder="$">
-
-          <label>Internet ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_internet" placeholder="$">
+          <label>
+            Annual Expense Increase (%)
+            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+          </label>
+          <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.e_annualExpenseIncrease" placeholder="%">
         </div>
       </div>
+      </fieldset>
+    </div>
+  </div>
+  <h3>Utilities
+  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
+  <div class="row">
+    <div class="col-md-10">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Water ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_water" placeholder="$">
+
+            <label>Sewer ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_sewer" placeholder="$">
+
+            <label>Garbage ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_garbage" placeholder="$">
+          </div>
+          <div class="col-md-6">
+            <label>Electricity ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_electricity" placeholder="$">
+
+            <label>Natural Gas ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_naturalGas" placeholder="$">
+
+            <label>Internet ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_internet" placeholder="$">
+          </div>
+        </div>
+        <br/>
+      </fieldset>
       <br/>
-    </fieldset>
+    </div>
+  </div>
+  <div ng-repeat="addedUtilities in rentalCalculator.input.utilities track by $index">
+    <div class="row">
+      <div class="col-md-10">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeUtility()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Utility Name</label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description" name="add_u_name{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_name{{$index}}.$invalid}">
+            </div>
+            <div class="col-md-6">
+              <label>Utility Amount ($/mo)</label>
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$" name="add_u_amount{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_amount{{$index}}.$invalid}">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
     <br/>
   </div>
-</div>
-<div ng-repeat="addedUtilities in rentalCalculator.input.utilities track by $index">
+  <br/>
+  <div ng-click="rentalCalculator.addUtility()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add Utility</label>
+  </div>
+
+  <h3>Maintenance</h3><br/>
   <div class="row">
     <div class="col-md-10">
       <fieldset>
         <div class="row">
-          <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeUtility()">
-            <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+          <div class="col-md-6">
+            <label>
+              Cost ($/mo)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.m_costAmount" placeholder="$">
+          </div>
+          <div class="col-md-6">
+            <label>
+              Cost (%)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%">
           </div>
         </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <h3>Other</h3><br/>
+  <div class="row">
+    <div class="col-md-10">
+      <fieldset>
         <div class="row">
           <div class="col-md-6">
-            <label>Utility Name</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description">
+            <label>
+              Yard Maintenance ($/mo)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_yardMaintenance" placeholder="$">
+
+            <label>
+              Vacancy Rate (%)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.o_vacancyRate" placeholder="%">
           </div>
           <div class="col-md-6">
-            <label>Utility Amount ($/mo)</label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$">
+            <label>
+              Insurance ($/mo)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_insurance" placeholder="$">
+
+            <label>
+              Property Taxes ($/yr)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_propertyTaxes" placeholder="$">
           </div>
         </div>
       </fieldset>
     </div>
   </div>
   <br/>
-</div>
-<br/>
-<div ng-click="rentalCalculator.addUtility()">
-  <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-  <label>Add Utility</label>
-</div>
-
-<h3>Maintenance</h3><br/>
-<div class="row">
-  <div class="col-md-10">
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6">
-          <label>
-            Cost ($/mo)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.m_costAmount" placeholder="$">
-        </div>
-        <div class="col-md-6">
-          <label>
-            Cost (%)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%">
-        </div>
+  <div ng-repeat="addedExpenses in rentalCalculator.input.expenses track by $index">
+    <div class="row">
+      <div class="col-md-10">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeExpense()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Expense Name</label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description" name="add_e_name{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_name{{$index}}.$invalid}">
+            </div>
+            <div class="col-md-6">
+              <label>Cost ($/mo)</label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$" name="add_e_cost{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_cost{{$index}}.$invalid}">
+            </div>
+          </div>
+        </fieldset>
       </div>
-    </fieldset>
+    </div>
+    <br/>
   </div>
-</div>
-
-<h3>Other</h3><br/>
-<div class="row">
-  <div class="col-md-10">
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6">
-          <label>
-            Yard Maintenance ($/mo)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_yardMaintenance" placeholder="$">
-
-          <label>
-            Vacancy Rate (%)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.o_vacancyRate" placeholder="%">
-        </div>
-        <div class="col-md-6">
-          <label>
-            Insurance ($/mo)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_insurance" placeholder="$">
-
-          <label>
-            Property Taxes ($/yr)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_propertyTaxes" placeholder="$">
-        </div>
-      </div>
-    </fieldset>
+  <br/>
+  <div ng-click="rentalCalculator.addExpense()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add Other Expense</label>
   </div>
-</div>
-<br/>
-<div ng-repeat="addedExpenses in rentalCalculator.input.expenses track by $index">
+
+
+  <h3>Property Management</h3><br/>
   <div class="row">
     <div class="col-md-10">
       <fieldset>
         <div class="row">
-          <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeExpense()">
-            <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last"  aria-hidden="true"></span>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-md-6">
-            <label>Expense Name</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description">
+            <label>Management Fee ($/mo)</label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeeAmount" placeholder="$">
+
+            <label>
+              Tenant Placement Fee ($)
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </label>
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_tenantPlacementFee" placeholder="$">
           </div>
           <div class="col-md-6">
-            <label>Cost ($/mo)</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$">
+            <label>Management Fee (%)</label>
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeePercent" placeholder="%">
           </div>
         </div>
       </fieldset>
     </div>
   </div>
-  <br/>
-</div>
-<br/>
-<div ng-click="rentalCalculator.addExpense()">
-  <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-  <label>Add Other Expense</label>
-</div>
 
-
-<h3>Property Management</h3><br/>
-<div class="row">
-  <div class="col-md-10">
-    <fieldset>
-      <div class="row">
-        <div class="col-md-6">
-          <label>Management Fee ($/mo)</label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeeAmount" placeholder="$">
-
-          <label>
-            Tenant Placement Fee ($)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-          </label>
-          <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_tenantPlacementFee" placeholder="$">
-        </div>
-        <div class="col-md-6">
-          <label>Management Fee (%)</label>
-          <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeePercent" placeholder="%">
-        </div>
+  <h3>Capital Expenditures
+  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
+  <div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
+    <div class="row">
+      <div class="col-md-10">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeCapitalExpenditure()">
+              <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <label>Description</label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="ce_description{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_description{{$index}}.$invalid}">
+            </div>
+            <div class="col-md-4">
+              <label>Cost ($)</label>
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="ce_cost{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_cost{{$index}}.$invalid}">
+            </div>
+            
+            <div class="col-md-4">
+              <label>Date</label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="ce_date{{$index}}" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_date{{$index}}.$invalid}">
+            </div>
+          </div>
+        </fieldset>
       </div>
-    </fieldset>
-  </div>
-</div>
-
-<h3>Capital Expenditures
-<span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
-<div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
-  <div class="row">
-    <div class="col-md-10">
-      <fieldset>
-        <div class="row">
-          <div class="col-md-2 col-md-offset-10" ng-click="rentalCalculator.removeCapitalExpenditure()">
-            <span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <label>Description</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description">
-          </div>
-          <div class="col-md-4">
-            <label>Cost ($)</label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$">
-          </div>
-          
-          <div class="col-md-4">
-            <label>Date</label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date">
-          </div>
-        </div>
-      </fieldset>
     </div>
+    <br/>
   </div>
   <br/>
-</div>
-<br/>
-<div ng-click="rentalCalculator.addCapitalExpenditure()">
-  <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
-  <label>Add Capital Expediture</label> 
-</div>
+  <div ng-click="rentalCalculator.addCapitalExpenditure()">
+    <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+    <label>Add Capital Expediture</label> 
+  </div>
+</ng-form>

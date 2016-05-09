@@ -162,7 +162,7 @@ fieldset{
     padding: 0;                 /*Align the UL to the left*/
 }
 .progressbar li {
-    width: 16.66%;              /*How much space each item gets based on how many steps*/
+    width: 20%;              /*How much space each item gets based on how many steps*/
     float: left;                /*Vertical align list*/
     position: relative;         /*Position an element relative to its normal position*/
     text-align: center;         /*Centers the steps*/ 
@@ -173,7 +173,7 @@ fieldset{
  * On extra small devices remove the step labels
  * Because otherwhise the text just does not look good
  */
-@media screen and (max-width: 600px){
+@media screen and (max-width: 400px){
     /*To hide the step descriptions on small screens*/
     .progressbar li {
         font-size: 0;

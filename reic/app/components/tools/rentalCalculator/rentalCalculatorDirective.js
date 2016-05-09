@@ -35,15 +35,6 @@
   };
 });
 
-/* Financial Measures 
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('financialMeasures', function() {
-  return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/financialMeasures.html'
-  };
-});
-
  /* Results
  * Loads template into result.html
  */
