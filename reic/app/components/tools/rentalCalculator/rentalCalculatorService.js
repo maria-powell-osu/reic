@@ -847,17 +847,18 @@ function calculateFirstYearIncome (form){
 		sumOfGrossMonthlyUnitIncome = 0;
 
 	for (var i = 0; i < supplementalIncomesLength; i++) {
-		sumOfGrossMonthlySupplementalIncome += supplementalIncomes[i].si_grossMonthlyIncome;
+		if(supplementalIncomes[i].si_grossMonthlyIncome){
+			sumOfGrossMonthlySupplementalIncome += supplementalIncomes[i].si_grossMonthlyIncome;
+		}
 	}
 
 	for (var i = 0; i < unitsLength; i++) {
-		sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
+		if(units[i].ri_grossMonthlyIncome){
+			sumOfGrossMonthlyUnitIncome += units[i].ri_grossMonthlyIncome;
+		}
 	}
 
 	income = (sumOfGrossMonthlySupplementalIncome + sumOfGrossMonthlyUnitIncome) * 12;
-
-	//round result to the nearest dollar
-	income =  income;
 
 	return income;
 }
