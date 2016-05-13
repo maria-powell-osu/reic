@@ -12,7 +12,9 @@
         <div class="col-md-6">
           <label>
             Annual Expense Increase (%)
-            <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.expenseIncreaseText}}"> 
+              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+            </a>
           </label>
           <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.e_annualExpenseIncrease" placeholder="%">
         </div>
@@ -21,7 +23,7 @@
     </div>
   </div>
   <h3>Utilities
-  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
+  <!-- <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span> --></h3><br/>
   <div class="row">
     <div class="col-md-10">
       <fieldset>
@@ -90,14 +92,15 @@
           <div class="col-md-6">
             <label>
               Cost ($/mo)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.maitenanceText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.m_costAmount" placeholder="$">
           </div>
           <div class="col-md-6">
             <label>
               Cost (%)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
             </label>
             <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%">
           </div>
@@ -114,26 +117,28 @@
           <div class="col-md-6">
             <label>
               Yard Maintenance ($/mo)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_yardMaintenance" placeholder="$">
 
             <label>
               Vacancy Rate (%)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.vacancyText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
             </label>
             <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.o_vacancyRate" placeholder="%">
           </div>
           <div class="col-md-6">
             <label>
               Insurance ($/mo)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_insurance" placeholder="$">
 
             <label>
               Property Taxes ($/yr)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.propTaxText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_propertyTaxes" placeholder="$">
           </div>
@@ -179,12 +184,19 @@
       <fieldset>
         <div class="row">
           <div class="col-md-6">
-            <label>Management Fee ($/mo)</label>
+            <label>
+              Management Fee ($/mo)
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.managementFeeText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
+            </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeeAmount" placeholder="$">
 
             <label>
               Tenant Placement Fee ($)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.tenantPlacementText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_tenantPlacementFee" placeholder="$">
           </div>
@@ -198,7 +210,9 @@
   </div>
 
   <h3>Capital Expenditures
-  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span></h3><br/>
+   <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.capitalExpendituresText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a></h3><br/>
   <div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
     <div class="row">
       <div class="col-md-10">

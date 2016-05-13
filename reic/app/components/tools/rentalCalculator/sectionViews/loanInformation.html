@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label>Purchase Price ($)</label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchasePrice.$invalid}"> 
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchasePrice.$invalid}" ng-change="rentalCalculator.calculateDownPayments('price')"> 
           </div>
           <div class="col-md-6 form-group">
             <label>Purchase Date</label>
@@ -43,9 +43,8 @@
 
               <label>
                 Down Payment ($)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label> 
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$" name="bl_downPaymentDollar" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentDollar.$invalid}">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$" name="bl_downPaymentDollar" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentDollar.$invalid}" ng-change="rentalCalculator.calculateDownPayments('dollar')">
 
               <label>Closing Cost ($)</label>
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_closingCost" placeholder="$">        
@@ -56,13 +55,14 @@
 
               <label>
                 Down Payment (%)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </label>     
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%" name="bl_downPaymentPercent" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentPercent.$invalid}">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%" name="bl_downPaymentPercent" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentPercent.$invalid}" ng-change="rentalCalculator.calculateDownPayments('percent')">
 
               <label>
                 Amortization (yrs)
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.amortizationText}}">
+                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                </a>
               </label>
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_amortization" placeholder="yrs" name="bl_amortization" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_amortization.$invalid}">             
             </div>  
@@ -70,7 +70,9 @@
           <div class="col-md-6">
             <label>
               Extra Principal Pmt ($/mo)
-              <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.extraPrincipalText}}">
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
             </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_extraPrincipal" placeholder="$" name="bl_extraPrincipal" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan' && (rentalCalculator.input.bl_startDate || rentalCalculator.input.bl_endDate)" ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_extraPrincipal.$invalid}">
           </div>
@@ -110,18 +112,24 @@
               <div class="col-md-6 form-group">
                 <label>
                   Amortization (yrs)
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.amortizationText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_amortization" placeholder="yrs" name="add_bl_amortization{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_amortization{{$index}}.$invalid}">
 
                 <label>
                   Year Until Balloon Pmt
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.balloonDateText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>     
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_balloon"  placeholder="Yrs"> 
                 <label>
                   Up Front Lender Points ($)
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.lenderPointsText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_upFrontLenderPoints" placeholder="$">
               </div>
@@ -177,19 +185,25 @@
 
                 <label>
                   Amortization (yrs)
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.amortizationText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_amortization" placeholder="yrs" name="stl_amortization{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_amortization{{$index}}.$invalid}">
 
                 <label>
                   Years Until Balloon Pmt
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.balloonDateText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_balloon" placeholder="Yrs"> 
 
                 <label>
                   Up Front Lender Points ($)
-                  <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.lenderPointsText}}">
+                    <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+                  </a>
                 </label>
                 <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_upFrontLenderPoints" placeholder="$">
               </div>

@@ -44,6 +44,22 @@
   };
 });
 
+/*
+ * Activates Tooltip for element
+ */
+App.directive("mpTooltip", function($timeout) {
+   return {
+      restrict: 'A', //only want it triggered for attributes
+      link: function(scope, element, attrs, ctrl) {
+         $(element).attr('title', attrs.mpTooltip).tooltip();
+      }
+   };
+});
+
+/*
+ * Sets up the asterix on required fields
+ * Required the input to have a label before it
+ */
 App.directive("mpRequired", function($timeout) {
    return {
       require: 'ngModel',

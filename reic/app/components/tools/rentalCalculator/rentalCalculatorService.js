@@ -18,6 +18,56 @@ App.factory('RentalCalculator', function() {
 		},
 		calculate: function (userInput){
 			return rentalCalculations(userInput);
+		},
+/*		calculateDownPaymentDollar: function (userInput){
+			var result ,
+				purchasePrice = userInput.li_purchasePrice,
+				downPaymentPercent = userInput.bl_downPaymentPercent;
+
+			if(purchasePrice && downPaymentPercent){
+				result = (downPaymentPercent/100) * purchasePrice;
+			}
+			return result;
+		},
+		calculateDownPaymentPercent: function(userInput){
+			var result, 
+				purchasePrice = userInput.li_purchasePrice,
+				downPaymentDollar = userInput.bl_downPaymentDollar;
+
+			if(purchasePrice && downPaymentDollar){
+				result = (downPaymentDollar/purchasePrice) *10;
+			}
+			return result;
+		},*/
+		calculateDownPayments: function(element,userInput){
+			var result = {}, 
+				purchasePrice = userInput.li_purchasePrice,
+				downPaymentDollar = userInput.bl_downPaymentDollar,
+				downPaymentPercent = userInput.bl_downPaymentPercent;
+
+			//if the user has not entered purchase price return nothing
+			if (purchasePrice){
+
+				//if the change event got triggered by dollar amount
+				if(element && element === "percent" && downPaymentPercent){
+					userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
+
+				//if the change event got triggered by percentage
+				} else if (element && element === "dollar" && downPaymentDollar){
+					userInput.bl_downPaymentPercent = (downPaymentDollar/purchasePrice) *100;
+				//if the change event got trigger by the purchase price
+				} else if (element && element === "price" && downPaymentPercent){
+					userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
+					userInput.bl_downPaymentPercent = (userInput.bl_downPaymentDollar/purchasePrice) *100;
+				}else{
+					userInput.bl_downPaymentDollar = undefined;
+					userInput.bl_downPaymentPercent = undefined;
+				}
+			} else {
+				userInput.bl_downPaymentDollar = undefined;
+				userInput.bl_downPaymentPercent = undefined;
+			}
+			//return result;
 		}
 	}
 });

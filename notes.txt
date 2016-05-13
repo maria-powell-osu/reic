@@ -21,7 +21,7 @@ Notes:
 	- 
 
 Worklist:
-	- rentalCalculation directive split up instead of accessing divs
+	- optimize the add and remove data functions -- and other controller functions
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
