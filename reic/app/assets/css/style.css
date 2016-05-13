@@ -18,22 +18,15 @@
     background-repeat: no-repeat;
     background-position: 50% top;
 }
-/*Give the collapsed navbar custom height*/
-.navbar-header {
-   line-height: 70px;
-    height: 70px;
-    padding-top: 0; 
-}
-/*Give the navbar custom height*/
-.navbar-nav li a {
-    line-height: 70px;
-    height: 70px;
-    padding-top: 0;
+/*Adjust Padding*/
+a.navbar-brand {
+    padding: 6px 10px; //adjust this accordingly until you have it centered.
 }
 .navbarImg
 {
+    padding-top: 0 !important;
     width: auto;
-    height:35px;
+    height: 35px;
 }
 .navbar {
 	border: none;
@@ -258,12 +251,14 @@ li.selected.completed + li:after {
 .fieldSetWidth {
     display: inline-block;
 }
-
 .disabled {
  visibility: hidden;
  cursor: default;
 }
-
 .inValidField {
     border: 1px solid #843534;
+}
+.userButton {
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
