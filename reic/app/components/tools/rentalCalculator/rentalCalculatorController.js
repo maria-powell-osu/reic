@@ -1,30 +1,16 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
-    vm.input = {};
-    vm.calculating = false;
-    vm.steps = [
-      {
-        index: 0, view: "bp", display: "Property Info"
-      },
-      {
-        index: 1, view: "li", display: "Loan Info"
-      },
-      {
-        index: 2, view: "in", display: "Income"
-      },
-      {
-        index: 3, view: "exp", display: "Expenses"
-      },
-      {
-        index: 4, view: "res", display: "Result"
-      },
-    ];
+    vm.input = {};    
+    vm.steps = RentalCalculator.steps();
     vm.totalSteps = vm.steps.length;
+
+    //Initialize all default values for view
+    vm.calculating = false;
     vm.currStep = vm.steps[0].index; //Initialize default Views
     vm.currView = vm.steps[vm.currStep].view;
     
     //Progress Step Bar Functions
-    vm.next = function (){
+    vm.next = function (form){
       vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
       vm.currView = vm.steps[vm.currStep].view;
     };
@@ -40,7 +26,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         }
       }
     };
-    vm.prev = function (){
+    vm.prev = function (form){
       vm.currStep = RentalCalculator.prevStep(vm.currStep);
       vm.currView = vm.steps[vm.currStep].view;
     };
@@ -57,14 +43,6 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         vm.currView = vm.steps[vm.currStep].view;
       }
     };
-
-    /*vm.calculateDownPaymentDollar = function (){
-      vm.input.bl_downPaymentDollar = RentalCalculator.calculateDownPaymentDollar(vm.input);
-    };
-
-    vm.calculateDownPaymentPercent = function (){
-      //vm.input.bl_downPaymentPercent = RentalCalculator.calculateDownPaymentPercent(vm.input);
-    };*/
 
     vm.calculateDownPayments = function(element){
       var result = RentalCalculator.calculateDownPayments(element, vm.input);

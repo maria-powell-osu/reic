@@ -20,7 +20,9 @@
       <fieldset>
         <div class="row">
           <div class="col-md-6 form-group">
-            <label>Purchase Price ($)</label>
+            <label>
+              Purchase Price ($)
+            </label>
             <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.li_purchasePrice" placeholder="$" name="li_purchasePrice" required mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.li_purchasePrice.$invalid}" ng-change="rentalCalculator.calculateDownPayments('price')"> 
           </div>
           <div class="col-md-6 form-group">
@@ -43,6 +45,7 @@
 
               <label>
                 Down Payment ($)
+                <span class="text-danger" ng-show="rentalCalculator.input.showDownPaymentDollarHelpText">Enter purchase price first.</span>
               </label> 
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentDollar" placeholder="$" name="bl_downPaymentDollar" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentDollar.$invalid}" ng-change="rentalCalculator.calculateDownPayments('dollar')">
 
@@ -55,6 +58,7 @@
 
               <label>
                 Down Payment (%)
+                <span class="text-danger" ng-show="rentalCalculator.input.showDownPaymentPercentHelpText">Enter purchase price first.</span>
               </label>     
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%" name="bl_downPaymentPercent" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentPercent.$invalid}" ng-change="rentalCalculator.calculateDownPayments('percent')">
 
