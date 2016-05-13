@@ -15,7 +15,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.currView = vm.steps[vm.currStep].view;
     };
     vm.jumpTo = function (jumpToIndex, form){
-      var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex; 
+      var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex;
       if(form[vm.steps[previousIndex].view].$valid)  {
         //Here we need to see if the step was ac
         if(jumpToIndex === vm.totalSteps - 1){
@@ -33,7 +33,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.calculate = function (form){
       if(form.$valid)  {
         //Get the data for the tables, graphs etc.
-        var results = RentalCalculator.calculate(vm.input);
+        var results = RentalCalculator.calculateResults(vm.input);
 
         //A watch has been added in the mp-charts directive that triggers drawing of the graphs
         vm.chartData = results;
@@ -45,8 +45,12 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     };
 
     vm.calculateDownPayments = function(element){
-      var result = RentalCalculator.calculateDownPayments(element, vm.input);
-    }
+      RentalCalculator.calculateDownPayments(element, vm.input);
+    };
+
+    vm.calculateMaintenance = function(element){
+      RentalCalculator.calculateMaintenance(element, vm.input);
+    };
 
     /* 
      * Setting up defaults values for the rows 

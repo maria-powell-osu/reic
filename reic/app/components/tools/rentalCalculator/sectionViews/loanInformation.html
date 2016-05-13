@@ -1,10 +1,5 @@
 <!-- Ng-form used for step validation (so the whole form does not get validated) -->
 <ng-form name="{{rentalCalculator.steps[1].view}}">
-  <!-- Error Messages -->
-  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[1].view}}.$invalid}">
-    <b>Please Enter Required Fields Below</b>
-  </div>
-  <br/>
   <div class="row">
     <div class="col-md-12 form-group">
       <input type="radio" ng-model="rentalCalculator.input.loanInfoView" value="cash" >
@@ -58,7 +53,7 @@
 
               <label>
                 Down Payment (%)
-                <span class="text-danger" ng-show="rentalCalculator.input.showDownPaymentPercentHelpText">Enter purchase price first.</span>
+                <span class="text-danger" ng-show="rentalCalculator.showDownPaymentPercentHelpText">Enter purchase price first.</span>
               </label>     
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.bl_downPaymentPercent" placeholder="%" name="bl_downPaymentPercent" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_downPaymentPercent.$invalid}" ng-change="rentalCalculator.calculateDownPayments('percent')">
 

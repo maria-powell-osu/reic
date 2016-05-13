@@ -1,10 +1,5 @@
 <!-- Ng-form used for step validation (so the whole form does not get validated) -->
 <ng-form name="{{rentalCalculator.steps[0].view}}">
-  <!-- Error Messages -->
-  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[0].view}}.$invalid}">
-    <b>Please Enter Required Fields Below</b>
-  </div>
-  <br/>
   <!-- Form Input -->
   <div class="row elemIndent">
     <div class="col-md-5 form-group">

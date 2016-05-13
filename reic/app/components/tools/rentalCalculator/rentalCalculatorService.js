@@ -16,8 +16,28 @@ App.factory('RentalCalculator', function() {
 		jumpTo: function (jumpToIndex){
 			return jumpToIndex;
 		},
-		calculate: function (userInput){
+		calculateResults: function (userInput){
 			return rentalCalculations(userInput);
+		},
+		calculateMaintenance: function (element, userInput) {
+			var yearlyIncome = calculateFirstYearIncome(userInput),
+				monthlyIncome = yearlyIncome / 12,
+				maintenanceDollar = userInput.m_costAmount,
+				maintenancePercent = userInput.m_costPercent;
+
+			if(element === "percent" && maintenancePercent){
+				userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+				
+			} else if (element === "dollar" && maintenanceDollar){
+				userInput.m_costPercent = maintenanceDollar/monthlyIncome;
+			} else { 
+				userInput.m_costAmount = undefined;
+				userInput.m_costPercent = undefined;
+			}
+			
+		},
+		calculateDownPayments: function(element, userInput){
+			return calculateDownPayments(element, userInput);
 		},
 		steps: function () {
 			var steps = [
@@ -38,47 +58,47 @@ App.factory('RentalCalculator', function() {
 		      },
     		];
     		return steps;
-		},
-		calculateDownPayments: function(element,userInput){
-			var result = {}, 
-				purchasePrice = userInput.li_purchasePrice,
-				downPaymentDollar = userInput.bl_downPaymentDollar,
-				downPaymentPercent = userInput.bl_downPaymentPercent;
-
-			//if the user has not entered purchase price return nothing
-			if (purchasePrice){
-				//Hide the help text
-				userInput.showDownPaymentDollarHelpText = false;
-				userInput.showDownPaymentPercentHelpText = false;
-
-				//if the change event got triggered by dollar amount
-				if(element && element === "percent" && downPaymentPercent){
-					userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
-				//if the change event got triggered by percentage
-				} else if (element && element === "dollar" && downPaymentDollar){
-					userInput.bl_downPaymentPercent = (downPaymentDollar/purchasePrice) *100;
-				//if the change event got trigger by the purchase price
-				} else if (element && element === "price" && downPaymentPercent){
-					userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
-					userInput.bl_downPaymentPercent = (userInput.bl_downPaymentDollar/purchasePrice) *100;
-				//if the user deleted on of the two fields reset them both
-				}else{
-					//Delete the user inputs
-					userInput.bl_downPaymentDollar = undefined;
-					userInput.bl_downPaymentPercent = undefined;
-				}
-			} else {
-				//If the user delete the purchase price field delete them both
-				userInput.bl_downPaymentDollar = undefined;
-				userInput.bl_downPaymentPercent = undefined;
-
-				//show help text for user to enter purchas price first
-				userInput.showDownPaymentDollarHelpText = true;
-				userInput.showDownPaymentPercentHelpText = true;
-			}
 		}
 	}
 });
+
+function calculateDownPayments (element, userInput){
+	var purchasePrice = userInput.li_purchasePrice,
+		downPaymentDollar = userInput.bl_downPaymentDollar,
+		downPaymentPercent = userInput.bl_downPaymentPercent;
+
+	//if the user has not entered purchase price return nothing
+	if (purchasePrice){
+		//Hide the help text
+		userInput.showDownPaymentDollarHelpText = false;
+		userInput.showDownPaymentPercentHelpText = false;
+
+		//if the change event got triggered by dollar amount
+		if(element && element === "percent" && downPaymentPercent){
+			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
+		//if the change event got triggered by percentage
+		} else if (element && element === "dollar" && downPaymentDollar){
+			userInput.bl_downPaymentPercent = (downPaymentDollar/purchasePrice) *100;
+		//if the change event got trigger by the purchase price
+		} else if (element && element === "price" && downPaymentPercent){
+			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
+			userInput.bl_downPaymentPercent = (userInput.bl_downPaymentDollar/purchasePrice) *100;
+		//if the user deleted on of the two fields reset them both
+		}else{
+			//Delete the user inputs
+			userInput.bl_downPaymentDollar = undefined;
+			userInput.bl_downPaymentPercent = undefined;
+		}
+	} else {
+		//If the user delete the purchase price field delete them both
+		userInput.bl_downPaymentDollar = undefined;
+		userInput.bl_downPaymentPercent = undefined;
+
+		//show help text for user to enter purchas price first
+		userInput.showDownPaymentDollarHelpText = true;
+		userInput.showDownPaymentPercentHelpText = true;
+	}
+}
 
 function validatePropertyInfo(userInput){
 	var result = false;

@@ -243,9 +243,16 @@ fieldset{
     color: white;
 }
 
-/*Sets the line after the active item to be green*/
+/*Sets the line color after the active item if the section is marked as completed*/
 li.completed + li:after {
-    background-color: #5bc0de;/*dodgerblue;*/
+    background-color: #5bc0de;
+    color: white;
+}
+
+/*Sets the line color of selected section to be darker blue if also marked as completed*/
+li.selected.completed + li:after {
+    background-color: #51acc7 !important;
+    color: white;
 }
 
 .fieldSetWidth {

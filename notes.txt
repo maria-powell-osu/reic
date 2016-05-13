@@ -39,7 +39,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 130
+	Coding: 140
 
 Rachael:
 	- calculator

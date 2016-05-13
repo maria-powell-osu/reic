@@ -1,10 +1,5 @@
 <!-- Ng-form used for step validation (so the whole form does not get validated) -->
 <ng-form name="{{rentalCalculator.steps[3].view}}">
-  <!-- Error Messages -->
-  <div class="text-danger elemIndent" ng-class="{'disabled': !{{rentalCalculator.steps[3].view}}.$invalid}">
-    <b>Please Enter Required Fields Below</b>
-  </div>
-  <br/>
   <div class="row">
     <div class="col-md-10">      
       <fieldset>
@@ -96,13 +91,13 @@
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </a>
             </label>
-            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.m_costAmount" placeholder="$">
+            <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.m_costAmount" placeholder="$" ng-change="rentalCalculator.calculateMaintenance('dollar')">
           </div>
           <div class="col-md-6">
             <label>
               Cost (%)
             </label>
-            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%">
+            <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%" ng-change="rentalCalculator.calculateMaintenance('percent')">
           </div>
         </div>
       </fieldset>
