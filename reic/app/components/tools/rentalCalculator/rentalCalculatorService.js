@@ -19,25 +19,11 @@ App.factory('RentalCalculator', function() {
 		calculateResults: function (userInput){
 			return rentalCalculations(userInput);
 		},
-		calculateMaintenance: function (element, userInput) {
-			var yearlyIncome = calculateFirstYearIncome(userInput),
-				monthlyIncome = yearlyIncome / 12,
-				maintenanceDollar = userInput.m_costAmount,
-				maintenancePercent = userInput.m_costPercent;
-
-			if(element === "percent" && maintenancePercent){
-				userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
-				
-			} else if (element = "income" && maintenancePercent) { 
-				userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
-			} else {
-				userInput.m_costAmount = undefined;
-				userInput.m_costPercent = undefined;
-			}
-			
+		calculateFieldExpenses: function (triggerIndicator, userInput) {
+			return calculateFieldExpenses(triggerIndicator, userInput);
 		},
-		calculateDownPayments: function(element, userInput){
-			return calculateDownPayments(element, userInput);
+		calculateDownPayments: function(triggerIndicator, userInput){
+			return calculateDownPayments(triggerIndicator, userInput);
 		},
 		steps: function () {
 			var steps = [
@@ -62,7 +48,35 @@ App.factory('RentalCalculator', function() {
 	}
 });
 
-function calculateDownPayments (element, userInput){
+function calculateFieldExpenses(triggerIndicator, userInput){
+	var yearlyIncome = calculateFirstYearIncome(userInput),
+		monthlyIncome = yearlyIncome / 12,
+		maintenancePercent = userInput.m_costPercent,
+		managementPercent = userInput.pm_managementFeePercent;
+
+	if(triggerIndicator === "maintenancePercent" && maintenancePercent){
+		userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+		
+	} else if (triggerIndicator === "managementPercent" && managementPercent) {
+		userInput.pm_managementFeeAmount = (managementPercent / 100) * monthlyIncome;
+
+	} else if (triggerIndicator === "income") { 
+		if (maintenancePercent){
+			userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+		}
+		if(managementPercent){
+			userInput.pm_managementFeeAmount = (managementPercent / 100) * monthlyIncome;
+		}
+
+	} else {
+		userInput.m_costAmount = undefined;
+		userInput.m_costPercent = undefined;
+		userInput.pm_managementFeePercent = undefined;
+		userInput.pm_managementFeeAmount = undefined;
+	}
+}
+
+function calculateDownPayments (triggerIndicator, userInput){
 	var purchasePrice = userInput.li_purchasePrice,
 		downPaymentDollar = userInput.bl_downPaymentDollar,
 		downPaymentPercent = userInput.bl_downPaymentPercent;
@@ -74,13 +88,13 @@ function calculateDownPayments (element, userInput){
 		userInput.showDownPaymentPercentHelpText = false;
 
 		//if the change event got triggered by dollar amount
-		if(element && element === "percent" && downPaymentPercent){
+		if(triggerIndicator === "percent" && downPaymentPercent){
 			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
 		//if the change event got triggered by percentage
-		} else if (element && element === "dollar" && downPaymentDollar){
+		} else if (triggerIndicator === "dollar" && downPaymentDollar){
 			userInput.bl_downPaymentPercent = (downPaymentDollar/purchasePrice) *100;
 		//if the change event got trigger by the purchase price
-		} else if (element && element === "price" && downPaymentPercent){
+		} else if (triggerIndicator === "price" && downPaymentPercent){
 			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
 			userInput.bl_downPaymentPercent = (userInput.bl_downPaymentDollar/purchasePrice) *100;
 		//if the user deleted on of the two fields reset them both

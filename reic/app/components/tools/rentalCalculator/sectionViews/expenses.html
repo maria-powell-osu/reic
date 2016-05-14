@@ -116,7 +116,7 @@
               </a>
             </label>
             <div class = "input-group">
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%" ng-change="rentalCalculator.calculateMaintenance('percent')">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.m_costPercent" placeholder="%" ng-change="rentalCalculator.calculateFieldExpenses('maintenancePercent')">
               <span class = "input-group-addon">%</span>
             </div>
           </div>
@@ -222,14 +222,14 @@
         <div class="row">
           <div class="col-md-6">
             <label>
-              Management Fee
-              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.managementFeeText}}"> 
+              Management Fee (%)
+                <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.managementFeeText}}"> 
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </a>
             </label>
             <div class="input-group">
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeeAmount" placeholder="$">
-              <span class="input-group-addon">$/month</span>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeePercent" placeholder="%" ng-change="rentalCalculator.calculateFieldExpenses('managementPercent')">
+              <span class="input-group-addon">%</span>
             </div>
             <br/>
             <label>
@@ -243,12 +243,14 @@
               <span class="input-group-addon">$</span>
             </div>
           </div>
-          <div class="col-md-6">
-            <label>Management Fee</label>
-            <div class="input-group">
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeePercent" placeholder="%">
-              <span class="input-group-addon">%</span>
+          <div class="col-md-6" ng-show="rentalCalculator.input.pm_managementFeeAmount">
+            <label>
+              Management Fee ($)
+            </label>
+            <div>
+              {{rentalCalculator.input.pm_managementFeeAmount}} $/month
             </div>
+            <input type="hidden" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeeAmount" placeholder="$">
           </div>
         </div>
       </fieldset>

@@ -44,12 +44,12 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       }
     };
 
-    vm.calculateDownPayments = function(element){
-      RentalCalculator.calculateDownPayments(element, vm.input);
+    vm.calculateDownPayments = function(triggerIndicator){
+      RentalCalculator.calculateDownPayments(triggerIndicator, vm.input);
     };
 
-    vm.calculateMaintenance = function(element){
-      RentalCalculator.calculateMaintenance(element, vm.input);
+    vm.calculateFieldExpenses = function(triggerIndicator){
+      RentalCalculator.calculateFieldExpenses(triggerIndicator, vm.input);
     };
 
     /* 
