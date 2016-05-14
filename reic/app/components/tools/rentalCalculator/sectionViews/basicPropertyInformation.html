@@ -38,31 +38,39 @@
   <div class="row elemIndent">
     <div class="form-group col-md-3">
       <label>
-        Typical Cap Rate for Area (%)
+        Typical Cap Rate for Area
         <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.capRateText}}"> 
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
         </a>
       </label>
-        
-      <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_typicalRapRate" placeholder="%">
+      <div class="input-group">
+        <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_typicalRapRate" placeholder="%">
+        <span class="input-group-addon">%</span>
+      </div>
     </div>
     <div class="form-group col-md-3">
       <label>
-        Assumed Appreciation (%/yr)
+        Assumed Appreciation
         <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.appreciationText}}"> 
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
         </a>
       </label>
-      <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_assumedAppreciation" placeholder="%">
+      <div class="input-group">
+        <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_assumedAppreciation" placeholder="%">
+        <span class="input-group-addon">%/year</span>
+      </div>
     </div>
     <div class="form-group col-md-4">
       <label>
-        Desired Cash on Cash (%)
+        Desired Cash on Cash
         <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.desiredCashText}}">
           <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
         </a>
       </label>
-      <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_desiredReturn" placeholder="%"> 
+      <div class="input-group">
+        <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.fm_desiredReturn" placeholder="%">
+        <span class="input-group-addon">%</span>
+      </div> 
     </div>
   </div>
 

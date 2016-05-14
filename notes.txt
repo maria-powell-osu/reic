@@ -1,8 +1,7 @@
 
 Where I left of:
-- need to have a check that required fields only show when steps is activated
+	- add the units to each input fields 
 
-- test the functionality
 
 What I am trying to do:
 	- add errpr handling on what the service returns

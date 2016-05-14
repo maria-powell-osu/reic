@@ -28,9 +28,9 @@ App.factory('RentalCalculator', function() {
 			if(element === "percent" && maintenancePercent){
 				userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
 				
-			} else if (element === "dollar" && maintenanceDollar){
-				userInput.m_costPercent = maintenanceDollar/monthlyIncome;
-			} else { 
+			} else if (element = "income" && maintenancePercent) { 
+				userInput.m_costAmount = (maintenancePercent / 100) * monthlyIncome;
+			} else {
 				userInput.m_costAmount = undefined;
 				userInput.m_costPercent = undefined;
 			}
