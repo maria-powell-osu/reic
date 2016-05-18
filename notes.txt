@@ -1,6 +1,6 @@
 
 Where I left of:
-	- add the units to each input fields 
+	- calculator page
 
 
 What I am trying to do:
