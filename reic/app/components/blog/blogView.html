@@ -1,0 +1,41 @@
+<div class="container page-content">
+	<h2>Blog</h2>
+	<button type="button" class="btn btn-info" ng-click="blog.reply()" ng-hide="blog.replyActive">Reply</button>
+
+
+	<h2><b>Comments</b></h2>
+	<hr/>
+	<fieldset ng-show="blog.replyActive">
+		<div class="row">
+			<div class="col-md-10">
+				<label>Comment</label>
+				<textarea rows="4" class="form-control" placeholder="Type your comment here:"></textarea>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-4">
+				<label>Name</label>
+				<input type="text" class="form-control inpt">
+
+				<label>Email</label>
+				<input type="text" class="form-control inpt">
+
+				<div class="checkbox">
+					<label><input type="checkbox" value="">Confirm you are not a spammer</label>
+				</div>
+
+				<div class="checkbox">
+					<label><input type="checkbox" checked>Sign Up for the Plan Passive Newsletter!</label>
+				</div>
+				<br/>
+				<button type="button" class="btn btn-info">Post Comment</button>
+				<button type="button" class="btn btn-info" ng-click="blog.cancelComment()">Cancel</button>
+			</div>
+			<div class="col-md-4">
+				<label>Website</label>
+				<input type="text" class="form-control inpt">
+			</div>
+		</div>
+	</fieldset>
+</div>

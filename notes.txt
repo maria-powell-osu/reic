@@ -1,6 +1,6 @@
 
 Where I left of:
-	- calculator page
+	- make both slanted and shorter
 
 
 What I am trying to do:
@@ -38,7 +38,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 140
+	Coding: 150
 
 Rachael:
 	- calculator

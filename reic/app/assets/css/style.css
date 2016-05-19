@@ -61,7 +61,7 @@ a.navbar-brand {
 	display: table-cell;
     vertical-align: middle;
 }
-textarea
+.nonResizable
 {
 	resize: none;
 }
@@ -160,8 +160,7 @@ fieldset{
 }
 
 /* 
- * On extra small devices remove the step labels
- * Because otherwhise the text just does not look good
+ * On extra small devices styline
  */
 @media screen and (max-width: 400px){
     /*To hide the step descriptions on small screens*/
@@ -281,15 +280,18 @@ li.selected.completed + li:after {
     opacity: 0.8;
     color: white;
 }
+.mpImageDesc > a {
+    color: inherit; /*Remove Blue Link Coloring*/
+}
 .mpBannerHeader {
     position: absolute;     /* elem absolutely positioned relative to parent*/
-    width: 400px;
+    width: 450px;
     bottom: 0;
-    padding: 10px;
+    padding: 5px 0 5px 10px;
     opacity: 0.8;
     color: white; 
-    font-size: Large;
-    border-radius: 3px;
+    font-size: medium;
+    border-radius: 3px;  
     line-height: 70px;
     border-right: 110px solid transparent;
     border-bottom: 110px solid #394659;
@@ -297,14 +299,26 @@ li.selected.completed + li:after {
 }
 .mpBannerDesc {
     position: absolute;     /* elem absolutely positioned relative to parent*/
-    border-radius: 3px;
-    width: 400px;
+    width: 450px;
     bottom: 0;              /*moves the text to bottom of image*/
-    background: #593300;
-    padding: 10px;
+    padding: 5px 0 5px 10px;
     opacity: 0.8;
     color: white; 
     font-size: medium;
+    border-radius: 3px;
+    line-height: 70px;
+    border-right: 55px solid transparent;
+    border-bottom: 55px solid #11151a;
+    height: 0;
+}
+@media screen and (max-width: 450px){
+    /*Makes the slanted text box in banner smaller so they do not fall of screen*/
+    .mpBannerHeader {
+        width: 350px !important;
+    }
+    .mpBannerDesc {
+        width: 350px !important;
+    }
 }
 .mpImageExpl {
     padding: 10px;

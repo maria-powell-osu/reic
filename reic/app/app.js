@@ -21,7 +21,9 @@ App.config(function($routeProvider) {
   });
   //this needs to be switched back to analyzeadeal
   $routeProvider.when('/blog', {
-    templateUrl: '../reic/app/components/blog/blog.html',
+    templateUrl: '../reic/app/components/blog/blogView.html',
+    controller: 'BlogController',
+    controllerAs: 'blog',
   });
   $routeProvider.when('/videos', {
     templateUrl: '../reic/app/components/videos/videos.html',
