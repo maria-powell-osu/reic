@@ -1,4 +1,21 @@
 'use strict'
+/*
+ * Sets up the asterix on required fields
+ * Required the input to have a label before it
+ */
+App.directive("mpRequired", function($timeout) {
+   return {
+      require: 'ngModel',
+      restrict: 'A', //only want it triggered for attributes
+      link: function(scope, element, attrs, ctrl) {
+        
+        //If the req. field has a label, prepend asterix to label
+        if($(element[0].previousElementSibling).is('label')){
+          $(element[0].previousElementSibling).prepend("<b class='text-danger'>* </b>");
+        }
+      }
+   };
+});
 
 App.directive('jqdatepicker', function() {
     return {
