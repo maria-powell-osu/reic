@@ -65,6 +65,10 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.input.utilities = [];
     vm.input.expenses = [];
     vm.input.loanInfoView = 'bankLoan';
+    vm.input.bp_assumedAppreciation = 3;
+    vm.input.ri_annualRentIncrease = 3;
+    vm.input.e_annualExpenseIncrease = 3;
+
 
     //To follow are all add or delete functions
     //I need to look into make them reusable here!!

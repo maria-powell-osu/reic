@@ -39,7 +39,7 @@
           <div class="row">
             <div class="col-md-6 form-group">
               <label>Loan Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name" name="bl_loanName" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.bl_loanName.$invalid}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'"> 
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.bl_loanName" placeholder="Loan Name" name="bl_loanName"> 
 
               <label>
                 Down Payment ($)
@@ -124,7 +124,7 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Loan Name</label>
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name" name="add_bl_loanName{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'bankLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.add_bl_loanName{{$index}}.$invalid}">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.loans[$index].add_bl_loanName" placeholder="Loan Name" name="add_bl_loanName{{$index}}">
 
                 <label>Amount</label>
                 <div class="input-group">
@@ -211,7 +211,7 @@
             <div class="row">
               <div class="col-md-6 form-group">
                 <label>Loan Name</label>
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name" name="stl_loanName{{$index}}" ng-required="rentalCalculator.input.loanInfoView == 'specialTermsLoan'" mp-required ng-class="{inValidField: !!{{rentalCalculator.steps[1].view}}.stl_loanName{{$index}}.$invalid}">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.specialTermsLoans[$index].stl_loanName" placeholder="Loan Name" name="stl_loanName{{$index}}">
                 
                 <label>Amount</label>
                 <div class="input-group">
