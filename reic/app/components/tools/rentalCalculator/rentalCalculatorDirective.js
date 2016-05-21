@@ -96,6 +96,7 @@ App.directive("mpTooltip", function($timeout) {
               createIncomePieChart();
               createExpensePieChart();
               createCashOnEquityTable();
+              createCashOnEquityChart();
 
               //Stop the page loader
               setTimeout(function(){ 
@@ -145,6 +146,23 @@ App.directive("mpTooltip", function($timeout) {
         /*To ensure that the table data gets updated*/
         $timeout(function() {
           incomePieChart.draw(data, rawData.options);
+        });
+      }
+
+      function createCashOnEquityChart(){
+        var chartElement = $("#createCashOnEquityChart")[0],
+            rawData = scope.data.cashOnEquityChart;
+
+        //Initialize chart
+        var chart = new google.visualization.ComboChart(chartElement);
+
+        //Create data table for chart   
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          //Draw Chart
+          chart.draw(data, rawData.options);
         });
       }
 

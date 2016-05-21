@@ -128,6 +128,7 @@ function rentalCalculations(form) {
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
     result.cashOnEquityTable = createCashOnEquityTable(form);
+    result.cashOnEquityChart = createCashOnEquityComboChart(form);
 
 	return result;
 }
@@ -145,6 +146,48 @@ function createTable(form) {
     tableData.options = {width: '100%', height: '300px'};
 
     return tableData;
+}
+
+function createCashOnEquityComboChart (form) {
+	var rawDataArray = form.cashOnEquityTableData,
+		yearIndex = 0,
+		equityIndex = 3,
+		cashOnEquityIndex = 5,
+		chartData = [],
+		result = {};
+
+	//Specify axis information
+	result.options = {
+		series: {
+			0: {axis: 'Equity', type: 'bars'}, 
+			1: {axis: 'CashOnEquity', type: 'line', targetAxisIndex:1}
+		},
+		axes: {
+			y: {
+				Equity: {label: 'Equity ($)'},
+				CashOnEquity: {label: 'Cash on Equity (%)'}
+			}
+		},
+		hAxis: {title: 'Years'},
+		width: '100%', 
+		height: '100%'
+	};
+
+	//Add columns to the data 
+	chartData.push(["Year", "Equity ($)", "Cash on Equity (%)"]);
+
+	//Add data rows to the data
+	rawDataArray.forEach(function(row) {
+		var dataRow = [];
+		dataRow.push(row[yearIndex]);
+		dataRow.push(row[equityIndex]);
+		dataRow.push(row[cashOnEquityIndex]);
+		chartData.push(dataRow);
+	});
+
+	result.data = chartData;
+
+	return result;
 }
 
 function createCashFlowProjectionComboChart(form) {
@@ -442,6 +485,9 @@ function createCashOnEquityTableDataRows(columns, form){
 		//Add to datarow
 		dataRows.push(column);
 	}
+
+	//to reuse on combo chart
+	form.cashOnEquityTableData = dataRows;
 
 	return dataRows;
 }
