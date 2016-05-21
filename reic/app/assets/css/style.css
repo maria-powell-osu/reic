@@ -348,3 +348,7 @@ li.selected.completed + li:after {
     height: 50px;
     width: auto;
 }
+
+.ui-datepicker{ 
+    z-index: 9999 !important;
+}
