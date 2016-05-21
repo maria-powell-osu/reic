@@ -203,6 +203,10 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
 
     vm.capitalExpendituresText = "Property improvements outside of regular maitenance.";
 
+    vm.arvText = "The price you pay for a property isn't always the same as what it's actually " 
+              + "worth. In this field, enter what you believe the property is actually worth. "
+              + "If you are rehabbing, enter what you believe the property is worth after your "
+              + "repairs.";
 });
 
 App.controller('FileController', ['$scope', function ($scope){

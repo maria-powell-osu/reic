@@ -95,9 +95,15 @@ App.directive("mpTooltip", function($timeout) {
               createCashFlowChart();
               createIncomePieChart();
               createExpensePieChart();
+              createCashOnEquityTable();
 
               //Stop the page loader
-              scope.calculating = false;
+              setTimeout(function(){ 
+                 scope.calculating = false;
+                 scope.$apply();
+               }, 1000);
+
+             
             }
           }
         }, true); //deep object equlity checking
@@ -156,6 +162,29 @@ App.directive("mpTooltip", function($timeout) {
         $timeout(function () {
           //Draw Chart
           chart.draw(data, rawData.options);
+        });
+      }
+
+      function createCashOnEquityTable() {
+        var table,
+            data = new google.visualization.DataTable(),
+            tableElement = $("#createCashOnEquityTable")[0],
+            rawData = scope.data.cashOnEquityTable;
+
+        //Add Table Columns
+        (rawData.columns).forEach(function(column) {
+          data.addColumn('number', column);
+        });
+
+        //Add Table Rows
+        data.addRows(rawData.rows);
+
+        //Initialize Table
+        table = new google.visualization.Table(tableElement);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          table.draw(data, rawData.options);
         });
       }
 

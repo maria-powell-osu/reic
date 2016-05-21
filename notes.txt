@@ -1,14 +1,15 @@
-
 Where I left of:
-	- make both slanted and shorter
+	- Make calendar a layer above the input fields. Currently is blocked visually
+	- if specialTermsLoan-interest-only = yes, amortization is not required
+	- I still want to change the way the required fields get communicated
+	- page should hop back on top when next button gets hit
+ 	
 
-
-What I am trying to do:
-	- add errpr handling on what the service returns
-	- #loaderbody: there should be a better way to call this
-	- change the rental calculate to use service instead of scope 
+Worklist:
+	-   I need to make the loader div go to the whole page even when scrolling
 	- do I still need jquery ui?
 	- You need to add test handler
+	- optimize the add and remove data functions -- and other controller functions
 
 	- 
 To Discuss with Jason:
@@ -19,8 +20,6 @@ To Discuss with Jason:
 Notes:
 	- 
 
-Worklist:
-	- optimize the add and remove data functions -- and other controller functions
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
@@ -38,7 +37,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 150
+	Coding: 160
 
 Rachael:
 	- calculator

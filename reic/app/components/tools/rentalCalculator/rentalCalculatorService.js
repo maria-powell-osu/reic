@@ -121,12 +121,13 @@ function validatePropertyInfo(userInput){
 }
 
 function rentalCalculations(form) {     
-    var result = {};
+    var result = {}; 
 
     result.cashFlowProjectionTable = createTable(form);
     result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
+    result.cashOnEquityTable = createCashOnEquityTable(form);
 
 	return result;
 }
@@ -341,6 +342,21 @@ function createExpensePieChart(form){
 	return result;
 }
 
+function createCashOnEquityTable (form) {
+	var tableData = {};
+	
+	//Create Columns
+	tableData.columns = ["Year", "Property Value", "Remaining Loan", "Equity", "Cash Flow", "Cash on Equity"];
+
+  	//Create Rows
+  	tableData.rows = createCashOnEquityTableDataRows(tableData.columns, form);
+
+  	//Table display options
+    tableData.options = {width: '100%', height: '300px'};
+
+    return tableData;
+}
+
 /*
  * Description: Helper function to create labels for pie charts
  *                This was create because default goog chart labels suck
@@ -393,6 +409,47 @@ function createLabelArray (colors, data, headerDescriptionIsSet){
 * Helper Function:
 * Creates the data that goes into each columns
 */
+function createCashOnEquityTableDataRows(columns, form){
+	var dataRows = [],
+		years = getYears(form),
+		remainingLoan = calculateRemainingLoan(years, form);
+
+	for (var i = 0; i < years; i++) {
+		var column = [],
+			yearData,
+			propertyValueData,
+			remLoanData,
+			equityData,
+			cashFlowData,
+			cashOnEquityData;
+
+		//Calculations
+		yearData = i + 1;
+		propertyValueData = calculatePropertyValue(yearData, form);
+		remLoanData = remainingLoan[i];
+		equityData = propertyValueData - remLoanData;
+		cashFlowData = form.cashFlowTableData[i][5];
+		cashOnEquityData = (cashFlowData / equityData) * 100;
+
+		//Build the column
+		column.push(yearData);
+		column.push(propertyValueData);
+		column.push(remLoanData);
+		column.push(equityData);
+		column.push(cashFlowData);
+		column.push(cashOnEquityData);
+
+		//Add to datarow
+		dataRows.push(column);
+	}
+
+	return dataRows;
+}
+
+/*
+* Helper Function:
+* Creates the data that goes into each columns
+*/
 function createDataRows (columns, form) {
 	var dataRows = [],
 		years = getYears(form),
@@ -408,6 +465,7 @@ function createDataRows (columns, form) {
 
 	for (var i = 0; i < years; i++) {
 		var column = [],
+			yearData,
 			incomeData,
 			cashFlowData,
 			cashOnCashData,
@@ -429,7 +487,7 @@ function createDataRows (columns, form) {
 		column.push(capExData);
 		column.push(loanPaymentData)
 		column.push(cashFlowData);
-		column.push(cashOnCashData );
+		column.push(cashOnCashData);
 		dataRows.push(column);
 	}
 
@@ -447,6 +505,23 @@ function calculateIncome (year, dataRows, incomeColumn, form) {
 		incomeResult = dataRows[year-1][incomeColumn] * ((rentIncrease/100) + 1);
 	}
 	return Math.round(incomeResult);
+}
+
+function calculatePropertyValue (year, form){
+	var propertyValueResult,
+		arv = form.e_arv,
+		assumedAppreciation = form.bp_assumedAppreciation || 0,
+		purchasePrice = form.li_purchasePrice;
+
+	var multiplier = Math.pow(1 + (assumedAppreciation / 100), year);
+
+	if (arv && arv > 0){
+		propertyValueResult = arv * multiplier;
+	} else {
+		propertyValueResult = purchasePrice * multiplier;
+	}
+
+	return Math.round(propertyValueResult);
 }
 
 function calculateExpenses (year, dataRows, expenseColumn, incomeData, form){
@@ -681,6 +756,98 @@ function balloonPmtCashFlow (years, form){
     return resultArray;
 }
 
+function remainingLoanFormula(p, r, n, a) {
+	var originalBalance,
+		annuity,
+		remLoanResult;
+
+	if (p && r && n && a){
+		originalBalance = p * Math.pow((1 + r), n);
+		annuity = a * ( (Math.pow((1 + r), n) - 1 ) / r);
+
+		remLoanResult = originalBalance - annuity;
+	}
+
+	return remLoanResult;
+}
+
+function calculateRemainingLoan (years, form){
+	var view = form.loanInfoView,
+		addedBankLoans = form.loans || [],
+		addedBankLoansLength = Object.keys(addedBankLoans).length,
+		specialTermsLoans = form.specialTermsLoans || [],
+		specialTermsLoansLength = Object.keys(specialTermsLoans).length,
+		loanPmtData = form.captureLoanData,
+		r,
+		p,
+		n,
+		A,
+		remLoan = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
+
+	for(var i = 0; i < years; i++){
+		if (view == "bankLoan"){
+			if(i < (form.bl_amortization)){
+
+				//Calculate remaining loan for bank Loan
+				p = form.li_purchasePrice - form.bl_downPaymentDollar;
+				r = (form.bl_interest / 100) / 12;
+				n = (i + 1) * 12; 
+				A = loanPmtData.bankLoanPmt / 12;
+				remLoan[i] += remainingLoanFormula(p, r, n, A); 
+			} else {
+				//current year (i) is past loan amoprt so remaining loan is 0
+				remLoan[i] += 0;
+			}
+			//Add the other loans the user added which have a different format (Stl) than reg. bank loan
+			for (var j = 0; j < addedBankLoansLength; j++) {
+				if (i < addedBankLoans[j].add_bl_amortization) {
+					if (addedBankLoans[j].add_bl_balloon && i > addedBankLoans[j].add_bl_balloon - 1) {
+						remLoan[i] += 0;
+					} else {
+						if (addedBankLoans[j].add_bl_interestOnly === "no"){
+							//Calculate remaining loan 
+							p = addedBankLoans[j].add_bl_loanAmount;
+							r = (addedBankLoans[j].add_bl_interest / 100) / 12;
+							n = (i + 1) * 12; 
+							A = loanPmtData.addedBankLoans[j] / 12;
+							remLoan[i] += remainingLoanFormula(p, r, n, A); 
+						} else {
+							remLoan[i] += addedBankLoans[j].add_bl_loanAmount;
+						}
+					}
+				} else {
+					//current year (i) is past loan amoprt so remaining loan is 0
+					remLoan[i] += 0;
+				}
+			}
+
+		} else if (view == "specialTermsLoan"){
+			for (var j = 0; j < specialTermsLoansLength; j++) {
+				if (i < (specialTermsLoans[j].stl_amortization)){
+					if (specialTermsLoans[j].stl_balloon && i > specialTermsLoans[j].stl_balloon - 1) {
+						remLoan[i] += 0;
+					} else {
+		        		if (specialTermsLoans[j].stl_interestOption == "no"){
+		        			//Calculate remaining loan 
+							p = specialTermsLoans[j].stl_amount;
+							r = (specialTermsLoans[j].stl_interest / 100) / 12;
+							n = (i + 1) * 12; 
+							A = loanPmtData.specialTermsLoans[j] / 12;
+							remLoan[i] += remainingLoanFormula(p, r, n, A); 
+		        		} else {
+		        			remLoan[i] += specialTermsLoans[j].stl_amount;
+		        		}
+		        	}
+	        	} else {
+					//current year (i) is past loan amoprt so remaining loan is 0
+					remLoan[i] += 0;
+				}
+			}
+		} 
+	}
+	return remLoan;
+}
+
 function calculateLoanPmts (years, form) {
 	var view = form.loanInfoView,
 		addedBankLoans = form.loans || [],
@@ -693,6 +860,11 @@ function calculateLoanPmts (years, form) {
 		curStlPaymentAmount,
 		yearlyLoanPayments = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
+	//this is added so we can capture data for cash equity calcs
+    form.captureLoanData = {},
+    form.captureLoanData.addedBankLoans = [],
+    form.captureLoanData.specialTermsLoans = [];
+
 	if (view == "bankLoan"){
 		//Calculate Bank Loan Payment
 		p = form.li_purchasePrice - form.bl_downPaymentDollar;
@@ -703,6 +875,9 @@ function calculateLoanPmts (years, form) {
 		//Create array of bank loan payments
 		var bankLoanAmort = form.bl_amortization;
 		var bankLoanPmts = Array.apply(null, Array(bankLoanAmort)).map(Number.prototype.valueOf, bankLoanPmt);
+		
+		//#For reuse purposes in different tables
+		form.captureLoanData.bankLoanPmt = bankLoanPmt;
 
 		//Creates the array of loan payments to make each year
 		yearlyLoanPayments = combineArrays(yearlyLoanPayments, bankLoanPmts);
@@ -716,7 +891,10 @@ function calculateLoanPmts (years, form) {
 				//Creates the array for the current loan payments for length of its amortization
 				var currentLoanAmort = addedBankLoans[i].add_bl_amortization;
 				var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
-				  
+
+				//#For reuse purposes in different tables
+				form.captureLoanData.addedBankLoans[i] = curStlPaymentAmount;
+
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
 				yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
@@ -746,6 +924,9 @@ function calculateLoanPmts (years, form) {
                 //Creates the array for the current loan payments for length of its amortization
                 var currentLoanAmort = addedBankLoans[i].add_bl_amortization;
                 var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
+
+                //#For reuse purposes in different tables
+				form.captureLoanData.addedBankLoans[i] = curStlPaymentAmount;
 
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
@@ -782,6 +963,9 @@ function calculateLoanPmts (years, form) {
 				var currentLoanAmort = specialTermsLoans[i].stl_amortization;
 				var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
+				//#For reuse purposes in different tables
+				form.captureLoanData.specialTermsLoans[i] = curStlPaymentAmount;
+
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
 				yearlyLoanPayments = combineArrays(yearlyLoanPayments, currentLoanArray);
@@ -810,6 +994,9 @@ function calculateLoanPmts (years, form) {
                 //Creates the array for the current loan payments for length of its amortization
                 var currentLoanAmort = specialTermsLoans[i].stl_amortization;
                 var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
+
+                //#For reuse purposes in different tables
+				form.captureLoanData.specialTermsLoans[i] = curStlPaymentAmount;
 
                 //Add the currentLoanArray to the rest of the loan arrays
                 //since they might all have different amortizations I wrote a special function
