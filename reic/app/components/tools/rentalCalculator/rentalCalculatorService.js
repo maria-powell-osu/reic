@@ -171,6 +171,7 @@ function createCashOnEquityComboChart (form) {
 			}
 		},
 		hAxis: {title: 'Years'},
+		vAxes: [{title:'Equity ($)'}, {title:'Cash on Equity (%)'}],
 		width: '100%', 
 		height: '100%'
 	};
@@ -205,7 +206,8 @@ function createTotalReturnStackedBarChart (form) {
 		isStacked: true,
         height: 300,
         legend: {position: 'top', maxLines: 3},
-        vAxis: {minValue: 0}
+        vAxis: {minValue: 0, title: 'Total Return ($)'},
+        hAxis: {title: 'Years'},
 	};
 
 	//Add columns to the data 
@@ -248,6 +250,7 @@ function createCashFlowProjectionComboChart(form) {
 			}
 		},
 		hAxis: {title: 'Years'},
+		vAxes: [{title:'Cash Flow ($)'}, {title:'Cash on Cash (%)'}],
 		width: '100%', 
 		height: '100%'
 	};
