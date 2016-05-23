@@ -173,7 +173,8 @@ App.directive("mpTooltip", function($timeout) {
             rawData = scope.data.totalReturnStackedBarChart;
 
         //Initialize chart
-        var chart = new google.visualization.ColumnChart(chartElement);
+        //var chart = new google.visualization.ColumnChart(chartElement);
+        var chart = new google.visualization.ComboChart(chartElement);
 
         //Create data table for chart   
         var data = google.visualization.arrayToDataTable(rawData.data);

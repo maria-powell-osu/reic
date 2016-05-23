@@ -193,7 +193,7 @@ function createCashOnEquityComboChart (form) {
 	return result;
 }
 
-function createTotalReturnStackedBarChart (form) {
+/*function createTotalReturnStackedBarChart (form) {
 	var result = {},
 		chartData = [],
 		rawDataArray = form.totalReturnTableData,
@@ -227,8 +227,58 @@ function createTotalReturnStackedBarChart (form) {
 	result.data = chartData;
 
 	return result;
-}
+}*/
+function createTotalReturnStackedBarChart(form){
+	var result = {},
+		chartData = [],
+		rawDataArray = form.totalReturnTableData,
+		year = 0,
+		appreciation = 1,
+		loanPaydow = 2,
+		cashFlow = 3,
+		totalReturnPercent = 5;
 
+	result.options = {
+		/* This specifies to which y axis the column belongs
+			0 is really the second value from the column list because 
+			the first one represent 'years' x axis*/
+		series: {
+			0: {axis: 'TotalReturnDollar', type: 'bars'},
+			1: {axis: 'TotalReturnDollar', type: 'bars'},
+			2: {axis: 'TotalReturnDollar', type: 'bars'},
+			3: {axis: 'TotalReturnPercent', type: 'line', targetAxisIndex:1}
+		},
+		axes: {
+			y: {
+				TotalReturnDollar: {label: 'Total Return ($)'},
+				TotalReturnPercent: {label: 'Total Return (%)'}
+			}
+		},
+		hAxis: {title: 'Years'},
+		vAxes: [{minValue: 0, title:'Total Return ($)'}, {title:'Total Return (%)'}],
+		isStacked: true,
+        height: 300,
+        legend: {position: 'top', maxLines: 3}
+	};
+
+	//Add columns to the data 
+	chartData.push(["Year", "Cash Flow", "Appreciation", "Loan Paydown", "Total Return (%)"]);
+
+	//Add data rows to the data
+	rawDataArray.forEach(function(row) {
+		var dataRow = [];
+		dataRow.push(row[year]);
+		dataRow.push(row[cashFlow]);	
+		dataRow.push(row[appreciation]);	
+		dataRow.push(row[loanPaydow]);
+		dataRow.push(row[totalReturnPercent]);
+		chartData.push(dataRow);
+	});
+
+	result.data = chartData;
+
+	return result;
+}
 function createCashFlowProjectionComboChart(form) {
 	var	rawDataArray = form.cashFlowTableData,
 		cashFlow = 5,
