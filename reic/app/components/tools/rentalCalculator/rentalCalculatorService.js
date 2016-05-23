@@ -123,24 +123,26 @@ function validatePropertyInfo(userInput){
 function rentalCalculations(form) {     
     var result = {}; 
 
-    result.cashFlowProjectionTable = createTable(form);
+    result.cashFlowProjectionTable = createCashFlowTable(form);
     result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
     result.cashOnEquityTable = createCashOnEquityTable(form);
     result.cashOnEquityChart = createCashOnEquityComboChart(form);
+    result.totalReturnTable = createTotalReturnTable(form);
+    //result.totalReturnStackedBarChart = createTotalReturnStackedBarChart(form);
 
 	return result;
 }
 
-function createTable(form) {
+function createCashFlowTable(form) {
 	var tableData = {};
 	
 	//Create Columns
 	tableData.columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
 
   	//Create Rows
-  	tableData.rows = createDataRows(tableData.columns, form);
+  	tableData.rows = createCashFlowDataRows(tableData.columns, form);
 
   	//Table display options
     tableData.options = {width: '100%', height: '300px'};
@@ -186,6 +188,39 @@ function createCashOnEquityComboChart (form) {
 	});
 
 	result.data = chartData;
+
+	return result;
+}
+
+function createTotalReturnStackedBarChart (form) {
+	var result = {},
+		chartData = [],
+		rawDataArray = form.totalReturnTableData,
+		appreciationIndex = 1,
+		loanPaydowIndex = 2,
+		cashFlowIndex = 3;
+
+	result.options = {
+		width: 600,
+        height: 400,
+        legend: { position: 'top', maxLines: 3 },
+        bar: { groupWidth: '75%' },
+        isStacked: true
+	};
+
+	//Add columns to the data 
+	chartData.push(["Appreciation", "Loan Paydown", "Cash Flow"]);
+
+	//Add data rows to the data
+	/*rawDataArray.forEach(function(row) {
+		var dataRow = [];
+		dataRow.push(row[year]);
+		dataRow.push(row[cashFlow]);
+		dataRow.push(row[cashOnCash]);
+		chartData.push(dataRow);
+	});
+
+	result.data = chartData;*/
 
 	return result;
 }
@@ -274,8 +309,12 @@ function createIncomePieChart(form){
 
   	result.data = dataArray;
   
+  	//When we create labels without including the header descriptions
+    var dataArrayWithoutHeader = dataArray.slice();
+    dataArrayWithoutHeader.shift();
+
   	//Since we do not like the google charts legend label display, let's make our own 
-  	result.labels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
+  	result.labels = createLabelArray(colorArray, dataArrayWithoutHeader);
 
   	//Set up display preferences
   	result.options = {
@@ -370,8 +409,12 @@ function createExpensePieChart(form){
     }
     result.data = dataArray;
 
+    //When we create labels without including the header descriptions
+    var dataArrayWithoutHeader = dataArray.slice();
+    dataArrayWithoutHeader.shift();
+
 	//Since google charts legend label display sucks I am creating our own 
-	result.labels = createLabelArray(colorArray, dataArray, headerDescriptionIsSet = true);
+	result.labels = createLabelArray(colorArray, dataArrayWithoutHeader);
 
 	result.options = {
 		width: '100%', 
@@ -383,6 +426,21 @@ function createExpensePieChart(form){
 	};
 
 	return result;
+}
+
+function createTotalReturnTable (form) {
+	var tableData = {};
+
+	//Create Columns
+	tableData.columns = ["Year", "Appreciation", "Loan Paydown", "Cash Flow", "Total Return ($)", "Total Return (%)"];
+
+  	//Create Rows
+  	tableData.rows = createTotalReturnDataRows(tableData.columns, form);
+
+  	//Table display options
+    tableData.options = {width: '100%', height: '300px'};
+
+	return tableData;
 }
 
 function createCashOnEquityTable (form) {
@@ -405,22 +463,13 @@ function createCashOnEquityTable (form) {
  *                This was create because default goog chart labels suck
  * Params:      Colors: colors used in the pie chart so I can add color coding)
  *              Data: the sections added into the pie charts
- *              headerDescription: e.g. for the pie charts we set up the array to contain description
- *                                 of the data in the first position of the array and we would not want
- *                                 this for our labels so we need to take it out if flag is true       
  */
-function createLabelArray (colors, data, headerDescriptionIsSet){
+function createLabelArray (colors, data){
 	var result = [],
   		errormsg,
   		descIndex = 0,
   		valueIndex = 1,
   		i = 0;
-
-    //if the data array contains description header
-    //then take out the first row which is the header
-    if(headerDescriptionIsSet){
-        i = 1;
-    }
 
 	//Create the label array with colors in it
 	for (i; i < data.length; i++){ 
@@ -446,6 +495,48 @@ function createLabelArray (colors, data, headerDescriptionIsSet){
 	  	}
 	}
 	return result;
+}
+
+function createTotalReturnDataRows(columns, form){
+	var dataRows = [],
+		years = getYears(form),
+		loanPayDowns = calculateLoanPayDown(years, form),
+		cashFlowIndex = 4,
+		equityIndex = 3;
+
+	for (var i = 0; i < years; i++) {
+		var column = [],
+			yearData,
+			appreciationData,
+			loanPayDownData,
+			cashFlowData,
+			totalReturnDollarData,
+			totalReturnDollarPercent;
+
+		//Calculations
+		yearData = i + 1;
+		appreciationData = calculateAppreciation(i, form);
+		loanPayDownData = loanPayDowns[i]
+		cashFlowData = form.cashOnEquityTableData[i][cashFlowIndex];
+		totalReturnDollarData = appreciationData + loanPayDownData + cashFlowData;
+		totalReturnDollarPercent = totalReturnDollarData / form.cashOnEquityTableData[i][equityIndex];
+
+		//Build the column
+		column.push(yearData);
+		column.push(appreciationData);
+		column.push(loanPayDownData);
+		column.push(cashFlowData);
+		column.push(totalReturnDollarData);
+		column.push(totalReturnDollarPercent);
+
+		//Add to datarow
+		dataRows.push(column);
+	}
+
+	//to reuse on combo chart
+	form.totalReturnTableData = dataRows;
+
+	return dataRows;
 }
 
 /*
@@ -496,7 +587,7 @@ function createCashOnEquityTableDataRows(columns, form){
 * Helper Function:
 * Creates the data that goes into each columns
 */
-function createDataRows (columns, form) {
+function createCashFlowDataRows (columns, form) {
 	var dataRows = [],
 		years = getYears(form),
 		capitalExpenditures = calculateCapitalExpenditures(years, form),
@@ -551,6 +642,26 @@ function calculateIncome (year, dataRows, incomeColumn, form) {
 		incomeResult = dataRows[year-1][incomeColumn] * ((rentIncrease/100) + 1);
 	}
 	return Math.round(incomeResult);
+}
+
+function calculateAppreciation(year, form){
+	var appreciationResult,
+		arv = form.e_arv,
+		propertyValue = form.cashOnEquityTableData[year][1],
+		purchasePrice = form.li_purchasePrice;
+
+	if(year === 0) {
+		if(arv && arv > 0){
+			appreciationResult = propertyValue - arv;
+		} else {
+			appreciationResult = propertyValue - purchasePrice; 
+		}
+	} else {
+		var prioYear = form.cashOnEquityTableData[year - 1][1];
+		appreciationResult = propertyValue - prioYear;
+	}
+
+	return appreciationResult;
 }
 
 function calculatePropertyValue (year, form){
@@ -892,6 +1003,45 @@ function calculateRemainingLoan (years, form){
 		} 
 	}
 	return remLoan;
+}
+
+function calculateLoanPayDown (years, form){
+	var view = form.loanInfoView,
+		firstYearLoanAmount = 0,
+		remLoanIndex = 2,
+		purchasePrice = form.li_purchasePrice,
+		downPayment = form.bl_downPaymentDollar,
+		addedBankLoans = form.loans || [],
+		addedBankLoansLength = Object.keys(addedBankLoans).length,
+		specialTermsLoans = form.specialTermsLoans || [],
+		specialTermsLoansLength = Object.keys(specialTermsLoans).length,
+		loanPayDownResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
+
+	//Year 1 Loan PayDown
+	if (view === "bankLoan"){
+		//Bank Loan
+		firstYearLoanAmount += purchasePrice - downPayment;
+
+		//Added STL Loans
+		for(var i = 0; i < addedBankLoansLength; i++){
+			firstYearLoanAmount += addedBankLoans[i].add_bl_loanAmount;
+		}
+
+	} else if (view === "specialTermsLoan"){
+		for (var i = 0; i < specialTermsLoansLength; i++) {
+			firstYearLoanAmount += specialTermsLoans[i].stl_amount;
+		}
+	}
+	loanPayDownResult[0] = firstYearLoanAmount - form.cashOnEquityTableData[0][remLoanIndex];
+
+	//Years after first of loan Paydowns
+	for(var i = 1; i < years; i++){
+		var lastYear = i - 1;
+
+		loanPayDownResult[i] = form.cashOnEquityTableData[lastYear][remLoanIndex] - form.cashOnEquityTableData[i][remLoanIndex];
+
+	}
+	return loanPayDownResult;
 }
 
 function calculateLoanPmts (years, form) {

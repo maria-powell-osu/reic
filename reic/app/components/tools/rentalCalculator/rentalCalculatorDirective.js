@@ -97,6 +97,7 @@ App.directive("mpTooltip", function($timeout) {
               createExpensePieChart();
               createCashOnEquityTable();
               createCashOnEquityChart();
+              createTotalReturnTable();
 
               //Stop the page loader
               setTimeout(function(){ 
@@ -150,7 +151,7 @@ App.directive("mpTooltip", function($timeout) {
       }
 
       function createCashOnEquityChart(){
-        var chartElement = $("#createCashOnEquityChart")[0],
+        var chartElement = $("#cashOnEquityChart")[0],
             rawData = scope.data.cashOnEquityChart;
 
         //Initialize chart
@@ -186,8 +187,31 @@ App.directive("mpTooltip", function($timeout) {
       function createCashOnEquityTable() {
         var table,
             data = new google.visualization.DataTable(),
-            tableElement = $("#createCashOnEquityTable")[0],
+            tableElement = $("#cashOnEquityTable")[0],
             rawData = scope.data.cashOnEquityTable;
+
+        //Add Table Columns
+        (rawData.columns).forEach(function(column) {
+          data.addColumn('number', column);
+        });
+
+        //Add Table Rows
+        data.addRows(rawData.rows);
+
+        //Initialize Table
+        table = new google.visualization.Table(tableElement);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          table.draw(data, rawData.options);
+        });
+      }
+
+      function createTotalReturnTable (){
+        var table,
+            data = new google.visualization.DataTable(),
+            tableElement = $("#totalReturnTable")[0],
+            rawData = scope.data.totalReturnTable;
 
         //Add Table Columns
         (rawData.columns).forEach(function(column) {
