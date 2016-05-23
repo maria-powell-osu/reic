@@ -130,7 +130,7 @@ function rentalCalculations(form) {
     result.cashOnEquityTable = createCashOnEquityTable(form);
     result.cashOnEquityChart = createCashOnEquityComboChart(form);
     result.totalReturnTable = createTotalReturnTable(form);
-    //result.totalReturnStackedBarChart = createTotalReturnStackedBarChart(form);
+    result.totalReturnStackedBarChart = createTotalReturnStackedBarChart(form);
 
 	return result;
 }
@@ -196,31 +196,33 @@ function createTotalReturnStackedBarChart (form) {
 	var result = {},
 		chartData = [],
 		rawDataArray = form.totalReturnTableData,
-		appreciationIndex = 1,
-		loanPaydowIndex = 2,
-		cashFlowIndex = 3;
+		year = 0,
+		appreciation = 1,
+		loanPaydow = 2,
+		cashFlow = 3;
 
 	result.options = {
-		width: 600,
-        height: 400,
-        legend: { position: 'top', maxLines: 3 },
-        bar: { groupWidth: '75%' },
-        isStacked: true
+		isStacked: true,
+        height: 300,
+        legend: {position: 'top', maxLines: 3},
+        vAxis: {minValue: 0}
 	};
 
 	//Add columns to the data 
-	chartData.push(["Appreciation", "Loan Paydown", "Cash Flow"]);
+	chartData.push(["Year", "Cash Flow", "Appreciation", "Loan Paydown",  { role: 'annotation' } ]);
 
 	//Add data rows to the data
-	/*rawDataArray.forEach(function(row) {
+	rawDataArray.forEach(function(row) {
 		var dataRow = [];
 		dataRow.push(row[year]);
-		dataRow.push(row[cashFlow]);
-		dataRow.push(row[cashOnCash]);
+		dataRow.push(row[cashFlow]);	
+		dataRow.push(row[appreciation]);	
+		dataRow.push(row[loanPaydow]);
+		dataRow.push('');
 		chartData.push(dataRow);
 	});
 
-	result.data = chartData;*/
+	result.data = chartData;
 
 	return result;
 }

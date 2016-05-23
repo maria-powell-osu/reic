@@ -98,6 +98,7 @@ App.directive("mpTooltip", function($timeout) {
               createCashOnEquityTable();
               createCashOnEquityChart();
               createTotalReturnTable();
+              createTotalReturnStackedBarChart();
 
               //Stop the page loader
               setTimeout(function(){ 
@@ -165,6 +166,24 @@ App.directive("mpTooltip", function($timeout) {
           //Draw Chart
           chart.draw(data, rawData.options);
         });
+      }
+
+      function createTotalReturnStackedBarChart(){
+        var chartElement = $("#totalReturnStackedBarChart")[0],
+            rawData = scope.data.totalReturnStackedBarChart;
+
+        //Initialize chart
+        var chart = new google.visualization.ColumnChart(chartElement);
+
+        //Create data table for chart   
+        var data = google.visualization.arrayToDataTable(rawData.data);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function () {
+          //Draw Chart
+          chart.draw(data, rawData.options);
+        });
+        
       }
 
       function createCashFlowChart() {
