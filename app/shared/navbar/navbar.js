@@ -1,9 +1,9 @@
 'use strict';
 
 //Navigation Bar: Need to Add Active Button Still
-App.directive('mpLoader', function() {
+App.directive('mpTopNavBar', function() {
   return {
   	restrict: 'E',
-    templateUrl: '/reic/app/shared/loader/loader.html'
+    templateUrl: '/app/shared/navbar/navbar.html'
   };
 });

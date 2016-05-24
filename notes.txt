@@ -1,5 +1,4 @@
 Where I left of:
-	- Make calendar a layer above the input fields. Currently is blocked visually
 	- if specialTermsLoan-interest-only = yes, amortization is not required
 	- I still want to change the way the required fields get communicated
 	- page should hop back on top when next button gets hit

@@ -7,29 +7,29 @@ var App = angular.module('App', ['ngRoute', 'ngSanitize']);
 //to call the controller instead of calling $parent
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: '../reic/app/components/about/aboutView.html',
+    templateUrl: '../app/components/about/aboutView.html',
     /*controller: 'AboutController',
     controllerAs: 'aboutController',*/
   });
   $routeProvider.when('/tools', {
-    templateUrl: '../reic/app/components/tools/tools.html',
+    templateUrl: '../app/components/tools/tools.html',
   });
   $routeProvider.when('/rentalCalculator', {
-    templateUrl: '../reic/app/components/tools/rentalCalculator/rentalCalculatorView.html',
+    templateUrl: '../app/components/tools/rentalCalculator/rentalCalculatorView.html',
     controller: 'RentalCalculatorController',
     controllerAs: 'rentalCalculator',
   });
   //this needs to be switched back to analyzeadeal
   $routeProvider.when('/blog', {
-    templateUrl: '../reic/app/components/blog/blogView.html',
+    templateUrl: '../app/components/blog/blogView.html',
     controller: 'BlogController',
     controllerAs: 'blog',
   });
   $routeProvider.when('/videos', {
-    templateUrl: '../reic/app/components/videos/videos.html',
+    templateUrl: '../app/components/videos/videos.html',
   });
   $routeProvider.when('/contact', {
-    templateUrl: '../reic/app/components/contact/contact.html',
+    templateUrl: '../app/components/contact/contact.html',
   });
 
 });

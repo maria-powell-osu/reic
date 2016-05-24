@@ -11,9 +11,6 @@ handlers:
   static_files: static/images/favicon.ico
   upload: static/images/favicon\.ico
 
-- url: /reic
-  static_dir: reic
-
 - url: /app
   static_dir: app
 

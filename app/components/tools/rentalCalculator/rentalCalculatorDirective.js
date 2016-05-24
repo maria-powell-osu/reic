@@ -3,7 +3,7 @@
  */
  App.directive('basicPropertyInformation', function() {
   return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/basicPropertyInformation.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/basicPropertyInformation.html'
   };
 });
 
@@ -12,7 +12,7 @@
  */
  App.directive('loanInformation', function() {
   return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
   };
 });
 
@@ -22,7 +22,7 @@
  */
  App.directive('incomeSources', function() {
   return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
   };
 });
 
@@ -31,7 +31,7 @@
  */
  App.directive('expenses', function() {
   return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/expenses.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/expenses.html'
   };
 });
 
@@ -40,7 +40,7 @@
  */
  App.directive('results', function() {
   return {
-    templateUrl: '/reic/app/components/tools/rentalCalculator/sectionViews/results.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/results.html'
   };
 });
 

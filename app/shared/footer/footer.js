@@ -4,7 +4,7 @@
 App.directive('mpFooter', function() {
   return {
   	restrict: 'E',
-    templateUrl: '/reic/app/shared/footer/footer.html'
+    templateUrl: '/app/shared/footer/footer.html'
   };
 });
 

@@ -4,7 +4,7 @@
 }
 .bg_picture
 {
-    background-image:url('/reic/app/assets/img/portland_skyline_banner_dark.jpg');
+    background-image:url('/app/assets/img/portland_skyline_banner_dark.jpg');
     width: 100%;
     height:400px;
     -webkit-background-size: cover;
@@ -260,7 +260,7 @@ li.selected.completed + li:after {
     background: #555555;    
 }
 .mpBanner {
-    background-image:url('/reic/app/assets/img/portland_skyline_banner_long.jpg');
+    background-image:url('/app/assets/img/portland_skyline_banner_long.jpg');
     width: 100%;
     height:200px;
     -webkit-background-size: cover;

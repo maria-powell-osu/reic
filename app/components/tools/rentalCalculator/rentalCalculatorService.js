@@ -574,7 +574,7 @@ function createTotalReturnDataRows(columns, form){
 		loanPayDownData = loanPayDowns[i]
 		cashFlowData = form.cashOnEquityTableData[i][cashFlowIndex];
 		totalReturnDollarData = appreciationData + loanPayDownData + cashFlowData;
-		totalReturnDollarPercent = totalReturnDollarData / form.cashOnEquityTableData[i][equityIndex];
+		totalReturnDollarPercent = (totalReturnDollarData / form.cashOnEquityTableData[i][equityIndex]) * 100;
 
 		//Build the column
 		column.push(yearData);
