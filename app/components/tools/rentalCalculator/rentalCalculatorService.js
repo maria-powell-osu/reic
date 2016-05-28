@@ -1,12 +1,6 @@
 App.factory('RentalCalculator', function() {
 	var RentalCalculator = {};
 	return {
-		/*getData: function(){
-			return RentalCalculator;
-		},
-		setData: function (rentalCalculatorData){
-			RentalCalculator = rentalCalculatorData;
-		},*/
 		nextStep: function (currStep, lastStep) {
 			return currStep < lastStep ? currStep + 1 : currStep;
 		},
@@ -67,7 +61,6 @@ function calculateFieldExpenses(triggerIndicator, userInput){
 		if(managementPercent){
 			userInput.pm_managementFeeAmount = (managementPercent / 100) * monthlyIncome;
 		}
-
 	} else {
 		userInput.m_costAmount = undefined;
 		userInput.m_costPercent = undefined;
@@ -365,7 +358,7 @@ function createIncomePieChart(form){
   	result.data = dataArray;
   
   	//When we create labels without including the header descriptions
-    var dataArrayWithoutHeader = dataArray.slice();
+    var dataArrayWithoutHeader = dataArray.slice(); //slice returns a new array so that we are not altering the old array
     dataArrayWithoutHeader.shift();
 
   	//Since we do not like the google charts legend label display, let's make our own 
@@ -556,6 +549,7 @@ function createTotalReturnDataRows(columns, form){
 	var dataRows = [],
 		years = getYears(form),
 		loanPayDowns = calculateLoanPayDown(years, form),
+		cashFlows = calculateCashFlowWithoutBalloon(years, form),
 		cashFlowIndex = 4,
 		equityIndex = 3;
 
@@ -571,8 +565,8 @@ function createTotalReturnDataRows(columns, form){
 		//Calculations
 		yearData = i + 1;
 		appreciationData = calculateAppreciation(i, form);
-		loanPayDownData = loanPayDowns[i]
-		cashFlowData = form.cashOnEquityTableData[i][cashFlowIndex];
+		loanPayDownData = loanPayDowns[i];
+		cashFlowData = cashFlows[i];
 		totalReturnDollarData = appreciationData + loanPayDownData + cashFlowData;
 		totalReturnDollarPercent = (totalReturnDollarData / form.cashOnEquityTableData[i][equityIndex]) * 100;
 
@@ -1021,7 +1015,7 @@ function calculateRemainingLoan (years, form){
 							p = addedBankLoans[j].add_bl_loanAmount;
 							r = (addedBankLoans[j].add_bl_interest / 100) / 12;
 							n = (i + 1) * 12; 
-							A = loanPmtData.addedBankLoans[j] / 12;
+							A = loanPmtData.addedBankLoans[j].pmt / 12;
 							remLoan[i] += remainingLoanFormula(p, r, n, A); 
 						} else {
 							remLoan[i] += addedBankLoans[j].add_bl_loanAmount;
@@ -1044,7 +1038,7 @@ function calculateRemainingLoan (years, form){
 							p = specialTermsLoans[j].stl_amount;
 							r = (specialTermsLoans[j].stl_interest / 100) / 12;
 							n = (i + 1) * 12; 
-							A = loanPmtData.specialTermsLoans[j] / 12;
+							A = loanPmtData.specialTermsLoans[j].pmt / 12;
 							remLoan[i] += remainingLoanFormula(p, r, n, A); 
 		        		} else {
 		        			remLoan[i] += specialTermsLoans[j].stl_amount;
@@ -1060,6 +1054,38 @@ function calculateRemainingLoan (years, form){
 	return remLoan;
 }
 
+function calculateCashFlowWithoutBalloon(years, form){
+	var cashFlowIndex = 4,
+		capturedBankLoans = form.captureLoanData.addedBankLoans,
+		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoan,
+		view = form.loanInfoView,
+		cashFlowDataResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
+
+	//Copy the cash flow data from previous table
+	for(var i = 0; i < years; i++){
+		//copy the cashFlow value over - it contains the subtracted balloon payment
+		cashFlowDataResult[i] = form.cashOnEquityTableData[i][cashFlowIndex];
+	}
+
+	//if there are balloon payments add it back to the cashflowData
+	if (view === "bankLoan"){
+		for(var j = 0; j < capturedBankLoans.length; j++){
+			//if we have a balloon payment that year
+			if(capturedBankLoans[j].ballonYear){
+				cashFlowDataResult[capturedBankLoans[j].ballonYear] += capturedBankLoans[j].ballonAmount;
+			}
+		}
+	}else if (view === "specialTermsLoan"){
+		for(var j = 0; j < capturedSpecialTermsLoans.length; j++){
+			//if we have a balloon payment that year
+			if(capturedSpecialTermsLoans[j].ballonYear){
+				cashFlowDataResult[capturedSpecialTermsLoans[j].ballonYear] += capturedSpecialTermsLoans[j].ballonAmount;
+			}
+		}
+	}
+	return cashFlowDataResult;
+}
+
 function calculateLoanPayDown (years, form){
 	var view = form.loanInfoView,
 		firstYearLoanAmount = 0,
@@ -1070,6 +1096,8 @@ function calculateLoanPayDown (years, form){
 		addedBankLoansLength = Object.keys(addedBankLoans).length,
 		specialTermsLoans = form.specialTermsLoans || [],
 		specialTermsLoansLength = Object.keys(specialTermsLoans).length,
+		capturedBankLoans = form.captureLoanData.addedBankLoans,
+		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoan,
 		loanPayDownResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
 	//Year 1 Loan PayDown
@@ -1087,14 +1115,37 @@ function calculateLoanPayDown (years, form){
 			firstYearLoanAmount += specialTermsLoans[i].stl_amount;
 		}
 	}
+
 	loanPayDownResult[0] = firstYearLoanAmount - form.cashOnEquityTableData[0][remLoanIndex];
+
 
 	//Years after first of loan Paydowns
 	for(var i = 1; i < years; i++){
 		var lastYear = i - 1;
 
 		loanPayDownResult[i] = form.cashOnEquityTableData[lastYear][remLoanIndex] - form.cashOnEquityTableData[i][remLoanIndex];
+	}
 
+
+	//if there are balloon payments subtract them from the loanPayDownResult
+	if (view === "bankLoan"){
+		for(var i = 0; i < capturedBankLoans.length; i++){
+			//if we have a balloon payment that year
+			if(capturedBankLoans[i].ballonYear){
+				//the ballon paydown is reflected in the next year of the loan paydown
+				//that is why we need to subtract ballon from following yr
+				loanPayDownResult[capturedBankLoans[i].ballonYear + 1] -= capturedBankLoans[i].ballonAmount;
+			}
+		}
+	}else if (view === "specialTermsLoan"){
+		for(var i = 0; i < capturedSpecialTermsLoans.length; i++){
+			//if we have a balloon payment that year
+			if(capturedSpecialTermsLoans[i].ballonYear){
+				//the ballon paydown is reflected in the next year of the loan paydown
+				//that is why we need to subtract ballon from following yr
+				loanPayDownResult[capturedSpecialTermsLoans[i].ballonYear + 1] -= capturedSpecialTermsLoans[i].ballonAmount;
+			}
+		}
 	}
 	return loanPayDownResult;
 }
@@ -1144,7 +1195,7 @@ function calculateLoanPmts (years, form) {
 				var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
 				//#For reuse purposes in different tables
-				form.captureLoanData.addedBankLoans[i] = curStlPaymentAmount;
+				form.captureLoanData.addedBankLoans.push({pmt: curStlPaymentAmount});
 
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
@@ -1156,6 +1207,10 @@ function calculateLoanPmts (years, form) {
 				    //Adds the Ballon Payment to the given ballon year
 				    var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
 				    yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + addedBankLoans[i].add_bl_loanAmount;
+
+				    //#For reuse purposes in different tables
+					form.captureLoanData.addedBankLoans[i].ballonYear = ballonYear;
+					form.captureLoanData.addedBankLoans[i].ballonAmount = addedBankLoans[i].add_bl_loanAmount;
 
 				    //All loanpayments after ballon payment are 0 
 				    for(var j = ballonYear + 1; j < currentLoanAmort; j ++){
@@ -1177,7 +1232,7 @@ function calculateLoanPmts (years, form) {
                 var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
                 //#For reuse purposes in different tables
-				form.captureLoanData.addedBankLoans[i] = curStlPaymentAmount;
+				form.captureLoanData.addedBankLoans.push({pmt: curStlPaymentAmount});
 
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
@@ -1188,13 +1243,18 @@ function calculateLoanPmts (years, form) {
 
 	                //Adds the Ballon Payment to the given ballon year
 	                var ballonYear = addedBankLoans[i].add_bl_balloon - 1;
-	                yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + 
-	                calculateNoInterestBalloonPayoff(
+	                var ballonAmount = calculateNoInterestBalloonPayoff(
 	                	addedBankLoans[i].add_bl_loanAmount, 
 	                	addedBankLoans[i].add_bl_interest, 
 	                	addedBankLoans[i].add_bl_balloon, 
 	                	curStlPaymentAmount,
 	                	form);
+
+	                yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + ballonAmount;
+
+	                //#For reuse purposes in different tables
+					form.captureLoanData.addedBankLoans[i].ballonYear = ballonYear;
+					form.captureLoanData.addedBankLoans[i].ballonAmount = ballonAmount;
 
                     //All loanpayments after ballon payment are 0 
                     for(var j = ballonYear + 1; j < currentLoanAmort; j ++){
@@ -1215,7 +1275,7 @@ function calculateLoanPmts (years, form) {
 				var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
 				//#For reuse purposes in different tables
-				form.captureLoanData.specialTermsLoans[i] = curStlPaymentAmount;
+				form.captureLoanData.specialTermsLoans.push({pmt: curStlPaymentAmount});
 
 				//Add the currentLoanArray to the rest of the loan arrays
 				//since they might all have different amortizations I wrote a special function
@@ -1226,6 +1286,10 @@ function calculateLoanPmts (years, form) {
                     //Adds the Ballon Payment to the given ballon year
                     var ballonYear = specialTermsLoans[i].stl_balloon - 1;
                     yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + specialTermsLoans[i].stl_amount;
+
+                    //#For reuse purposes in different tables
+					form.captureLoanData.specialTermsLoans[i].ballonYear = ballonYear;
+					form.captureLoanData.specialTermsLoans[i].ballonAmount = specialTermsLoans[i].stl_amount;
 
                     //All loanpayments after ballon payment are 0 
                     for(var j = ballonYear + 1; j < currentLoanAmort; j ++){
@@ -1247,7 +1311,7 @@ function calculateLoanPmts (years, form) {
                 var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
                 //#For reuse purposes in different tables
-				form.captureLoanData.specialTermsLoans[i] = curStlPaymentAmount;
+				form.captureLoanData.specialTermsLoans[i].push({pmt: curStlPaymentAmount});
 
                 //Add the currentLoanArray to the rest of the loan arrays
                 //since they might all have different amortizations I wrote a special function
@@ -1257,12 +1321,18 @@ function calculateLoanPmts (years, form) {
                 if (specialTermsLoans[i].stl_balloon){
                     //Adds the Ballon Payment to the given ballon year
                     var ballonYear = specialTermsLoans[i].stl_balloon - 1;
-                        yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + 
-                        calculateNoInterestBalloonPayoff(specialTermsLoans[i].stl_amount, 
+                    var ballonAmount = calculateNoInterestBalloonPayoff(specialTermsLoans[i].stl_amount, 
                         	specialTermsLoans[i].stl_interest, 
                         	specialTermsLoans[i].stl_balloon, 
                         	curStlPaymentAmount,
                         	form);
+
+                    yearlyLoanPayments[ballonYear] = yearlyLoanPayments[ballonYear] + ballonAmount;
+                        
+
+                    //#For reuse purposes in different tables
+					form.captureLoanData.specialTermsLoans[i].ballonYear = ballonYear;
+					form.captureLoanData.specialTermsLoans[i].ballonAmount = ballonAmount;
 
                     //All loanpayments after ballon payment are 0 
                     for(var j = ballonYear + 1; j < currentLoanAmort; j ++){

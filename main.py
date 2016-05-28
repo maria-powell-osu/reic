@@ -19,8 +19,9 @@ class PlanPassive(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render())
 
-
-# starts the application
+# starts th application
 application = webapp2.WSGIApplication([
 	('/', PlanPassive),
+	# Service Routes for API
+	#('/')
 ], debug=True)
