@@ -1057,7 +1057,7 @@ function calculateRemainingLoan (years, form){
 function calculateCashFlowWithoutBalloon(years, form){
 	var cashFlowIndex = 4,
 		capturedBankLoans = form.captureLoanData.addedBankLoans,
-		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoan,
+		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoans,
 		view = form.loanInfoView,
 		cashFlowDataResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
@@ -1097,7 +1097,7 @@ function calculateLoanPayDown (years, form){
 		specialTermsLoans = form.specialTermsLoans || [],
 		specialTermsLoansLength = Object.keys(specialTermsLoans).length,
 		capturedBankLoans = form.captureLoanData.addedBankLoans,
-		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoan,
+		capturedSpecialTermsLoans = form.captureLoanData.specialTermsLoans,
 		loanPayDownResult = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
 
 	//Year 1 Loan PayDown
@@ -1311,7 +1311,7 @@ function calculateLoanPmts (years, form) {
                 var currentLoanArray = Array.apply(null, Array(currentLoanAmort)).map(Number.prototype.valueOf, curStlPaymentAmount);
 
                 //#For reuse purposes in different tables
-				form.captureLoanData.specialTermsLoans[i].push({pmt: curStlPaymentAmount});
+				form.captureLoanData.specialTermsLoans.push({pmt: curStlPaymentAmount});
 
                 //Add the currentLoanArray to the rest of the loan arrays
                 //since they might all have different amortizations I wrote a special function
