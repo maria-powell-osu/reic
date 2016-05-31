@@ -379,3 +379,9 @@ li.selected.completed + li:after {
 .headerHeight {
     height: 70px;
 }
+.dollarValueLarge {
+    font-size: large;
+}
+.dollarValueMedium {
+    font-size: medium;
+}

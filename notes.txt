@@ -5,7 +5,8 @@ Where I left of:
  	
 
 Worklist:
-	-   I need to make the loader div go to the whole page even when scrolling
+	- I Could probably create a shared directive for the different types of charts
+	- I need to make the loader div go to the whole page even when scrolling
 	- do I still need jquery ui?
 	- You need to add test handler
 	- optimize the add and remove data functions -- and other controller functions
@@ -36,7 +37,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 168
+	Coding: 186
 
 Rachael:
 	- calculator

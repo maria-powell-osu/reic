@@ -19,6 +19,11 @@ App.config(function($routeProvider) {
     controller: 'RentalCalculatorController',
     controllerAs: 'rentalCalculator',
   });
+  $routeProvider.when('/futureValueCalculator', {
+    templateUrl: '../app/components/tools/futureValueCalculator/futureValueCalculatorView.html',
+    controller: 'FutureValueCalculatorController',
+    controllerAs: 'fv',
+  });
   //this needs to be switched back to analyzeadeal
   $routeProvider.when('/blog', {
     templateUrl: '../app/components/blog/blogView.html',

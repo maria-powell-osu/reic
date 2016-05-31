@@ -1,0 +1,125 @@
+<div class="container page-content">
+	<h4>Bread Crumbs need to go here</h4>
+	<div class="row">
+		<div class="col-md-12">
+			<!-- <fieldset> -->
+				<div class="row">
+					<div class="col-md-4">
+						<label>What is your starting balance?</label>
+						<div class="input-group">
+				            <input type="number" class="inpt form-control" placeholder="$" ng-model="fv.input.investAmount">
+				            <span class="input-group-addon">$</span>
+				        </div><br/>
+
+			            <label>How much do you want to contribute per month?</label>
+						<div class="input-group">
+				            <input type="number" class="inpt form-control" placeholder="$" ng-model="fv.input.monthlyContributions">
+				            <span class="input-group-addon">$ / month</span>
+				        </div><br/>
+
+			            <label>What is the annual rate of return?</label>
+						<div class="input-group">
+				            <input type="number" step="0.01" class="inpt form-control" placeholder="$" ng-model="fv.input.annualRateOfReturn">
+				            <span class="input-group-addon">$ / year</span>
+				        </div><br/>
+
+				        <label>How much will this investment be worth in ...?</label>
+						<div class="input-group">
+				            <input type="number" step="0.001" class="inpt form-control" placeholder="years" ng-model="fv.input.years">
+				            <span class="input-group-addon">years</span>
+				        </div><br/>
+
+			            <label>In how many years will you start this investment?</label>
+						<div class="input-group">
+				            <input type="number" step="0.001" class="inpt form-control" placeholder="years" ng-model="fv.input.yearsBeforeContributing">
+				            <span class="input-group-addon">years</span>
+				        </div>
+			            <span>This shows you the cost of waiting by not starting right now.</span><br/><br/>
+
+			            <!-- Calculate -->
+				    	<button type="button" ng-click="fv.calculate()" class="btn btn-info pull-right">Calculate</button>
+			        </div>
+			        <div class="col-md-7 col-md-offset-1">
+			        	<div class="row">
+			        		<div class="col-md-6 offWhiteBg" ng-show="fv.input.years && fv.result.futureValue">
+					        	{{fv.input.years}}-YEAR VALUE<br/>
+								<b class="dollarValueLarge">$ {{fv.result.futureValue}}</b>
+							</div>
+						</div>
+						<div class="row">
+							<div  class="col-md-6" ng-show="fv.result.totalAmountContributed">
+								<div>Total Contributions</div>
+								<b class="dollarValueMedium">
+									$ {{fv.result.totalAmountContributed}}
+								</b>
+							</div>
+						
+							<div  class="col-md-6" ng-show="fv.result.totalInvestmentReturn">
+								<div>Total Interest Earned</div>
+								<b class="dollarValueMedium">
+									$ {{fv.result.totalInvestmentReturn}}
+								</b>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-secondary">BAR GRAPH</button>
+									<button type="button" class="btn btn-secondary">PIE CHART</button>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<mp-future-value-charts data="fv.chartData" future-value-pie-chart-labels="fv.futureValuePieChartLabels">
+									<div id="futureValueStackColumnChart" ></div><br/>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div id="futureValuePieChart"></div><br/>
+										</div>
+									
+										<div class="col-md-6">
+											<br/>
+											<br/>
+											<div ng-repeat="fvLabels in fv.futureValuePieChartLabels track by $index">
+												<div class="row">
+													<div class="col-md-6">
+														<span class="glyphicon glyphicon-stop" aria-hidden="true" style="color:{{fvLabels.color}}"></span>
+														<span>{{fvLabels.description}}:</span>
+													</div>
+													<div class="col-md-6">
+														<span>{{fvLabels.value}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</mp-future-value-charts>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" ng-show="fv.input.yearsBeforeContributing && fv.result.futureValueOfYears">
+								<br/><span>If you wait <b>{{fv.input.yearsBeforeContributing}} years </b> to start this investment it is worth <b>${{fv.result.futureValueOfYears}}.</b></span><br/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" ng-show="fv.input.years && fv.result.costOfWaiting">
+								<div>Cost of waiting {{fv.input.yearsBeforeContributing}} years</div>
+								<b>$ {{fv.result.costOfWaiting}}</b><br/>
+							</div>
+						</div>
+
+						<span class="pull-right">*Assumes monthly compounding</span>
+			        </div>
+				</div>
+			<!-- </fieldset> -->
+		</div>
+	</div>
+	<br/>
+	<h3>Results</h3>
+
+	
+</div>
+<br/>
+<br/>
