@@ -41,45 +41,48 @@
 			        </div>
 			        <div class="col-md-7 col-md-offset-1">
 			        	<div class="row">
-			        		<div class="col-md-6 offWhiteBg" ng-show="fv.input.years && fv.result.futureValue">
-					        	{{fv.input.years}}-YEAR VALUE<br/>
+			        		<div class="col-md-6">
+					        	<span ng-show="fv.input.years">{{fv.input.years}}-YEAR</span> VALUE<br/>
 								<b class="dollarValueLarge">$ {{fv.result.futureValue}}</b>
 							</div>
 						</div>
 						<div class="row">
-							<div  class="col-md-6" ng-show="fv.result.totalAmountContributed">
+							<div  class="col-md-6">
 								<div>Total Contributions</div>
 								<b class="dollarValueMedium">
 									$ {{fv.result.totalAmountContributed}}
 								</b>
 							</div>
 						
-							<div  class="col-md-6" ng-show="fv.result.totalInvestmentReturn">
+							<div  class="col-md-6">
 								<div>Total Interest Earned</div>
 								<b class="dollarValueMedium">
 									$ {{fv.result.totalInvestmentReturn}}
 								</b>
 							</div>
 						</div>
+						<br/>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="btn-group" role="group">
-									<button type="button" class="btn btn-secondary">BAR GRAPH</button>
-									<button type="button" class="btn btn-secondary">PIE CHART</button>
-								</div>
+								<div class="btn-toolbar">
+							        <div class="btn-group">
+							        	<label class="btn btn-default" ng-class="{active: fv.view === 'barGraph'}"><input type="radio" ng-model="fv.view" value="barGraph" class="mpButtonGroupRadio">Bar Graph</label>
+							        	<label class="btn btn-default" ng-class="{active: fv.view === 'pieChart'}"><input type="radio" ng-model="fv.view" value="pieChart" class="mpButtonGroupRadio">Pie Chart</label>
+							        </div>
+							    </div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<mp-future-value-charts data="fv.chartData" future-value-pie-chart-labels="fv.futureValuePieChartLabels">
-									<div id="futureValueStackColumnChart" ></div><br/>
+									<div id="futureValueStackColumnChart" ng-show="fv.view === 'barGraph'"></div><br/>
 
-									<div class="row">
-										<div class="col-md-6">
-											<div id="futureValuePieChart"></div><br/>
+									<div class="row" ng-show="fv.view === 'pieChart'">
+										<div class="col-md-5">
+											<div id="futureValuePieChart"></div>
 										</div>
 									
-										<div class="col-md-6">
+										<div class="col-md-7">
 											<br/>
 											<br/>
 											<div ng-repeat="fvLabels in fv.futureValuePieChartLabels track by $index">
@@ -105,8 +108,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12" ng-show="fv.input.years && fv.result.costOfWaiting">
-								<div>Cost of waiting {{fv.input.yearsBeforeContributing}} years</div>
-								<b>$ {{fv.result.costOfWaiting}}</b><br/>
+								<div>Cost of waiting {{fv.input.yearsBeforeContributing}} years <b>$ {{fv.result.costOfWaiting}}</b></div>
 							</div>
 						</div>
 

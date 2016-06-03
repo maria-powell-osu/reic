@@ -3,10 +3,22 @@ App.factory('FutureValueCalculator', function() {
 	return {
 		calculateResults: function (userInput){
 			return futureValueCalculations(userInput);
+		},
+		defaultEmptyGraphs: function (){
+			return defaultEmptyGraphs();
 		}
+
 	}
 });
 
+function defaultEmptyGraphs() {
+	var result = {};
+
+	result.futureValueChart = createFutureValueChartData(0,0,0,0);
+	result.futureValuePieChart = createFutureValuePieChartData(0,0);
+
+	return result;
+}
 
 function futureValueCalculations(userInput){
 	var result = {};
@@ -82,12 +94,11 @@ function createFutureValuePieChartData(totalInvestmentReturn, totalAmountContrib
 
   	//Set up display preferences
   	result.options = {
-	    width: '100%', 
-	    height: '100%',
 	    is3D: true,
 	    legend: "none",
 	    fontSize: 11,
-	    /*pieSliceText: 'none',*/
+	    chartArea:{left:20,top:0,width:'50%',height:'75%'},
+	    pieSliceText: 'none',
 	    colors: colorArray
   	};
 
@@ -120,7 +131,12 @@ function createFutureValueChartData(p, r, years, a){
 	};
 
 	//Create the data in array format
-	var rawDataArray = createFutureValueGraphData(p, r, years, a);
+	var rawDataArray = [];
+	if(p == 0 && r == 0 && years == 0 && a == 0){
+		rawDataArray = [0, 1, 0];
+	}else{
+		rawDataArray = createFutureValueGraphData(p, r, years, a);
+	}
 
 	//Add columns to the data 
 	chartData.push(["Year", "Amount Contributed", "Interest Earned"]);

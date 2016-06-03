@@ -3,6 +3,15 @@ App.controller("FutureValueCalculatorController", function($scope, FutureValueCa
 	vm.input = {};
 	vm.result = {};
 
+	//Default Values
+	vm.view = "barGraph";
+	vm.result.futureValue = 0;
+	vm.result.totalAmountContributed = 0;
+	vm.result.totalInvestmentReturn = 0;
+	vm.result.futureValueOfYears = 0;
+	vm.result.costOfWaiting = 0;
+	/*vm.chartData = FutureValueCalculator.defaultEmptyGraphs();*/
+
 	vm.calculate = function (){
 		var result = FutureValueCalculator.calculateResults(vm.input);
 

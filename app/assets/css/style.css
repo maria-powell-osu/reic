@@ -385,3 +385,7 @@ li.selected.completed + li:after {
 .dollarValueMedium {
     font-size: medium;
 }
+/*To make the radio circles disappear*/
+.mpButtonGroupRadio {
+    display: none;
+}
