@@ -3,22 +3,10 @@ App.factory('FutureValueCalculator', function() {
 	return {
 		calculateResults: function (userInput){
 			return futureValueCalculations(userInput);
-		},
-		defaultEmptyGraphs: function (){
-			return defaultEmptyGraphs();
 		}
 
 	}
 });
-
-function defaultEmptyGraphs() {
-	var result = {};
-
-	result.futureValueChart = createFutureValueChartData(0,0,0,0);
-	result.futureValuePieChart = createFutureValuePieChartData(0,0);
-
-	return result;
-}
 
 function futureValueCalculations(userInput){
 	var result = {};
@@ -43,6 +31,8 @@ function futureValueCalculations(userInput){
 		//Calculate future value of waited xx years
 		result.futureValueOfYears = Math.round(calculateFutureValueLumpSum(p, r, w) + calculateFutureValueAnnuity(a, r, w));
 
+		result.resultPercent = Math.round(calculatePercent(result.totalInvestmentReturn, result.totalAmountContributed));
+
 		//Calculate cost of waiting
 		result.costOfWaiting = Math.round(calculateCostOfWaiting(result.futureValue, result.futureValueOfYears));
 
@@ -51,9 +41,35 @@ function futureValueCalculations(userInput){
 
 		//data for future value pie chart
 		result.dataForVisuals.futureValuePieChart = createFutureValuePieChartData(result.totalInvestmentReturn, result.totalAmountContributed);
+	
+
+		//data for future value return gauge
+		result.dataForVisuals.futureValueGauge = createFutureValueGauge(result.resultPercent);
 	} else {
 		result = 0;
 	}
+
+	return result;
+}
+
+
+function createFutureValueGauge(returnPercent){
+	var result = {};
+
+	result.data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Return %', returnPercent]
+        ]);
+
+	var gaugeMax = returnPercent > 100 ? returnPercent : 100; 
+
+    result.options = {
+          width: 400, height: 120,
+          greenFrom: 50, greenTo: gaugeMax,
+          redFrom: 0, redTo: 20,
+          yellowFrom:20, yellowTo: 50,
+          minorTicks: 5
+        };
 
 	return result;
 }
@@ -172,6 +188,18 @@ function createFutureValueGraphData(p, r, years, a){
 		dataRow.push(interestEarned);
 
 		result.push(dataRow);
+	}
+
+	return result;
+}
+
+function calculatePercent (totalInvestmentReturn, totalAmountContributed){
+	var result;
+
+	if(totalInvestmentReturn !== null && totalAmountContributed !== null){
+		result = (totalInvestmentReturn / totalAmountContributed) * 100;
+	}else{
+		result = 0;
 	}
 
 	return result;

@@ -10,7 +10,6 @@ App.controller("FutureValueCalculatorController", function($scope, FutureValueCa
 	vm.result.totalInvestmentReturn = 0;
 	vm.result.futureValueOfYears = 0;
 	vm.result.costOfWaiting = 0;
-	/*vm.chartData = FutureValueCalculator.defaultEmptyGraphs();*/
 
 	vm.calculate = function (){
 		var result = FutureValueCalculator.calculateResults(vm.input);
@@ -21,6 +20,7 @@ App.controller("FutureValueCalculatorController", function($scope, FutureValueCa
 			vm.result.totalInvestmentReturn = result.totalInvestmentReturn;
 			vm.result.futureValueOfYears = result.futureValueOfYears;
 			vm.result.costOfWaiting = result.costOfWaiting;
+			vm.result.resultPercent = result.resultPercent;
 
 			//A watch has been added in the mp-charts directive that triggers drawing of the graphs
         	vm.chartData = result.dataForVisuals;

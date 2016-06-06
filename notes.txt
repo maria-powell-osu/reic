@@ -1,10 +1,17 @@
 Where I left of:
+	- round downpayment percentage
+	- remove req for unit name
+	- prefill vacancy rate 5% and prefill purchase date to today
+	- check why asterix does not display 
+	- discuss the scale with jason and the overtime step
+	- typical Cap rate on area - discuss with Jason
 	- if specialTermsLoan-interest-only = yes, amortization is not required
 	- I still want to change the way the required fields get communicated
 	- page should hop back on top when next button gets hit
  	
 
 Worklist:
+	- make navbar collaps by itself
 	- I Could probably create a shared directive for the different types of charts
 	- I need to make the loader div go to the whole page even when scrolling
 	- do I still need jquery ui?

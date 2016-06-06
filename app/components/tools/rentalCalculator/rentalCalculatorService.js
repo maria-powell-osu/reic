@@ -21,17 +21,20 @@ App.factory('RentalCalculator', function() {
 		},
 		steps: function () {
 			var steps = [
-		      {
+		      /*{
 		        index: 0, view: "bp", display: "Property Info"
+		      },*/
+		      {
+		        index: 0, view: "li", display: "Loan Info"
 		      },
 		      {
-		        index: 1, view: "li", display: "Loan Info"
+		        index: 1, view: "in", display: "Income"
 		      },
 		      {
-		        index: 2, view: "in", display: "Income"
+		        index: 2, view: "exp", display: "Expenses"
 		      },
 		      {
-		        index: 3, view: "exp", display: "Expenses"
+		        index: 3, view: "time", display: "Inflation"
 		      },
 		      {
 		        index: 4, view: "res", display: "Result"

@@ -8,11 +8,14 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.calculating = false;
     vm.currStep = vm.steps[0].index; //Initialize default Views
     vm.currView = vm.steps[vm.currStep].view;
+    vm.userWantedToProceed = false;
     
     //Progress Step Bar Functions
     vm.next = function (form){
       vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
       vm.currView = vm.steps[vm.currStep].view;
+      //reset once entered the new view
+      vm.userWantedToProceed = false;
     };
     vm.jumpTo = function (jumpToIndex, form){
       var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex;
@@ -23,7 +26,11 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         } else {
           vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
           vm.currView = vm.steps[vm.currStep].view;
+          //reset once entered the new view
+          vm.userWantedToProceed = false;
         }
+      } else {
+        vm.userWantedToProceed = true;
       }
     };
     vm.prev = function (form){
@@ -41,6 +48,8 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         //Route to the results page
         vm.currStep = vm.totalSteps - 1;
         vm.currView = vm.steps[vm.currStep].view;
+      } else {
+        vm.userWantedToProceed = true;
       }
     };
 

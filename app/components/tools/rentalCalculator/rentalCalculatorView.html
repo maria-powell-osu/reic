@@ -13,22 +13,25 @@
 	<br/>
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
 		<!-- Error Messages -->
-		<div class="text-danger elemIndent" ng-class="{'disabled': !rentalCalculatorInputForm[rentalCalculator.currView].$invalid}">
+		<div class="text-danger elemIndent" ng-class="{'disabled': !rentalCalculatorInputForm[rentalCalculator.currView].$invalid}" ng-show="rentalCalculator.userWantedToProceed">
     		<b>Please Enter Required Fields Below</b>
   		</div>
   		<br/>
 		<div>
 			<!-- Basic Property Information -->
-			<div id="basicInformation" basic-property-information ng-show="rentalCalculator.currStep ==  rentalCalculator.steps[0].index"></div>
+			<!-- <div id="basicInformation" basic-property-information ng-show="rentalCalculator.currStep ==  rentalCalculator.steps[0].index"></div> -->
 			
 			<!-- Loan Information -->
-			<div id="loanInformation" loan-information ng-show="rentalCalculator.currStep == rentalCalculator.steps[1].index"></div>
+			<div id="loanInformation" loan-information ng-show="rentalCalculator.currStep == rentalCalculator.steps[0].index"></div>
 
 			<!-- Income Sources -->
-			<div id="incomeSources" income-Sources ng-show="rentalCalculator.currStep == rentalCalculator.steps[2].index"></div>  
+			<div id="incomeSources" income-sources ng-show="rentalCalculator.currStep == rentalCalculator.steps[1].index"></div>  
 
 			<!-- Expenses -->
-			<div id="expenses" expenses ng-show="rentalCalculator.currStep == rentalCalculator.steps[3].index"></div>
+			<div id="expenses" expenses ng-show="rentalCalculator.currStep == rentalCalculator.steps[2].index"></div>
+
+			<!-- Over Time Values -->
+			<div id="overTime" over-time ng-show="rentalCalculator.currStep == rentalCalculator.steps[3].index"></div>
 
 			<!-- Results -->
 			<div id="results" results ng-show="rentalCalculator.currStep == rentalCalculator.steps[4].index"></div>
@@ -43,22 +46,19 @@
 		<div class="row elemIndent">
 		<div class="col-md-10">
 			<div class="col-md-6">
-				Step {{rentalCalculator.currStep + 1}} of {{rentalCalculator.totalSteps}}
+				<button type="button" class="btn btn-info" ng-hide="rentalCalculator.currStep == rentalCalculator.steps[0].index" ng-click="rentalCalculator.prev(rentalCalculatorInputForm)">Previous</button>
 			</div>
-			<div class="col-md-offset-4 col-md-2">
-				<div class="col-md-3">
-		  			<button type="button" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep == rentalCalculator.steps[0].index" ng-click="rentalCalculator.prev(rentalCalculatorInputForm)">Previous</button>
-		  		</div>
-		  		<div class="col-md-9">		 
-		  			<!-- Next Step --> 			
-		    		<button type="button" ng-click="rentalCalculator.next(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps - 2)" ng-disabled="rentalCalculatorInputForm[rentalCalculator.currView].$invalid">Next</button>
+			<div class="col-md-6">
+				<!-- Next Step --> 			
+	    		<button type="button" ng-click="rentalCalculator.next(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps - 2)" ng-disabled="rentalCalculatorInputForm[rentalCalculator.currView].$invalid">Next</button>
 
-		    		<!-- Calculate -->
-		    		<button type="button" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-show="rentalCalculator.currStep == (rentalCalculator.totalSteps - 2)">Calculate</button>
-		    	</div>
-		    	<br/>
-		  	</div>
+	    		<!-- Calculate -->
+	    		<button type="button" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-show="rentalCalculator.currStep == (rentalCalculator.totalSteps - 2)">Calculate</button>
+			</div>
 		  </div>
 		</div>
 	</form>
 </div>
+<br/>
+<br/>
+<br/>

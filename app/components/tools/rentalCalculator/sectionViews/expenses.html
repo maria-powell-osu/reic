@@ -1,6 +1,6 @@
 <!-- Ng-form used for step validation (so the whole form does not get validated) -->
-<ng-form name="{{rentalCalculator.steps[3].view}}">
-  <div class="row">
+<ng-form name="{{rentalCalculator.steps[2].view}}">
+  <!-- <div class="row">
     <div class="col-md-10">      
       <fieldset>
       <div class="row">
@@ -31,8 +31,8 @@
       </div>
       </fieldset>
     </div>
-  </div>
-  <br/>
+  </div> 
+  <br/>-->
   <h3>Utilities</h3>
   <div class="row">
     <div class="col-md-10">
@@ -44,16 +44,22 @@
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_water" placeholder="$">
               <span class="input-group-addon">$/month</span>
             </div>
-            <br/>
             <label>Sewer</label>
             <div class="input-group">
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_sewer" placeholder="$">
               <span class="input-group-addon">$/month</span>
             </div>
-            <br/>
             <label>Garbage</label>
             <div class="input-group">
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_garbage" placeholder="$">
+              <span class="input-group-addon">$/month</span>
+            </div>
+          
+            <label>
+              Yard
+            </label>
+            <div class="input-group">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_yardMaintenance" placeholder="$">
               <span class="input-group-addon">$/month</span>
             </div>
           </div>
@@ -63,13 +69,13 @@
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_electricity" placeholder="$">
               <span class="input-group-addon">$/month</span>
             </div>
-            <br/>
+            
             <label>Natural Gas</label>
             <div class="input-group">
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_naturalGas" placeholder="$">
               <span class="input-group-addon">$/month</span>
             </div>
-            <br/>
+          
             <label>Internet</label>
             <div class="input-group">
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.u_internet" placeholder="$">
@@ -95,12 +101,12 @@
           <div class="row">
             <div class="col-md-6">
               <label>Utility Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description" name="add_u_name{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_amount" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_name{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_name"  placeholder="Description" name="add_u_name{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_amount" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.add_u_name{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
             </div>
             <div class="col-md-6">
               <label>Utility Amount</label>
               <div class="input-group">
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$" name="add_u_amount{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_name" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_u_amount{{$index}}.$invalid}">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.addedUtilities[$index].add_u_amount" placeholder="$" name="add_u_amount{{$index}}" ng-required="rentalCalculator.input.addedUtilities[$index].add_u_name" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.add_u_amount{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
                 <span class="input-group-addon">$/month</span>
               </div>
             </div>
@@ -144,20 +150,12 @@
     </div>
   </div>
 
-  <h3>Other</h3>
+  <h3>Other Costs</h3>
   <div class="row">
     <div class="col-md-10">
       <fieldset>
         <div class="row">
           <div class="col-md-6">
-            <label>
-              Yard Maintenance
-            </label>
-            <div class="input-group">
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_yardMaintenance" placeholder="$">
-              <span class="input-group-addon">$/month</span>
-            </div>
-            <br/>
             <label>
               Vacancy Rate
               <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.vacancyText}}"> 
@@ -168,16 +166,7 @@
               <input type="number" step="0.001" class="inpt form-control" ng-model="rentalCalculator.input.o_vacancyRate" placeholder="%">
               <span class="input-group-addon">%</span>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label>
-              Insurance
-            </label>
-            <div class="input-group">
-              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_insurance" placeholder="$">
-              <span class="input-group-addon">$/month</span>
-            </div>
-            <br/>
+           
             <label>
               Property Taxes
               <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.propTaxText}}"> 
@@ -187,6 +176,15 @@
             <div class="input-group">
               <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_propertyTaxes" placeholder="$">
               <span class="input-group-addon">$/year</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>
+              Insurance
+            </label>
+            <div class="input-group">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.o_insurance" placeholder="$">
+              <span class="input-group-addon">$/month</span>
             </div>
           </div>
         </div>
@@ -206,12 +204,12 @@
           <div class="row">
             <div class="col-md-6">
               <label>Expense Name</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description" name="add_e_name{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_name{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_name" placeholder="Description" name="add_e_name{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.add_e_name{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
             </div>
             <div class="col-md-6">
               <label>Cost</label>
               <div class="input-group">
-                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$" name="add_e_cost{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_name" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.add_e_cost{{$index}}.$invalid}">
+                <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.addedExpenses[$index].add_e_cost" placeholder="$" name="add_e_cost{{$index}}" ng-required="rentalCalculator.input.addedExpenses[$index].add_e_name" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.add_e_cost{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
                 <span class="input-group-addon">$/month</span>
               </div>
             </div>
@@ -220,7 +218,6 @@
       </div>
     </div>
   </div>
-  <br/>
   <div ng-click="rentalCalculator.addExpense()">
     <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
     <label>Add Other Expense</label>
@@ -243,7 +240,7 @@
               <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.pm_managementFeePercent" placeholder="%" ng-change="rentalCalculator.calculateFieldExpenses('managementPercent')">
               <span class="input-group-addon">%</span>
             </div>
-            <br/>
+           
             <label>
               Tenant Placement Fee
               <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.tenantPlacementText}}"> 
@@ -269,10 +266,7 @@
     </div>
   </div>
   <br/>
-  <h3>Capital Expenditures
-   <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.capitalExpendituresText}}"> 
-                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
-              </a></h3>
+  <h3>Repairs & Improvements</h3>
   <div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
     <br/>
     <div class="row">
@@ -285,29 +279,54 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <label>Description</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="ce_description{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_description{{$index}}.$invalid}">
+              <label>
+                Capital Expentiture (CAPEX)
+                <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.capitalExpendituresText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
+              </label>
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="ce_description{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.ce_description{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
             </div>
             <div class="col-md-4">
               <label>Cost</label>
               <div class="input-group">
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="ce_cost{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_cost{{$index}}.$invalid}">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="ce_cost{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.ce_cost{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
                 <span class="input-group-addon">$</span>
               </div>
             </div>
             
             <div class="col-md-4">
               <label>Date</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="ce_date{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[3].view}}.ce_date{{$index}}.$invalid}">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="ce_date{{$index}}" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_cost" ng-class="{inValidField: !!{{rentalCalculator.steps[2].view}}.ce_date{{$index}}.$invalid && rentalCalculator.userWantedToProceed}">
             </div>
           </div>
         </fieldset>
       </div>
     </div>
   </div>
-  <br/>
   <div ng-click="rentalCalculator.addCapitalExpenditure()">
     <span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
     <label>Add Capital Expediture</label> 
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-md-10 form-group">
+      <fieldset>
+        <div class="row">
+          <div class="col-md-12">
+            <label>
+              After Repair Value
+              <a rel="mpTooltip" mp-tooltip="{{rentalCalculator.arvText}}"> 
+                <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
+              </a>
+            </label>
+            <div class="input-group">
+              <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.e_arv" placeholder="$">
+              <span class="input-group-addon">$</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
 </ng-form>

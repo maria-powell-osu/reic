@@ -26,9 +26,23 @@
             if(scope.data){
                 createStackedColumnChart();
                 createPieChart();
+                createGauge();
             }
           }
         }, true); //deep object equlity checking
+      }
+
+      function createGauge() {
+        var gaugeElement = $("#futureValueGauge")[0],
+            rawData = scope.data.futureValueGauge;
+
+
+        var chart = new google.visualization.Gauge(gaugeElement);
+
+        /*To ensure that the table data gets updated*/
+        $timeout(function() {
+          chart.draw(rawData.data, rawData.options);
+        });
       }
 
       function createPieChart(){

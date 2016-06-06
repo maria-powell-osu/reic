@@ -1,9 +1,18 @@
 /* Basic Property Information
  * Loads template into rentalCalculatorInput.html
  */
- App.directive('basicPropertyInformation', function() {
+/* App.directive('basicPropertyInformation', function() {
   return {
     templateUrl: '/app/components/tools/rentalCalculator/sectionViews/basicPropertyInformation.html'
+  };
+});*/
+
+/* Basic Property Information
+ * Loads template into rentalCalculatorInput.html
+ */
+ App.directive('overTime', function() {
+  return {
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/overTime.html'
   };
 });
 
@@ -275,55 +284,4 @@ App.directive("mpTooltip", function($timeout) {
     }
   };
 });
-
-/* App.directive('mpCashFlowProjectionTable', function($timeout) {
-  return {
-    restrict: 'E', 
-    scope: {
-      data: '=data',
-      calculating: '=calculating',
-    },
-    link: function (scope, element, attrs, ctrl) {
-
-      //Added to ensure that google loads charts fully before drawing charts
-      google.charts.setOnLoadCallback(processTable);
-
-      //Callback function
-      function processTable(){
-        
-        //Watches, to refresh the chart when data object changes
-        scope.$watch('data', function (newValue, oldValue) {
-          
-          if (newValue !== oldValue) {
-            var table,
-              data = new google.visualization.DataTable(),
-              tableElement = element[0];
-
-            //For Error Handling
-            if(scope.data){
-              scope.calculating = true;      
-     
-              //Add Table Columns
-              (scope.data.columns).forEach(function(column) {
-                data.addColumn('number', column);
-              });
-
-              //Add Table Rows
-              data.addRows(scope.data.rows);
-
-              //Create Table
-              table = new google.visualization.Table(tableElement);
-
-              $timeout(function () {
-                table.draw(data, scope.options);
-              });
-
-              scope.calculating = false;
-            }
-          }
-        });
-      }
-    }
-  };
-});*/
 

@@ -34,6 +34,12 @@ a.navbar-brand {
     width: 100%;
     z-index:3;
 }
+.row  .row {
+    margin: 0px -15px;
+}
+label {
+    margin-top:15px !important;
+}
 .inpt
 {
 	border: solid 1pt #E0E0E0;
