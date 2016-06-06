@@ -224,26 +224,35 @@ fieldset{
     content: none;
 }
 
-/*Sets the active circle to be green*/
+/*Sets the active circle*/
 .progressbar li.active:before {
     /*border-color: dodgerblue;*/
     background: #5bc0de;
     color:white;
+    cursor: pointer;
 }
 
 /*Sets the currently selected circle to darker blue*/
 .progressbar li.selected:before {
     background: #51acc7;
     color: white;
+    cursor: pointer;
 }
 
-/*Sets the line color after the active item if the section is marked as completed*/
+/*Sets the line after bublle if the section is marked as completed*/
 li.completed + li:after {
     background-color: #5bc0de;
     color: white;
 }
 
-/*Sets the line color of selected section to be darker blue if also marked as completed*/
+/*Sets bubble after the active item if the section is marked as completed*/
+li.completed + li:before {
+    background-color: #5bc0de;
+    color: white;
+    cursor: pointer;
+}
+
+/*Sets the line color of selected section to be darker blue if also marked as selected*/
 li.selected.completed + li:after {
     background-color: #51acc7 !important;
     color: white;
@@ -395,3 +404,6 @@ li.selected.completed + li:after {
 .mpButtonGroupRadio {
     display: none;
 }
+/*a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, li.completed + li:after {
+       cursor: pointer;
+}*/

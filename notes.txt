@@ -1,7 +1,4 @@
 Where I left of:
-	- round downpayment percentage
-	- remove req for unit name
-	- prefill vacancy rate 5% and prefill purchase date to today
 	- check why asterix does not display 
 	- discuss the scale with jason and the overtime step
 	- typical Cap rate on area - discuss with Jason

@@ -18,8 +18,17 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.userWantedToProceed = false;
     };
     vm.jumpTo = function (jumpToIndex, form){
-      var previousIndex = jumpToIndex != 0 ? jumpToIndex - 1 : jumpToIndex;
-      if(form[vm.steps[previousIndex].view].$valid)  {
+      var canProceed = true;
+
+      //This checks if all forms up to the jumpToIndex are valid
+      for(var i = 0; i < jumpToIndex; i++){
+        if(!form[vm.steps[i].view].$valid){
+          canProceed = false;
+        }
+      }
+
+      //If all previous steps have been validated then jump
+      if(canProceed)  {
         //Here we need to see if the step was ac
         if(jumpToIndex === vm.totalSteps - 1){
           vm.calculate(form);
@@ -77,6 +86,8 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.input.bp_assumedAppreciation = 3;
     vm.input.ri_annualRentIncrease = 3;
     vm.input.e_annualExpenseIncrease = 3;
+    vm.input.li_purchaseDate = getCurrentDate();
+    vm.input.o_vacancyRate = 5;
 
 
     //To follow are all add or delete functions
@@ -227,3 +238,19 @@ App.controller('FileController', ['$scope', function ($scope){
 	 $scope.imgUpload = {};
 	 $scope.imgUpload.src = '';
 }]);
+
+function getCurrentDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+    var result = yyyy+'-'+mm+'-'+dd;
+    return result;
+}
