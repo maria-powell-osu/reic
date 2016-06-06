@@ -16,6 +16,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.currView = vm.steps[vm.currStep].view;
       //reset once entered the new view
       vm.userWantedToProceed = false;
+      $(window).scrollTop(0);
     };
     vm.jumpTo = function (jumpToIndex, form){
       var canProceed = true;
@@ -45,6 +46,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.prev = function (form){
       vm.currStep = RentalCalculator.prevStep(vm.currStep);
       vm.currView = vm.steps[vm.currStep].view;
+      $(window).scrollTop(0);
     };
     vm.calculate = function (form){
       if(form.$valid)  {
