@@ -247,8 +247,6 @@ li.completed + li:after {
 
 /*Sets bubble after the active item if the section is marked as completed*/
 li.completed + li:before {
-    background-color: #5bc0de;
-    color: white;
     cursor: pointer;
 }
 

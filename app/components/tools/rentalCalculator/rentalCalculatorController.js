@@ -9,6 +9,11 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.currStep = vm.steps[0].index; //Initialize default Views
     vm.currView = vm.steps[vm.currStep].view;
     vm.userWantedToProceed = false;
+
+    //Default View Settings for result view
+    vm.cashFlowView = 'graph';
+    vm.cashOnEquityView = 'graph';
+    vm.totalReturnView = 'graph';
     
     //Progress Step Bar Functions
     vm.next = function (form){

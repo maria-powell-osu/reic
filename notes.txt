@@ -1,9 +1,10 @@
 Where I left of:
+	- design front page sliders
+	- design new results page
+	- comment service with gae
 	- discuss the scale with jason and the overtime step
 	- typical Cap rate on area - discuss with Jason
 	- if specialTermsLoan-interest-only = yes, amortization is not required
-	- I still want to change the way the required fields get communicated
-	- page should hop back on top when next button gets hit
  	
 
 Worklist:
@@ -13,16 +14,6 @@ Worklist:
 	- do I still need jquery ui?
 	- You need to add test handler
 	- optimize the add and remove data functions -- and other controller functions
-
-	- 
-To Discuss with Jason:
-	- color too neo like
-	- color order should be different (especially the green shades)
-	- I need testing that the color orders are right
-	- 
-Notes:
-	- 
-
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
@@ -40,7 +31,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 186
+	Coding: 193
 
 Rachael:
 	- calculator

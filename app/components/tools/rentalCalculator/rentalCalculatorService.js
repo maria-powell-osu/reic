@@ -135,7 +135,7 @@ function createCashFlowTable(form) {
 	var tableData = {};
 	
 	//Create Columns
-	tableData.columns = ["Year", "Income", "Expenses", "CAPEX ", "Loan PMT", "Cash Flow", "Cash on Cash"];
+	tableData.columns = ["Year", "Income ($)", "Expenses ($)", "CAPEX ($)", "Loan PMT ($)", "Cash Flow ($)", "Cash on Cash (%)"];
 
   	//Create Rows
   	tableData.rows = createCashFlowDataRows(tableData.columns, form);
@@ -483,7 +483,7 @@ function createTotalReturnTable (form) {
 	var tableData = {};
 
 	//Create Columns
-	tableData.columns = ["Year", "Appreciation", "Loan Paydown", "Cash Flow", "Total Return ($)", "Total Return (%)"];
+	tableData.columns = ["Year", "Appreciation ($)", "Loan Paydown ($)", "Cash Flow ($)", "Total Return ($)", "Total Return (%)"];
 
   	//Create Rows
   	tableData.rows = createTotalReturnDataRows(tableData.columns, form);
@@ -498,7 +498,7 @@ function createCashOnEquityTable (form) {
 	var tableData = {};
 	
 	//Create Columns
-	tableData.columns = ["Year", "Property Value", "Remaining Loan", "Equity", "Cash Flow", "Cash on Equity"];
+	tableData.columns = ["Year", "Property Value ($)", "Remaining Loan ($)", "Equity ($)", "Cash Flow ($)", "Cash on Equity (%)"];
 
   	//Create Rows
   	tableData.rows = createCashOnEquityTableDataRows(tableData.columns, form);
