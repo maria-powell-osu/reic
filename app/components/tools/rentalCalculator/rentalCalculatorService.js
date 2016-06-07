@@ -25,19 +25,19 @@ App.factory('RentalCalculator', function() {
 		        index: 0, view: "bp", display: "Property Info"
 		      },*/
 		      {
-		        index: 0, view: "li", display: "Loan Info"
+		        index: 0, view: "li", display: "Loan Info", activated: true
 		      },
 		      {
-		        index: 1, view: "in", display: "Income"
+		        index: 1, view: "in", display: "Income", activated: false
 		      },
 		      {
-		        index: 2, view: "exp", display: "Expenses"
+		        index: 2, view: "exp", display: "Expenses", activated: false
 		      },
 		      {
-		        index: 3, view: "time", display: "Inflation"
+		        index: 3, view: "time", display: "Assumptions", activated: false
 		      },
 		      {
-		        index: 4, view: "res", display: "Result"
+		        index: 4, view: "res", display: "Result", activated: false
 		      },
     		];
     		return steps;
@@ -421,9 +421,6 @@ function createExpensePieChart(form){
     }
     if (form.u_naturalGas){
         dataArray.push(["Natural Gas", form.u_naturalGas]);
-    }
-    if (form.u_internet){
-        dataArray.push(["Internet", form.u_internet]);
     }
     if (form.m_costAmount){
         dataArray.push(["Cost Amount", form.m_costAmount]);
@@ -1407,7 +1404,6 @@ function calculateFirstYearExpense (firstYearIncome, form){
 		garbage = form.u_garbage || 0,
 		electricity = form.u_electricity || 0,
 		naturalGas = form.u_naturalGas || 0,
-		internet = form.u_internet || 0,
 		maintenanceCost = form.m_costAmount || 0,
 		yardMaitenance = form.o_yardMaintenance || 0,
 		insurance = form.o_insurance || 0,
@@ -1420,7 +1416,7 @@ function calculateFirstYearExpense (firstYearIncome, form){
 		//add up all monthly default utility costs and 
 		monthlyExpenses = water + sewer + garbage
 			+ electricity + naturalGas
-			+ internet + maintenanceCost
+			+ maintenanceCost
 			+ yardMaitenance + insurance
 			+ managementFee;
 

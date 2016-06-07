@@ -402,6 +402,6 @@ li.selected.completed + li:after {
 .mpButtonGroupRadio {
     display: none;
 }
-/*a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer, li.completed + li:after {
-       cursor: pointer;
-}*/
+.mpProfit {
+    color: green;
+}

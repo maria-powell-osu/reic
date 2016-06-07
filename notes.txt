@@ -1,11 +1,8 @@
 Where I left of:
-	- mm/dd/yyyy
-	- interest earned in green and name it "profit"
 	- Delete "Internet" and Change "Yard" to "Yard Care"
 	- Make Utilities 3 wide instead of 2 wide
 	- Make"other costs" 3 wide
 	- Make ARV shorter
-	- When hopping back a step in the inputs, keep existing steps blue
 	- Change step 4 to "Assumptions", put all 3 inputs on one row, change title to "Assumed Property Appreciation"
 	- Cash Flow guage: 5 year Average of cash on cash return % "0-5 Red 5-10 yello 10+ Green"
 	- Total Return gauge: 5 year avg of total return % (0-10 red, 10-15 yellow, 15+green)

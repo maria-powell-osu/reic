@@ -5,7 +5,10 @@
 	<div class="row">
 		<div class="progressbarContainer">
 			<ul class="progressbar" >
-				<li ng-repeat="step in rentalCalculator.steps" ng-attr-id="step.index" ng-class="{active: rentalCalculator.currStep>=step.index, selected:rentalCalculator.currStep==step.index, completed: rentalCalculatorInputForm[step.view].$valid && rentalCalculator.currStep>=step.index}" ng-click="rentalCalculator.jumpTo(step.index, rentalCalculatorInputForm)">{{step.display}}</li> 
+				<!-- active: when the step has opened up and is editable (bubble to blue)
+					 selected: the currrently viewed step 
+					 completed: when step has all fields need to proceed (set the line to blue and cursor)-->
+				<li ng-repeat="step in rentalCalculator.steps" ng-attr-id="step.index" ng-class="{active: rentalCalculator.currStep>=step.index || step.activated, selected:rentalCalculator.currStep==step.index, completed: rentalCalculatorInputForm[step.view].$valid && step.activated}" ng-click="rentalCalculator.jumpTo(step.index, rentalCalculatorInputForm)">{{step.display}}</li> 
 			</ul>
 		</div>
 	</div>

@@ -19,6 +19,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.next = function (form){
       vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
       vm.currView = vm.steps[vm.currStep].view;
+      vm.steps[vm.currStep].activated = true;
       //reset once entered the new view
       vm.userWantedToProceed = false;
       $(window).scrollTop(0);
@@ -35,6 +36,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
 
       //If all previous steps have been validated then jump
       if(canProceed)  {
+        vm.steps[jumpToIndex].activated = true;
         //Here we need to see if the step was ac
         if(jumpToIndex === vm.totalSteps - 1){
           vm.calculate(form);
