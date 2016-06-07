@@ -1,7 +1,21 @@
 Where I left of:
-	- design front page sliders
+	- mm/dd/yyyy
+	- interest earned in green and name it "profit"
+	- Delete "Internet" and Change "Yard" to "Yard Care"
+	- Make Utilities 3 wide instead of 2 wide
+	- Make"other costs" 3 wide
+	- Make ARV shorter
+	- When hopping back a step in the inputs, keep existing steps blue
+	- Change step 4 to "Assumptions", put all 3 inputs on one row, change title to "Assumed Property Appreciation"
+	- Cash Flow guage: 5 year Average of cash on cash return % "0-5 Red 5-10 yello 10+ Green"
+	- Total Return gauge: 5 year avg of total return % (0-10 red, 10-15 yellow, 15+green)
 	- design new results page
+	- pie charts on the same line
+	- cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
+	- monthly income - monthly expenses - mortgage(loan pmt) = +green, -red
+	- design front page sliders
 	- comment service with gae
+	- show the loader on the whole page
 	- discuss the scale with jason and the overtime step
 	- typical Cap rate on area - discuss with Jason
 	- if specialTermsLoan-interest-only = yes, amortization is not required

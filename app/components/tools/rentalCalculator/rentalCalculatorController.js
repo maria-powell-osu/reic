@@ -258,6 +258,6 @@ function getCurrentDate(){
     if(mm<10){
         mm='0'+mm
     } 
-    var result = yyyy+'-'+mm+'-'+dd;
+    var result = mm+'/'+ dd +'/'+ yyyy;
     return result;
 }

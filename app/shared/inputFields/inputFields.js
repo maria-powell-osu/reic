@@ -18,7 +18,7 @@ App.directive('jqdatepicker', function() {
         require: 'ngModel',
         link: function(scope, element, attrs, ctrl) {
             $(element).datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'mm/dd/yy',
                 changeMonth: true,
                 changeYear: true,
                 onSelect: function(date) {
