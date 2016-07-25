@@ -121,14 +121,76 @@ function rentalCalculations(form) {
 
     result.cashFlowProjectionTable = createCashFlowTable(form);
     result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
+    result.cashFlowAvg = createCashFlowAvg(form);
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
     result.cashOnEquityTable = createCashOnEquityTable(form);
     result.cashOnEquityChart = createCashOnEquityComboChart(form);
     result.totalReturnTable = createTotalReturnTable(form);
     result.totalReturnStackedBarChart = createTotalReturnStackedBarChart(form);
+    result.totalReturnAvg = createTotalReturnAvg(form);
+    result.summaryData = createSummaryData(form);
 
 	return result;
+}
+
+function createSummaryData(form){
+	var resultData = [],
+		income = 1,
+		expense = 2,
+		cashFlow = 5,
+		cashOnCash = 6,
+		firstYear = 0,
+		loanPmt = 4;
+
+	//cash flow 
+	resultData.cashFlow = Math.round(form.cashFlowTableData[firstYear][cashFlow] /12);
+
+	//income
+	resultData.income = Math.round(form.cashFlowTableData[firstYear][income] /12);
+
+	//expense
+	resultData.expense = Math.round((form.cashFlowTableData[firstYear][expense] + form.cashFlowTableData[firstYear][loanPmt]) /12);
+
+	//cash on cash roi
+	resultData.cashOnCash = Math.round(form.cashFlowTableData[firstYear][cashOnCash]);
+
+	//cap rate
+	resultData.capRate = Math.round(((resultData.income - form.cashFlowTableData[firstYear][expense]) / form.li_purchasePrice) *100);
+
+	return resultData;
+}
+
+function createCashFlowAvg(form){
+	var resultAvg,
+		tableData = form.cashFlowTableData,
+		cashOnCash = 6,
+		cashOnCashSum = 0;
+
+
+	for(var i = 0; i < 5; i++){
+		cashOnCashSum += tableData[i][cashOnCash];
+	}
+	
+	resultAvg = Math.round(cashOnCashSum / 5);
+
+	return resultAvg;
+}
+
+function createTotalReturnAvg(form) {
+	var resultAvg,
+		tableData = form.totalReturnTableData,
+		totalReturn = 5,
+		totalReturnSum = 0;
+
+	for(var i = 0; i < 5; i++){
+		totalReturnSum += tableData[i][totalReturn];
+	}
+	
+	resultAvg = Math.round(totalReturnSum / 5);
+
+	return resultAvg;
+
 }
 
 function createCashFlowTable(form) {
@@ -189,41 +251,6 @@ function createCashOnEquityComboChart (form) {
 	return result;
 }
 
-/*function createTotalReturnStackedBarChart (form) {
-	var result = {},
-		chartData = [],
-		rawDataArray = form.totalReturnTableData,
-		year = 0,
-		appreciation = 1,
-		loanPaydow = 2,
-		cashFlow = 3;
-
-	result.options = {
-		isStacked: true,
-        height: 300,
-        legend: {position: 'top', maxLines: 3},
-        vAxis: {minValue: 0, title: 'Total Return ($)'},
-        hAxis: {title: 'Years'},
-	};
-
-	//Add columns to the data 
-	chartData.push(["Year", "Cash Flow", "Appreciation", "Loan Paydown",  { role: 'annotation' } ]);
-
-	//Add data rows to the data
-	rawDataArray.forEach(function(row) {
-		var dataRow = [];
-		dataRow.push(row[year]);
-		dataRow.push(row[cashFlow]);	
-		dataRow.push(row[appreciation]);	
-		dataRow.push(row[loanPaydow]);
-		dataRow.push('');
-		chartData.push(dataRow);
-	});
-
-	result.data = chartData;
-
-	return result;
-}*/
 function createTotalReturnStackedBarChart(form){
 	var result = {},
 		chartData = [],
@@ -272,6 +299,7 @@ function createTotalReturnStackedBarChart(form){
 	});
 
 	result.data = chartData;
+
 
 	return result;
 }

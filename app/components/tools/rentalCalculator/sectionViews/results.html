@@ -1,10 +1,57 @@
 
 <mp-charts data="rentalCalculator.chartData" calculating="rentalCalculator.calculating" income-pie-chart-labels="rentalCalculator.incomePieChartsLabels" 
 expense-pie-chart-labels="rentalCalculator.expensePieChartLabels">
-	<h2>CASH FLOW</h2>
-	<p>Am I making more money or loosing money?</p>
-	<hr>
+	<div class="row">
+		<div class="col-md-2 mpBoxSpacing ">
+			CASH FLOW
+			<div class="dollarValueLarge">
+				$ {{rentalCalculator.chartData.summaryData.cashFlow}}
+			</div>
+			
+		</div>
+		<div class="col-md-2 mpBoxSpacing mpGreen">
+			INCOME
+			<div class="dollarValueLarge">
+				$ {{rentalCalculator.chartData.summaryData.income}}
+			</div>
+		</div>
+		<div class="col-md-2 mpBoxSpacing mpRed">
+			EXPENSES
+			<div class="dollarValueLarge">
+				$ {{rentalCalculator.chartData.summaryData.expense}}
+			</div>
+		</div>
+		<div class="col-md-2 mpBoxSpacing">
+			CASH ON CASH ROI
+			<div class="dollarValueLarge">
+				{{rentalCalculator.chartData.summaryData.cashOnCash}}%
+			</div>
+		</div>	
+		<div class="col-md-2 mpBoxSpacing">
+			CAP RATE
+			<div class="dollarValueLarge">
+				{{rentalCalculator.chartData.summaryData.capRate}}%
+			</div>
+		</div>
+		<div class="col-md-2" style="line-height=50px;">
+			FIRST MONTH VALUES
+		</div>
+ 	</div>
+ 	<hr/>
 	
+	<div class="row">
+		<div class="col-md-6">
+			<h2>CASH FLOW <span class="glyphicon glyphicon-facetime-video"></span></h2>
+			<p>Am I making more money or loosing money?</p>
+		</div>
+		<div class="col-md-3 col-md-offset-3" id="cashFlowGauge"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-md-offset-9">
+			{{rentalCalculator.chartData.cashFlowAvg}}% Cash Return
+		</div>
+	</div>
+	<hr>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="btn-toolbar">
@@ -20,8 +67,18 @@ expense-pie-chart-labels="rentalCalculator.expensePieChartLabels">
 	<div id="cashFlowProjectionTable" ng-show="rentalCalculator.cashFlowView === 'table'"></div><br/>
 
 	<br/>
-	<h2>TOTAL RETURN</h2>
-	<p>How much money did I make overall?</p>	
+	<div class="row">
+		<div class="col-md-6">
+			<h2>TOTAL RETURN</h2>
+			<p>How much money did I make overall?</p>
+		</div>
+		<div class="col-md-3 col-md-offset-3" id="totalReturnGauge"></div>
+	</div>	
+	<div class="row">
+		<div class="col-md-3 col-md-offset-9">
+			{{rentalCalculator.chartData.totalReturnAvg}}% Total Return
+		</div>
+	</div>
 	<hr>
 	<div class="row">
 		<div class="col-md-12">

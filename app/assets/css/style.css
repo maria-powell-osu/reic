@@ -226,7 +226,6 @@ fieldset{
 
 /*Sets the active circle*/
 .progressbar li.active:before {
-    /*border-color: dodgerblue;*/
     background: #5bc0de;
     color:white;
     cursor: pointer;
@@ -405,3 +404,19 @@ li.selected.completed + li:after {
 .mpProfit {
     color: green;
 }
+.mpGreen {
+    color: green;
+}
+.mpRed {
+    color:red;
+}
+/*.mpBoxShadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mpBoxHeight {
+    height: 150px;
+}
+.mpBoxSpacing {
+    margin-right: 20px;
+}*/

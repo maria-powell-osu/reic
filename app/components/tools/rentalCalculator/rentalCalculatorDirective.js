@@ -109,6 +109,9 @@ App.directive("mpTooltip", function($timeout) {
               createTotalReturnTable();
               createTotalReturnStackedBarChart();
 
+              drawGauge('cashFlowGauge', scope.data.cashFlowAvg, '%', 0, 5, 5, 10, 10, 100, 20);
+              drawGauge('totalReturnGauge', scope.data.totalReturnAvg, '%', 0, 10, 10, 15, 15, 100, 30);
+
               //Stop the page loader
               setTimeout(function(){ 
                  scope.calculating = false;
@@ -120,6 +123,25 @@ App.directive("mpTooltip", function($timeout) {
           }
         }, true); //deep object equlity checking
       }
+
+      function drawGauge(gaugeElementName, value, valueSuffix='', redFrom, redTo, yellowFrom,yellowTo,greenFrom,greenTo, maxValue){
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          [value + valueSuffix, {v:value, f:''}],
+        ]);
+
+        var options = {
+          width: 300, height: 100,
+          redFrom: redFrom, redTo: redTo,
+          yellowFrom:yellowFrom, yellowTo: yellowTo,
+          greenFrom: greenFrom, greenTo: greenTo,
+          max: maxValue
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById(gaugeElementName));
+
+        chart.draw(data, options);
+      } 
 
       function createExpensePieChart() {
         var chartElement = $('#expensePieChart')[0],
@@ -284,4 +306,40 @@ App.directive("mpTooltip", function($timeout) {
     }
   };
 });
+
+/*function createGauge(canvasElementName) {
+        //Gauge sizing & Architecture
+        var canvas = $('#' + canvasElementName)[0];
+
+        if (canvas){
+          var context = canvas.getContext('2d'),
+            x = canvas.width / 2,
+            y = canvas.height, //move this to not center the height in rect
+            radius = 75,
+            startAngle = 1 * Math.PI,
+            endAngle = 0,
+            counterClockwise = false,
+            percent = 120;
+
+          //Draw the Gauge
+          context.beginPath();
+          context.arc(x, y, radius, startAngle, endAngle);
+          context.strokeStyle = 'lightgray';
+          context.lineWidth = 25;
+          context.stroke();
+
+          //Draw the percent indicator
+          var endPercent = ((percent / 100) + 1) * Math.PI;
+          context.beginPath();
+          context.arc(x, y, radius, startAngle, endPercent);
+          context.strokeStyle='red';
+
+          //General Styling
+          context.font='24px verdana';
+          context.textAlign='center';
+          context.textBaseline='middle';
+          context.fillText(percent+'%',x,y * 0.80);
+          context.stroke();
+        }
+      }*/
 

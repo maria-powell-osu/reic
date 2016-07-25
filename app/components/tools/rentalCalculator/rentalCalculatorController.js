@@ -24,6 +24,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
       vm.userWantedToProceed = false;
       $(window).scrollTop(0);
     };
+    
     vm.jumpTo = function (jumpToIndex, form){
       var canProceed = true;
 

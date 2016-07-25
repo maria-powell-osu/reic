@@ -1,3 +1,4 @@
+
 'use strict'
 /*
  * Sets up the asterix on required fields
