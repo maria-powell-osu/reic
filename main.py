@@ -2,6 +2,7 @@ import os
 import urllib
 import jinja2
 import webapp2
+from google.appengine.api import oauth
 from google.appengine.api import users
 
 # Python Template Engine To Render my HTML
@@ -19,9 +20,13 @@ class PlanPassive(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render())
 
+#class Comment (webapp2.RequestHandler):
+ 	#def get(self):
+ 		#self.response.write("hello world")
+
 # starts th application
 application = webapp2.WSGIApplication([
 	('/', PlanPassive),
 	# Service Routes for API
-	#('/')
+	('/comments', 'comment.Comment'),
 ], debug=True)
