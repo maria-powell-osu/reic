@@ -16,7 +16,7 @@ Where I left of:
  	
 
 Worklist:
-	- make navbar collaps by itself
+	- make navbar collapse by itself
 	- I Could probably create a shared directive for the different types of charts
 	- I need to make the loader div go to the whole page even when scrolling
 	- do I still need jquery ui?
@@ -39,7 +39,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 193
+	Coding: 199
 
 Rachael:
 	- calculator

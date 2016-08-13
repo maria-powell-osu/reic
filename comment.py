@@ -13,43 +13,38 @@ class Comment(webapp2.RequestHandler):
 		for i, comment in enumerate(comments):
 			out = comment.to_dict()	
 			resultJson += json.dumps(out)
-			if i != last:
+			
+			if i != last: #so there is no comma added at the end of the json list
 				resultJson += ','
 		resultJson += ']'
 		
-
+		#Return the result
 		self.response.write(resultJson)
 		return
 
 	def post(self):
 
-		#Validate Data Or Send Error Message Back
-		try:
-			#Grab Data
-			content = self.request.get('content', default_value=None)
-			postDate = self.request.get('date', default_value=None)
-			name = self.request.get('name', default_value=None)
-			emailAddress = self.request.get('email', default_value=None)
-			website = self.request.get('website', default_value=None)
-    		
-     		#Grab int data and check that they are in fact ints
-			blogId = self.request.get('blogId', default_value=None)
-			commentId = self.request.get('commentId', default_value=None)
+		#Grab Data
+		jsonData = json.loads(self.request.body)
+		content = jsonData['content']
+		postDate = jsonData['date']
+		name = jsonData['name']
+		emailAddress = jsonData['email']
+		website = jsonData['website']
+		blogId = jsonData['blogId']
+		commentId = jsonData['commentId']
 
-    		#Validation Need to go here**************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-		except ValueError:
-			print "Oops!  That was not valid data.  Try again..."
+		#Validation Needs to go here
 
 		#Write data to datastore					
-		Comment = db_defs.Comment(parent=comment_key)
-		Comment.BlogId = blogId
-		Comment.CommentId = commentId
-		Comment.Content = content
-		Comment.Date = postDate
-		Comment.Name = name
-		Comment.Email = emailAddress
-		Comment.Website = website
+		Comment = db_defs.Comment()
+		Comment.blogId = blogId
+		Comment.commentId = commentId
+		Comment.content = content
+		Comment.date = postDate
+		Comment.name = name
+		Comment.email = emailAddress
+		Comment.website = website
 		Comment.put()
 		out = Comment.to_dict()
 		self.response.write(json.dumps(out))

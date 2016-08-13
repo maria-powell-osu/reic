@@ -11,32 +11,32 @@
 					<div class="row">
 						<div class="col-md-12">
 							<label>Comment</label>
-							<textarea rows="4" class="form-control" placeholder="Type your comment here:" required mp-required ng-model="blog.comment" name="comment"></textarea>
+							<textarea rows="4" class="form-control" placeholder="Type your comment here:" required mp-required ng-model="blog.newComment.content" name="comment"></textarea>
 						</div>
 					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-5">
 							<label>Name</label>
-							<input type="text" class="form-control inpt"required mp-required ng-model="blog.name" name="name">
+							<input type="text" class="form-control inpt"required mp-required ng-model="blog.newComment.name" name="name">
 
 							<label>Email</label>
-							<input type="text" class="form-control inpt" required mp-required ng-model="blog.email" name="email">
+							<input type="text" class="form-control inpt" required mp-required ng-model="blog.newComment.email" name="email">
 
 							<div class="checkbox">
-								<label><input type="checkbox" value="" required mp-required ng-model="blog.spammer" name="spammer">Confirm you are not a spammer</label>
+								<label><input type="checkbox" value="" required mp-required ng-model="blog.newComment.spammer" name="spammer">Confirm you are not a spammer</label>
 							</div>
 
-							<div class="checkbox">
+							<!-- <div class="checkbox">
 								<label><input type="checkbox" ng-model="blog.wantsNewsletter" name="wantsNewsletter">Sign Up for the Plan Passive Newsletter!</label>
-							</div>
+							</div> -->
 							<br/>
-							<button type="button" class="btn btn-info" ng-disabled="blogCommentForm.$invalid" ng-click="submit()">Post Comment</button>
+							<button type="button" class="btn btn-info" ng-disabled="blogCommentForm.$invalid" ng-click="blog.submitNewComment()">Post Comment</button>
 							<button type="button" class="btn btn-info" ng-click="blog.cancelComment()">Cancel</button>
 						</div>
 						<div class="col-md-5">
 							<label>Website</label>
-							<input type="text" class="form-control inpt">
+							<input type="text" class="form-control inpt" ng-model="blog.newComment.website">
 						</div>
 					</div>
 				</fieldset>
@@ -46,7 +46,7 @@
 				<hr/>
 				<div class="row">
 					<div class="col-md-5">
-						<p><b>{{comment.Name}}</b> said on <b>{{comment.Date}}</b></p>
+						<p><b>{{comment.name}}</b> said on <b>{{comment.date}}</b></p>
 					</div>
 					<div class="col-md-1 col-md-offset-5">
 						<button type="button" class="btn btn-info">
@@ -58,7 +58,7 @@
 				<br/>
 				<div class="row">
 					<div class="col-md-10">
-					<p>{{comment.Content}}</p>
+					<p>{{comment.content}}</p>
 					</div>
 				</div>
 			</div>

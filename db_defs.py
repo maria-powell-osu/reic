@@ -7,13 +7,13 @@ from google.appengine.ext import ndb
 # 		return repr(self.value)
 
 class Comment(ndb.Model):
-	BlogId = ndb.IntegerProperty(required=True)
-	CommentId = ndb.IntegerProperty(required=True)
-	Content = ndb.StringProperty(required=True)
-	Date = ndb.StringProperty(required=True)
-	Name = ndb.StringProperty(required=True)
-	Email = ndb.StringProperty(required=True)
-	Website = ndb.StringProperty(required=False)
+	blogId = ndb.IntegerProperty(required=True)
+	commentId = ndb.IntegerProperty(required=True)
+	content = ndb.StringProperty(required=True)
+	date = ndb.StringProperty(required=True)
+	name = ndb.StringProperty(required=True)
+	email = ndb.StringProperty(required=True)
+	website = ndb.StringProperty(required=False)
 	def to_dict(self):
 		d = super(Comment, self).to_dict()
 		d['key'] = self.key.id()
