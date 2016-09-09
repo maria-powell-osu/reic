@@ -2,8 +2,6 @@ App.controller("BlogController", function($scope, Comments) {
 	var vm = this;
     vm.newComment = {};
     vm.replyActive = false;
-/*    vm.wantsNewsletter = true;*/
-
 
     //Retrieve the comments and load them onto the page
     Comments.getComments()
@@ -29,6 +27,8 @@ App.controller("BlogController", function($scope, Comments) {
         Comments.postComment(jsonData)
         .success(function (response){
             vm.comments.push({ name: vm.newComment.name, email: vm.newComment.email, date: vm.newComment.date, content: vm.newComment.content });
+            vm.replyActive = false;
+            vm.newComment = {};
         })
         .error (function (error) {
             //Error Handling Needed ****************************

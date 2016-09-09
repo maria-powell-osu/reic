@@ -1,5 +1,19 @@
 Where I left of:
+	- Comment Service
+		- For website add email link
+		- Add required fields to the reply
+		- allow for reply of replies
+		- Add validation in python
+	- Blog Service
+		- Need to put in a way to add new blogs
+			- Blog Page Design (overview or showing the latest?)
+			- Blog Content Json
+			- associate comments with commentId and BlogId
+			- Add validation in python
+		
+Backlog:
 	- cap rate round to nearest 10th
+	- navigation bar needs to close from site
 	- instead of 5 year avg do just the first year (cash on cash ROI) 
 	- the downpayment percent should always stay the same no matter what
 	- pie charts on the same line

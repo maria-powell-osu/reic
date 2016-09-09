@@ -24,11 +24,15 @@ App.config(function($routeProvider) {
     controller: 'FutureValueCalculatorController',
     controllerAs: 'fv',
   });
-  //this needs to be switched back to analyzeadeal
   $routeProvider.when('/blog', {
     templateUrl: '../app/components/blog/blogView.html',
     controller: 'BlogController',
     controllerAs: 'blog',
+  });
+  $routeProvider.when('/admin', {
+    templateUrl: '../app/components/admin/adminView.html',
+    controller: 'AdminController',
+    controllerAs: 'admin',
   });
   $routeProvider.when('/videos', {
     templateUrl: '../app/components/videos/videos.html',
