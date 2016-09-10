@@ -40,6 +40,7 @@ class Blog(webapp2.RequestHandler):
 		Blog.title = title
 		Blog.author = author
 		Blog.date = date
+		Blog.body = body
 		Blog.put()
 		out = Blog.to_dict()
 		self.response.write(json.dumps(out))

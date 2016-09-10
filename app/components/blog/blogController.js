@@ -1,7 +1,16 @@
-App.controller("BlogController", function($scope, Comments) {
+App.controller("BlogController", function($scope, Comments, Blog) {
 	var vm = this;
     vm.newComment = {};
     vm.replyActive = false;
+
+    Blog.getBlogs()
+        .success(function (blogs) {
+            vm.blogs = blogs;
+        })
+        .error (function (error) {
+            //Need to add error handling here ***********************************
+            var test = error;
+        });
 
     //Retrieve the comments and load them onto the page
     Comments.getComments()
@@ -37,5 +46,6 @@ App.controller("BlogController", function($scope, Comments) {
 
     vm.cancelComment = function () {
     	vm.replyActive = false;
+        vm.newComment = {};
     };
 });

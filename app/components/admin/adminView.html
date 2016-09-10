@@ -1,10 +1,35 @@
-<h3>Admin</h3>
-<h3>Admin</h3>
-<h3>Admin</h3>
-<h3>Admin</h3>
-<h3>Admin</h3>
-<h3>Admin last</h3>
-<google-sign-in-button button-id="uniqueid" options="options"></google-sign-in-button>
+<div class="container page-content">
+	<div>{{admin.notification}}</div>
+ 	<a ng-href="{{admin.link}}">{{admin.buttonText}}</a>
+	<br/>
+	<div ng-show="admin.blogPostedMessage" class="alert alert-success">
+		<strong>Blog Successfully Posted</strong>
+	</div>
+	<form ng-show="admin.showBlogForm" id="blogForm" name="blogForm">
+		<!-- Form Input -->
+		<div class="row">
+		    <div class="col-md-10">
+		      	<fieldset>
+					<label>Blog Title</label>
+					<input type="text" placeholder="Title" class="inpt form-control" ng-model="admin.input.title" name="title" required mp-required>
+
+					<label>Body</label>
+					<textarea ng-model="admin.input.body" rows="15" class="inpt form-control nonResizable" placeholder="Body" name="body" required mp-required></textarea>
+
+					<label>Author</label>
+					<input type="text" class="inpt form-control" ng-model="admin.input.author" placeholder="Pen Name" name="author" required mp-required>  
+
+					<label>Date Posted</label>
+	            	<input type="text" class="inpt form-control" ng-model="admin.input.date" name="date" jqdatepicker required mp-required> 
+
+	            	<br/>
+					<button type="button" class="btn btn-info" ng-click="admin.submitNewBlog()" ng-disabled="blogForm.$invalid">Post Blog</button>
+					<button type="button" class="btn btn-info" ng-click="admin.cancelBlog()">Cancel</button>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+</div>
 
 <br/>
 <br/>

@@ -1,10 +1,14 @@
 Where I left of:
+	- I need to import oauth2 somehow
+	- check the test var to see what gets returned
+	- when the user logs out of gmail, hide the form again
 	- Comment Service
 		- For website add email link
 		- Add required fields to the reply
 		- allow for reply of replies
 		- Add validation in python
 	- Blog Service
+		- Need to add a preview button
 		- Need to put in a way to add new blogs
 			- Blog Page Design (overview or showing the latest?)
 			- Blog Content Json
