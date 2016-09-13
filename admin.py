@@ -19,6 +19,7 @@ class Admin(webapp2.RequestHandler):
             raw_data["link"] = logout_url
 
             if users.is_current_user_admin():
+                raw_data["isSignedIn"] = True
                 raw_data["isAdmin"] = True
             else:
                 raw_data["isAdmin"] = False

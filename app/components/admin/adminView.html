@@ -1,9 +1,14 @@
 <div class="container page-content">
-	<div>{{admin.notification}}</div>
- 	<a ng-href="{{admin.link}}">{{admin.buttonText}}</a>
-	<br/>
-	<div ng-show="admin.blogPostedMessage" class="alert alert-success">
-		<strong>Blog Successfully Posted</strong>
+	<div class="row">
+		<div class="col-md-12">
+				<div>{{admin.notification}}</div>
+			 	<a class="btn btn-default pull-right" ng-href="{{admin.link}}">{{admin.buttonText}}</a>
+				<br/>
+				<div ng-show="admin.blogPostedMessage" class="alert alert-success">
+					<strong>Blog Successfully Posted</strong>
+				</div>
+			<hr/>
+		</div>
 	</div>
 	<form ng-show="admin.showBlogForm" id="blogForm" name="blogForm">
 		<!-- Form Input -->
@@ -13,8 +18,8 @@
 					<label>Blog Title</label>
 					<input type="text" placeholder="Title" class="inpt form-control" ng-model="admin.input.title" name="title" required mp-required>
 
-					<label>Body</label>
-					<textarea ng-model="admin.input.body" rows="15" class="inpt form-control nonResizable" placeholder="Body" name="body" required mp-required></textarea>
+					<label>Title Image</label>
+					<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.titleImg">
 
 					<label>Author</label>
 					<input type="text" class="inpt form-control" ng-model="admin.input.author" placeholder="Pen Name" name="author" required mp-required>  
@@ -22,10 +27,43 @@
 					<label>Date Posted</label>
 	            	<input type="text" class="inpt form-control" ng-model="admin.input.date" name="date" jqdatepicker required mp-required> 
 
+		            <label>Paragraph</label>
+					<div ng-repeat="paragraph in admin.input.paragraphs track by $index">
+						<div class="row">
+							<div class="col-md-12">
+								<fieldset>
+									<div class="row">
+										<div class="col-md-2 col-md-offset-10" ng-click="admin.removeParagraph()">
+											<span class="glyphicon glyphicon-minus-sign glyphiconDeleteForm" ng-show="$last && !$first"  aria-hidden="true"></span>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<label>Sub Header</label> 
+											<input type="text" class="inpt form-control" ng-model="admin.input.paragraphs[$index].subheader" placeholder="i.e. Unit 1, Unit A, etc." name="subHeader{{$index}}">
+
+											<label mp-required>Body</label>
+											<textarea type="text" class="inpt form-control nonResizable" ng-model="admin.input.paragraphs[$index].body" placeholder="Paragraph Content" required name="body{{$index}}"rows="5"></textarea mp-required>
+
+											<label>Image</label>
+											<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" ng-model="admin.input.paragraphs[$index].pImg">
+										</div>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<br/>
+					</div>
+					
+					<div ng-click="admin.addParagraph()">
+						<span class="glyphicon glyphicon-plus-sign glyphiconGreenColor" aria-hidden="true"></span>
+						<label>Add Paragraph</label><br/><br/>
+					</div>
+				</fieldset>
+
 	            	<br/>
 					<button type="button" class="btn btn-info" ng-click="admin.submitNewBlog()" ng-disabled="blogForm.$invalid">Post Blog</button>
 					<button type="button" class="btn btn-info" ng-click="admin.cancelBlog()">Cancel</button>
-				</fieldset>
 			</div>
 		</div>
 	</form>

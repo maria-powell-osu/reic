@@ -2,17 +2,19 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     var vm = this;
     vm.input = {};
     vm.blog = {};
+    vm.input.paragraphs = [{}];
     vm.input.date = getCurrentDate();
     vm.showBlogForm = false;
     vm.blogPostedMessage = false;
     vm.notification = "You are not signed in at the momement.";
     vm.buttonText = "Sign In";
+    vm.publicKey = "6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH";
 
     //Check User Credentials
     Admin.isAdmin()
         .success(function (response){
             if (response.isSignedIn){   
-                vm.notification = "Have fun blogging.";
+                vm.notification = "";
                 vm.buttonText = "Sign Out";
                 if(response.isAdmin){
                     vm.showBlogForm = true;
@@ -26,10 +28,21 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.notification = "Oops. Something went wrong. Contact Maria."
         });
 
+    vm.removeParagraph= function() {
+        var lastItem = vm.input.paragraphs.length-1;
+        vm.input.paragraphs.splice(lastItem);
+    };
+
+     vm.addParagraph = function() {
+      vm.input.paragraphs.push({});
+    };
+
+
     //Post New Blog
     vm.submitNewBlog = function (){
         var jsonData = JSON.stringify(vm.input);
-        Blog.postBlog(jsonData)
+
+       Blog.postBlog(jsonData)
         .success(function (response){
             //Success Message and maybe add a link
             vm.blogPostedMessage = true;
@@ -43,7 +56,6 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     //Cancel Blog Form and Clear It
     vm.cancelBlog = function () {
-        vm.showBlogForm = false;
         vm.input = {};
     };
 
