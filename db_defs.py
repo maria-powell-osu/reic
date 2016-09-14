@@ -22,11 +22,20 @@ class Comment(ndb.Model):
 
 class Blog(ndb.Model):
 	title = ndb.StringProperty(required=True)
-	body = ndb.StringProperty(required=True)
 	author = ndb.StringProperty(required=True)
 	#image = ndb.BlobProperty(required=False)
 	date = ndb.StringProperty(required=True)
 	def to_dict(self):
 		d = super(Blog, self).to_dict()
 		d['key'] = self.key.id()
+		return d
+
+class Paragraph(ndb.Model):
+	blogKey = ndb.KeyProperty(kind=Blog)
+	subHeader = ndb.StringProperty(required=False)
+	body = ndb.StringProperty(required=True)
+	def to_dict(self):
+		d = super(Paragraph, self).to_dict()
+		d['key'] = self.key.id()
+		d['blogKey'] = self.blogKey.id()
 		return d

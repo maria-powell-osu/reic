@@ -1,7 +1,6 @@
 Where I left of:
-	- I need to import oauth2 somehow
-	- check the test var to see what gets returned
-	- when the user logs out of gmail, hide the form again
+	- look what gets return in getBlogs call in adminController and set up GET
+
 	- Comment Service
 		- For website add email link
 		- Add required fields to the reply
@@ -57,7 +56,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 199
+	Coding: 220
 
 Rachael:
 	- calculator

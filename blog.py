@@ -27,22 +27,34 @@ class Blog(webapp2.RequestHandler):
 		#Grab Data
 		jsonData = json.loads(self.request.body)
 		title = jsonData['title']
-		body = jsonData['body']
 		author = jsonData['author']
 		date = jsonData['date']
+		paragraphs = jsonData['paragraphs']
+		result = {}
 
 		#Validation Needs to go here
 		#check for datatypes
 		#check for max lengths 
 
-		#Write data to datastore					
+		#Write Blog data to datastore					
 		Blog = db_defs.Blog()
 		Blog.title = title
 		Blog.author = author
 		Blog.date = date
-		Blog.body = body
 		Blog.put()
 		out = Blog.to_dict()
-		self.response.write(json.dumps(out))
+
+		#Validate Blog Key is set
+
+		#Write Paragraph Data to datastore with corresponding blog key
+		for p in paragraphs:
+			Paragraph = db_defs.Paragraph()
+			Paragraph.subHeader = p["subHeader"]
+			Paragraph.body = p["body"]
+			Paragraph.blogKey = Blog.key 
+			Paragraph.put()
+			out = Paragraph.to_dict()
+
+		#This probably should return status code with self.response.write
 		return
 		
