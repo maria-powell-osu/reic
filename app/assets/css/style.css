@@ -105,7 +105,12 @@ fieldset{
     color: #843534;
     font-size: 1.2em;
 
-}   
+} 
+.mpClickable
+{
+    cursor: pointer;
+    cursor: hand; 
+}  
 .resultDiv
 {
     height: 100px;

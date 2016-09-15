@@ -1,5 +1,8 @@
 Where I left of:
-	- look what gets return in getBlogs call in adminController and set up GET
+	- test out delete button
+		- make sure you add comment, paragraphs in the delete function too
+
+	-REST API needs validation and proper code return
 
 	- Comment Service
 		- For website add email link
@@ -56,7 +59,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 220
+	Coding: 223
 
 Rachael:
 	- calculator

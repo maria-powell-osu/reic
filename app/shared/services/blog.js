@@ -6,6 +6,12 @@ App.factory('Blog', function($http) {
 				url: "/blogs"
 			});
 		},
+		deleteBlog: function (blogKey){
+			return $http({
+				method: 'DELETE',
+				url: "/blogs/" + blogKey
+			});
+		},
 		postBlog: function (data){
 			return $http({
 				method: 'POST',

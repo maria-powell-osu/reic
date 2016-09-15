@@ -2,6 +2,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     var vm = this;
     setupInputFormDefaultData();
     vm.blog = {};
+    vm.view = "addNewBlog";
     vm.showBlogForm = false;
     vm.blogPostedMessage = false;
     vm.notification = "You are not signed in at the momement.";
@@ -10,7 +11,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     Blog.getBlogs()
         .success(function (response){
-            var test = response;
+            vm.blogs = response;
         })
         .error (function (error) {
             //Error Handling Needed ****************************
@@ -34,6 +35,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.notification = "Oops. Something went wrong. Contact Maria."
         });
 
+
     vm.removeParagraph= function() {
         var lastItem = vm.input.paragraphs.length-1;
         vm.input.paragraphs.splice(lastItem);
@@ -43,6 +45,19 @@ App.controller("AdminController", function($scope, Blog, Admin) {
       vm.input.paragraphs.push({});
     };
 
+    vm.deleteBlog = function(blogKey){
+        Blog.deleteBlog(blogKey)
+        .success(function (response){
+            var test = response;
+        })
+        .error (function (error) {
+            //Error Handling Needed ****************************
+        });
+    }
+
+    vm.editBlog = function(){
+
+    }
 
     //Post New Blog
     vm.submitNewBlog = function (){
