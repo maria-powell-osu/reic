@@ -45,10 +45,11 @@ App.controller("AdminController", function($scope, Blog, Admin) {
       vm.input.paragraphs.push({});
     };
 
-    vm.deleteBlog = function(blogKey){
+    vm.deleteBlog = function(blogKey, index){
         Blog.deleteBlog(blogKey)
         .success(function (response){
             var test = response;
+            vm.blogs.splice( index, 1 );
         })
         .error (function (error) {
             //Error Handling Needed ****************************

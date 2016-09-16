@@ -21,11 +21,12 @@ class PlanPassive(webapp2.RequestHandler):
 		self.response.write(template.render())
 
 
-# starts th application
-application = webapp2.WSGIApplication([
-	('/', PlanPassive),
-	# Service Routes for API
-	('/comments', 'comment.Comment'),
-	('/blogs', 'blog.Blog'),
-	('/admin', 'admin.Admin'),
-], debug=True)
+#Application Routing
+application = webapp2.WSGIApplication([], debug=True)
+
+#POST
+application.router.add(webapp2.Route('/',PlanPassive))
+application.router.add(webapp2.Route(r'/comments', 'comment.Comment'))
+application.router.add(webapp2.Route(r'/blogs', 'blog.Blog'))
+application.router.add(webapp2.Route(r'/blogs/<id:[0-9]+><:/?>', 'blog.Blog'))
+application.router.add(webapp2.Route(r'/admin', 'admin.Admin'))
