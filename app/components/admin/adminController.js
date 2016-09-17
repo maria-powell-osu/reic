@@ -46,14 +46,14 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     };
 
     vm.deleteBlog = function(blogKey, index){
-        Blog.deleteBlog(blogKey)
+        /*Blog.deleteBlog(blogKey)
         .success(function (response){
             var test = response;
-            vm.blogs.splice( index, 1 );
+            vm.blogs.splice(index, 1);
         })
         .error (function (error) {
             //Error Handling Needed ****************************
-        });
+        });*/
     }
 
     vm.editBlog = function(){
@@ -66,6 +66,8 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         
         Blog.postBlog(jsonData)
         .success(function (response){
+            vm.input['key'] = response.key;
+            vm.blogs.push(vm.input);
             setupInputFormDefaultData();
             vm.blogPostedMessage = true;
         })

@@ -1,8 +1,9 @@
 Where I left of:
-	- test out delete button
-		- make sure you add comment, paragraphs in the delete function too
+	- test delete button: there is a bug
 
-	-REST API needs validation and proper code return
+	- REST API needs validation and proper code return
+	- Shared service calls might need to be providers
+		- I bet there is a better way to setup services
 
 	- Comment Service
 		- For website add email link
@@ -59,7 +60,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 223
+	Coding: 226
 
 Rachael:
 	- calculator

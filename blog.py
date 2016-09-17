@@ -55,7 +55,7 @@ class Blog(webapp2.RequestHandler):
 		Blog.author = author
 		Blog.date = date
 		Blog.put()
-		out = Blog.to_dict()
+		blogOut = Blog.to_dict()
 
 		#Validate Blog Key is set
 
@@ -68,7 +68,8 @@ class Blog(webapp2.RequestHandler):
 			Paragraph.put()
 			out = Paragraph.to_dict()
 
-		#This probably should return status code with self.response.write
+		#Return the result
+		self.response.write(json.dumps(blogOut))
 		return
 		
 	def delete(self, **kwargs):
@@ -79,8 +80,21 @@ class Blog(webapp2.RequestHandler):
 
 		#Validation check for blogKey
 
+		#Delete all paragraphs associated with blogKey
+		paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blogKey).fetch()
+		if paragraphs:
+			for paragraph in paragraphs:
+				paragraph.key.delete()
+
+		#Delete all comments associated with blogKey
+		comments = db_defs.Comment.query(db_defs.Comment.blogKey == blogKey).fetch()
+		if comments:
+			for comment in comments:
+				comment.key.delete()
+
 		blog = db_defs.Blog.query(db_defs.Blog.key == blogKey).get()
-		blog.key.delete()
+		if blog:
+			blog.key.delete()
 		
 		self.response.write("Deleted")
 		return 
