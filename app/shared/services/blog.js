@@ -12,6 +12,13 @@ App.factory('Blog', function($http) {
 				url: "/blogs/" + blogKey
 			});
 		},
+		editBlog: function (data){
+			return $http({
+				method: 'PUT',
+				url: "/blogs",
+				data: data
+			});
+		},
 		postBlog: function (data){
 			return $http({
 				method: 'POST',

@@ -16,11 +16,14 @@ class Blog(webapp2.RequestHandler):
 			out = blog.to_dict()	
 
 			#self.response.write(out["key"])
-			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).get()
+			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).fetch()
 			
-			#Validation Check if paragraphs found		
+			paragraphResultList = []
 			if paragraphs:
-				out['paragraphs'] = paragraphs.to_dict()
+				for paragraph in paragraphs:
+					paragraphResultList.append(paragraph.to_dict())
+
+			out['paragraphs'] = paragraphResultList
 
 			#Pull Comments as well
 
@@ -32,6 +35,54 @@ class Blog(webapp2.RequestHandler):
 
 		#Return the result
 		self.response.write(resultJson)
+		return
+
+	def put(self, **kwargs):
+		#Json check
+
+		#Grab Data
+		jsonData = json.loads(self.request.body)
+		key = jsonData['key']
+		title = jsonData['title']
+		author = jsonData['author']
+		date = jsonData['date']
+		paragraphs = jsonData['paragraphs']
+		result = {}
+
+		#Validation Needs to go here
+		#check for datatypes
+		#check for max lengths 
+
+		#Convert key string to Datastore key	
+		blog_key = ndb.Key(db_defs.Blog, key)
+
+		#Get the blog to be updated by the key
+		Blog = db_defs.Blog.query(db_defs.Blog.key == blog_key).get()	
+		
+		#check that record was found, otherwise return not found code
+
+		Blog.title = title
+		Blog.author = author
+		Blog.date = date
+		Blog.put()
+		out = Blog.to_dict()
+
+		#Validate Blog Key is set
+
+		#Write Paragraph Data to datastore with corresponding blog key
+		paragraphResultList = []
+		for p in paragraphs:
+			Paragraph = db_defs.Paragraph()
+			Paragraph.subHeader = p["subHeader"]
+			Paragraph.body = p["body"]
+			Paragraph.blogKey = Blog.key 
+			Paragraph.put()
+			paragraphResultList.append(Paragraph.to_dict())
+
+		out['paragraphs'] = paragraphResultList
+
+		#Return the result
+		self.response.write(json.dumps(out))
 		return
 
 	def post(self):

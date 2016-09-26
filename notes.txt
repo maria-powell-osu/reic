@@ -1,24 +1,15 @@
 Where I left of:
-	- test delete button: there is a bug
-
-	- REST API needs validation and proper code return
-	- Shared service calls might need to be providers
+	1) Update Blog Finish
+	2) Finish Picture upload, download, delete
+	3) Display Blogs on page
+		- For website add email link comments
+	4) Turn this API into truly REST API (json validation, input validation, response code etc.)
+	5) - Shared service calls might need to be providers
 		- I bet there is a better way to setup services
-
-	- Comment Service
-		- For website add email link
-		- Add required fields to the reply
-		- allow for reply of replies
-		- Add validation in python
-	- Blog Service
-		- Need to add a preview button
-		- Need to put in a way to add new blogs
-			- Blog Page Design (overview or showing the latest?)
-			- Blog Content Json
-			- associate comments with commentId and BlogId
-			- Add validation in python
+	6) Preview button for jason blogs page?
 		
 Backlog:
+	- blogs should be able to be ordered (maybe look how owr is doing that)
 	- cap rate round to nearest 10th
 	- navigation bar needs to close from site
 	- instead of 5 year avg do just the first year (cash on cash ROI) 
@@ -60,7 +51,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 226
+	Coding: 230
 
 Rachael:
 	- calculator

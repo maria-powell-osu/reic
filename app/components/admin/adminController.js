@@ -2,7 +2,8 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     var vm = this;
     setupInputFormDefaultData();
     vm.blog = {};
-    vm.view = "addNewBlog";
+    vm.currentBlogInformation = {};
+    vm.view = "postBlog";
     vm.showBlogForm = false;
     vm.blogPostedMessage = false;
     vm.notification = "You are not signed in at the momement.";
@@ -41,27 +42,66 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         vm.input.paragraphs.splice(lastItem);
     };
 
-     vm.addParagraph = function() {
-      vm.input.paragraphs.push({});
+     vm.addParagraph = function(paragraph) {
+     var p = (typeof paragraph !== 'undefined') ?  paragraph : {};
+     vm.input.paragraphs.push(p);
     };
 
-    vm.deleteBlog = function(blogKey, index){
-        /*Blog.deleteBlog(blogKey)
+    vm.deleteBlog = function(){
+        Blog.deleteBlog(vm.currentBlogInformation.key)
         .success(function (response){
-            var test = response;
-            vm.blogs.splice(index, 1);
+            vm.blogs.splice(
+                vm.currentBlogInformation.index, 1);
         })
         .error (function (error) {
             //Error Handling Needed ****************************
-        });*/
+        });
     }
 
-    vm.editBlog = function(){
+    vm.editBlog = function (blog) {
 
+        //Populate the inputs with blog information
+        vm.input.title = blog.title;
+        vm.input.author = blog.author;
+        vm.input.date = blog.date;
+        vm.input.key = blog.key
+    
+        //Make sure there is no objects in paragraphs (typically there is one for user to be required to enter 
+            //at least one paragraph)
+        vm.input.paragraphs = []
+
+        for (i = 0; i < blog.paragraphs.length; i++) {
+            vm.addParagraph(blog.paragraphs[i]);
+        }
+
+        //Show Post Blog Screen
+        vm.view = "postBlog";
+        vm.blogAction = "edit";
+    };
+
+    vm.updateBlog = function(){
+        var jsonData = JSON.stringify(vm.input);
+        
+        Blog.editBlog(jsonData)
+        .success(function (response){
+            //Update the view with the new blog
+            for (i = 0; i < vm.blogs.length; i++){
+                if (vm.blogs[i].key == response.key){
+                    vm.blogs[i] = response;
+                }
+            }
+            setupInputFormDefaultData();
+            vm.blogPostedMessage = true;
+            $(window).scrollTop(0);
+
+        })
+        .error (function (error) {
+            //Error Handling Needed ****************************
+        });
     }
 
     //Post New Blog
-    vm.submitNewBlog = function (){
+    vm.postBlog = function (){
         var jsonData = JSON.stringify(vm.input);
         
         Blog.postBlog(jsonData)
@@ -70,6 +110,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.blogs.push(vm.input);
             setupInputFormDefaultData();
             vm.blogPostedMessage = true;
+            $(window).scrollTop(0);
         })
         .error (function (error) {
             //Error Handling Needed ****************************
@@ -78,13 +119,14 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     //Cancel Blog Form and Clear It
     vm.cancelBlog = function () {
-        vm.input = {};
+        setupInputFormDefaultData();
      };
 
     function setupInputFormDefaultData(){
         vm.input = {};
         vm.input.paragraphs = [{}];
         vm.input.date = getCurrentDate();
+        vm.blogAction = "new";
     }
 });
 
