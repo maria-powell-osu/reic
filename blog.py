@@ -72,7 +72,11 @@ class Blog(webapp2.RequestHandler):
 		#Write Paragraph Data to datastore with corresponding blog key
 		paragraphResultList = []
 		for p in paragraphs:
-			Paragraph = db_defs.Paragraph()
+			if key in p:
+				Paragraph = db_defs.Blog.query(db_defs.Paragraph.key == p.key).get()
+			else:
+				Paragraph = db_defs.Paragraph()
+			# check if paragraph was found
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.blogKey = Blog.key 
