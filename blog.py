@@ -15,9 +15,8 @@ class Blog(webapp2.RequestHandler):
 		for i, blog in enumerate(blogs):
 			out = blog.to_dict()	
 
-			#self.response.write(out["key"])
-			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).fetch()
-			
+			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).order(db_defs.Paragraph.index).fetch()
+
 			paragraphResultList = []
 			if paragraphs:
 				for paragraph in paragraphs:
@@ -83,6 +82,7 @@ class Blog(webapp2.RequestHandler):
 			# check if paragraph was found
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
+			Paragraph.index = p["index"]
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			paragraphResultList.append(Paragraph.to_dict())
@@ -123,6 +123,7 @@ class Blog(webapp2.RequestHandler):
 			Paragraph = db_defs.Paragraph()
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
+			Paragraph.index = p["index"]
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			out = Paragraph.to_dict()

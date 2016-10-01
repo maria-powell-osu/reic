@@ -20,6 +20,7 @@ class Paragraph(ndb.Model):
 	blogKey = ndb.KeyProperty(kind=Blog)
 	subHeader = ndb.StringProperty(required=False)
 	body = ndb.StringProperty(required=True)
+	index = ndb.IntegerProperty(required=True)
 	def to_dict(self):
 		d = super(Paragraph, self).to_dict()
 		d['key'] = self.key.id()

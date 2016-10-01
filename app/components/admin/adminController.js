@@ -80,6 +80,11 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     };
 
     vm.updateBlog = function(){
+        //add order indices for paragraphs
+        for(i = 0; i < vm.input.paragraphs.length; i++){
+            vm.input.paragraphs[i].index = i;
+        }
+        
         var jsonData = JSON.stringify(vm.input);
         
         Blog.editBlog(jsonData)
@@ -102,14 +107,27 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     //Post New Blog
     vm.postBlog = function (){
+        //add order indices for paragraphs
+        for(i = 0; i < vm.input.paragraphs.length; i++){
+            vm.input.paragraphs[i].index = i;
+        }
         var jsonData = JSON.stringify(vm.input);
         
         Blog.postBlog(jsonData)
         .success(function (response){
+            //Save the blog key gotten from DB
             vm.input['key'] = response.key;
+
+            //Add the new blog to site list
             vm.blogs.push(vm.input);
+
+            //Reset the blog data so that form is cleared
             setupInputFormDefaultData();
+
+            //Show user "Blog posted" message
             vm.blogPostedMessage = true;
+
+            //Scroll the page back to top
             $(window).scrollTop(0);
         })
         .error (function (error) {
