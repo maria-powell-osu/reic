@@ -69,13 +69,17 @@ class Blog(webapp2.RequestHandler):
 
 		#Validate Blog Key is set
 
+		#Delete all paragraphs associated with Blog 
+		paragraphsOfBlogInDB = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog_key).fetch()
+		if paragraphsOfBlogInDB:
+			for paragraph in paragraphsOfBlogInDB:
+				paragraph.key.delete()
+
 		#Write Paragraph Data to datastore with corresponding blog key
 		paragraphResultList = []
 		for p in paragraphs:
-			if key in p:
-				Paragraph = db_defs.Blog.query(db_defs.Paragraph.key == p.key).get()
-			else:
-				Paragraph = db_defs.Paragraph()
+			Paragraph = db_defs.Paragraph()
+
 			# check if paragraph was found
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
