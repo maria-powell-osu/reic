@@ -45,6 +45,7 @@ class Blog(webapp2.RequestHandler):
 		title = jsonData['title']
 		author = jsonData['author']
 		date = jsonData['date']
+		img = str(jsonData['titleImg'])
 		paragraphs = jsonData['paragraphs']
 		result = {}
 
@@ -63,6 +64,7 @@ class Blog(webapp2.RequestHandler):
 		Blog.title = title
 		Blog.author = author
 		Blog.date = date
+		Blog.image = img
 		Blog.put()
 		out = Blog.to_dict()
 
@@ -83,6 +85,7 @@ class Blog(webapp2.RequestHandler):
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.index = p["index"]
+			Paragraph.image = str(p["pImg"])
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			paragraphResultList.append(Paragraph.to_dict())
@@ -102,6 +105,7 @@ class Blog(webapp2.RequestHandler):
 		author = jsonData['author']
 		date = jsonData['date']
 		paragraphs = jsonData['paragraphs']
+		img = str(jsonData['titleImg'])
 		result = {}
 
 		#Validation Needs to go here
@@ -113,6 +117,8 @@ class Blog(webapp2.RequestHandler):
 		Blog.title = title
 		Blog.author = author
 		Blog.date = date
+		Blog.image = img
+
 		Blog.put()
 		blogOut = Blog.to_dict()
 
@@ -121,9 +127,12 @@ class Blog(webapp2.RequestHandler):
 		#Write Paragraph Data to datastore with corresponding blog key
 		for p in paragraphs:
 			Paragraph = db_defs.Paragraph()
+
+			#Validate if fields exists: especially non-required ones
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.index = p["index"]
+			Paragraph.image = str(p["pImg"])
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			out = Paragraph.to_dict()

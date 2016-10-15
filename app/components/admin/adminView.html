@@ -125,7 +125,7 @@
 												<textarea type="text" class="inpt form-control nonResizable" ng-model="admin.input.paragraphs[$index].body" placeholder="Paragraph Content" required name="body{{$index}}"rows="5"></textarea mp-required>
 
 												<label>Image</label>
-												<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" ng-model="admin.input.paragraphs[$index].pImg">
+												<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" filereader="admin.input.paragraphs[$index].pImg">
 											</div>
 										</div>
 									</fieldset>

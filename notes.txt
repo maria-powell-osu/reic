@@ -1,5 +1,6 @@
 Where I left of:
-	1) Update Blog Finish
+	1) Img Title Input fields needs to be cleared (when you post it doesnt clear)
+		- Image fields needs to be bound to the field as well. 
 	2) Finish Picture upload, download, delete
 	3) Display Blogs on page
 		- For website add email link comments
@@ -51,7 +52,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 230
+	Coding: 233
 
 Rachael:
 	- calculator

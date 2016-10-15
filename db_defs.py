@@ -9,7 +9,7 @@ from google.appengine.ext import ndb
 class Blog(ndb.Model):
 	title = ndb.StringProperty(required=True)
 	author = ndb.StringProperty(required=True)
-	#image = ndb.BlobProperty(required=False)
+	image = ndb.BlobProperty(required=False)
 	date = ndb.StringProperty(required=True)
 	def to_dict(self):
 		d = super(Blog, self).to_dict()
@@ -21,6 +21,7 @@ class Paragraph(ndb.Model):
 	subHeader = ndb.StringProperty(required=False)
 	body = ndb.StringProperty(required=True)
 	index = ndb.IntegerProperty(required=True)
+	image = ndb.BlobProperty(required=False)
 	def to_dict(self):
 		d = super(Paragraph, self).to_dict()
 		d['key'] = self.key.id()
