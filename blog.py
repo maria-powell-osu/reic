@@ -2,59 +2,146 @@ import webapp2
 from google.appengine.ext import ndb
 import db_defs #Contain Classes Used By Website
 import json
+import sys
+maxEntitySizeOfOneMB = 1048576 
 
 class Blog(webapp2.RequestHandler):
+	
 	def get(self, **kwargs):
-		#JSon check needed
+		errorObject = {}
+
+		#Check request format
+		if 'application/json' not in self.request.accept:
+			#Setup proper response code
+			self.response.set_status(406)
+
+			#Setup error details
+			errorObject['code'] = 406
+			errorObject['message'] = "Data format does not match application/json"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		blogs = db_defs.Blog.query().fetch()
-		
-		#Builds results in JSON serializable format
-		resultJson = "["
-		last = len(blogs) - 1
-		for i, blog in enumerate(blogs):
-			out = blog.to_dict()	
+		listOfBlogObjects = []
 
+		#create response Object containing all blogs and corresponding paragraphs
+		for i, blog in enumerate(blogs):
+
+			#add current blog to list
+			listOfBlogObjects.append(blog.to_dict())
+
+			#get pragraphs associated to blog
 			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).order(db_defs.Paragraph.index).fetch()
 
-			paragraphResultList = []
+			#if the blog has paragraphs, generate list of paragraphs
+			listOfParagraphs = []
 			if paragraphs:
 				for paragraph in paragraphs:
-					paragraphResultList.append(paragraph.to_dict())
+					listOfParagraphs.append(paragraph.to_dict())
 
-			out['paragraphs'] = paragraphResultList
+			#add paragraphs to the blog object
+			listOfBlogObjects[i]['paragraphs'] = listOfParagraphs
 
-			#Pull Comments as well
-
-			resultJson += json.dumps(out)
-			
-			if i != last: #so there is no comma added at the end of the json list
-				resultJson += ','
-		resultJson += ']'
-
-		#Return the result
-		self.response.write(resultJson)
+		#Return reponse with proper code
+		self.response.set_status(200)
+		self.response.write(json.dumps(listOfBlogObjects))
 		return
 
 	def put(self, **kwargs):
-		#Json check
+		errorObject = {}
 
-		#Grab Data
+		#Check request format
+		if 'application/json' not in self.request.accept:
+			#Setup proper response code
+			self.response.set_status(406)
+
+			#Setup error details
+			errorObject['code'] = 406
+			errorObject['message'] = "Data format does not match application/json"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
 		jsonData = json.loads(self.request.body)
-		key = jsonData['key']
-		title = jsonData['title']
-		author = jsonData['author']
-		date = jsonData['date']
-		img = str(jsonData['titleImg'])
-		paragraphs = jsonData['paragraphs']
-		result = {}
+		key = jsonData['key'] if ('key' in jsonData) else None;
+		title = jsonData['title'] if ('title' in jsonData) else None;
+		author = jsonData['author'] if ('author' in jsonData ) else None;
+		date = jsonData['date'] if ('date' in jsonData) else None;
+		img = str(jsonData['image']) if ('image' in jsonData) else None;
+		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None;
 
-		#Validation Needs to go here
-		#check for datatypes
-		#check for max lengths 
+		#Key Validation
+		if key == "" or key is None or not isinstance(key, (int, long)):
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Key attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Title Validation
+		if title == "" or title is None or not isinstance(title, (basestring)):
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Title attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Author Validation
+		if author == "" or author is None or not isinstance(author, (basestring)):
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Author attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Date Validation
+		if date == "" or date is None:
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Date attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Image Validation
+		if paragraphs == [] or paragraphs is None:
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Paragraphs are missing from blog."
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		#Convert key string to Datastore key	
 		blog_key = ndb.Key(db_defs.Blog, key)
+
+		#HERE: create a check if the key was found
 
 		#Get the blog to be updated by the key
 		Blog = db_defs.Blog.query(db_defs.Blog.key == blog_key).get()	
@@ -66,7 +153,7 @@ class Blog(webapp2.RequestHandler):
 		Blog.date = date
 		Blog.image = img
 		Blog.put()
-		out = Blog.to_dict()
+		blogObject = Blog.to_dict()
 
 		#Validate Blog Key is set
 
@@ -85,15 +172,16 @@ class Blog(webapp2.RequestHandler):
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.index = p["index"]
-			Paragraph.image = str(p["pImg"])
+			Paragraph.image = str(p["image"])
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			paragraphResultList.append(Paragraph.to_dict())
 
-		out['paragraphs'] = paragraphResultList
+		blogObject['paragraphs'] = paragraphResultList
 
 		#Return the result
-		self.response.write(json.dumps(out))
+		self.response.set_status(200)
+		self.response.write(json.dumps(blogObject))
 		return
 
 	def post(self):
@@ -105,12 +193,15 @@ class Blog(webapp2.RequestHandler):
 		author = jsonData['author']
 		date = jsonData['date']
 		paragraphs = jsonData['paragraphs']
-		img = str(jsonData['titleImg'])
+		img = str(jsonData['image'])
 		result = {}
 
 		#Validation Needs to go here
 		#check for datatypes
 		#check for max lengths 
+		#check for size
+
+
 
 		#Write Blog data to datastore					
 		Blog = db_defs.Blog()
@@ -132,10 +223,15 @@ class Blog(webapp2.RequestHandler):
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.index = p["index"]
-			Paragraph.image = str(p["pImg"])
+			Paragraph.image = str(p["image"])
 			Paragraph.blogKey = Blog.key 
-			Paragraph.put()
-			out = Paragraph.to_dict()
+			
+			if len(Paragraph._to_pb().Encode()) <= maxEntitySizeOfOneMB:
+				Paragraph.put()
+				out = Paragraph.to_dict()
+			else:
+				#enter error cod
+				errorMessage = "error"
 
 		#Return the result
 		self.response.write(json.dumps(blogOut))

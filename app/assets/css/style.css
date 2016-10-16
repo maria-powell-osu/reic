@@ -415,7 +415,12 @@ li.selected.completed + li:after {
 .mpRed {
     color:red;
 }
-.footerTest {
+.imageThumb {
+    width:100px;
+    margin:5px;
+    float:left;
+}
+/*.footerTest {
 background: rgba(39,49,79,1);
 background: -moz-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgba(39,49,79,1)), color-stop(15%, rgba(50,83,102,1)), color-stop(31%, rgba(61,119,127,1)), color-stop(51%, rgba(59,143,145,1)), color-stop(77%, rgba(57,174,168,1)), color-stop(84%, rgba(66,176,147,1)), color-stop(100%, rgba(85,181,100,1)));
@@ -424,4 +429,4 @@ background: -o-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%,
 background: -ms-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
 background: linear-gradient(to right, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27314f', endColorstr='#55b564', GradientType=1 );
-}
+}*/

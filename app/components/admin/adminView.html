@@ -8,6 +8,9 @@
 				<div ng-show="admin.blogPostedMessage" class="alert alert-success">
 					<strong>Blog Successfully Posted</strong>
 				</div>
+				<div ng-show="admin.errorMessage" class="alert alert-danger">
+					<strong>Error Occured: {{admin.errorMessage}}</strong>
+				</div>
 			<hr/>
 		</div>
 	</div>
@@ -97,8 +100,13 @@
 						<label>Blog Title</label>
 						<input type="text" placeholder="Title" class="inpt form-control" ng-model="admin.input.title" name="title" required mp-required>
 
-						<label>Title Image</label>
-						<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.titleImg">
+						<div class="row elemIndent">
+							 <div class="col-md-12">
+								<label>Title Image</label>
+								<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.image" id="titleImg" image-display-id="titleImgDisplay">
+								<img ng-src="{{admin.input.image}}" class="imageThumb" id="titleImgDisplay"/>
+							</div>
+						</div>
 
 						<label>Author</label>
 						<input type="text" class="inpt form-control" ng-model="admin.input.author" placeholder="Pen Name" name="author" required mp-required>  
@@ -124,8 +132,13 @@
 												<label mp-required>Body</label>
 												<textarea type="text" class="inpt form-control nonResizable" ng-model="admin.input.paragraphs[$index].body" placeholder="Paragraph Content" required name="body{{$index}}"rows="5"></textarea mp-required>
 
-												<label>Image</label>
-												<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" filereader="admin.input.paragraphs[$index].pImg">
+												<div class="row elemIndent">
+									 				<div class="col-md-12">
+														<label>Image</label>
+														<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" id="pImg{{$index}}" filereader="admin.input.paragraphs[$index].image" image-display-id="pImgDisplay{{$index}}">
+														<img ng-src="{{admin.input.paragraphs[$index].image}}" class="imageThumb" id="pImgDisplay{{$index}}"/>
+													</div>
+												</div>							
 											</div>
 										</div>
 									</fieldset>

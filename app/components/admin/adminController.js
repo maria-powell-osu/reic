@@ -15,7 +15,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.blogs = response;
         })
         .error (function (error) {
-            //Error Handling Needed ****************************
+            vm.errorMessage = error.message;
         });
 
     //Check User Credentials
@@ -64,7 +64,8 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         vm.input.title = blog.title;
         vm.input.author = blog.author;
         vm.input.date = blog.date;
-        vm.input.key = blog.key
+        vm.input.key = blog.key;
+        vm.input.image = blog.image;
     
         //Make sure there is no objects in paragraphs (typically there is one for user to be required to enter 
             //at least one paragraph)
@@ -101,7 +102,8 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
         })
         .error (function (error) {
-            //Error Handling Needed ****************************
+            vm.errorMessage = error.message;
+            $(window).scrollTop(0);
         });
     }
 

@@ -32,61 +32,6 @@ App.directive('jqdatepicker', function() {
     };
 });
 
-/*App.directive('mpValidation', function($timeout) {
-    return {
-        restrict: 'A',
-        scope: { formName: '=' },
-        link: function(scope, element, attrs, ctrl) {
-        	$timeout(function() {
-        		var test = scope['formName'];
-        		var resultArray = [];   
-            	var t = $('#rentalCalculatorInputForm *').filter(':input').each(function(index, element){
-            		if(element.required && element.value == ""){
-            			resultArray.push(element);
-            		}
-            	});
-            });
-        }
-    };
-});
-*/
-
-/*App.directive('jqSlideSection', function($timeout) {
-    return {
-        link: function(scope, element, attrs, ctrl) {
-            //$timeout to make sure everything is loaded properly before this
-            $timeout(function() {   
-                //if you want to hide them at some point do:
-                //$('#accordion .ui-accordion-content ').hide();
-
-                // header click event
-                $('#accordion .accordion-header').click(function() {
-                    //gets the sibling element which is the content of the header
-                    var contentOfHeader = $(this).next();
-                    var isContentOpen = contentOfHeader.is(':visible');
-                 
-                    contentOfHeader[isContentOpen? 'slideUp': 'slideDown']()
-                        // toggle between hide and show
-                        .trigger(isContentOpen? 'hide': 'show');
-
-                    // this prevents a pagescroll
-                    return false;
-                });
-            });
-        }
-    };
-});*/
-
-/*App.directive('jqTabs', function($timeout) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs, ctrl) {
-            $timeout(function() {  
-                $(element).tabs();
-            });
-        }
-    };
-});*/
 
 /*
  * Purpose: Handles drag and drop events
@@ -184,7 +129,8 @@ App.directive('droppable', function() {
 .directive("filereader", [function () {
 	return {
 		scope: {
-			filereader: "="
+			filereader: "=",
+			imageDisplayId: "@"
 		},
 		link: function (scope, element, attrs) {
 			element.bind("change", function (changeEvent) {
@@ -202,6 +148,18 @@ App.directive('droppable', function() {
 				//New styling after picture added
 				pictureAddedStyling();
 			});
+			scope.$watch('filereader', function (newValue, oldValue) {
+		          //if the value has change and the value is not defined 
+		          //that means the controller is trying to clear the field
+		          if (newValue !== oldValue && !newValue) {         	
+		          	$('#' + element[0].id).val('');
+
+		          	//if the user specific image displayid then clear that too
+		          	if(scope.imageDisplayId){
+		          		$('#' + scope.imageDisplayId).attr('src', '');
+		          	}
+		          }
+      		});
 		}
 	}
 }]);
@@ -237,3 +195,60 @@ function pictureAddedStyling () {
 	$("#removeImage").show();
 	$( "#propertyImage").show();
 }
+
+/*App.directive('mpValidation', function($timeout) {
+    return {
+        restrict: 'A',
+        scope: { formName: '=' },
+        link: function(scope, element, attrs, ctrl) {
+        	$timeout(function() {
+        		var test = scope['formName'];
+        		var resultArray = [];   
+            	var t = $('#rentalCalculatorInputForm *').filter(':input').each(function(index, element){
+            		if(element.required && element.value == ""){
+            			resultArray.push(element);
+            		}
+            	});
+            });
+        }
+    };
+});
+*/
+
+/*App.directive('jqSlideSection', function($timeout) {
+    return {
+        link: function(scope, element, attrs, ctrl) {
+            //$timeout to make sure everything is loaded properly before this
+            $timeout(function() {   
+                //if you want to hide them at some point do:
+                //$('#accordion .ui-accordion-content ').hide();
+
+                // header click event
+                $('#accordion .accordion-header').click(function() {
+                    //gets the sibling element which is the content of the header
+                    var contentOfHeader = $(this).next();
+                    var isContentOpen = contentOfHeader.is(':visible');
+                 
+                    contentOfHeader[isContentOpen? 'slideUp': 'slideDown']()
+                        // toggle between hide and show
+                        .trigger(isContentOpen? 'hide': 'show');
+
+                    // this prevents a pagescroll
+                    return false;
+                });
+            });
+        }
+    };
+});*/
+
+/*App.directive('jqTabs', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ctrl) {
+            $timeout(function() {  
+                $(element).tabs();
+            });
+        }
+    };
+});*/
+

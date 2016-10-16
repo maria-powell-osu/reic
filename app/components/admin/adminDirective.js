@@ -6,32 +6,6 @@
  *  3) Bootstrap modal does not accept parameters so I am using the angular model to pass params
  */
 
-
-/*
- * Delete Button Inside Delete Dialog Box
- */
-/*App.directive('mpDeleteBlog', function(Blog) {
-	return {
-		restrict: 'A',
-		scope: {
-			currentBlogInformation: '='
-		},
-		link: function(scope, element, attrs, ctrl){
-			//User confirm in dialog box that they really want to delete blog
-			$("#deleteBlog").click(function() {
-				Blog.deleteBlog(scope.currentBlogInformation.key)
-		        .success(function (response){
-		            scope.currentBlogInformation.blogs.splice(
-		            	scope.currentBlogInformation.index, 1);
-		        })
-		        .error (function (error) {
-		            //Error Handling Needed ****************************
-		        });
-			});
-		}
-	};
-});*/
-
 /*
  * Bootstrap Delete Modal Dialog 
  */
