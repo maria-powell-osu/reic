@@ -15,7 +15,12 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.blogs = response;
         })
         .error (function (error) {
-            vm.errorMessage = error.message;
+             if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
+            $(window).scrollTop(0);
         });
 
     //Check User Credentials
@@ -54,7 +59,12 @@ App.controller("AdminController", function($scope, Blog, Admin) {
                 vm.currentBlogInformation.index, 1);
         })
         .error (function (error) {
-            //Error Handling Needed ****************************
+             if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
+            $(window).scrollTop(0);
         });
     }
 
@@ -102,7 +112,11 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
         })
         .error (function (error) {
-            vm.errorMessage = error.message;
+            if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
             $(window).scrollTop(0);
         });
     }
@@ -133,7 +147,12 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             $(window).scrollTop(0);
         })
         .error (function (error) {
-            //Error Handling Needed ****************************
+             if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
+            $(window).scrollTop(0);
         });
     };
 

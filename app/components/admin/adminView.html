@@ -20,7 +20,7 @@
 				<div class="btn-toolbar">
 			        <div class="btn-group">
 			        	<label class="btn btn-default" ng-class="{active: admin.view === 'postBlog'}"><input type="radio" class="mpButtonGroupRadio" ng-model="admin.view" value="postBlog">Publish Blog</label>
-			        	<label class="btn btn-default" ng-class="{active: admin.view === 'editBlogs'}"><input type="radio" class="mpButtonGroupRadio" ng-model="admin.view" value="editBlogs">Edit Blogs</label>
+			        	<label class="btn btn-default" ng-class="{active: admin.view === 'editBlogs'}"><input type="radio" class="mpButtonGroupRadio" ng-model="admin.view" value="editBlogs" ng-click="admin.cancelBlog()">Edit Blogs</label>
 			        </div>
 			    </div>
 			</div>

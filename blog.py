@@ -23,6 +23,7 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
+		#Get all blogs from DB
 		blogs = db_defs.Blog.query().fetch()
 		listOfBlogObjects = []
 
@@ -65,6 +66,7 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
+		#Get data sent with request or set it to None
 		jsonData = json.loads(self.request.body)
 		key = jsonData['key'] if ('key' in jsonData) else None;
 		title = jsonData['title'] if ('title' in jsonData) else None;
@@ -125,7 +127,7 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
-		#Image Validation
+		#Paragraph Validation
 		if paragraphs == [] or paragraphs is None:
 			#Setup proper response code
 			self.response.set_status(422)
@@ -138,15 +140,36 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
+		#Image Validation
+		if img == [] or img is None:
+			#Setup proper response code
+			self.response.set_status(422)
+
+			#Setup error details
+			errorObject['code'] = 422
+			errorObject['message'] = "Title Image is missing from blog."
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
 		#Convert key string to Datastore key	
 		blog_key = ndb.Key(db_defs.Blog, key)
-
-		#HERE: create a check if the key was found
 
 		#Get the blog to be updated by the key
 		Blog = db_defs.Blog.query(db_defs.Blog.key == blog_key).get()	
 		
-		#check that record was found, otherwise return not found code
+		#check that record was found
+		if not Blog or Blog == None:
+			#Setup proper response code
+			self.response.set_status(404)
+
+			#Setup error details
+			errorObject['code'] = 404
+			errorObject['message'] = "Blog record could not be found."
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		Blog.title = title
 		Blog.author = author
@@ -154,8 +177,6 @@ class Blog(webapp2.RequestHandler):
 		Blog.image = img
 		Blog.put()
 		blogObject = Blog.to_dict()
-
-		#Validate Blog Key is set
 
 		#Delete all paragraphs associated with Blog 
 		paragraphsOfBlogInDB = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog_key).fetch()
@@ -167,8 +188,6 @@ class Blog(webapp2.RequestHandler):
 		paragraphResultList = []
 		for p in paragraphs:
 			Paragraph = db_defs.Paragraph()
-
-			# check if paragraph was found
 			Paragraph.subHeader = p["subHeader"]
 			Paragraph.body = p["body"]
 			Paragraph.index = p["index"]
@@ -188,13 +207,15 @@ class Blog(webapp2.RequestHandler):
 		#Json check
 
 		#Grab Data
+		#Get data sent with request or set it to None
 		jsonData = json.loads(self.request.body)
-		title = jsonData['title']
-		author = jsonData['author']
-		date = jsonData['date']
-		paragraphs = jsonData['paragraphs']
-		img = str(jsonData['image'])
+		title = jsonData['title'] if ('title' in jsonData) else None;
+		author = jsonData['author'] if ('author' in jsonData ) else None;
+		date = jsonData['date'] if ('date' in jsonData) else None;
+		img = str(jsonData['image']) if ('image' in jsonData) else None;
+		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None;
 		result = {}
+
 
 		#Validation Needs to go here
 		#check for datatypes

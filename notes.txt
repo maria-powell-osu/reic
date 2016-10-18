@@ -1,6 +1,7 @@
+
 Where I left of:
-	1) Img Title Input fields needs to be cleared (when you post it doesnt clear)
-		- Image fields needs to be bound to the field as well. 
+	1) blog.py:144 REST API checks
+	2) Need a remove image for updates and such 
 	2) Finish Picture upload, download, delete
 	3) Display Blogs on page
 		- For website add email link comments
@@ -10,6 +11,7 @@ Where I left of:
 	6) Preview button for jason blogs page?
 		
 Backlog:
+	- write jason tutorial on how large of pictures to used 
 	- blogs should be able to be ordered (maybe look how owr is doing that)
 	- cap rate round to nearest 10th
 	- navigation bar needs to close from site
@@ -52,7 +54,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 233
+	Coding: 240
 
 Rachael:
 	- calculator
