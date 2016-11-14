@@ -1,6 +1,13 @@
-.page-content
+/*.page-content
 {
     margin-top: 5%;
+}*/
+.ppDarkBlue{
+    background-color: #27314F;
+}
+/*To remove space below navbar before content starts*/
+.navbar {
+    margin-bottom: 0;
 }
 .cover
 {
@@ -26,11 +33,10 @@
       top: 0;
       width: 100%;
       z-index: 998;
-        position: fixed;
+      position: fixed;
   }
-
-  .affix + .container-fluid {
-      padding-top: 70px;
+  .affix-top{
+    background-color: red;
   }
 /*Takes out default hover event for nav-justified*/
 .nav-justified > li:hover, .nav-justified > li:focus {
