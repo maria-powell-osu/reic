@@ -2,11 +2,12 @@
 {
     margin-top: 5%;
 }
-.bg_picture
+.cover
 {
-    background-image:url('/app/assets/img/portland_skyline_banner_dark.jpg');
+    background-image:url('/app/assets/img/Plan_Passive_Cover.png');
     width: 100%;
-    height:400px;
+    height:500px;
+    background-size: 100% 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -14,25 +15,52 @@
     background-repeat: no-repeat;
     background-position: 50% top;
 }
-/*Adjust Padding*/
-a.navbar-brand {
-    padding: 6px 10px; //adjust this accordingly until you have it centered.
+.whiteText {
+    color: white !important;
 }
-.navbarImg
+/*Takes out default hover event for nav-justified*/
+.nav-justified > li > a:hover, .nav-justified > li > a:focus{
+    background-color:rgba(0,0,0,0);
+}
+ .affix {
+      top: 0;
+      width: 100%;
+      z-index: 998;
+        position: fixed;
+  }
+
+  .affix + .container-fluid {
+      padding-top: 70px;
+  }
+/*Takes out default hover event for nav-justified*/
+.nav-justified > li:hover, .nav-justified > li:focus {
+    background-color:rgba(0,0,0,0);
+}
+/*Adds white text box on hover event*/
+.nav-justified > li > a > div:hover, .nav-justified > li > a > div:focus, .nav-justified > li > a > div.active{
+    outline: 1px solid white;
+}
+/*Vertically aligns the links on navbar*/
+.nav-justified > li {
+    padding-top: 5px;
+}
+/* CSS Gradient Coloring*/
+.ppGradient
 {
-    padding-top: 0 !important;
-    width: auto;
-    height: 35px;
-}
-.mpNavbar {
-	border: none;
-    border-radius: 0;
-    /*background-color: rgba(0,0,0,0.5);*/
-    background-color: black;
-    /*position: fixed;
-    top: 0;*/
-    width: 100%;
-    z-index:3;
+    background: rgba(39,49,79,1);
+    background: -moz-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(39,49,79,1)), color-stop(15%, rgba(50,83,102,1)), color-stop(31%, rgba(61,119,127,1)), color-stop(51%, rgba(59,143,145,1)), color-stop(77%, rgba(57,174,168,1)), color-stop(84%, rgba(66,176,147,1)), color-stop(100%, rgba(85,181,100,1)));
+    background: -webkit-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -o-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: -ms-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    background: linear-gradient(to right, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27314f', endColorstr='#55b564', GradientType=1 );
+    /*White Borders*/
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-left: none;
+    border-right: none;
+    border-radius: 0 !important; /*Taking off rounded borders*/
 }
 .row  .row {
     margin: 0px -15px;
@@ -173,7 +201,7 @@ fieldset{
 /* 
  * On extra small devices styline
  */
-@media screen and (max-width: 400px){
+ @media screen and (max-width: 400px){
     /*To hide the step descriptions on small screens*/
     .progressbar li {
         font-size: 0;
@@ -195,158 +223,172 @@ fieldset{
     .page-content {
         margin-top: 25%;
     }
-}
+    /*To make the cover image smaller on phones*/
+    .cover {
+        height: 200px;
+    }
+    .affix {
+        position: static;
+    }
+    /*Added padding to collapse button in navbar because
+     on phones it otherwise disappears behind phone status bar at the top*/
+    /*.navbar-header {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-right: 15px;
+    }
+}*/
 
 /*Everything right before list item (circle*/
-.progressbar li:before {
-    content: counter(step);     /*Adds the numbering*/
-    counter-increment: step;    /*Define our step to be counter increment*/
-    width: 40px;
-    height: 40px;
-    line-height: 40px;          /*To vertically align the content*/
-    display: block;             /*In order to move the steps above writing*/
-    text-align: center;         /*Center the numbering*/
-    margin: 0 auto 10px auto;   /*Center the writing under steps*/
-    border-radius: 50%;         /*Create Circle Steps*/
-    background-color: #d3d3d3;    /*to make the line disappear and not show*/
-}
+    .progressbar li:before {
+        content: counter(step);     /*Adds the numbering*/
+        counter-increment: step;    /*Define our step to be counter increment*/
+        width: 40px;
+        height: 40px;
+        line-height: 40px;          /*To vertically align the content*/
+        display: block;             /*In order to move the steps above writing*/
+        text-align: center;         /*Center the numbering*/
+        margin: 0 auto 10px auto;   /*Center the writing under steps*/
+        border-radius: 50%;         /*Create Circle Steps*/
+        background-color: #d3d3d3;    /*to make the line disappear and not show*/
+    }
 
-/*Everything right after list item (line)*/
-.progressbar li:after {
-    content: '';                /*without this it will not show; done for element without content but should show*/
-    position: absolute;         /*positioned relative to 1st ancestor element >> li*/
-    width: 100%;
-    height: 4px;
-    background-color: #C0C0C0;
-    top: 20px;                  /*for the line to display halfway through the circle*/
-    /*since position = absolute: the left edge position in % of containing element*/
-    left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
-    z-index: -1;                /*The lines should show behind the circle*/
-}
+    /*Everything right after list item (line)*/
+    .progressbar li:after {
+        content: '';                /*without this it will not show; done for element without content but should show*/
+        position: absolute;         /*positioned relative to 1st ancestor element >> li*/
+        width: 100%;
+        height: 4px;
+        background-color: #C0C0C0;
+        top: 20px;                  /*for the line to display halfway through the circle*/
+        /*since position = absolute: the left edge position in % of containing element*/
+        left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
+            z-index: -1;                /*The lines should show behind the circle*/
+        }
 
-/*To remove to the line before the first step*/
-.progressbar li:first-child:after {
-    content: none;
-}
+        /*To remove to the line before the first step*/
+        .progressbar li:first-child:after {
+            content: none;
+        }
 
-/*Sets the active circle*/
-.progressbar li.active:before {
-    background: #5bc0de;
-    color:white;
-    cursor: pointer;
-}
+        /*Sets the active circle*/
+        .progressbar li.active:before {
+            background: #5bc0de;
+            color:white;
+            cursor: pointer;
+        }
 
-/*Sets the currently selected circle to darker blue*/
-.progressbar li.selected:before {
-    background: #51acc7;
-    color: white;
-    cursor: pointer;
-}
+        /*Sets the currently selected circle to darker blue*/
+        .progressbar li.selected:before {
+            background: #51acc7;
+            color: white;
+            cursor: pointer;
+        }
 
-/*Sets the line after bublle if the section is marked as completed*/
-li.completed + li:after {
-    background-color: #5bc0de;
-    color: white;
-}
+        /*Sets the line after bublle if the section is marked as completed*/
+        li.completed + li:after {
+            background-color: #5bc0de;
+            color: white;
+        }
 
-/*Sets bubble after the active item if the section is marked as completed*/
-li.completed + li:before {
-    cursor: pointer;
-}
+        /*Sets bubble after the active item if the section is marked as completed*/
+        li.completed + li:before {
+            cursor: pointer;
+        }
 
-/*Sets the line color of selected section to be darker blue if also marked as selected*/
-li.selected.completed + li:after {
-    background-color: #51acc7 !important;
-    color: white;
-}
+        /*Sets the line color of selected section to be darker blue if also marked as selected*/
+        li.selected.completed + li:after {
+            background-color: #51acc7 !important;
+            color: white;
+        }
 
-.fieldSetWidth {
-    display: inline-block;
-}
-.disabled {
- visibility: hidden;
- cursor: default;
-}
-.inValidField {
-    border: 1px solid #843534;
-}
-.mpImageItem {
-    position: relative;     /*relative position so that child element do not escape (are not positioned relative to doc body)*/
-}
-.mpImageDesc:hover {
-    background: #555555;    
-}
-.mpBanner {
-    background-image:url('/app/assets/img/portland_skyline_banner_long.jpg');
-    width: 100%;
-    height:200px;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-}
-.mpImageDesc {
-    position: absolute;     /* elem absolutely positioned relative to parent*/
-    width: 100%;
-    bottom: 0;              /*moves the text to bottom of image*/
-    text-align: center;
-    background: #333333;
-    padding: 10px;
-    opacity: 0.8;
-    color: white;
-}
-.mpImageDesc > a {
-    color: inherit; /*Remove Blue Link Coloring*/
-}
-.mpBannerHeader {
-    position: absolute;     /* elem absolutely positioned relative to parent*/
-    width: 450px;
-    bottom: 0;
-    padding: 5px 0 5px 10px;
-    opacity: 0.8;
-    color: white; 
-    font-size: medium;
-    border-radius: 3px;  
-    line-height: 70px;
-    border-right: 110px solid transparent;
-    border-bottom: 110px solid #394659;
-    height: 0;
-}
-.mpBannerDesc {
-    position: absolute;     /* elem absolutely positioned relative to parent*/
-    width: 450px;
-    bottom: 0;              /*moves the text to bottom of image*/
-    padding: 5px 0 5px 10px;
-    opacity: 0.8;
-    color: white; 
-    font-size: medium;
-    border-radius: 3px;
-    line-height: 70px;
-    border-right: 55px solid transparent;
-    border-bottom: 55px solid #11151a;
-    height: 0;
-}
-@media screen and (max-width: 450px){
-    /*Makes the slanted text box in banner smaller so they do not fall of screen*/
+        .fieldSetWidth {
+            display: inline-block;
+        }
+        .disabled {
+           visibility: hidden;
+           cursor: default;
+       }
+       .inValidField {
+        border: 1px solid #843534;
+    }
+    .mpImageItem {
+        position: relative;     /*relative position so that child element do not escape (are not positioned relative to doc body)*/
+    }
+    .mpImageDesc:hover {
+        background: #555555;    
+    }
+    .mpBanner {
+        background-image:url('/app/assets/img/portland_skyline_banner_long.jpg');
+        width: 100%;
+        height:200px;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+    .mpImageDesc {
+        position: absolute;     /* elem absolutely positioned relative to parent*/
+        width: 100%;
+        bottom: 0;              /*moves the text to bottom of image*/
+        text-align: center;
+        background: #333333;
+        padding: 10px;
+        opacity: 0.8;
+        color: white;
+    }
+    .mpImageDesc > a {
+        color: inherit; /*Remove Blue Link Coloring*/
+    }
     .mpBannerHeader {
-        width: 350px !important;
+        position: absolute;     /* elem absolutely positioned relative to parent*/
+        width: 450px;
+        bottom: 0;
+        padding: 5px 0 5px 10px;
+        opacity: 0.8;
+        color: white; 
+        font-size: medium;
+        border-radius: 3px;  
+        line-height: 70px;
+        border-right: 110px solid transparent;
+        border-bottom: 110px solid #394659;
+        height: 0;
     }
     .mpBannerDesc {
-        width: 350px !important;
+        position: absolute;     /* elem absolutely positioned relative to parent*/
+        width: 450px;
+        bottom: 0;              /*moves the text to bottom of image*/
+        padding: 5px 0 5px 10px;
+        opacity: 0.8;
+        color: white; 
+        font-size: medium;
+        border-radius: 3px;
+        line-height: 70px;
+        border-right: 55px solid transparent;
+        border-bottom: 55px solid #11151a;
+        height: 0;
     }
-}
-.mpImageExpl {
-    padding: 10px;
-}
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 0;             /*allow image to take up the whole space*/
-}
-.roundedCorners {
-    border-radius: 3px;
-}
+    @media screen and (max-width: 450px){
+        /*Makes the slanted text box in banner smaller so they do not fall of screen*/
+        .mpBannerHeader {
+            width: 350px !important;
+        }
+        .mpBannerDesc {
+            width: 350px !important;
+        }
+    }
+    .mpImageExpl {
+        padding: 10px;
+    }
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        padding: 0;             /*allow image to take up the whole space*/
+    }
+    .roundedCorners {
+        border-radius: 3px;
+    }
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -356,12 +398,12 @@ li.selected.completed + li:after {
     /* The footer is place at the bottom of content
        If the content does not reach to the bottom of screen height
        then this gives the illusion that footer continues to bottom of page*/
-    box-shadow: 0px 500px 0px 500px #E0E7E9; 
-    padding: 10px 0 10px 0;
-    /*margin-top: 30px;*/       /*To add padding before footer starts*/
-}
+       box-shadow: 0px 500px 0px 500px #E0E7E9; 
+       padding: 10px 0 10px 0;
+       /*margin-top: 30px;*/       /*To add padding before footer starts*/
+   }
 
-.mpLogo {
+   .mpLogo {
     height: 50px;
     width: auto;
 }
@@ -420,13 +462,3 @@ li.selected.completed + li:after {
     margin:5px;
     float:left;
 }
-/*.footerTest {
-background: rgba(39,49,79,1);
-background: -moz-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
-background: -webkit-gradient(left top, right top, color-stop(0%, rgba(39,49,79,1)), color-stop(15%, rgba(50,83,102,1)), color-stop(31%, rgba(61,119,127,1)), color-stop(51%, rgba(59,143,145,1)), color-stop(77%, rgba(57,174,168,1)), color-stop(84%, rgba(66,176,147,1)), color-stop(100%, rgba(85,181,100,1)));
-background: -webkit-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
-background: -o-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
-background: -ms-linear-gradient(left, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
-background: linear-gradient(to right, rgba(39,49,79,1) 0%, rgba(50,83,102,1) 15%, rgba(61,119,127,1) 31%, rgba(59,143,145,1) 51%, rgba(57,174,168,1) 77%, rgba(66,176,147,1) 84%, rgba(85,181,100,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27314f', endColorstr='#55b564', GradientType=1 );
-}*/

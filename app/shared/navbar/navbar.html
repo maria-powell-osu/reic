@@ -1,38 +1,32 @@
-<nav class="navbar navbar-inverse navbar-fixed-top mpNavbar">
+<!-- data-offset-top calculates the position of the scroll and data spy adds the affic for the sticky navbar -->
+<nav class="navbar navbar-default ppGradient" data-spy="affix" role="navigation" data-offset-top="500">
 	<div class="container">
-		<a href="/#/" class="navbar-brand">
-			<img class="img-responsive navbarImg" src="/app/assets/img/logo_white.png"></a>
-        <div class="navbar-header">
-        	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-        	</button>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/#/">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#tools">Financial Calculators</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#blog">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#videos">Videos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
-          </ul>
-          <!-- <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-link">Join</a></li>
-            <li class="nav-item"><a class="nav-link">Log In</a></li>
-          </ul> -->
-		</div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-			
+    <div class="navbar-header">
+     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+   </div>
+   <div class="collapse navbar-collapse" id="example-navbar-collapse"><!-- So that the original navbar disappears upon collapse -->
+    <ul class="nav nav-justified">
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="/#/"><div ng-class="{ active: isActive('/')}">About</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="#tools"><div ng-class="{ active: isActive('/tools')}">Calculators</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="#blog"><div ng-class="{ active: isActive('/blog')}">Blog</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="#videos"><div ng-class="{ active: isActive('/videos')}">Videos</div></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link whiteText" href="#contact"><div ng-class="{ active: isActive('/contact')}">Contact</div></a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
