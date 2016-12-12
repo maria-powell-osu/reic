@@ -41,6 +41,24 @@
     background-repeat: no-repeat;
     background-position: 50% top;
 }
+.calculatorBackground:hover
+{
+    background-image:url('/app/assets/img/Icon_Background_Hoverstate.jpg');
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+    color: white;
+}
+.calculatorBackground:hover #investmentReturnImg {
+    content: url('/app/assets/img/Icon_ROI_White.png');
+}
+.calculatorBackground:hover #rentalPropertyImg {
+    content: url('/app/assets/img/Icon_Property_White.png');
+}
 
 .whiteText {
     color: white !important;
