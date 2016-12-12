@@ -5,6 +5,9 @@
 /*.ppDarkBlue{
     background-color: #27314F;
 }*/
+body {
+    background-color: #e6e7e8;
+}
 /*To remove space below navbar before content starts*/
 .navbar {
     margin-bottom: 0;
@@ -29,6 +32,21 @@
 .taglineImgStyling
  {
     padding-top: 150px;
+}
+/*start: Makes all columns inside one div row to have the same height*/
+.allColumnsSameHeight {
+    overflow: hidden; 
+}
+.allColumnsSameHeight [class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+/*end: making coolumns the same height*/
+.blogThumbnailImageSpacing {
+    padding: 25px;
+}
+.padding15 {
+    padding: 15px;
 }
 .calculatorBackground
 {
@@ -523,4 +541,10 @@ fieldset{
 }
 .mpDesign3D777F {
     color: #3D777F;
+}
+.mpDesign27314F {
+    color: #27314F;
+}
+.mpDesign39AEA9 {
+    color: #39AEA9;
 }
