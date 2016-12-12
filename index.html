@@ -15,9 +15,20 @@
 
 	</head>
 	<body>
-		<div class="cover">
-			<img src="/app/assets/img/PP_Logo_White.png" class="img-responsive">
-		</div>
+		<!-- Right now the cover image is on every page
+		     Eventually I need to pull it into the aboutView.html
+		     So that every page can have its own view and style 
+		 -->
+     	<div class="cover">
+     		<div class="phoneSizeLogo">
+     			<img src="/app/assets/img/PP_Logo_White.png" class="img-responsive logoPadding">
+     		</div>
+ 			<div class="col-md-5 pull-right phoneSizeTagLine">
+ 				<img src="/app/assets/img/PP_Tagline_White.png" class="
+ 				img-responsive taglineImgStyling">
+ 			</div>
+     	</div>
+	     
   		<mp-top-nav-bar></mp-top-nav-bar>	
 		<ng-view></ng-view>
 		<!-- <mp-footer></mp-footer> -->

@@ -2,9 +2,9 @@
 {
     margin-top: 5%;
 }*/
-.ppDarkBlue{
+/*.ppDarkBlue{
     background-color: #27314F;
-}
+}*/
 /*To remove space below navbar before content starts*/
 .navbar {
     margin-bottom: 0;
@@ -21,7 +21,27 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% top;
+} 
+.logoPadding {
+    padding-top: 15px;
+    padding-left: 20px;
 }
+.taglineImgStyling
+ {
+    padding-top: 150px;
+}
+.calculatorBackground
+{
+    background-image:url('/app/assets/img/Icon_Background_Light.jpg');
+    background-size: 100% 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% top;
+}
+
 .whiteText {
     color: white !important;
 }
@@ -86,6 +106,7 @@ label {
     display: table;
     text-align: center;
 }
+
 .dashedHoverPlaceholder {
     border: 2px dashed #26267f;
     width: 100%;
@@ -204,6 +225,7 @@ fieldset{
     color: #545454;
 }
 
+
 /* 
  * On extra small devices styline
  */
@@ -233,19 +255,29 @@ fieldset{
     .cover {
         height: 200px;
     }
+    /*To make the tagline not disappear on phones due to small cover image height*/
+    .taglineImgStyling {
+        padding-top: 50px;
+    }
+    /*Makes the tag line image smaller on phones*/
+    .phoneSizeTagLine {
+        width: 55%;
+    }
+    /*Makes the logo img smaller on phones*/
+    .phoneSizeLogo {
+        width: 25%;
+    }
+    /*Adjust the space of the logo from the corner to be smaller on phones*/
+    .logoPadding {
+        padding-top: 7px;
+        padding-left: 7px;
+    }
+
     .affix {
         position: static;
     }
-    /*Added padding to collapse button in navbar because
-     on phones it otherwise disappears behind phone status bar at the top*/
-    /*.navbar-header {
-        padding-top: 15px;
-        padding-bottom: 15px;
-        padding-right: 15px;
-    }
-}*/
 
-/*Everything right before list item (circle*/
+    /*Everything right before list item (circle*/
     .progressbar li:before {
         content: counter(step);     /*Adds the numbering*/
         counter-increment: step;    /*Define our step to be counter increment*/
@@ -269,54 +301,54 @@ fieldset{
         top: 20px;                  /*for the line to display halfway through the circle*/
         /*since position = absolute: the left edge position in % of containing element*/
         left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
-            z-index: -1;                /*The lines should show behind the circle*/
-        }
+        z-index: -1;                /*The lines should show behind the circle*/
+    }
 
         /*To remove to the line before the first step*/
-        .progressbar li:first-child:after {
-            content: none;
-        }
+    .progressbar li:first-child:after {
+        content: none;
+    }
 
-        /*Sets the active circle*/
-        .progressbar li.active:before {
-            background: #5bc0de;
-            color:white;
-            cursor: pointer;
-        }
+    /*Sets the active circle*/
+    .progressbar li.active:before {
+        background: #5bc0de;
+        color:white;
+        cursor: pointer;
+    }
 
-        /*Sets the currently selected circle to darker blue*/
-        .progressbar li.selected:before {
-            background: #51acc7;
-            color: white;
-            cursor: pointer;
-        }
+    /*Sets the currently selected circle to darker blue*/
+    .progressbar li.selected:before {
+        background: #51acc7;
+        color: white;
+        cursor: pointer;
+    }
 
-        /*Sets the line after bublle if the section is marked as completed*/
-        li.completed + li:after {
-            background-color: #5bc0de;
-            color: white;
-        }
+    /*Sets the line after bublle if the section is marked as completed*/
+    li.completed + li:after {
+        background-color: #5bc0de;
+        color: white;
+    }
 
-        /*Sets bubble after the active item if the section is marked as completed*/
-        li.completed + li:before {
-            cursor: pointer;
-        }
+    /*Sets bubble after the active item if the section is marked as completed*/
+    li.completed + li:before {
+        cursor: pointer;
+    }
 
-        /*Sets the line color of selected section to be darker blue if also marked as selected*/
-        li.selected.completed + li:after {
-            background-color: #51acc7 !important;
-            color: white;
-        }
+    /*Sets the line color of selected section to be darker blue if also marked as selected*/
+    li.selected.completed + li:after {
+        background-color: #51acc7 !important;
+        color: white;
+    }
 
-        .fieldSetWidth {
-            display: inline-block;
-        }
-        .disabled {
-           visibility: hidden;
-           cursor: default;
-       }
-       .inValidField {
-        border: 1px solid #843534;
+    .fieldSetWidth {
+        display: inline-block;
+    }
+    .disabled {
+       visibility: hidden;
+       cursor: default;
+   }
+   .inValidField {
+    border: 1px solid #843534;
     }
     .mpImageItem {
         position: relative;     /*relative position so that child element do not escape (are not positioned relative to doc body)*/
@@ -324,7 +356,7 @@ fieldset{
     .mpImageDesc:hover {
         background: #555555;    
     }
-    .mpBanner {
+/*    .mpBanner {
         background-image:url('/app/assets/img/portland_skyline_banner_long.jpg');
         width: 100%;
         height:200px;
@@ -334,7 +366,7 @@ fieldset{
         background-size: cover;
         background-repeat: no-repeat;
         position: relative;
-    }
+    }*/
     .mpImageDesc {
         position: absolute;     /* elem absolutely positioned relative to parent*/
         width: 100%;
@@ -348,9 +380,9 @@ fieldset{
     .mpImageDesc > a {
         color: inherit; /*Remove Blue Link Coloring*/
     }
-    .mpBannerHeader {
-        position: absolute;     /* elem absolutely positioned relative to parent*/
-        width: 450px;
+/*    .mpBannerHeader {
+        position: absolute;     *//* elem absolutely positioned relative to parent*/
+/*        width: 450px;
         bottom: 0;
         padding: 5px 0 5px 10px;
         opacity: 0.8;
@@ -363,10 +395,10 @@ fieldset{
         height: 0;
     }
     .mpBannerDesc {
-        position: absolute;     /* elem absolutely positioned relative to parent*/
-        width: 450px;
-        bottom: 0;              /*moves the text to bottom of image*/
-        padding: 5px 0 5px 10px;
+        position: absolute;   */  /* elem absolutely positioned relative to parent*/
+/*        width: 450px;
+        bottom: 0;     */         /*moves the text to bottom of image*/
+/*        padding: 5px 0 5px 10px;
         opacity: 0.8;
         color: white; 
         font-size: medium;
@@ -375,16 +407,18 @@ fieldset{
         border-right: 55px solid transparent;
         border-bottom: 55px solid #11151a;
         height: 0;
+    }*/
+}
+
+/*@media screen and (max-width: 450px){*/
+    /*Makes the slanted text box in banner smaller so they do not fall of screen*/
+/*    .mpBannerHeader {
+        width: 350px !important;
     }
-    @media screen and (max-width: 450px){
-        /*Makes the slanted text box in banner smaller so they do not fall of screen*/
-        .mpBannerHeader {
-            width: 350px !important;
-        }
-        .mpBannerDesc {
-            width: 350px !important;
-        }
+    .mpBannerDesc {
+        width: 350px !important;
     }
+}*/
     .mpImageExpl {
         padding: 10px;
     }
@@ -395,6 +429,7 @@ fieldset{
     .roundedCorners {
         border-radius: 3px;
     }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -467,4 +502,7 @@ fieldset{
     width:100px;
     margin:5px;
     float:left;
+}
+.mpDesign3D777F {
+    color: #3D777F;
 }

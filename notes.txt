@@ -9,6 +9,8 @@ Where I left of:
 	5) - Shared service calls might need to be providers
 		- I bet there is a better way to setup services
 	6) Preview button for jason blogs page?
+
+	- banner stuff in css in media tag could be removed
 		
 Backlog:
 	- write jason tutorial on how large of pictures to used 
