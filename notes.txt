@@ -13,6 +13,7 @@ Where I left of:
 	- banner stuff in css in media tag could be removed
 		
 Backlog:
+	- SASS for page colors
 	- write jason tutorial on how large of pictures to used 
 	- blogs should be able to be ordered (maybe look how owr is doing that)
 	- cap rate round to nearest 10th
