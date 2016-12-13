@@ -17,7 +17,7 @@ class Blog(webapp2.RequestHandler):
 
 			#Setup error details
 			errorObject['code'] = 406
-			errorObject['message'] = "Data format does not match application/json"
+			errorObject['message'] = "Data format does not match required type"
 
 			#return details
 			self.response.write(json.dumps(errorObject))
@@ -60,7 +60,7 @@ class Blog(webapp2.RequestHandler):
 
 			#Setup error details
 			errorObject['code'] = 406
-			errorObject['message'] = "Data format does not match application/json"
+			errorObject['message'] = "Data format does not match required type"
 
 			#return details
 			self.response.write(json.dumps(errorObject))
@@ -68,20 +68,20 @@ class Blog(webapp2.RequestHandler):
 
 		#Get data sent with request or set it to None
 		jsonData = json.loads(self.request.body)
-		key = jsonData['key'] if ('key' in jsonData) else None;
-		title = jsonData['title'] if ('title' in jsonData) else None;
-		author = jsonData['author'] if ('author' in jsonData ) else None;
-		date = jsonData['date'] if ('date' in jsonData) else None;
-		img = str(jsonData['image']) if ('image' in jsonData) else None;
-		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None;
+		key = jsonData['key'] if ('key' in jsonData) else None
+		title = jsonData['title'] if ('title' in jsonData) else None
+		author = jsonData['author'] if ('author' in jsonData ) else None
+		date = jsonData['date'] if ('date' in jsonData) else None
+		img = str(jsonData['image']) if ('image' in jsonData) else None
+		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None
 
 		#Key Validation
 		if key == "" or key is None or not isinstance(key, (int, long)):
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Key attribute is missing or in unacceptable format"
 
 			#return details
@@ -91,10 +91,10 @@ class Blog(webapp2.RequestHandler):
 		#Title Validation
 		if title == "" or title is None or not isinstance(title, (basestring)):
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Title attribute is missing or in unacceptable format"
 
 			#return details
@@ -104,10 +104,10 @@ class Blog(webapp2.RequestHandler):
 		#Author Validation
 		if author == "" or author is None or not isinstance(author, (basestring)):
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Author attribute is missing or in unacceptable format"
 
 			#return details
@@ -117,10 +117,10 @@ class Blog(webapp2.RequestHandler):
 		#Date Validation
 		if date == "" or date is None:
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Date attribute is missing or in unacceptable format"
 
 			#return details
@@ -130,10 +130,10 @@ class Blog(webapp2.RequestHandler):
 		#Paragraph Validation
 		if paragraphs == [] or paragraphs is None:
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Paragraphs are missing from blog."
 
 			#return details
@@ -141,17 +141,39 @@ class Blog(webapp2.RequestHandler):
 			return
 
 		#Image Validation
-		if img == [] or img is None:
+		if img == "" or img is None:
 			#Setup proper response code
-			self.response.set_status(422)
+			self.response.set_status(400)
 
 			#Setup error details
-			errorObject['code'] = 422
+			errorObject['code'] = 400
 			errorObject['message'] = "Title Image is missing from blog."
 
 			#return details
 			self.response.write(json.dumps(errorObject))
 			return
+
+
+		# Validate required Parameter fields are there, else return error code
+		for p in paragraphs:
+			if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
+			if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
+			if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
 
 		#Convert key string to Datastore key	
 		blog_key = ndb.Key(db_defs.Blog, key)
@@ -188,10 +210,10 @@ class Blog(webapp2.RequestHandler):
 		paragraphResultList = []
 		for p in paragraphs:
 			Paragraph = db_defs.Paragraph()
-			Paragraph.subHeader = p["subHeader"]
-			Paragraph.body = p["body"]
-			Paragraph.index = p["index"]
-			Paragraph.image = str(p["image"])
+			Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
+			Paragraph.body = p["body"] if ('body' in p) else None
+			Paragraph.index = p["index"] if ('index' in p) else None
+			Paragraph.image = str(p["image"]) if ('image' in p) else None
 			Paragraph.blogKey = Blog.key 
 			Paragraph.put()
 			paragraphResultList.append(Paragraph.to_dict())
@@ -204,25 +226,82 @@ class Blog(webapp2.RequestHandler):
 		return
 
 	def post(self):
-		#Json check
+		errorObject = {}
+		#Check request format
+		if 'application/json' not in self.request.accept:
+			#Setup proper response code
+			self.response.set_status(406)
+
+			#Setup error details
+			errorObject['code'] = 406
+			errorObject['message'] = "Data format does not match required type"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		#Grab Data
 		#Get data sent with request or set it to None
 		jsonData = json.loads(self.request.body)
-		title = jsonData['title'] if ('title' in jsonData) else None;
-		author = jsonData['author'] if ('author' in jsonData ) else None;
-		date = jsonData['date'] if ('date' in jsonData) else None;
-		img = str(jsonData['image']) if ('image' in jsonData) else None;
-		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None;
+		title = jsonData['title'] if ('title' in jsonData) else None
+		author = jsonData['author'] if ('author' in jsonData ) else None
+		date = jsonData['date'] if ('date' in jsonData) else None
+		img = str(jsonData['image']) if ('image' in jsonData) else None
+		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None
 		result = {}
 
+		#Blog Title Validation
+		if title == None or title == "" or not isinstance(title, (basestring)): 
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+
+		#Blog Author Validation
+		if author == None or author == "" or not isinstance(author, (basestring)): 
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+
+		#Blog Date Validation
+		if date == None or date == "": 
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+
+		#Blog Paragraphs Validation
+		if paragraphs == None or paragraphs == "": 
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+
+		# Validate required Parameter fields are there, else return error code
+		for p in paragraphs:
+			if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
+			if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
+			if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+				self.response.write(json.dumps(errorObject))
+				return
 
 		#Validation Needs to go here
-		#check for datatypes
 		#check for max lengths 
 		#check for size
-
-
 
 		#Write Blog data to datastore					
 		Blog = db_defs.Blog()
@@ -234,17 +313,15 @@ class Blog(webapp2.RequestHandler):
 		Blog.put()
 		blogOut = Blog.to_dict()
 
-		#Validate Blog Key is set
-
 		#Write Paragraph Data to datastore with corresponding blog key
 		for p in paragraphs:
 			Paragraph = db_defs.Paragraph()
 
-			#Validate if fields exists: especially non-required ones
-			Paragraph.subHeader = p["subHeader"]
-			Paragraph.body = p["body"]
-			Paragraph.index = p["index"]
-			Paragraph.image = str(p["image"])
+			#Validate required fiselds exi
+			Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
+			Paragraph.body = p["body"] if ('body' in p) else None
+			Paragraph.index = p["index"] if ('index' in p) else None
+			Paragraph.image = str(p["image"]) if ('image' in p) else None
 			Paragraph.blogKey = Blog.key 
 			
 			if len(Paragraph._to_pb().Encode()) <= maxEntitySizeOfOneMB:
@@ -259,12 +336,29 @@ class Blog(webapp2.RequestHandler):
 		return
 		
 	def delete(self, **kwargs):
+		errorObject = {}
+		#Check request format
+		if 'application/json' not in self.request.accept:
+			#Setup proper response code
+			self.response.set_status(406)
+
+			#Setup error details
+			errorObject['code'] = 406
+			errorObject['message'] = "Data format does not match required type"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		#Validation check that blog id was sent	
+		if not ('id' in kwargs) or not kwargs['id'].isdigit():
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+			return
 
 		blogKey = ndb.Key(db_defs.Blog, int(kwargs['id']))
-
-		#Validation check for blogKey
 
 		#Delete all paragraphs associated with blogKey
 		paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blogKey).fetch()
@@ -278,9 +372,23 @@ class Blog(webapp2.RequestHandler):
 			for comment in comments:
 				comment.key.delete()
 
+		#Get the blog
 		blog = db_defs.Blog.query(db_defs.Blog.key == blogKey).get()
+		
+		#Validation check for blogKey
+		if not blog or blog == None:
+			#Setup proper response code
+			self.response.set_status(404)
+
+			#Setup error details
+			errorObject['code'] = 404
+			errorObject['message'] = "Blog record could not be found."
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
 		if blog:
 			blog.key.delete()
-		
+
 		self.response.write("Deleted")
 		return 
