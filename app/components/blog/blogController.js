@@ -15,7 +15,10 @@ App.controller("BlogController", function($scope, Comments, Blog) {
     //Retrieve the comments and load them onto the page
     Comments.getComments()
         .success(function (comments) {
-            vm.comments = comments;
+            //Associate the comments with the blog
+                //vm.blogs[blogKey].comments = comments;
+            //Add amount of comments for display
+                //vm.blogs[blogKey].numberOfComments = comments.length;
         })
         .error (function (error) {
             //Need to add error handling here ***********************************

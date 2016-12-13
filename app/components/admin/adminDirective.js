@@ -51,3 +51,21 @@ App.directive('mpModalPost', function () {
 		}
 	};
 });
+
+/*
+ * Bootstrap Preview Modal Dialog 
+ */
+App.directive('mpModalPreview', function () {
+	return {
+		restrict: 'A',
+		link: function (scope,element, attrs, ctrl){
+			//User clicked Delete Icon - Shows Bootstrap Dialog Box
+			$(element).click(function() {
+				//Activate Bootstrap Modal
+				$("#mpModalPreview").modal('show');		
+			});
+
+			
+		}
+	};
+});
