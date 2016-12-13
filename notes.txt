@@ -1,6 +1,5 @@
 
 Where I left of:
-	1) add hover to calculator icons
 	2) Need a remove image for updates and such 
 	2) Finish Picture upload, download, delete
 	3) Display Blogs on page
