@@ -598,3 +598,8 @@ fieldset{
   color: white;
   text-decoration: underline; 
 }
+/*To make tinymce images responsive*/
+.elemResize img {
+    max-width: 100%;
+    height: auto;
+}

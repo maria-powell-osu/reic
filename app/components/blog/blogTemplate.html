@@ -1,7 +1,11 @@
-
-<h2>{{blog.title}}</h2>
-<p>Posted by {{blog.author}}</p>
-<img ng-src="{{blog.image}}" class="imageThumbLarge img-responsive pull-right">
-<div ng-bind-html="blog.content" ng-hide="doc.isEditing"></div>
+<div class="row">
+	<div class="col-md-12">
+		<h2>{{blog.title}}</h2>
+		<p>Posted by {{blog.author}}</p>
+		<img ng-src="{{blog.image}}" class="imageThumbLarge img-responsive pull-right">
+		<!-- Class imgResize was added to make tinymce images responsive -->
+		<div ng-bind-html="blog.content" ng-hide="doc.isEditing" class="elemResize"></div>
+	</div>
+</div>
 
 
