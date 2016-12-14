@@ -1,0 +1,25 @@
+- take out loan name everywhere
+
+- move vacancy under property management
+
+
+
+
+I want to be able to enter:
+- INCOME
+	- Rental Income
+	- More income options:
+		- supplemental option
+- EXPENSES
+	- Property Tax
+	- Insurance
+	- Maintenance
+	- Utilities
+		- remove sewer, elect, gas
+	- More expense options:
+		- repairs and improvements
+		- property management
+			- vacancy, management fee, tenant placement fee
+- PROPERTY OVER TIME
+	- 
+

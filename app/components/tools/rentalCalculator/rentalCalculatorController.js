@@ -54,6 +54,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.input.bp_assumedAppreciation = 3;
     vm.input.ri_annualRentIncrease = 3;
     vm.input.e_annualExpenseIncrease = 3;
+    vm.input.m_costPercent = 3;
     vm.input.li_purchaseDate = getCurrentDate();
     vm.input.o_vacancyRate = 5;
 
