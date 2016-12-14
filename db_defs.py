@@ -30,8 +30,8 @@ class Paragraph(ndb.Model):
 
 class Comment(ndb.Model):
 	#Here This needs to become a foreign key
-	blogKey = ndb.KeyProperty(kind=Blog)
-	commentId = ndb.IntegerProperty(required=True)
+	blogKey = ndb.KeyProperty(kind=Blog, required=True)
+	index = ndb.IntegerProperty(required=True)
 	content = ndb.StringProperty(required=True)
 	date = ndb.StringProperty(required=True)
 	name = ndb.StringProperty(required=True)

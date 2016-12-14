@@ -45,6 +45,18 @@ class Blog(webapp2.RequestHandler):
 			#add paragraphs to the blog object
 			listOfBlogObjects[i]['paragraphs'] = listOfParagraphs
 
+			#get comments associated with blog
+			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).order(db_defs.Comment.index).fetch()
+
+			#if the blog has comments, generate list of paragraphs
+			listOfComments = []
+			if comments:
+				for comment in comments:
+					listOfComments.append(comment.to_dict())
+
+			#add paragraphs to the blog object
+			listOfBlogObjects[i]['comments'] = listOfComments
+
 		#Return reponse with proper code
 		self.response.set_status(200)
 		self.response.write(json.dumps(listOfBlogObjects))

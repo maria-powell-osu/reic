@@ -1,4 +1,3 @@
-
 	<!-- BLOGS -->
 	<div class="row">
 		<!-- MOST RECENT BLOGS -->
@@ -11,22 +10,20 @@
 			</div>
 			<!-- BLOGS: Most recent -->
 			<div class="row blogListPadding">
-				<div class="row" ng-repeat="blog in blog.blogs track by $index"> <!-- NEEDS TO BE ORDERED BY DATE!!!!!! -->
-				<div class="col-md-6 col-md-push-4">
-					<div class="row mpDesign27314F ">
-						<h2><b>{{blog.title}}</b></h2>
+			<!-- 	<a href="#blog/{{blog.title}}" > -->
+					<div class="row mpClickable" ng-repeat="b in blog.blogs track by $index" ng-click="blog.showBlog(b)"> <!-- NEEDS TO BE ORDERED BY DATE!!!!!! -->
+					<div class="col-md-6 col-md-push-4">
+						<div class="row mpDesign27314F ">
+							<h2><b>{{b.title}}</b></h2>
+						</div>
+						<div class="row mpDesign39AEA9  ">
+							<p><b>-- {{b.comments.length}} Comments</b></p>
+						</div>
 					</div>
-					<div class="row mpDesign39AEA9  ">
-						<p><b>-- 25 Comments</b></p>
+					<div class="col-md-4 col-md-pull-6">
+						<img ng-src="{{b.image}}" class="img-responsive">
 					</div>
-				</div>
-				<div class="col-md-4 col-md-pull-6">
-					<img ng-src="{{blog.image}}" class="img-responsive">
-				</div>
-				<!-- This needs to be shown when link is clicked -->
-				<!-- <div ng-repeat="blog in blog.blogs track by $index">
-					<mp-blog blog="blog"></mp-blog>
-				</div> -->
+				<!-- </a> -->
 			</div>
 			</div>
 		</div>

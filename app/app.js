@@ -29,6 +29,11 @@ App.config(function($routeProvider) {
     controller: 'BlogController',
     controllerAs: 'blog',
   });
+  $routeProvider.when('/blog/:blogTitle', {
+    templateUrl: '../app/components/blog/blogView.html',
+    controller: 'BlogController',
+    controllerAs: 'blog',
+  });
   $routeProvider.when('/admin', {
     templateUrl: '../app/components/admin/adminView.html',
     controller: 'AdminController',

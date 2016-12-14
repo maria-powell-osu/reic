@@ -1,4 +1,4 @@
-App.controller("BlogController", function($scope, Comments, Blog) {
+App.controller("BlogController", function($scope, Comments, Blog, $location) {
 	var vm = this;
     vm.newComment = {};
     vm.replyActive = false;
@@ -12,8 +12,14 @@ App.controller("BlogController", function($scope, Comments, Blog) {
             var test = error;
         });
 
+    vm.showBlog = function (blog) {
+        //Create Blog Title for URL - add hyphen between each word for SEO
+        hyphenatedBlogTitle = blog.title.split(' ').join('-');
+
+        $location.path( "blog/" + hyphenatedBlogTitle);
+    }
     //Retrieve the comments and load them onto the page
-    Comments.getComments()
+   /* Comments.getComments()
         .success(function (comments) {
             //Associate the comments with the blog
                 //vm.blogs[blogKey].comments = comments;
@@ -21,9 +27,7 @@ App.controller("BlogController", function($scope, Comments, Blog) {
                 //vm.blogs[blogKey].numberOfComments = comments.length;
         })
         .error (function (error) {
-            //Need to add error handling here ***********************************
-            var test = error;
-        });
+        });*/
 
     var today = new Date().toDateString();
 
