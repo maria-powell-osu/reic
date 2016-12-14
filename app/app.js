@@ -8,8 +8,8 @@ var App = angular.module('App', ['ngRoute', 'ngSanitize', 'ui.tinymce']);
 App.config(function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: '../app/components/about/aboutView.html',
-    /*controller: 'AboutController',
-    controllerAs: 'aboutController',*/
+    controller: 'AboutController',
+    controllerAs: 'about',
   });
   $routeProvider.when('/tools', {
     templateUrl: '../app/components/tools/tools.html',

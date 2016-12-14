@@ -29,35 +29,20 @@
 		<h4><b class="whiteText">MOST POPULAR BLOGS</b></h4>
 	</div>
 </div>
-<div class="row blogRow">
+<div class="row blogRow mpClickable" ng-repeat="blog in about.blogs track by $index" ng-click="about.showBlog(blog)">
 	<!-- Implements push and pull re-ordering for columns 
 		This was added so that on small screens the title comes first-->
 	<div class="col-md-6 col-md-push-4">
 		<div class="row mpDesign27314F blogListPadding">
-			<h2><b>TOP 10 PASSIVE INCOME INVESTMENTS</b></h2>
+			<h2><b>{{blog.title}}</b></h2>
 		</div>
 		<div class="row mpDesign39AEA9 blogListPadding">
-			<p><b>-- 25 Comments</b></p>
+			<p><b>-- {{blog.comments.length}} Comments</b></p>
 		</div>
 	</div>
 	<div class="col-md-4 col-md-pull-6">
-		<img src="/app/assets/img/temp.jpg" class="img-responsive blogListPadding">
+		<img ng-src="{{blog.image}}" class="img-responsive blogListPadding">
 	</div>
+	<hr class="thickHR"/>
 </div>
-<hr class="thickHR"/>
-<div class="row blogRow">
-	<!-- Implements push and pull re-ordering for columns 
-		This was added so that on small screens the title comes first-->
-	<div class="col-md-6 col-md-push-4">
-		<div class="row mpDesign27314F blogListPadding">
-			<h2><b>HOW TO RE BALANCE INVESTMENT PORTFOLIOS BY FOLLOWING AN ASSET ALLOCATION STRATEGY</b></h2>
-		</div>
-		<div class="row mpDesign39AEA9 blogListPadding">
-			<p><b>-- 25 Comments</b></p>
-		</div>
-	</div>
-	<div class="col-md-4 col-md-pull-6">
-		<img src="/app/assets/img/portland_skyline_banner.jpg" class="img-responsive blogListPadding">
-	</div>
-</div>
-<hr class="thickHR"/>
+

@@ -92,7 +92,7 @@
 				<button type="button" class="btn btn-info" ng-click="blog.reply()" ng-hide="blog.replyActive">Reply</button>
 				<br/>
 				<!-- COMMENT VIEW -->
-				<h2><b style="color: #696969;">Comments</b></h2>
+				<h2 ng-if="blog.currentBlogView.comments.length != 0"><b style="color: #696969;">Comments</b></h2>
 				<div ng-repeat="comment in blog.currentBlogView.comments track by $index">
 					<hr/>
 					<div class="row">

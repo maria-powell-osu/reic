@@ -1,11 +1,15 @@
 
 Where I left of:
 
-	- finish blog display
+	- admin page needs pull content dynamically (set max display on there)
+	- finish blog display on about page
+	- order all blogs by date
+	- add tag to post to mark as most popular
 	- google captcha
 	- comment service with reply to reply
 	- Google Analytics
 	- db check for javascript?
+	- do I need the trustsce stuff for editor?
 		
 Backlog:
 	- Add replies to comments
@@ -55,7 +59,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 240
+	Coding: 264
 
 Rachael:
 	- calculator
