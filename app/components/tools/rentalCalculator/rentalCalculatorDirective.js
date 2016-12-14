@@ -1,53 +1,27 @@
-/* Basic Property Information
- * Loads template into rentalCalculatorInput.html
- */
-/* App.directive('basicPropertyInformation', function() {
-  return {
-    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/basicPropertyInformation.html'
-  };
-});*/
-
-/* Basic Property Information
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('overTime', function() {
-  return {
-    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/overTime.html'
-  };
-});
 
 /* Loan Information
  * Loads template into rentalCalculatorInput.html
  */
  App.directive('loanInformation', function() {
   return {
+    restrict: 'E',
     templateUrl: '/app/components/tools/rentalCalculator/sectionViews/loanInformation.html'
   };
 });
 
-
 /* Income Sources
- * Loads template into rentalCalculatorInput.html
+ * Loads template into incomeSources.html
  */
- App.directive('incomeSources', function() {
+ App.directive('moneyFlow', function() {
   return {
     templateUrl: '/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
-  };
-});
-
-/* Expenses
- * Loads template into rentalCalculatorInput.html
- */
- App.directive('expenses', function() {
-  return {
-    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/expenses.html'
   };
 });
 
  /* Results
  * Loads template into result.html
  */
- App.directive('results', function() {
+ App.directive('cashflowSummary', function() {
   return {
     templateUrl: '/app/components/tools/rentalCalculator/sectionViews/results.html'
   };

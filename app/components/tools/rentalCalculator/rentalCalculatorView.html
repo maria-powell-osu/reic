@@ -1,64 +1,49 @@
 <!-- Loader showing when calculations are running -->
 <mp-loader ng-show="rentalCalculator.calculating"></mp-loader>
 <div class="container page-content">
-	<h4>Bread Crumbs need to go here</h4>
-	<div class="row">
+<!-- 	<div class="row">
 		<div class="progressbarContainer">
-			<ul class="progressbar" >
+			<ul class="progressbar" > -->
 				<!-- active: when the step has opened up and is editable (bubble to blue)
 					 selected: the currrently viewed step 
 					 completed: when step has all fields need to proceed (set the line to blue and cursor)-->
-				<li ng-repeat="step in rentalCalculator.steps" ng-attr-id="step.index" ng-class="{active: rentalCalculator.currStep>=step.index || step.activated, selected:rentalCalculator.currStep==step.index, completed: rentalCalculatorInputForm[step.view].$valid && step.activated}" ng-click="rentalCalculator.jumpTo(step.index, rentalCalculatorInputForm)">{{step.display}}</li> 
+	<!-- 			<li ng-repeat="step in rentalCalculator.steps" ng-attr-id="step.index" ng-class="{active: rentalCalculator.currStep>=step.index || step.activated, selected:rentalCalculator.currStep==step.index, completed: rentalCalculatorInputForm[step.view].$valid && step.activated}" ng-click="rentalCalculator.jumpTo(step.index, rentalCalculatorInputForm)">{{step.display}}</li> 
 			</ul>
+		</div>
+	</div> -->
+	<div class="row">
+		<div class="col-md-10">
+			<div class="btn-toolbar" >
+				<!-- BUTTON TABS -->
+		        <div class="btn-group" style="width:100%;" > 
+		        	<!-- To strech the tabs to whole width
+		        		  Each of the labels got a assigned a width percentage value. ones with longer names I gave more space -->
+		        	<!-- Loan-->
+		        	<label class="btn btn-default" style="width:25%;"  ng-class="{active: rentalCalculator.view === 'loan'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="loan">Loan</label>
+		        	<!-- Income/Expenses -->
+		        	<label class="btn btn-default" style="width:42%;" ng-class="{active: rentalCalculator.view === 'incomeExpenses'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="incomeExpenses">Money Flow</label>
+		        	<!-- CASHFLOW SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" ng-class="{active: rentalCalculator.view === 'cashFlowSummary'}" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="cashFlowSummary" >Result</label>
+		        </div>
+		    </div>
 		</div>
 	</div>
 	<br/>
 	<br/>
 	<form id="rentalCalculatorInputForm" name="rentalCalculatorInputForm">
-		<!-- Error Messages -->
-		<div class="text-danger elemIndent" ng-class="{'disabled': !rentalCalculatorInputForm[rentalCalculator.currView].$invalid}" ng-show="rentalCalculator.userWantedToProceed">
-    		<b>Please Enter Required Fields Below</b>
-  		</div>
-  		<br/>
 		<div>
-			<!-- Basic Property Information -->
-			<!-- <div id="basicInformation" basic-property-information ng-show="rentalCalculator.currStep ==  rentalCalculator.steps[0].index"></div> -->
-			
-			<!-- Loan Information -->
-			<div id="loanInformation" loan-information ng-show="rentalCalculator.currStep == rentalCalculator.steps[0].index"></div>
-
-			<!-- Income Sources -->
-			<div id="incomeSources" income-sources ng-show="rentalCalculator.currStep == rentalCalculator.steps[1].index"></div>  
-
-			<!-- Expenses -->
-			<div id="expenses" expenses ng-show="rentalCalculator.currStep == rentalCalculator.steps[2].index"></div>
-
-			<!-- Over Time Values -->
-			<div id="overTime" over-time ng-show="rentalCalculator.currStep == rentalCalculator.steps[3].index"></div>
-
-			<!-- Results -->
-			<div id="results" results ng-show="rentalCalculator.currStep == rentalCalculator.steps[4].index"></div>
-			<br/>
-
-		</div>
-		<div class="row elemIndent">
-			<div class="col-md-10">
-				<hr/>
-			</div>
-		</div>
-		<div class="row elemIndent">
-		<div class="col-md-10">
-			<div class="col-md-6">
-				<button type="button" class="btn btn-info" ng-hide="rentalCalculator.currStep == rentalCalculator.steps[0].index" ng-click="rentalCalculator.prev(rentalCalculatorInputForm)">Previous</button>
-			</div>
-			<div class="col-md-6">
-				<!-- Next Step --> 			
-	    		<button type="button" ng-click="rentalCalculator.next(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-hide="rentalCalculator.currStep >= (rentalCalculator.totalSteps - 2)" ng-disabled="rentalCalculatorInputForm[rentalCalculator.currView].$invalid">Next</button>
-
-	    		<!-- Calculate -->
-	    		<button type="button" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)" class="btn btn-info pull-right" ng-show="rentalCalculator.currStep == (rentalCalculator.totalSteps - 2)">Calculate</button>
-			</div>
-		  </div>
+			<loan-information ng-show="rentalCalculator.view == 'loan'"></loan-information>
+			<money-flow ng-show="rentalCalculator.view == 'incomeExpenses'"></money-flow>
+			<!-- Only Shown when all fields have been entered -->
+			<cashflow-summary ng-show="rentalCalculator.view == 'cashFlowSummary'" ng-if="rentalCalculatorInputForm.$valid"></cashflow-summary>
+			<!-- If form is not valid but tab has been pushed display error message with missing fields -->
+			<!-- Error Messages -->
+			<div class="text-danger elemIndent" ng-show="rentalCalculator.view == 'cashFlowSummary' && !rentalCalculatorInputForm.$valid">
+	    		<b>Enter the following fields to view your cashflow summary:</b>
+	    		<div ng-repeat="field in rentalCalculator.missingFields">
+	    			<div>{{field}}</div>
+	    		</div>
+	  		</div>
 		</div>
 	</form>
 </div>

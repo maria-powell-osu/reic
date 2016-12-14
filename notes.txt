@@ -1,9 +1,10 @@
 
 Where I left of:
-
+- 
 	- admin page needs pull content dynamically (set max display on there)
 	- finish blog display on about page
 	- order all blogs by date
+		- blogs need to have blish date that does not update with blog updated
 	- add tag to post to mark as most popular
 	- google captcha
 	- comment service with reply to reply

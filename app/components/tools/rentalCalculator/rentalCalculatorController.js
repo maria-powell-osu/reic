@@ -1,61 +1,16 @@
 App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
     var vm = this;
-    vm.input = {};    
-    vm.steps = RentalCalculator.steps();
-    vm.totalSteps = vm.steps.length;
+    vm.input = {};  
+    vm.view = "loan";  
 
     //Initialize all default values for view
     vm.calculating = false;
-    vm.currStep = vm.steps[0].index; //Initialize default Views
-    vm.currView = vm.steps[vm.currStep].view;
-    vm.userWantedToProceed = false;
 
     //Default View Settings for result view
     vm.cashFlowView = 'graph';
     vm.cashOnEquityView = 'graph';
     vm.totalReturnView = 'graph';
     
-    //Progress Step Bar Functions
-    vm.next = function (form){
-      vm.currStep = RentalCalculator.nextStep(vm.currStep, vm.totalSteps);
-      vm.currView = vm.steps[vm.currStep].view;
-      vm.steps[vm.currStep].activated = true;
-      //reset once entered the new view
-      vm.userWantedToProceed = false;
-      $(window).scrollTop(0);
-    };
-    
-    vm.jumpTo = function (jumpToIndex, form){
-      var canProceed = true;
-
-      //This checks if all forms up to the jumpToIndex are valid
-      for(var i = 0; i < jumpToIndex; i++){
-        if(!form[vm.steps[i].view].$valid){
-          canProceed = false;
-        }
-      }
-
-      //If all previous steps have been validated then jump
-      if(canProceed)  {
-        vm.steps[jumpToIndex].activated = true;
-        //Here we need to see if the step was ac
-        if(jumpToIndex === vm.totalSteps - 1){
-          vm.calculate(form);
-        } else {
-          vm.currStep = RentalCalculator.jumpTo(jumpToIndex);
-          vm.currView = vm.steps[vm.currStep].view;
-          //reset once entered the new view
-          vm.userWantedToProceed = false;
-        }
-      } else {
-        vm.userWantedToProceed = true;
-      }
-    };
-    vm.prev = function (form){
-      vm.currStep = RentalCalculator.prevStep(vm.currStep);
-      vm.currView = vm.steps[vm.currStep].view;
-      $(window).scrollTop(0);
-    };
     vm.calculate = function (form){
       if(form.$valid)  {
         //Get the data for the tables, graphs etc.
@@ -64,11 +19,14 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         //A watch has been added in the mp-charts directive that triggers drawing of the graphs
         vm.chartData = results;
 
-        //Route to the results page
-        vm.currStep = vm.totalSteps - 1;
-        vm.currView = vm.steps[vm.currStep].view;
       } else {
-        vm.userWantedToProceed = true;
+        //Generate list of missing fields
+        vm.missingFields = [];
+
+        for(var i = 0; i < form.$error.required.length; i++){
+            vm.userWantedToViewResults = true;
+            vm.missingFields.push(form.$error.required[i].$name);
+        }
       }
     };
 

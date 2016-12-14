@@ -5,6 +5,7 @@
 /*.ppDarkBlue{
     background-color: #27314F;
 }*/
+
 /*To remove space below navbar before content starts*/
 .navbar {
     margin-bottom: 0;
@@ -274,44 +275,43 @@ fieldset{
 .elemIndent{
     padding-left: 1%;
 }
-.progressbarContainer {
+
+/*.progressbarContainer {
     width: 85%;
-}
-.progressbar{
-    list-style: none;           /*take out list bullet*/
-    counter-reset: step;        /*a way to number sections*/
-    padding: 0;                 /*Align the UL to the left*/
-}
+}*/
+/*.progressbar{
+    list-style: none;   */        /*take out list bullet*/
+   /* counter-reset: step;    */    /*a way to number sections*/
+   /* padding: 0;         */        /*Align the UL to the left*/
+/*}
 .progressbar li {
-    width: 20%;              /*How much space each item gets based on how many steps*/
-    float: left;                /*Vertical align list*/
-    position: relative;         /*Position an element relative to its normal position*/
-    text-align: center;         /*Centers the steps*/ 
-    color: #545454;
-}
-
-
+    width: 20%;    */          /*How much space each item gets based on how many steps*/
+   /* float: left;        */        /*Vertical align list*/
+   /* position: relative; */        /*Position an element relative to its normal position*/
+    /*text-align: center;    */     /*Centers the steps*/ 
+  /*  color: #545454;
+}*/
 /* 
  * On extra small devices styline
  */
  @media screen and (max-width: 400px){
     /*To hide the step descriptions on small screens*/
-    .progressbar li {
+/*    .progressbar li {
         font-size: 0;
-    }
+    }*/
     /*To make sure number don't get hidden like labels on small devices*/
     /*Important was added to avoid it getting overridden by my class below it*/
-    .progressbar li:before {
+/*    .progressbar li:before {
         font-size: 10px !important;  
         width: 30px !important;
         height: 30px !important;
         line-height: 30px !important;           
-    }
+    }*/
     /*After resizing the circles for small screens let's also re-center lines and width*/
-    .progressbar li:after {
+/*    .progressbar li:after {
         top: 15px !important; 
         height: 2px !important;
-    }
+    }*/
     /*To make sure the navbar doesnt overlap the page content*/
     .page-content {
         margin-top: 25%;
@@ -349,51 +349,51 @@ fieldset{
     }
 
     /*Everything right before list item (circle*/
-    .progressbar li:before {
-        content: counter(step);     /*Adds the numbering*/
-        counter-increment: step;    /*Define our step to be counter increment*/
-        width: 40px;
+   /* .progressbar li:before {
+        content: counter(step);*/     /*Adds the numbering*/
+      /*  counter-increment: step; */   /*Define our step to be counter increment*/
+       /* width: 40px;
         height: 40px;
-        line-height: 40px;          /*To vertically align the content*/
-        display: block;             /*In order to move the steps above writing*/
-        text-align: center;         /*Center the numbering*/
-        margin: 0 auto 10px auto;   /*Center the writing under steps*/
-        border-radius: 50%;         /*Create Circle Steps*/
-        background-color: #d3d3d3;    /*to make the line disappear and not show*/
-    }
+        line-height: 40px;    */      /*To vertically align the content*/
+     /*   display: block;  */           /*In order to move the steps above writing*/
+      /*  text-align: center;      */   /*Center the numbering*/
+        /*margin: 0 auto 10px auto; */  /*Center the writing under steps*/
+      /*  border-radius: 50%;       */  /*Create Circle Steps*/
+      /*  background-color: #d3d3d3; */   /*to make the line disappear and not show*/
+   /* }*/
 
     /*Everything right after list item (line)*/
-    .progressbar li:after {
-        content: '';                /*without this it will not show; done for element without content but should show*/
-        position: absolute;         /*positioned relative to 1st ancestor element >> li*/
-        width: 100%;
+  /*  .progressbar li:after {
+        content: '';              */  /*without this it will not show; done for element without content but should show*/
+       /* position: absolute;   */      /*positioned relative to 1st ancestor element >> li*/
+      /*  width: 100%;
         height: 4px;
         background-color: #C0C0C0;
-        top: 20px;                  /*for the line to display halfway through the circle*/
+        top: 20px;      */            /*for the line to display halfway through the circle*/
         /*since position = absolute: the left edge position in % of containing element*/
-        left: -50%;                 /*aligned the line to go over the circle (fixed with zindex & bg color white*/
-        z-index: -1;                /*The lines should show behind the circle*/
-    }
+      /*  left: -50%;    */             /*aligned the line to go over the circle (fixed with zindex & bg color white*/
+       /* z-index: -1;   */             /*The lines should show behind the circle*/
+   /* }*/
 
         /*To remove to the line before the first step*/
-    .progressbar li:first-child:after {
+    /*.progressbar li:first-child:after {
         content: none;
     }
-
+*/
     /*Sets the active circle*/
-    .progressbar li.active:before {
+  /*  .progressbar li.active:before {
         background: #5bc0de;
         color:white;
         cursor: pointer;
-    }
+    }*/
 
     /*Sets the currently selected circle to darker blue*/
-    .progressbar li.selected:before {
+   /* .progressbar li.selected:before {
         background: #51acc7;
         color: white;
         cursor: pointer;
     }
-
+*/
     /*Sets the line after bublle if the section is marked as completed*/
     li.completed + li:after {
         background-color: #5bc0de;
@@ -418,9 +418,6 @@ fieldset{
        visibility: hidden;
        cursor: default;
    }
-   .inValidField {
-    border: 1px solid #843534;
-    }
     .mpImageItem {
         position: relative;     /*relative position so that child element do not escape (are not positioned relative to doc body)*/
     }
@@ -574,20 +571,32 @@ fieldset{
     margin:5px;
     float:left;
 }
+.mpDesignLightGray {
+    background-color: #e6e7e8;
+}
+/*Light Turquoise*/
 .mpDesign3D777F {
     color: #3D777F;
 }
+/*Dark Blue*/
 .mpDesign27314F {
     color: #27314F;
 }
+/*light blue*/
 .mpDesign39AEA9 {
     color: #39AEA9;
 }
+/*Light Turquoise*/
 .mpDesignBackground3D777F {
     background-color: #3D777F;
 }
+/*Dark Blue*/
 .mpDesignBackground27314F {
     background-color: #27314F;
+}
+/* Medium Green*/
+.mpDesignBackGround55B563{
+     background-color: #55B563
 }
 
 .footerLink {
@@ -603,3 +612,20 @@ fieldset{
     max-width: 100%;
     height: auto;
 }
+.calculatorTabs .tab-content {
+  background-color: #39AEA9;
+  padding : 5px 15px;
+}
+/* remove border radius for the tab */
+.calculatorTabs .nav-pills > li > a {
+  border-radius: 0;
+}
+/* adds new coloring to bootstrap tab pills*/
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:black;
+    background-color:#39AEA9;
+}
+.inValidField {
+        border: 1px solid #843534;
+        background-color: #843534;
+    }
