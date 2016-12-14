@@ -191,7 +191,19 @@ class Blog(webapp2.RequestHandler):
 		blog_key = ndb.Key(db_defs.Blog, key)
 
 		#Get the blog to be updated by the key
-		Blog = db_defs.Blog.query(db_defs.Blog.key == blog_key).get()	
+		Blog = db_defs.Blog.query(db_defs.Blog.key == blog_key).get()
+
+		#If the user is changing the title, then check if title exists
+		if Blog.title != title:
+			#Check that Blog Title is unique
+			#Title was made unique because it is used to identify routes on the site
+			titleFound = db_defs.Blog.query(db_defs.Blog.title == title).fetch()
+			if(titleFound):
+				self.response.set_status(400)
+				errorObject['code'] = 400
+				errorObject['message'] = "BAD REQUEST: Blog Title already exists."
+				self.response.write(json.dumps(errorObject))
+				return	
 		
 		#check that record was found
 		if not Blog or Blog == None:
@@ -268,6 +280,7 @@ class Blog(webapp2.RequestHandler):
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
 			self.response.write(json.dumps(errorObject))
+			return
 
 		#Blog Author Validation
 		if author == None or author == "" or not isinstance(author, (basestring)): 
@@ -275,6 +288,7 @@ class Blog(webapp2.RequestHandler):
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
 			self.response.write(json.dumps(errorObject))
+			return
 
 		#Blog Date Validation
 		if date == None or date == "": 
@@ -282,6 +296,7 @@ class Blog(webapp2.RequestHandler):
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
 			self.response.write(json.dumps(errorObject))
+			return
 
 		#Blog Paragraphs Validation
 		if paragraphs == None or paragraphs == "": 
@@ -289,6 +304,17 @@ class Blog(webapp2.RequestHandler):
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
 			self.response.write(json.dumps(errorObject))
+			return
+
+		#Check that Blog Title is unique
+		#Title was made unique because it is used to identify routes on the site
+		titleFound = db_defs.Blog.query(db_defs.Blog.title == title).fetch()
+		if(titleFound):
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Blog Title already exists."
+			self.response.write(json.dumps(errorObject))
+			return
 
 		# Validate required Parameter fields are there, else return error code
 		for p in paragraphs:

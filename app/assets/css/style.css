@@ -569,6 +569,11 @@ fieldset{
     margin:5px;
     float:left;
 }
+.imageThumbLarge {
+    width:300px;
+    margin:5px;
+    float:left;
+}
 .mpDesign3D777F {
     color: #3D777F;
 }

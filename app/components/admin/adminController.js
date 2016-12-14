@@ -69,7 +69,6 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     }
 
     vm.editBlog = function (blog) {
-
         //Populate the inputs with blog information
         vm.input.title = blog.title;
         vm.input.author = blog.author;
@@ -91,6 +90,11 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     };
 
     vm.updateBlog = function(){
+        vm.errorMessage = "";
+        if(!vm.input.image) {
+            vm.errorMessage = "Title Image is missing.";
+            return;
+        }
         //add order indices for paragraphs
         for(i = 0; i < vm.input.paragraphs.length; i++){
             vm.input.paragraphs[i].index = i;
@@ -123,6 +127,11 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     //Post New Blog
     vm.postBlog = function (){
+         vm.errorMessage = ""
+        if(!vm.input.image) {
+            vm.errorMessage = "Title Image is missing."
+            return;
+        }
         //add order indices for paragraphs
         for(i = 0; i < vm.input.paragraphs.length; i++){
             vm.input.paragraphs[i].index = i;
@@ -166,6 +175,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         vm.input.paragraphs = [{}];
         vm.input.date = getCurrentDate();
         vm.blogAction = "new";
+        vm.errorMessage = "";
     }
 });
 

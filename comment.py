@@ -72,6 +72,7 @@ class Comment(webapp2.RequestHandler):
 		website = jsonData['website'] if ('website' in jsonData) else None
 		blogKey = jsonData['blogKey'] if ('blogKey' in jsonData) else None
 		index = jsonData['index'] if ('index' in jsonData) else None
+		# level = jsonData['level'] if ('level' in jsonData) else None
 
 		#BlogKey Validation
 		if blogKey == "" or blogKey is None or not isinstance(blogKey, (int, long)):
@@ -151,11 +152,27 @@ class Comment(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
+		#Index Validation
+		# if level == "" or level is None or not isinstance(level, (int, long)):
+		# 	#Setup proper response code
+		# 	self.response.set_status(400)
+
+		# 	#Setup error details
+		# 	errorObject['code'] = 400
+		# 	errorObject['message'] = "Level attribute is missing or in unacceptable format"
+
+		# 	#return details
+		# 	self.response.write(json.dumps(errorObject))
+		# 	return
+
+		#Convert key string to Datastore key	
+		key = ndb.Key(db_defs.Blog, blogKey)
 
 		#Write data to datastore					
 		Comment = db_defs.Comment()
-		Comment.blogId = blogKey
+		Comment.blogKey = key
 		Comment.index = index
+		# Comment.level = level
 		Comment.content = content
 		Comment.date = postDate
 		Comment.name = name

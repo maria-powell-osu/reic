@@ -132,6 +132,7 @@
 								<label>Title Image</label>
 								<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.image" id="titleImg" image-display-id="titleImgDisplay">
 								<img ng-src="{{admin.input.image}}" class="imageThumb" id="titleImgDisplay"/>
+								<button ng-click="admin.input.image = ''" ng-if="admin.input.image">Remove Image</button>
 							</div>
 						</div>
 
@@ -164,6 +165,7 @@
 														<label>Image</label>
 														<input type="file" name="pImg{{$index}}" accept="image/*" class="inpt form-control" id="pImg{{$index}}" filereader="admin.input.paragraphs[$index].image" image-display-id="pImgDisplay{{$index}}">
 														<img ng-src="{{admin.input.paragraphs[$index].image}}" class="imageThumb" id="pImgDisplay{{$index}}"/>
+														<button ng-click="admin.input.paragraphs[$index].image = ''" ng-if="admin.input.paragraphs[$index].image">Remove Image</button>
 													</div>
 												</div>							
 											</div>
