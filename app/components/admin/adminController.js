@@ -10,6 +10,14 @@ App.controller("AdminController", function($scope, Blog, Admin) {
     vm.buttonText = "Sign In";
     vm.publicKey = "6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH";
 
+    vm.tinymceOptions = {
+        plugins: 'advlist autolink link image lists charmap preview textcolor colorpicker table autoresize',
+        skin: 'lightgray',
+        theme: 'modern',
+        toolbar: "undo redo | fontsizeselect bold italic | forecolor backcolor | alignleft aligncenter alignright | link image | table",
+        fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
+    };
+
     Blog.getBlogs()
         .success(function (response){
             vm.blogs = response;
@@ -41,7 +49,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.notification = "Oops. Something went wrong. Contact Maria."
         });
 
-
+/*
     vm.removeParagraph= function() {
         var lastItem = vm.input.paragraphs.length-1;
         vm.input.paragraphs.splice(lastItem);
@@ -51,7 +59,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
      var p = (typeof paragraph !== 'undefined') ?  paragraph : {};
      vm.input.paragraphs.push(p);
     };
-
+*/
     vm.deleteBlog = function(){
         Blog.deleteBlog(vm.currentBlogInformation.key)
         .success(function (response){
@@ -75,14 +83,14 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         vm.input.date = blog.date;
         vm.input.key = blog.key;
         vm.input.image = blog.image;
-    
+        vm.input.content = blog.content;
         //Make sure there is no objects in paragraphs (typically there is one for user to be required to enter 
             //at least one paragraph)
-        vm.input.paragraphs = []
+        /*vm.input.paragraphs = []
 
         for (i = 0; i < blog.paragraphs.length; i++) {
             vm.addParagraph(blog.paragraphs[i]);
-        }
+        }*/
 
         //Show Post Blog Screen
         vm.view = "postBlog";
@@ -96,9 +104,9 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             return;
         }
         //add order indices for paragraphs
-        for(i = 0; i < vm.input.paragraphs.length; i++){
+/*        for(i = 0; i < vm.input.paragraphs.length; i++){
             vm.input.paragraphs[i].index = i;
-        }
+        }*/
         
         var jsonData = JSON.stringify(vm.input);
         
@@ -133,9 +141,9 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             return;
         }
         //add order indices for paragraphs
-        for(i = 0; i < vm.input.paragraphs.length; i++){
+        /*for(i = 0; i < vm.input.paragraphs.length; i++){
             vm.input.paragraphs[i].index = i;
-        }
+        }*/
         var jsonData = JSON.stringify(vm.input);
         
         Blog.postBlog(jsonData)
@@ -172,7 +180,7 @@ App.controller("AdminController", function($scope, Blog, Admin) {
 
     function setupInputFormDefaultData(){
         vm.input = {};
-        vm.input.paragraphs = [{}];
+        //vm.input.paragraphs = [{}];
         vm.input.date = getCurrentDate();
         vm.blogAction = "new";
         vm.errorMessage = "";

@@ -61,7 +61,7 @@
 						<h4 class="modal-title">Blog Preview</h4>
 					</div>
 					<div class="modal-body">
-						<p>Blog Content to go here</p>
+						<mp-blog blog="admin.input"></mp-blog>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Done Viewing</button>
@@ -120,7 +120,49 @@
 			</fieldset>
 		</div>
 		<!-- BLOG INPUT FORM -->
-		<div ng-show="admin.view === 'postBlog'">
+<!-- 		<div ng-show="admin.view === 'postBlog'">
+			<br/>
+			<div class="row">
+	 			<textarea ui-tinymce="admin.tinymceOptions" ng-model="admin.input"></textarea>
+	 		</div>
+	 		<br/>
+		 </div> -->
+		 <div ng-show="admin.view === 'postBlog'">
+			<div class="row">
+			    <div class="col-md-12">
+			      	<fieldset>
+						<label>Blog Title</label>
+						<input type="text" placeholder="Title" class="inpt form-control" ng-model="admin.input.title" name="title" required mp-required>
+
+						<div class="row elemIndent">
+							 <div class="col-md-12">
+								<label>Title Image</label>
+								<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.image" id="titleImg" image-display-id="titleImgDisplay">
+								<img ng-src="{{admin.input.image}}" class="imageThumb" id="titleImgDisplay"/>
+								<button ng-click="admin.input.image = ''" ng-if="admin.input.image">Remove Image</button>
+							</div>
+						</div>
+
+						<label>Author</label>
+						<input type="text" class="inpt form-control" ng-model="admin.input.author" placeholder="Pen Name" name="author" required mp-required>  
+
+						<label>Date Posted</label>
+		            	<input type="text" class="inpt form-control" ng-model="admin.input.date" name="date" jqdatepicker required mp-required> 
+
+			            <div class="row">
+				 			<textarea ui-tinymce="admin.tinymceOptions" ng-model="admin.input.content"></textarea>
+				 		</div>
+					</fieldset>
+		            	<br/> 
+		            	<!-- mp-modal-post && mp-modal-preview are initialize in adminDirective file -->
+						<button type="button" class="btn btn-info" mp-modal-post ng-disabled="blogForm.$invalid">Post Blog</button>
+						<button type="button" class="btn btn-info" mp-modal-preview ng-disabled="blogForm.$invalid">Preview Blog</button>
+						<button type="button" class="btn btn-danger" ng-click="admin.cancelBlog()">Cancel</button>
+				</div>
+			</div>
+		</div> 
+		<!-- BLOG INPUT FORM -->
+		<!-- <div ng-show="admin.view === 'postBlog'">
 			<div class="row">
 			    <div class="col-md-10">
 			      	<fieldset>
@@ -181,14 +223,14 @@
 							<label>Add Paragraph</label><br/><br/>
 						</div>
 					</fieldset>
-		            	<br/>
+		            	<br/> -->
 		            	<!-- mp-modal-post && mp-modal-preview are initialize in adminDirective file -->
-						<button type="button" class="btn btn-info" mp-modal-post ng-disabled="blogForm.$invalid">Post Blog</button>
+					<!-- 	<button type="button" class="btn btn-info" mp-modal-post ng-disabled="blogForm.$invalid">Post Blog</button>
 						<button type="button" class="btn btn-info" mp-modal-preview ng-disabled="blogForm.$invalid">Preview Blog</button>
 						<button type="button" class="btn btn-danger" ng-click="admin.cancelBlog()">Cancel</button>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</form>
 </div>
 

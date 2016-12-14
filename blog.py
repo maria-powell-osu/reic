@@ -34,16 +34,16 @@ class Blog(webapp2.RequestHandler):
 			listOfBlogObjects.append(blog.to_dict())
 
 			#get pragraphs associated to blog
-			paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).order(db_defs.Paragraph.index).fetch()
+			#paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog.key).order(db_defs.Paragraph.index).fetch()
 
 			#if the blog has paragraphs, generate list of paragraphs
-			listOfParagraphs = []
-			if paragraphs:
-				for paragraph in paragraphs:
-					listOfParagraphs.append(paragraph.to_dict())
+			# listOfParagraphs = []
+			# if paragraphs:
+			# 	for paragraph in paragraphs:
+			# 		listOfParagraphs.append(paragraph.to_dict())
 
-			#add paragraphs to the blog object
-			listOfBlogObjects[i]['paragraphs'] = listOfParagraphs
+			# #add paragraphs to the blog object
+			# listOfBlogObjects[i]['paragraphs'] = listOfParagraphs
 
 			#get comments associated with blog
 			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).order(db_defs.Comment.index).fetch()
@@ -54,7 +54,7 @@ class Blog(webapp2.RequestHandler):
 				for comment in comments:
 					listOfComments.append(comment.to_dict())
 
-			#add paragraphs to the blog object
+			#add comments to the blog object
 			listOfBlogObjects[i]['comments'] = listOfComments
 
 		#Return reponse with proper code
@@ -85,7 +85,8 @@ class Blog(webapp2.RequestHandler):
 		author = jsonData['author'] if ('author' in jsonData ) else None
 		date = jsonData['date'] if ('date' in jsonData) else None
 		img = str(jsonData['image']) if ('image' in jsonData) else None
-		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None
+		content = jsonData['content'] if ('content' in jsonData) else None
+		#paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None
 
 		#Key Validation
 		if key == "" or key is None or not isinstance(key, (int, long)):
@@ -139,14 +140,14 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
-		#Paragraph Validation
-		if paragraphs == [] or paragraphs is None:
+		#Content Validation
+		if content == "" or content is None:
 			#Setup proper response code
 			self.response.set_status(400)
 
 			#Setup error details
 			errorObject['code'] = 400
-			errorObject['message'] = "Paragraphs are missing from blog."
+			errorObject['message'] = "Content is missing from blog."
 
 			#return details
 			self.response.write(json.dumps(errorObject))
@@ -167,25 +168,25 @@ class Blog(webapp2.RequestHandler):
 
 
 		# Validate required Parameter fields are there, else return error code
-		for p in paragraphs:
-			if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
-			if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
-			if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
+		# for p in paragraphs:
+		# 	if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
+		# 	if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
+		# 	if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
 
 		#Convert key string to Datastore key	
 		blog_key = ndb.Key(db_defs.Blog, key)
@@ -221,28 +222,29 @@ class Blog(webapp2.RequestHandler):
 		Blog.author = author
 		Blog.date = date
 		Blog.image = img
+		Blog.content = content
 		Blog.put()
 		blogObject = Blog.to_dict()
 
 		#Delete all paragraphs associated with Blog 
-		paragraphsOfBlogInDB = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog_key).fetch()
-		if paragraphsOfBlogInDB:
-			for paragraph in paragraphsOfBlogInDB:
-				paragraph.key.delete()
+		# paragraphsOfBlogInDB = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blog_key).fetch()
+		# if paragraphsOfBlogInDB:
+		# 	for paragraph in paragraphsOfBlogInDB:
+		# 		paragraph.key.delete()
 
 		#Write Paragraph Data to datastore with corresponding blog key
-		paragraphResultList = []
-		for p in paragraphs:
-			Paragraph = db_defs.Paragraph()
-			Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
-			Paragraph.body = p["body"] if ('body' in p) else None
-			Paragraph.index = p["index"] if ('index' in p) else None
-			Paragraph.image = str(p["image"]) if ('image' in p) else None
-			Paragraph.blogKey = Blog.key 
-			Paragraph.put()
-			paragraphResultList.append(Paragraph.to_dict())
+		# paragraphResultList = []
+		# for p in paragraphs:
+		# 	Paragraph = db_defs.Paragraph()
+		# 	Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
+		# 	Paragraph.body = p["body"] if ('body' in p) else None
+		# 	Paragraph.index = p["index"] if ('index' in p) else None
+		# 	Paragraph.image = str(p["image"]) if ('image' in p) else None
+		# 	Paragraph.blogKey = Blog.key 
+		# 	Paragraph.put()
+		# 	paragraphResultList.append(Paragraph.to_dict())
 
-		blogObject['paragraphs'] = paragraphResultList
+		# blogObject['paragraphs'] = paragraphResultList
 
 		#Return the result
 		self.response.set_status(200)
@@ -271,7 +273,7 @@ class Blog(webapp2.RequestHandler):
 		author = jsonData['author'] if ('author' in jsonData ) else None
 		date = jsonData['date'] if ('date' in jsonData) else None
 		img = str(jsonData['image']) if ('image' in jsonData) else None
-		paragraphs = jsonData['paragraphs'] if ('paragraphs' in jsonData) else None
+		content = jsonData['content'] if ('content' in jsonData) else None
 		result = {}
 
 		#Blog Title Validation
@@ -298,8 +300,8 @@ class Blog(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
-		#Blog Paragraphs Validation
-		if paragraphs == None or paragraphs == "": 
+		#Blog Content Validation
+		if content == None or content == "": 
 			self.response.set_status(400)
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
@@ -317,25 +319,25 @@ class Blog(webapp2.RequestHandler):
 			return
 
 		# Validate required Parameter fields are there, else return error code
-		for p in paragraphs:
-			if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
-			if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
-			if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
-				self.response.set_status(400)
-				errorObject['code'] = 400
-				errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
-				self.response.write(json.dumps(errorObject))
-				return
+		# for p in paragraphs:
+		# 	if not ('body' in p) or p["body"] == "" or not isinstance(p["body"], (basestring)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
+		# 	if not ('index' in p) or p["index"] == "" or not isinstance(p["index"], (int, long)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
+		# 	if ("subHeader" in p) and not isinstance(p["subHeader"], (basestring)):
+		# 		self.response.set_status(400)
+		# 		errorObject['code'] = 400
+		# 		errorObject['message'] = "BAD REQUEST: Required paragraph parameter is missing."
+		# 		self.response.write(json.dumps(errorObject))
+		# 		return
 
 		#Validation Needs to go here
 		#check for max lengths 
@@ -347,27 +349,28 @@ class Blog(webapp2.RequestHandler):
 		Blog.author = author
 		Blog.date = date
 		Blog.image = img
+		Blog.content = content
 
 		Blog.put()
 		blogOut = Blog.to_dict()
 
 		#Write Paragraph Data to datastore with corresponding blog key
-		for p in paragraphs:
-			Paragraph = db_defs.Paragraph()
+		# for p in paragraphs:
+		# 	Paragraph = db_defs.Paragraph()
 
-			#Validate required fiselds exi
-			Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
-			Paragraph.body = p["body"] if ('body' in p) else None
-			Paragraph.index = p["index"] if ('index' in p) else None
-			Paragraph.image = str(p["image"]) if ('image' in p) else None
-			Paragraph.blogKey = Blog.key 
+		# 	#Validate required fiselds exi
+		# 	Paragraph.subHeader = p["subHeader"] if ('subHeader' in p) else None
+		# 	Paragraph.body = p["body"] if ('body' in p) else None
+		# 	Paragraph.index = p["index"] if ('index' in p) else None
+		# 	Paragraph.image = str(p["image"]) if ('image' in p) else None
+		# 	Paragraph.blogKey = Blog.key 
 			
-			if len(Paragraph._to_pb().Encode()) <= maxEntitySizeOfOneMB:
-				Paragraph.put()
-				out = Paragraph.to_dict()
-			else:
-				#enter error cod
-				errorMessage = "error"
+		# 	if len(Paragraph._to_pb().Encode()) <= maxEntitySizeOfOneMB:
+		# 		Paragraph.put()
+		# 		out = Paragraph.to_dict()
+		# 	else:
+		# 		#enter error cod
+		# 		errorMessage = "error"
 
 		#Return the result
 		self.response.write(json.dumps(blogOut))
@@ -399,10 +402,10 @@ class Blog(webapp2.RequestHandler):
 		blogKey = ndb.Key(db_defs.Blog, int(kwargs['id']))
 
 		#Delete all paragraphs associated with blogKey
-		paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blogKey).fetch()
-		if paragraphs:
-			for paragraph in paragraphs:
-				paragraph.key.delete()
+		# paragraphs = db_defs.Paragraph.query(db_defs.Paragraph.blogKey == blogKey).fetch()
+		# if paragraphs:
+		# 	for paragraph in paragraphs:
+		# 		paragraph.key.delete()
 
 		#Delete all comments associated with blogKey
 		comments = db_defs.Comment.query(db_defs.Comment.blogKey == blogKey).fetch()

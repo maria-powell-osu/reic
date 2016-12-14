@@ -1,23 +1,15 @@
 
 Where I left of:
-	2) Need a remove image for updates and such 
-	- there should not be internal server error for non-required fields
-	- add a tag property to blogs
-	2) Finish Picture upload, download, delete
-	3) Display Blogs on page
-		- For website add email link comments
-	4) Turn this API into truly REST API (json validation, input validation, response code etc.)
-	5) - Shared service calls might need to be providers
-		- I bet there is a better way to setup services
-	6) Preview button for jason blogs page?
+
+	- finish blog display
 	- google captcha
 	- comment service with reply to reply
-
-	- URL ROUTING
 	- Google Analytics
+	- db check for javascript?
 		
 Backlog:
 	- Add replies to comments
+	- Shared service calls might need to be providers
 	- Admin table will need sorting and pagination
 	- SASS for page colors
 	- write jason tutorial on how large of pictures to used 

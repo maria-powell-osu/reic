@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('App', ['ngRoute', 'ngSanitize']);
+var App = angular.module('App', ['ngRoute', 'ngSanitize', 'ui.tinymce']);
 
 //Single Page Application Routing Set Up
 //The controller as is added because it gives the ability 

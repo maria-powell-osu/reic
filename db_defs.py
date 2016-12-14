@@ -11,22 +11,24 @@ class Blog(ndb.Model):
 	author = ndb.StringProperty(required=True)
 	image = ndb.BlobProperty(required=False)
 	date = ndb.StringProperty(required=True)
+	#this is a text property because it is not limited for 1500 like StringProperty is
+	content = ndb.TextProperty(required=True) 
 	def to_dict(self):
 		d = super(Blog, self).to_dict()
 		d['key'] = self.key.id()
 		return d
 
-class Paragraph(ndb.Model):
-	blogKey = ndb.KeyProperty(kind=Blog)
-	subHeader = ndb.StringProperty(required=False)
-	body = ndb.StringProperty(required=True)
-	index = ndb.IntegerProperty(required=True)
-	image = ndb.BlobProperty(required=False)
-	def to_dict(self):
-		d = super(Paragraph, self).to_dict()
-		d['key'] = self.key.id()
-		d['blogKey'] = self.blogKey.id()
-		return d
+# class Paragraph(ndb.Model):
+# 	blogKey = ndb.KeyProperty(kind=Blog)
+# 	subHeader = ndb.StringProperty(required=False)
+# 	body = ndb.StringProperty(required=True)
+# 	index = ndb.IntegerProperty(required=True)
+# 	image = ndb.BlobProperty(required=False)
+# 	def to_dict(self):
+# 		d = super(Paragraph, self).to_dict()
+# 		d['key'] = self.key.id()
+# 		d['blogKey'] = self.blogKey.id()
+# 		return d
 
 class Comment(ndb.Model):
 	#Here This needs to become a foreign key

@@ -1,11 +1,7 @@
 
-	<h2>{{blog.title}}</h2>
-	<p>Posted by {{blog.author}}</p>
+<h2>{{blog.title}}</h2>
+<p>Posted by {{blog.author}}</p>
 <img ng-src="{{blog.image}}" class="imageThumbLarge img-responsive pull-right">
-<div ng-repeat="paragraph in blog.paragraphs track by $index">
-	<p><b ng-if="paragraph.subHeader">{{paragraph.subHeader}}</b></p>
-	<p>{{paragraph.body}}</p>
-	<img ng-src="{{paragraph.image}}" class="img-responsive">
-</div>
+<div ng-bind-html="blog.content" ng-hide="doc.isEditing"></div>
 
 
