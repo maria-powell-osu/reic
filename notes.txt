@@ -1,48 +1,36 @@
 
 Where I left of:
-- 
-	- admin page needs pull content dynamically (set max display on there)
-	- finish blog display on about page
-	- order all blogs by date
-		- blogs need to have blish date that does not update with blog updated
-	- add tag to post to mark as most popular
-	- google captcha
+
+
+Week Work List:	
+ 			- order all blogs by date
+			- add hover to blog
 	- comment service with reply to reply
+	- google captcha
+	- SEO for angularjs with work list for the two of us
+	- about page needs (set max display on there)
+	- add tag to post to mark as most popular
 	- Google Analytics
-	- db check for javascript?
 	- do I need the trustsce stuff for editor?
 		
+Calculator:
+	- cap rate round to nearest 10th
+	- instead of 5 year avg do just the first year (cash on cash ROI) 
+	- cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
+	- monthly income - monthly expenses - mortgage(loan pmt) = +green, -red
+	- the downpayment percent should always stay the same no matter what
+	- why is the chart getting small>?
+
 Backlog:
+	- db check for javascript?
 	- Add replies to comments
 	- Shared service calls might need to be providers
 	- Admin table will need sorting and pagination
 	- SASS for page colors
 	- write jason tutorial on how large of pictures to used 
 	- blogs should be able to be ordered (maybe look how owr is doing that)
-	- cap rate round to nearest 10th
-	- navigation bar needs to close from site
-	- instead of 5 year avg do just the first year (cash on cash ROI) 
-	- the downpayment percent should always stay the same no matter what
-	- pie charts on the same line
-	- cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
-	- monthly income - monthly expenses - mortgage(loan pmt) = +green, -red
-	- design front page sliders
-	- comment service with gae
-	- show the loader on the whole page
-	- discuss the scale with jason and the overtime step
-	- typical Cap rate on area - discuss with Jason
-	- required fields have to have better coloring to indicate missing
-	- why is the chart getting small>?
-	- if specialTermsLoan-interest-only = yes, amortization is not required
- 	
-
-Worklist:
-	- make navbar collapse by itself
-	- I Could probably create a shared directive for the different types of charts
-	- I need to make the loader div go to the whole page even when scrolling
+	- pie charts on the same line	
 	- do I still need jquery ui?
-	- You need to add test handler
-	- optimize the add and remove data functions -- and other controller functions
 
 Before Go-Live
 	- figure out how to optimized script loading (CDN, combining js files, etc.)
@@ -60,36 +48,5 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 264
-
-Rachael:
-	- calculator
-	- validation for conditional required fields
-	- calculator header
-	- calculator sampled
-
-Questions:
-
-1) How much logic should be in directive, controller, service
-loading performance on all the scripts
-2) How do controller service and directive relate
-	- how to get data from controller, or from service?
-	- should directive get data from controller or service?
-		- e.g. slideshow, google charts
-3) about the digest in apply, digest etc.
-4) primitives in controller
-5) which directive type to use
-6) timeout, apply, always in directive link??
-7) what if you want to add ids in the directive
-8) e.g. progress bar click event which needs to be accessed by directive link but
-   then how to get data or save data back into the view
-   button click events
-9) should a directive ever have access to a service
-10) what if the controller get it from the service and hands it to directive
-
-
-How to create transparent img:
-powerpoint:
-1) create shape and group it
-2) right click and save as image
+	Coding: 270
  

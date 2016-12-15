@@ -27,17 +27,17 @@
     background-color: #e6e7e8;
 }
 /*Hover states for blog background to blue*/
-.blogRow:hover {
+.blogHover:hover{
     background-color: #27314F;
     opacity: .9;
 }
 /*Hover states for blog thumb to blue opaque*/
-.blogRow:hover img{
+.blogHover:hover img{
     opacity: .5;
     background-color: #27314F;
 }
 /*Hover states for blog text to white*/
-.blogRow:hover div{
+.blogHover:hover div{
     color:white;
 }
 .logoPadding {
@@ -56,6 +56,13 @@
 }
 .thickHR {
     background-color: white;
+    border: 0 none;
+    height: 2px;
+    margin: 0;
+    padding: 0;
+}
+.thickHRBlack {
+    background-color: #27314F;
     border: 0 none;
     height: 2px;
     margin: 0;

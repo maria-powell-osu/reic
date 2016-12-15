@@ -105,7 +105,7 @@
 					    <th>Edit</th>
 					    <th>Delete</th>
 				  	</tr>
-				 	<tr ng-repeat="blog in admin.blogs track by $index">
+				 	<tr ng-repeat="blog in admin.blogs | orderBy:'date':true track by $index">
 
 				    	<td>{{ blog.title }}</td>
 				    	<td>{{ blog.date }}</td>
