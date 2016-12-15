@@ -5,6 +5,12 @@
 /*.ppDarkBlue{
     background-color: #27314F;
 }*/
+.topPadding1 {
+    padding-top: 1px;
+}
+.bottomPadding1 {
+    padding-bottom: 1px;
+}
 
 /*To remove space below navbar before content starts*/
 .navbar {
