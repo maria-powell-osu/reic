@@ -80,10 +80,10 @@ App.controller("BlogController", function($scope, Comments, Blog, $location, $ro
             .success(function (response){
                 //if it is a comment of a comment, add new comment to original comment
                 if(vm.newComment.respondsTo){
-                    originalComment.responses.push(vm.newComment);
+                    originalComment.responses.push(reponse);
                 //If it is general comment add it to comments list in blog
                 } else{
-                    blog.comments.push(vm.newComment);
+                    blog.comments.push(response);
                 }
                 vm.newComment = {};
             })

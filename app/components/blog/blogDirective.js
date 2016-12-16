@@ -2,7 +2,7 @@
 
 App.directive('mpBlog', function() {
 	return {
-		scope: {blog: "=blog",},
+		scope: {blog: "=blog"},
 		restrict: 'E',
 		templateUrl: '/app/components/blog/templates/blogTemplate.html'
 	};
@@ -13,7 +13,7 @@ App.directive('mpComment', function() {
 		scope: {
 			comment: "=comment",
 			level: "=level",
-			blog: "=blog",
+			blog: "=blog"
 		},
 		restrict: 'E',
 		templateUrl: '/app/components/blog/templates/commentViewTemplate.html'
@@ -25,7 +25,7 @@ App.directive('mpCommentReplyForm', function() {
 			blog: "=blog",
 			formid: "=formid",
 			respondsTo: "=respondsTo",
-			originalComment: "=originalComment",
+			originalComment: "=originalComment"
 		},
 		restrict: 'E',
 		templateUrl: '/app/components/blog/templates/commentReplyTemplate.html'
