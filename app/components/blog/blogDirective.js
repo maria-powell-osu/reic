@@ -2,16 +2,32 @@
 
 App.directive('mpBlog', function() {
 	return {
-		scope: {blog: "="},
+		scope: {blog: "=blog",},
 		restrict: 'E',
-		templateUrl: '/app/components/blog/blogTemplate.html'
+		templateUrl: '/app/components/blog/templates/blogTemplate.html'
 	};
 });
 
-/*App.directive('mpComment', function() {
+App.directive('mpComment', function() {
 	return {
-		scope: {blog: "=", level: "="},
+		scope: {
+			comment: "=comment",
+			level: "=level",
+			blog: "=blog",
+		},
 		restrict: 'E',
-		templateUrl: '/app/components/blog/commentTemplate.html'
+		templateUrl: '/app/components/blog/templates/commentViewTemplate.html'
 	};
-});*/
+});
+App.directive('mpCommentReplyForm', function() {
+	return {
+		scope: {
+			blog: "=blog",
+			formid: "=formid",
+			respondsTo: "=respondsTo",
+			originalComment: "=originalComment",
+		},
+		restrict: 'E',
+		templateUrl: '/app/components/blog/templates/commentReplyTemplate.html'
+	};
+});

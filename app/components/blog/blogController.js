@@ -1,7 +1,7 @@
 App.controller("BlogController", function($scope, Comments, Blog, $location, $routeParams) {
 	var vm = this;
     vm.newComment = {};
-    vm.replyActive = false;
+    //vm.replyActive = false;
     vm.view = "blogList";
     vm.error = false;
     vm.missingFields = [];
@@ -45,13 +45,7 @@ App.controller("BlogController", function($scope, Comments, Blog, $location, $ro
 
     }
 
-    var today = new Date().toDateString();
-
-    vm.reply = function () {
-    	vm.replyActive = true;
-    };
-
-    vm.submitNewComment = function (blog, level){
+    vm.submitNewComment = function (blog, respondsTo, originalComment){
         vm.error = false;
         vm.missingFields = [];
 
@@ -75,21 +69,22 @@ App.controller("BlogController", function($scope, Comments, Blog, $location, $ro
         if(vm.error == false){
             //Grab Data
             vm.newComment.blogKey = blog.key;
-            vm.newComment.index = blog.comments.length + 1;
-            vm.newComment.date = today;
+            vm.newComment.date = String(new Date());
+            if(respondsTo && respondsTo != ""){
+                vm.newComment.respondsTo = respondsTo;
+            }
             var jsonData = JSON.stringify(vm.newComment);
 
             //Save Comment to database
             Comments.postComment(jsonData)
             .success(function (response){
-                //find current blog and add comment to list
-                for (var i = 0; i < vm.blogs.length; i++){
-                    if(vm.blogs[i].key == blog.key){
-                        blog.comments.push(vm.newComment);
-                        break;
-                    }
+                //if it is a comment of a comment, add new comment to original comment
+                if(vm.newComment.respondsTo){
+                    originalComment.responses.push(vm.newComment);
+                //If it is general comment add it to comments list in blog
+                } else{
+                    blog.comments.push(vm.newComment);
                 }
-                vm.replyActive = false;
                 vm.newComment = {};
             })
             .error (function (error) {
@@ -99,7 +94,7 @@ App.controller("BlogController", function($scope, Comments, Blog, $location, $ro
     }
 
     vm.cancelComment = function () {
-    	vm.replyActive = false;
+    	//vm.replyActive = false;
         vm.error = false;
         vm.missingFields = [];
         vm.newComment = {};

@@ -68,70 +68,19 @@
 		<div class="row blogListPadding">
 			<div class="col-md-12">
 				<!-- COMMENT USER FORM -->
-				<form id="blogCommentForm" name="blogCommentForm">
-					<fieldset ng-show="blog.replyActive">
-						<div class="row">
-							<div class="col-md-12">
-								<label mp-required>Comment</label>
-								<textarea rows="4" class="form-control" placeholder="Type your comment here:" required mp-required ng-model="blog.newComment.content" name="comment"></textarea>
-							</div>
-						</div>
-						<br/>
-						<div class="row">
-							<div class="col-md-5">
-								<label mp-required>Name</label>
-								<input type="text" class="form-control inpt"required mp-required ng-model="blog.newComment.name" name="name">
-
-								<label mp-required>Email</label>
-								<input type="email" required class="form-control inpt" required mp-required ng-model="blog.newComment.email" name="email">
-
-								<div class="checkbox">
-									<label><input type="checkbox" value=""  mp-required ng-model="blog.newComment.spammer" name="spammer">Confirm you are not a spammer*</label>
-								</div>
-								<br/>
-								<!-- Error Messages -->
-								<div class="text-danger elemIndent" ng-show="blog.error">
-						    		<b>Please Enter Required Fields: </b><br/>
-						    		<b ng-repeat="field in blog.missingFields track by $index">{{field}} </b>
-						  		</div>
-								<button type="button" class="btn btn-info" ng-click="blog.submitNewComment(blog.currentBlogView)">Post Comment</button>
-								<button type="button" class="btn btn-info" ng-click="blog.cancelComment()">Cancel</button>
-							</div>
-							<div class="col-md-5">
-								<label>Website</label>
-								<input type="text" class="form-control inpt" ng-model="blog.newComment.website">
-							</div>
-						</div>
-					</fieldset>
-				</form>
+				<mp-comment-reply-form blog="blog" formid="'blogReply'" responds-to="" original-comment=""></mp-comment-reply-form>
 			</div>
 		</div>
 		<div class="row blogListPadding">
 			<div class="col-md-8">
 				<br/><br/>
-				<button type="button" class="btn btn-info" ng-click="blog.reply()" ng-hide="blog.replyActive">Reply</button>
+				<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#blogReply">Reply</button>
 				<br/>
 				<!-- COMMENT VIEW -->
 				<h2 ng-if="blog.currentBlogView.comments.length != 0"><b style="color: #696969;">Comments</b></h2>
-				<div ng-repeat="comment in blog.currentBlogView.comments track by $index">
-					<hr/>
-					<div class="row">
-						<div class="col-md-5">
-							<p><b>{{comment.name}}</b><b ng-if="comment.website"> @ <a href="http://{{comment.website}}">{{comment.website}}</a></b> said on <b>{{comment.date}}</b></p> 
-						</div>
-						<!-- <div class="col-md-1 col-md-offset-5">
-							<button type="button" class="btn btn-info" ng-click="blog.reply()" ng-hide="blog.replyActive">
-								<span class="glyphicon glyphicon-share-alt"></span>
-								Reply
-							</button>
-						</div> -->
-					</div>
-					<br/>
-					<div class="row">
-						<div class="col-md-10">
-						<p>{{comment.content}}</p>
-						</div>
-					</div>
+				<!-- Iterates through Comments -->
+				<div ng-repeat="comment in blog.currentBlogView.comments | orderBy:'date' track by $index">
+					<mp-comment comment="comment" level="1" blog="blog"></mp-comment>
 				</div>
 			</div>
 		</div>

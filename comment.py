@@ -71,8 +71,8 @@ class Comment(webapp2.RequestHandler):
 		emailAddress = jsonData['email'] if ('email' in jsonData) else None
 		website = jsonData['website'] if ('website' in jsonData) else None
 		blogKey = jsonData['blogKey'] if ('blogKey' in jsonData) else None
-		index = jsonData['index'] if ('index' in jsonData) else None
-		# level = jsonData['level'] if ('level' in jsonData) else None
+		# index = jsonData['index'] if ('index' in jsonData) else None
+		respondsTo = jsonData['respondsTo'] if ('respondsTo' in jsonData) else None
 
 		#BlogKey Validation
 		if blogKey == "" or blogKey is None or not isinstance(blogKey, (int, long)):
@@ -140,26 +140,13 @@ class Comment(webapp2.RequestHandler):
 			return
 
 		#Index Validation
-		if index == "" or index is None or not isinstance(index, (int, long)):
-			#Setup proper response code
-			self.response.set_status(400)
-
-			#Setup error details
-			errorObject['code'] = 400
-			errorObject['message'] = "Index attribute is missing or in unacceptable format"
-
-			#return details
-			self.response.write(json.dumps(errorObject))
-			return
-
-		#Index Validation
-		# if level == "" or level is None or not isinstance(level, (int, long)):
+		# if index == "" or index is None or not isinstance(index, (int, long)):
 		# 	#Setup proper response code
 		# 	self.response.set_status(400)
 
 		# 	#Setup error details
 		# 	errorObject['code'] = 400
-		# 	errorObject['message'] = "Level attribute is missing or in unacceptable format"
+		# 	errorObject['message'] = "Index attribute is missing or in unacceptable format"
 
 		# 	#return details
 		# 	self.response.write(json.dumps(errorObject))
@@ -171,8 +158,7 @@ class Comment(webapp2.RequestHandler):
 		#Write data to datastore					
 		Comment = db_defs.Comment()
 		Comment.blogKey = key
-		Comment.index = index
-		# Comment.level = level
+		Comment.respondsTo = respondsTo
 		Comment.content = content
 		Comment.date = postDate
 		Comment.name = name

@@ -1,5 +1,9 @@
 
 Where I left of:
+	- error when hitting reply of reply:
+		- https://docs.angularjs.org/error/$compile/nonassign
+	- bootstrap collapse not working (hide and show need with cancel and submitomment)
+	- 
 
 
 Week Work List:	
@@ -12,6 +16,7 @@ Week Work List:
 	- add tag to post to mark as most popular
 	- Google Analytics
 	- do I need the trustsce stuff for editor?
+	- prevent API attacks
 		
 Calculator:
 	- cap rate round to nearest 10th

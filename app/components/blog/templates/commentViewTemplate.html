@@ -1,0 +1,32 @@
+<hr/>
+<div class="row">
+	<div class="col-md-5">
+		<p><b>{{comment.name}}</b><b ng-if="comment.website"> @ <a href="http://{{comment.website}}">{{comment.website}}</a></b> said on <b>{{comment.date}}</b></p> 
+	</div>
+	<!-- To prohibit from too much comments of comments-->
+	<div class="col-md-1 col-md-offset-5" ng-if="level < 5">
+		<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{comment.key}}">
+			<span class="glyphicon glyphicon-share-alt"></span>
+			Reply
+		</button>
+	</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-md-10">
+	<p>{{comment.content}}</p>
+	</div>
+</div>
+<div class="row">
+	<!-- COMMENT USER FORM -->
+	<mp-comment-reply-form blog="blog" formid="comment.key" responds-to="comment.key" original-comment="comment"></mp-comment-reply-form>
+</div>
+
+<div class="row">
+	<div class="col-md-11 col-md-offset-1">
+		<!-- Iterates through comments of comments -->
+		<div ng-repeat="comment in comment.responses | orderBy:'date' track by $index" style="margin-left: 100px;">
+			<mp-comment comment="comment" level="level + 1" ></mp-comment>
+		</div>
+	</div>
+</div>
