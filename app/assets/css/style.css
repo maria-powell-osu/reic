@@ -324,6 +324,12 @@ fieldset{
         padding-top: 7px;
         padding-left: 7px;
     }
+    .mobileCaptchaResize {
+        transform:scale(0.50);
+        -webkit-transform:scale(0.50);
+        transform-origin:0 0;
+        -webkit-transform-origin:0 0;
+    }
 
     .affix {
         position: static;

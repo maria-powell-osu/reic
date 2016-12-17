@@ -16,12 +16,8 @@
 				<label mp-required>Email</label>
 				<input type="email" required class="form-control inpt" required mp-required ng-model="blog.newComment.email" name="email">
 
-<!-- 				<div class="checkbox">
-					<label><input type="checkbox" value=""  mp-required ng-model="blog.newComment.spammer" name="spammer">Confirm you are not a spammer*</label>
-				</div> -->
-
 				<!--Recaptcha Widget-->
-				<div vc-recaptcha key="blog.publicKey" ng-model="blog.currentBlogView.captchaResponse"></div>
+				<div vc-recaptcha key="blog.publicKey" ng-model="blog.currentBlogView.captchaResponse" class="mobileCaptchaResize"></div>
 
 				<br/>
 				<!-- Error Messages -->
