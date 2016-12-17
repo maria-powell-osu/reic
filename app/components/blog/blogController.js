@@ -1,10 +1,10 @@
-App.controller("BlogController", function($scope, Comments, Blog, $location, $routeParams) {
+App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Comments, Blog, $location, $routeParams ) {
 	var vm = this;
     vm.newComment = {};
-    //vm.replyActive = false;
     vm.view = "blogList";
     vm.error = false;
     vm.missingFields = [];
+    vm.publicKey = "6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH";
 
     Blog.getBlogs()
         .success(function (blogs) {
@@ -52,35 +52,40 @@ App.controller("BlogController", function($scope, Comments, Blog, $location, $ro
         //validate fields are there
         if(!vm.newComment.content){
             vm.error = true;
-            vm.missingFields.push("Comment")
+            vm.missingFields.push("Comment");
         } 
         if (!vm.newComment.name){
            vm.error = true;
-           vm.missingFields.push("Name")
+           vm.missingFields.push("Name");
         }
         if(!vm.newComment.email){
             vm.error = true;
-            vm.missingFields.push("Email")
-        } if(!vm.newComment.spammer){
-            vm.error = true;
-            vm.missingFields.push("Spammer Checkbox")
+            vm.missingFields.push("Email");
+        } 
+
+        if(blog.captchaResponse === ""){
+                vm.error = true;
+                vm.missingFields.push("Captcha");
         }
 
-        if(vm.error == false){
-            //Grab Data
+        if(vm.error == false ){
+            //Grab User Input Date
             vm.newComment.blogKey = blog.key;
             vm.newComment.date = String(new Date());
+            //Only send this field if it is not a first level comment
             if(respondsTo && respondsTo != ""){
                 vm.newComment.respondsTo = respondsTo;
             }
+            vm.newComment.captcha = blog.captchaResponse  //send g-captcah-reponse to our server
+                
             var jsonData = JSON.stringify(vm.newComment);
 
             //Save Comment to database
             Comments.postComment(jsonData)
             .success(function (response){
                 //if it is a comment of a comment, add new comment to original comment
-                if(vm.newComment.respondsTo){
-                    originalComment.responses.push(reponse);
+                if(response.respondsTo){
+                    originalComment.responses.push(response);
                 //If it is general comment add it to comments list in blog
                 } else{
                     blog.comments.push(response);

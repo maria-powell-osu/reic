@@ -1,19 +1,13 @@
 
 Where I left of:
-	- error when hitting reply of reply:
-		- https://docs.angularjs.org/error/$compile/nonassign
-	- bootstrap collapse not working (hide and show need with cancel and submitomment)
-	- 
 
 
 Week Work List:	
- 			- order all blogs by date
-			- add hover to blog
-	- comment service with reply to reply
+	- add tag to post to mark as most popular
 	- google captcha
 	- SEO for angularjs with work list for the two of us
 	- about page needs (set max display on there)
-	- add tag to post to mark as most popular
+	
 	- Google Analytics
 	- do I need the trustsce stuff for editor?
 	- prevent API attacks
@@ -27,6 +21,7 @@ Calculator:
 	- why is the chart getting small>?
 
 Backlog:
+	- add MOST POPULAR capability
 	- db check for javascript?
 	- Add replies to comments
 	- Shared service calls might need to be providers

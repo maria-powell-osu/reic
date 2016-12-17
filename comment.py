@@ -2,51 +2,10 @@ import webapp2
 from google.appengine.ext import ndb
 import db_defs #Contain Classes Used By Website
 import json
+import urllib
+from google.appengine.api import urlfetch
 
 class Comment(webapp2.RequestHandler):
-	# def get(self, **kwargs):
-	# 	errorObject = {}
-	# 	#Check request format
-	# 	if 'application/json' not in self.request.accept:
-	# 		#Setup proper response code
-	# 		self.response.set_status(406)
-
-	# 		#Setup error details
-	# 		errorObject['code'] = 406
-	# 		errorObject['message'] = "Data format does not match required type"
-
-	# 		#return details
-	# 		self.response.write(json.dumps(errorObject))
-	# 		return
-
-	# 	#Validation check that blog id was sent	
-	# 	if not ('blogkey' in kwargs) or not kwargs['blogkey'].isdigit():
-	# 		self.response.set_status(400)
-	# 		errorObject['code'] = 400
-	# 		errorObject['message'] = "BAD REQUEST: Required parameter is missing."
-	# 		self.response.write(json.dumps(errorObject))
-	# 		return
-
-	# 	#Generate ndb Key from id
-	# 	blogKey = ndb.Key(db_defs.Blog, int(kwargs['blogkey']))
-
-	# 	#Get all comments associated with blogkey
-	# 	comments = db_defs.Comment.query(db_defs.Comment.blogKey == blogKey).fetch()
-		
-	# 	#Builds results in JSON serializable format
-	# 	listOfCommentObjects = []
-
-	# 	#create response Object containing all blogs and corresponding paragraphs
-	# 	for i, comment in enumerate(comments):
-
-	# 		#add current blog to list
-	# 		listOfCommentObjects.append(comment.to_dict())
-		
-	# 	#Return reponse with proper code
-	# 	self.response.set_status(200)
-	# 	self.response.write(json.dumps(listOfCommentObjects))
-	# 	return
-
 	def post(self):
 		errorObject = {}
 
@@ -71,7 +30,7 @@ class Comment(webapp2.RequestHandler):
 		emailAddress = jsonData['email'] if ('email' in jsonData) else None
 		website = jsonData['website'] if ('website' in jsonData) else None
 		blogKey = jsonData['blogKey'] if ('blogKey' in jsonData) else None
-		# index = jsonData['index'] if ('index' in jsonData) else None
+		captchaResponse = jsonData['captcha'] if ('captcha' in jsonData) else None
 		respondsTo = jsonData['respondsTo'] if ('respondsTo' in jsonData) else None
 
 		#BlogKey Validation
@@ -82,6 +41,19 @@ class Comment(webapp2.RequestHandler):
 			#Setup error details
 			errorObject['code'] = 400
 			errorObject['message'] = "Key attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Content Validation
+		if captchaResponse == "" or captchaResponse is None or not isinstance(captchaResponse, (basestring)):
+			#Setup proper response code
+			self.response.set_status(400)
+
+			#Setup error details
+			errorObject['code'] = 400
+			errorObject['message'] = "Captcha User Information is missing."
 
 			#return details
 			self.response.write(json.dumps(errorObject))
@@ -139,18 +111,48 @@ class Comment(webapp2.RequestHandler):
 			self.response.write(json.dumps(errorObject))
 			return
 
-		#Index Validation
-		# if index == "" or index is None or not isinstance(index, (int, long)):
-		# 	#Setup proper response code
-		# 	self.response.set_status(400)
+		#Set Data for post request to google for captcha verification
+		googleCaptchaUrl = "https://www.google.com/recaptcha/api/siteverify" #google verification URL
+		secret = "6Le7FCoTAAAAACb0Q7sYy29ARlkbsN2XMCheo-Qh" #provided by google captcha
+		postData = {'secret': secret, 'response': captchaResponse,'remoteUserIP': self.request.remote_addr}
 
-		# 	#Setup error details
-		# 	errorObject['code'] = 400
-		# 	errorObject['message'] = "Index attribute is missing or in unacceptable format"
+		#Post request to google captcha
+		try:
+		    form_data = urllib.urlencode(postData)
+		    headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+		    response = urlfetch.fetch(
+		        url=googleCaptchaUrl,
+		        payload=form_data,
+		        method=urlfetch.POST,
+		        headers=headers)
 
-		# 	#return details
-		# 	self.response.write(json.dumps(errorObject))
-		# 	return
+		except urlfetch.Error:
+		    #Setup proper response code
+			self.response.set_status(500)
+
+			#Setup error details
+			errorObject['code'] = 400
+			errorObject['message'] = "Captcha Verification failed."
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Parse response to json
+		captchaResult = json.loads(response.content)
+
+		#See if captcha passed verification
+		if captchaResult["success"] == False:  #if user verification failed
+			#Setup proper response code
+			self.response.set_status(400)
+
+			#Setup error details
+			errorObject['code'] = 400
+			errorObject['message'] = "Captcha failed."
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
 
 		#Convert key string to Datastore key	
 		key = ndb.Key(db_defs.Blog, blogKey)

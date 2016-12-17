@@ -4,14 +4,15 @@
 		<title>Plan Passive</title>
 		<!-- Meta Tag provides machine parsable meta data about the webpage. The viewport is the visible area of a web page. Initial-scale controls zoom level when page is first loaded, initial scale = 1 means no zoom-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-		<!-- This is used for the google sign in button used in admin page to upload blogs
-			Client id got generate from gae account-->
-		<!-- <meta name="google-signin-client_id" content="203410938386-9kmhiru253pvifm82j9b8j9sngl9jiis.apps.googleusercontent.com"> -->
 		<!--Lib CSS-->
 		<link href="/app/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 		<link href="/app/assets/css/jquery-1.11.4-ui.css" rel="stylesheet" type="text/css">
 		<!-- Custom CSS-->
 		<link href="/app/assets/css/style.css" rel="stylesheet" type="text/css">
+
+		<!-- Google Captcha for commenting service -->
+		<!-- onload callback is necessary to notify angular-recaptcha library that reCaptcha api is ready for usage -->
+		<script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
 
 	</head>
 	<body>
@@ -49,6 +50,9 @@
 		 <script src="/app/assets/libs/scripts/tinymce/js/tinymce/tinymce.min.js"></script>
 		 <!-- Angular-UI-Tinymce -->
 		  <script src="/app/assets/libs/scripts/ui-tinymce-master/dist/tinymce.min.js"></script>
+
+		   <!-- Google Captcha -->
+		  <script src="/app/assets/libs/scripts/angular-recaptcha/angular-recaptcha.min.js"></script>
 
 		<!-- Google Charts -->
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

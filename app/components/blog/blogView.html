@@ -2,7 +2,7 @@
 	<!-- BLOGLIST -->
 	<div class="row" ng-if="blog.view == 'blogList'">
 		<!-- MOST RECENT BLOGS -->
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<!-- BLOG CATEGORY TITLE BAR -->
 			<div class="text-center  mpDesignBackground27314F topPadding1 bottomPadding1">
 				<h4><b class="whiteText">MOST RECENT BLOGS</b></h4>
@@ -30,33 +30,8 @@
 			</div>
 		</div>
 		<!-- MOST POPULAR BLOGS -->
-		<div class="col-md-6">
-			<!-- BLOG CATEGORY TITLE BAR -->
-			<div class="text-center  mpDesignBackground27314F topPadding1 bottomPadding1">
-				<h4><b class="whiteText">MOST POPULAR BLOGS</b></h4>
-			</div>
-			<!-- BLOGS: Most popular -->
-			<div class="row blogListPadding">
-				<div class="row mpClickable blogHover" ng-repeat="b in blog.blogs | orderBy:'date':true  track by $index" ng-click="blog.showBlog(b)"> 
-					<div class="col-md-6 col-md-push-4 blogListPadding">
-						<div class="row mpDesign27314F ">
-							<h2><b>{{b.title}}</b></h2>
-						</div>
-						<div class="row mpDesign39AEA9  ">
-							<p><b>-- {{b.comments.length}} Comments</b></p>
-						</div>
-					</div>
-					<div class="col-md-4 col-md-pull-6 blogListPadding">
-						<img ng-src="{{b.image}}" class="img-responsive">
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<hr class="thickHRBlack"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- <div class="col-md-6">
+		</div> -->
 	</div>
 	<!-- COMMENTING -->
 	<div ng-if="blog.view == 'viewBlog'">

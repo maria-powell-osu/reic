@@ -26,10 +26,10 @@
 <!-- ********BLOGS*********** -->
 <div class="row">
 	<div class="col-md-12 text-center  ppGradient">
-		<h4><b class="whiteText">MOST POPULAR BLOGS</b></h4>
+		<h4><b class="whiteText">MOST RECENT BLOGS</b></h4>
 	</div>
 </div>
-<div class="row blogRow mpClickable blogHover" ng-repeat="blog in about.blogs | orderBy:'date':true track by $index " ng-click="about.showBlog(blog)">
+<div class="row blogRow mpClickable blogHover" ng-repeat="blog in about.blogs | orderBy:'date':true track by $index" ng-click="about.showBlog(blog)">
 	<!-- Implements push and pull re-ordering for columns 
 		This was added so that on small screens the title comes first-->
 	<div class="col-md-6 col-md-push-4">
