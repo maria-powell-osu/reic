@@ -23,9 +23,8 @@ App.factory('Blog', function($http) {
 			return $http({
 				method: 'POST',
 				url: "/blogs",
-				data: data
+				data: data,
 			});
 		}
-
 	}
 });

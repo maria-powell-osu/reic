@@ -1,16 +1,13 @@
 
 Where I left of:
-
+	- need to add message when deleting a blog that the images should get deleted
 
 Week Work List:	
-	- add tag to post to mark as most popular
-	- google captcha
 	- SEO for angularjs with work list for the two of us
 	- about page needs (set max display on there)
-	
 	- Google Analytics
-	- do I need the trustsce stuff for editor?
-	- prevent API attacks
+	- contact page with email
+	-
 		
 Calculator:
 	- cap rate round to nearest 10th
@@ -21,6 +18,7 @@ Calculator:
 	- why is the chart getting small>?
 
 Backlog:
+	- prevent API attacks
 	- add MOST POPULAR capability
 	- db check for javascript?
 	- Add replies to comments
@@ -48,5 +46,8 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 270
+	Coding: 285
+
+Read Me:
+- install: pyton, PILL, GAE, github, text editor
  

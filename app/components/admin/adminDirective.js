@@ -7,7 +7,7 @@
  */
 
 /*
- * Bootstrap Delete Modal Dialog 
+ * Bootstrap Delete Modal Dialog - BLOG
  */
 App.directive('mpModalDelete', function () {
 	return {
@@ -27,6 +27,33 @@ App.directive('mpModalDelete', function () {
 
 				//Activate Bootstrap Modal
 				$("#mpModalDelete").modal('show');				
+			});
+
+			
+		}
+	};
+});
+
+/*
+ * Bootstrap Delete Modal Dialog - IMAGE
+ */
+App.directive('mpModalDeleteImg', function () {
+	return {
+		restrict: 'A',
+		scope: {
+			filename: "=",  
+			index: "=",  				//Index of current img so we know which one in list to delete for UI list of images
+			currentImageInformation: "=" //Carries current img information into delete button 				
+		},
+		link: function (scope,element, attrs, ctrl){
+			//User clicked Delete Icon - Shows Bootstrap Dialog Box
+			$(element).click(function() {
+				//Save the selected blog information, this will be delete button param
+				scope.currentImageInformation.filename = scope.filename;
+				scope.currentImageInformation.index = scope.index;
+
+				//Activate Bootstrap Modal
+				$("#mpModalDeleteImg").modal('show');				
 			});
 
 			

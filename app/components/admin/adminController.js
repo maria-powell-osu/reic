@@ -1,8 +1,10 @@
-App.controller("AdminController", function($scope, Blog, Admin) {
+App.controller("AdminController", function($scope, Blog, Admin, Image) {
     var vm = this;
     setupInputFormDefaultData();
     vm.blog = {};
     vm.currentBlogInformation = {};
+    vm.currentImageInformation = {};
+    vm.contentImageList = [];
     vm.view = "postBlog";
     vm.showBlogForm = false;
     vm.blogPostedMessage = false;
@@ -17,6 +19,20 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         toolbar: "undo redo | fontsizeselect bold italic | forecolor backcolor | alignleft aligncenter alignright | link image | table",
         fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt'
     };
+
+    Image.getImages()
+        .success(function (response){
+            vm.imageInfo = response;
+        })
+        .error (function (error) {
+             if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
+            $(window).scrollTop(0);
+        });
+
 
     Blog.getBlogs()
         .success(function (response){
@@ -49,17 +65,22 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             vm.notification = "Oops. Something went wrong. Contact Maria."
         });
 
-/*
-    vm.removeParagraph= function() {
-        var lastItem = vm.input.paragraphs.length-1;
-        vm.input.paragraphs.splice(lastItem);
+    vm.deleteImage = function(){
+        Image.deleteImage(vm.currentImageInformation.filename)
+        .success(function (response){
+            vm.imageInfo.splice(
+                vm.currentImageInformation.index, 1);
+        })
+        .error (function (error) {
+             if (error && error.message){
+                vm.errorMessage = error.message;
+            } else {
+                vm.errorMessage = "Internal Server Error.";
+            }
+            $(window).scrollTop(0);
+        });
     };
 
-     vm.addParagraph = function(paragraph) {
-     var p = (typeof paragraph !== 'undefined') ?  paragraph : {};
-     vm.input.paragraphs.push(p);
-    };
-*/
     vm.deleteBlog = function(){
         Blog.deleteBlog(vm.currentBlogInformation.key)
         .success(function (response){
@@ -84,13 +105,6 @@ App.controller("AdminController", function($scope, Blog, Admin) {
         vm.input.key = blog.key;
         vm.input.image = blog.image;
         vm.input.content = blog.content;
-        //Make sure there is no objects in paragraphs (typically there is one for user to be required to enter 
-            //at least one paragraph)
-        /*vm.input.paragraphs = []
-
-        for (i = 0; i < blog.paragraphs.length; i++) {
-            vm.addParagraph(blog.paragraphs[i]);
-        }*/
 
         //Show Post Blog Screen
         vm.view = "postBlog";
@@ -131,19 +145,48 @@ App.controller("AdminController", function($scope, Blog, Admin) {
             }
             $(window).scrollTop(0);
         });
-    }
+    };
+
+    //Clears the given fields
+    vm.clearImage = function (file, blob) {
+        //To remove the display image
+        blob = '';
+
+        //triggers a change event on the file input so image gets deleted (inputfield.js)
+        file = '';
+    };
+
+    vm.uploadImage = function (){
+        var form = new FormData();
+        form.append('image', vm.input.image);
+        Image.uploadImage(form)
+            .success(function (response){
+                //add the new image to the images list in image tab
+                vm.imageInfo.append(response);
+                vm.contentImageList.append(response);
+                vm.contentBlob = '';
+                vm.contentImage = '';
+
+            })
+            .error (function (error) {
+                 if (error && error.message){
+                    vm.errorMessage = error.message;
+                } else {
+                    vm.errorMessage = "Internal Server Error.";
+                }
+                $(window).scrollTop(0);
+            });
+    };
+
 
     //Post New Blog
     vm.postBlog = function (){
-         vm.errorMessage = ""
+         vm.errorMessage = "";
         if(!vm.input.image) {
-            vm.errorMessage = "Title Image is missing."
+            vm.errorMessage = "Title Image is missing.";
             return;
         }
-        //add order indices for paragraphs
-        /*for(i = 0; i < vm.input.paragraphs.length; i++){
-            vm.input.paragraphs[i].index = i;
-        }*/
+
         var jsonData = JSON.stringify(vm.input);
         
         Blog.postBlog(jsonData)

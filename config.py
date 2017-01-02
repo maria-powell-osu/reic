@@ -32,6 +32,10 @@ DATA_BACKEND = 'datastore'
 # https://console.developers.google.com
 PROJECT_ID = 'realestatecalculator1256'
 
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+CLOUD_STORAGE_BUCKET = 'realestatecalculator-1256.appspot.com'
+
 # SQLAlchemy configuration
 # Replace user, pass, host, and database with the respective values of your
 # Cloud SQL instance.

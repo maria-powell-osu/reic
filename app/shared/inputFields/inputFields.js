@@ -126,38 +126,96 @@ App.directive('droppable', function() {
 	};
 })
 
-.directive("filereader", [function () {
+.directive("cloudStorageFileUpload", ['$parse', function ($parse, Image) {
 	return {
 		scope: {
-			filereader: "=",
-			imageDisplayId: "@"
+			cloudStorageFileUpload: "=", //saves actual file
+			blobContentList: "=",		//saves the file blob used to display back to user
+			contentImageList: "="
 		},
 		link: function (scope, element, attrs) {
-			element.bind("change", function (changeEvent) {
 
+			element.bind("change", function (changeEvent) {
+				var form = new FormData();
+				form.append('image', changeEvent.target.files[0]);
+		        Image.uploadImage(form)
+		            .success(function (response){
+		                //add the new image to the images list in image tab
+		                vm.imageInfo.append(response);
+
+		                //add to list in current blog
+		                vm.contentImageList.append(response);
+
+		                //Remove value from input source
+		                $('#' + element[0].id).val('');
+
+            			
+						var reader = new FileReader();
+
+						//triggered when reading completed
+						reader.onload = function (loadEvent) {
+							scope.$apply(function () {
+								scope.cloudStorageBlob = loadEvent.target.result;
+							});
+						}
+						//Begins reading from blob as a 'data:' url string: for images
+						reader.readAsDataURL(changeEvent.target.files[0]);
+					})
+		            .error (function (error) {
+		                 if (error && error.message){
+		                    vm.errorMessage = error.message;
+		                } else {
+		                    vm.errorMessage = "Internal Server Error.";
+		                }
+		                $(window).scrollTop(0);
+		            });
+
+			});
+			scope.$watch('filereader', function (newValue, oldValue) {
+		          //if the value has change and the value is not defined 
+		          //that means the controller is trying to clear the field
+		          if (newValue !== oldValue && !newValue) {     
+		          	//Clears the file input value    	
+		          	$('#' + element[0].id).val('');
+		          }
+
+		          //Need if option to delete old image
+      		});
+		}
+	}
+}]);
+
+.directive("filereader", ['$parse', function ($parse) {
+	return {
+		scope: {
+			filereader: "=", //saves actual file
+			blob: "="		//saves the file blob used to display back to user
+		},
+		link: function (scope, element, attrs) {
+			//var model = $parse(scope.filereader);
+            //var modelSetter = model.assign;
+
+			element.bind("change", function (changeEvent) {
 				var reader = new FileReader();
+				scope.filereader = changeEvent.target.files[0];
+
 				//triggered when reading completed
 				reader.onload = function (loadEvent) {
 					scope.$apply(function () {
-						scope.filereader = loadEvent.target.result;
+						scope.blob = loadEvent.target.result;
+						
 					});
 				}
 				//Begins reading from blob as a 'data:' url string: for images
 				reader.readAsDataURL(changeEvent.target.files[0]);
 
-				//New styling after picture added
-				pictureAddedStyling();
 			});
 			scope.$watch('filereader', function (newValue, oldValue) {
 		          //if the value has change and the value is not defined 
 		          //that means the controller is trying to clear the field
-		          if (newValue !== oldValue && !newValue) {         	
+		          if (newValue !== oldValue && !newValue) {     
+		          	//Clears the file input value    	
 		          	$('#' + element[0].id).val('');
-
-		          	//if the user specific image displayid then clear that too
-		          	if(scope.imageDisplayId){
-		          		$('#' + scope.imageDisplayId).attr('src', '');
-		          	}
 		          }
       		});
 		}
@@ -184,7 +242,7 @@ App.directive('removeimage', function() {
  * Purpose: Helper method to style the image box after user added picture
  * Params: 
  */
-function pictureAddedStyling () {
+/*function pictureAddedStyling () {
 	//Remove the hover style effect in case it was invoked before
 	$("#dashedDiv").removeClass("dashedHoverPlaceholder");
 	//Add Styling for original dashed box
@@ -194,7 +252,7 @@ function pictureAddedStyling () {
 	//Show delete image button
 	$("#removeImage").show();
 	$( "#propertyImage").show();
-}
+}*/
 
 /*App.directive('mpValidation', function($timeout) {
     return {

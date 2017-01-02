@@ -4,6 +4,10 @@ import jinja2
 import webapp2
 from google.appengine.api import oauth
 from google.appengine.api import users
+import os
+import sys
+sys.path.append(os.path.join(os.path.join(os.path.dirname(__file__), ".."), "lib"))  # relative to main.py
+
 
 # Python Template Engine To Render my HTML
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -28,5 +32,7 @@ application = webapp2.WSGIApplication([], debug=True)
 application.router.add(webapp2.Route('/',PlanPassive))
 application.router.add(webapp2.Route(r'/comments', 'comment.Comment'))
 application.router.add(webapp2.Route(r'/blogs', 'blog.Blog'))
+application.router.add(webapp2.Route(r'/images', 'images.Image'))
+application.router.add(webapp2.Route(r'/images/<filename:.*><:/?>', 'images.Image'))
 application.router.add(webapp2.Route(r'/blogs/<id:[0-9]+><:/?>', 'blog.Blog'))
 application.router.add(webapp2.Route(r'/admin', 'admin.Admin'))

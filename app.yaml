@@ -23,6 +23,9 @@ handlers:
 - url: /img 
   static_dir: img
 
+- url: /assets 
+  static_dir: assets
+
 - url: /lib 
   static_dir: lib
 
@@ -53,13 +56,16 @@ handlers:
 
   # [ the .app was added to specify that we are using a WSGI application
   #   which is needed to enable threadsafe actions]
+
 - url: /.*
   script: main.application 
 
 # [Libraries]
 libraries:
 - name: webapp2
-  version: latest
+version: latest
 - name: jinja2
+version: latest
+- name: PIL
   version: latest
 

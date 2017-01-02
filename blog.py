@@ -4,6 +4,7 @@ import db_defs #Contain Classes Used By Website
 import json
 import sys
 maxEntitySizeOfOneMB = 1048576 
+from google.appengine.api import images
 
 class Blog(webapp2.RequestHandler):
 	
@@ -33,6 +34,8 @@ class Blog(webapp2.RequestHandler):
 
 			#add current blog to list
 			listOfBlogObjects.append(blog.to_dict())
+
+			img = images.Image(blog.image)
 
 			#get comments associated with blog
 			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).fetch()
