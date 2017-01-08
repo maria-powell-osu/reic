@@ -204,6 +204,7 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
         vm.blogAction = "new";
         vm.errorMessage = "";
         vm.input.blogBlobs = [];
+        vm.imageInfo = [];
     }
 });
 

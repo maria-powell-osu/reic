@@ -1,6 +1,8 @@
 
 Where I left of:
-	- need to add message when deleting a blog that the images should get deleted
+	- whys is listbucket function not working?
+	- how can I make the page load faster? (I suspect the front image is what takes long so see how we can improve that)
+	- need loader bars for the images
 
 Week Work List:	
 	- SEO for angularjs with work list for the two of us

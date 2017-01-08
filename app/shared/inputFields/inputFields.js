@@ -130,9 +130,8 @@ App.directive("cloudStorageFileUpload", ['$parse', 'Image', function ($parse, Im
 	return {
 		scope: {
 			//cloudStorageFileUpload: "=", //saves actual file
-			blogBlobs: "=",					//saves the file blob used to display back to user
-			//blobContentList: "=",		
-			//contentImageList: "=",		//so we can show list of file names back to user
+			blogBlobs: "=",		
+			errorMessage: "=",			//saves the file blob used to display back to user
 			imageInfo: "="					//contains the list of images already uploaded - for images overview screen
 		},
 		link: function (scope, element, attrs) {
@@ -166,9 +165,9 @@ App.directive("cloudStorageFileUpload", ['$parse', 'Image', function ($parse, Im
 					})
 		            .error (function (error) {
 		                 if (error && error.message){
-		                    vm.errorMessage = error.message;
+		                    scope.errorMessage = error.message;
 		                } else {
-		                    vm.errorMessage = "Internal Server Error.";
+		                    scope.errorMessage = "Internal Server Error.";
 		                }
 		                $(window).scrollTop(0);
 		            });

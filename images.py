@@ -28,19 +28,19 @@ class Image(webapp2.RequestHandler):
 
 		fileObject = {}
 		fileObject['url'] = public_url
-		fileObject['filename'] = "/bucket" + image.filename
+		fileObject['filename'] = "/realestatecalculator-1256.appspot.com" + image.filename
 
 		self.response.set_status(200)
 		self.response.write(json.dumps(fileObject))
 		return
 
 	def get(self, **kwargs):
-		bucketContents = gcs.listbucket('/bucket')
+		bucketContents = gcs.listbucket('/realestatecalculator-1256.appspot.com')
 		result = []
 		for img in bucketContents:
 			fileObject = {}
 			fileObject['filename'] = img.filename
-			blobKey = blobstore.create_gs_key('/gs/bucket/' + img.filename)
+			blobKey = blobstore.create_gs_key('/gs/realestatecalculator-1256.appspot.com/' + img.filename)
 			fileObject['url'] = images.get_serving_url(blob_key=blobKey)
 
 			result.append(fileObject)
@@ -86,7 +86,7 @@ def CreateFile(filename, content_type, fileStream, self):
 
 
 	#generate gcs file name
-	gcsFileName = '/bucket/' + filename
+	gcsFileName = '/realestatecalculator-1256.appspot.com/' + filename
 
  
 	# Create a GCS file with GCS client.
