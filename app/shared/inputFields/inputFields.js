@@ -45,7 +45,7 @@ App.directive('jqdatepicker', function() {
  *					& - to pass in a function that the directive can invoke
  * 			- link to register DOM listeners or update DOM
  */
-App.directive('droppable', function() {
+/*App.directive('droppable', function() {
 	return {
 		restrict: 'A',
 		scope: {
@@ -124,14 +124,16 @@ App.directive('droppable', function() {
 			}
 		}
 	};
-})
+})*/
 
-.directive("cloudStorageFileUpload", ['$parse', function ($parse, Image) {
+App.directive("cloudStorageFileUpload", ['$parse', 'Image', function ($parse, Image) {
 	return {
 		scope: {
-			cloudStorageFileUpload: "=", //saves actual file
-			blobContentList: "=",		//saves the file blob used to display back to user
-			contentImageList: "="
+			//cloudStorageFileUpload: "=", //saves actual file
+			blogBlobs: "=",					//saves the file blob used to display back to user
+			//blobContentList: "=",		
+			//contentImageList: "=",		//so we can show list of file names back to user
+			imageInfo: "="					//contains the list of images already uploaded - for images overview screen
 		},
 		link: function (scope, element, attrs) {
 
@@ -141,21 +143,22 @@ App.directive('droppable', function() {
 		        Image.uploadImage(form)
 		            .success(function (response){
 		                //add the new image to the images list in image tab
-		                vm.imageInfo.append(response);
-
-		                //add to list in current blog
-		                vm.contentImageList.append(response);
-
-		                //Remove value from input source
-		                $('#' + element[0].id).val('');
-
+		                scope.imageInfo.push(response);
             			
 						var reader = new FileReader();
 
 						//triggered when reading completed
 						reader.onload = function (loadEvent) {
 							scope.$apply(function () {
-								scope.cloudStorageBlob = loadEvent.target.result;
+								var object = {};
+
+								object.blob = loadEvent.target.result;
+								object.url = response.url;
+								//Saving the blob so we can display it
+								scope.blogBlobs.push(object);
+
+								 //Remove value from input source
+		                		$('#' + element[0].id).val('');
 							});
 						}
 						//Begins reading from blob as a 'data:' url string: for images
@@ -185,7 +188,7 @@ App.directive('droppable', function() {
 	}
 }]);
 
-.directive("filereader", ['$parse', function ($parse) {
+App.directive("filereader", ['$parse', function ($parse) {
 	return {
 		scope: {
 			filereader: "=", //saves actual file
@@ -197,13 +200,13 @@ App.directive('droppable', function() {
 
 			element.bind("change", function (changeEvent) {
 				var reader = new FileReader();
-				scope.filereader = changeEvent.target.files[0];
+				//scope.filereader = changeEvent.target.files[0];
 
 				//triggered when reading completed
 				reader.onload = function (loadEvent) {
 					scope.$apply(function () {
 						scope.blob = loadEvent.target.result;
-						
+						scope.filereader = loadEvent.target.result;
 					});
 				}
 				//Begins reading from blob as a 'data:' url string: for images

@@ -63,9 +63,9 @@ handlers:
 # [Libraries]
 libraries:
 - name: webapp2
-version: latest
+  version: latest
 - name: jinja2
-version: latest
+  version: latest
 - name: PIL
   version: latest
 

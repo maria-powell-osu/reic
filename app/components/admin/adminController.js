@@ -4,7 +4,6 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
     vm.blog = {};
     vm.currentBlogInformation = {};
     vm.currentImageInformation = {};
-    vm.contentImageList = [];
     vm.view = "postBlog";
     vm.showBlogForm = false;
     vm.blogPostedMessage = false;
@@ -148,36 +147,13 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
     };
 
     //Clears the given fields
-    vm.clearImage = function (file, blob) {
+    vm.clearImage = function () {
         //To remove the display image
-        blob = '';
+        vm.input.image = '';
 
         //triggers a change event on the file input so image gets deleted (inputfield.js)
-        file = '';
+        vm.input.blob = '';
     };
-
-    vm.uploadImage = function (){
-        var form = new FormData();
-        form.append('image', vm.input.image);
-        Image.uploadImage(form)
-            .success(function (response){
-                //add the new image to the images list in image tab
-                vm.imageInfo.append(response);
-                vm.contentImageList.append(response);
-                vm.contentBlob = '';
-                vm.contentImage = '';
-
-            })
-            .error (function (error) {
-                 if (error && error.message){
-                    vm.errorMessage = error.message;
-                } else {
-                    vm.errorMessage = "Internal Server Error.";
-                }
-                $(window).scrollTop(0);
-            });
-    };
-
 
     //Post New Blog
     vm.postBlog = function (){
@@ -227,6 +203,7 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
         vm.input.date = getCurrentDate();
         vm.blogAction = "new";
         vm.errorMessage = "";
+        vm.input.blogBlobs = [];
     }
 });
 

@@ -14,14 +14,13 @@ from google.appengine.ext import blobstore
 
 class Image(webapp2.RequestHandler):
 	def post(self, **kwargs):
-		#Returns list of  images with titleImage name in form but we default to return first one since we will only send one titleImage
-		#Note: had to use getall that returns a list for it to work with multiform data type form
+		#Returns list of  images with in form Note: had to use getall that returns a list for it to work with multiform data type form
 		image = self.request.POST.getall('image')
 
 		if not image:
 			return self.response.write("No Image Found")
 
-		#if list not empty extract our title image from list
+		#if list not empty extract our first image from list (only ever expect to be sent one at a time)
 		image = image[0]
 
 		blobKey = CreateFile(image.filename, image.type, image.value, self)
@@ -82,20 +81,12 @@ class Image(webapp2.RequestHandler):
 """
 def CreateFile(filename, content_type, fileStream, self):
 
-	self.response.write("inside creatFile....")
-
 	#Ensure that the file is an image
 	checkExtension(filename, config.ALLOWED_EXTENSIONS, self)
 
-	self.response.write("ext checked ok....")
-
-	#generate a safe filename to avoid collisions in gcs
-	#filename = generateSafeFilename(filename)
 
 	#generate gcs file name
 	gcsFileName = '/bucket/' + filename
-
-	self.response.write("generatedGCSFilename: " + gcsFileName + "....")
 
  
 	# Create a GCS file with GCS client.
@@ -121,7 +112,6 @@ def CreateFile(filename, content_type, fileStream, self):
 # 	return "{0}-{1}.{2}".format(basename, date, extension)
 
 def checkExtension(filename, allowed_extensions, self):
-	self.response.write("checking ext....")
 	if ('.' not in filename or filename.split('.').pop().lower() not in allowed_extensions):
 		errorObject = {}
 		#Setup proper response code
