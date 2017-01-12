@@ -180,9 +180,9 @@
 						<div class="row elemIndent">
 							 <div class="col-md-12">
 								<label>Title Image</label>
-								<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader="admin.input.image" blob="admin.input.blob" id="titleImg">
-								<img ng-src="{{admin.input.blob}}" class="imageThumb"/>
-								<button ng-click="admin.clearImage()" ng-if="admin.input.blob">Remove Image</button>
+								<input type="file" accept="image/*" class="inpt form-control" name="titleImg" filereader blob="admin.input.image" id="titleImg">
+								<img ng-src="{{admin.input.image}}" class="imageThumb"/>
+								<button ng-click="admin.input.image = ''" ng-if="admin.input.image">Remove Image</button>
 							</div>
 						</div>
 

@@ -190,7 +190,7 @@ App.directive("cloudStorageFileUpload", ['$parse', 'Image', function ($parse, Im
 App.directive("filereader", ['$parse', function ($parse) {
 	return {
 		scope: {
-			filereader: "=", //saves actual file
+			//filereader: "=", //saves actual file
 			blob: "="		//saves the file blob used to display back to user
 		},
 		link: function (scope, element, attrs) {
@@ -205,7 +205,7 @@ App.directive("filereader", ['$parse', function ($parse) {
 				reader.onload = function (loadEvent) {
 					scope.$apply(function () {
 						scope.blob = loadEvent.target.result;
-						scope.filereader = loadEvent.target.result;
+						//scope.filereader = changeEvent.target.result;
 					});
 				}
 				//Begins reading from blob as a 'data:' url string: for images

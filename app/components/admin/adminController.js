@@ -146,15 +146,6 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
         });
     };
 
-    //Clears the given fields
-    vm.clearImage = function () {
-        //To remove the display image
-        vm.input.image = '';
-
-        //triggers a change event on the file input so image gets deleted (inputfield.js)
-        vm.input.blob = '';
-    };
-
     //Post New Blog
     vm.postBlog = function (){
          vm.errorMessage = "";
