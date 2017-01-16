@@ -121,6 +121,7 @@ function rentalCalculations(form) {
 
     result.cashFlowProjectionTable = createCashFlowTable(form);
     result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
+    result.cashFlowSummary = createCashFlowSummary(form);
     result.cashFlowAvg = createCashFlowAvg(form);
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
@@ -134,14 +135,43 @@ function rentalCalculations(form) {
 	return result;
 }
 
+function createCashFlowSummary(form){
+	var cashflowData = form.cashFlowTableData,
+		sum = 0,
+		cashflow = 5,
+		result = [{years: 5, totalCashflow: 0},
+					{years: 15, totalCashflow: 0},
+					{years: 30, totalCashflow: 0}];
+
+	for(var i = 0; i < cashflowData.length; i ++){
+		sum += cashflowData[i][cashflow];
+		for(var j = 0; j < result.length; j++ ){
+			if((i+1) == result[j].years){
+				result[j].totalCashflow = Math.round(sum);
+				break;
+			}
+		}
+	}
+	return result;
+}
+
+function roundToNearestDecimal(precision, number){
+	var factor = Math.pow(10, precision);
+    var tempNumber = number * factor;
+    var roundedTempNumber = Math.round(tempNumber);
+    return roundedTempNumber / factor;
+}
+
 function createSummaryData(form){
 	var resultData = [],
 		income = 1,
 		expense = 2,
+		capex = 3,
+		loanPmt = 4,
 		cashFlow = 5,
 		cashOnCash = 6,
-		firstYear = 0,
-		loanPmt = 4;
+		firstYear = 0;
+		
 
 	//cash flow 
 	resultData.cashFlow = Math.round(form.cashFlowTableData[firstYear][cashFlow] /12);
@@ -156,7 +186,8 @@ function createSummaryData(form){
 	resultData.cashOnCash = Math.round(form.cashFlowTableData[firstYear][cashOnCash]);
 
 	//cap rate
-	resultData.capRate = Math.round(((resultData.income - form.cashFlowTableData[firstYear][expense]) / form.li_purchasePrice) *100);
+	//1st year income - 1st year expense / (purchase price + first year CAPEX)) ; rounded to nearest 10th decimal
+	resultData.capRate = roundToNearestDecimal(2, ((form.cashFlowTableData[firstYear][income] - form.cashFlowTableData[firstYear][expense]) / (form.li_purchasePrice + form.cashFlowTableData[firstYear][capex])  ) *100);
 
 	return resultData;
 }
@@ -725,11 +756,13 @@ function calculateAppreciation(year, form){
 	var appreciationResult,
 		arv = form.e_arv,
 		propertyValue = form.cashOnEquityTableData[year][1],
-		purchasePrice = form.li_purchasePrice;
+		purchasePrice = form.li_purchasePrice,
+		firstYear = 0,
+		capex = 3;
 
 	if(year === 0) {
 		if(arv && arv > 0){
-			appreciationResult = propertyValue - arv;
+			appreciationResult = propertyValue - arv + (arv- (form.cashFlowTableData[firstYear][capex] + purchasePrice) );
 		} else {
 			appreciationResult = propertyValue - purchasePrice; 
 		}

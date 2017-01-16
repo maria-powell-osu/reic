@@ -1,6 +1,11 @@
 
 Where I left of:
-	- whys is listbucket function not working?
+ 	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
+	- remove imagge blob should disapprea too
+	- make blog width bigger
+	- fix images list
+	- give jason ability ti give alt tag for title image 
+	-whys is listbucket function not working?
 	- how can I make the page load faster? (I suspect the front image is what takes long so see how we can improve that)
 	- need loader bars for the images
 
@@ -9,18 +14,41 @@ Week Work List:
 	- about page needs (set max display on there)
 	- Google Analytics
 	- contact page with email
-	-
 		
 Calculator:
-	- cap rate round to nearest 10th
-	- instead of 5 year avg do just the first year (cash on cash ROI) 
-	- cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
-	- monthly income - monthly expenses - mortgage(loan pmt) = +green, -red
-	- the downpayment percent should always stay the same no matter what
-	- why is the chart getting small>?
+
+	4) why is the chart getting small?
+		- have the table result open
+		- change income amount
+		- go back to results tab and change the view to graph instead of table
+	5) loader bar needs to be the whole page
+	6) change assumed values bar color
+	7) make the buttons look like they toggles
+	2) down payment needs to be rounded for % and $...check if the others are doing the same thing
+	3) at the bottom need nexts without scrolling
+	8) remove gauge and instead do the same thing as for cashflow above
+		- CASHFLOW: Total net income in:
+		- RETURN: Total profit in: (appr, cashflow, loadn paydown)
+	- whole row click for adding data in calculator is annoying and should be shorter 
+	- cash on equity table when paid all cash creates really small increments for (cash on equity %), they should be large therefore creating a straight line   instead of confusing up and down
+	- pie charts on the same line
+	- dollar signs by pie charts
+
+
+DONE:
+1) cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
+- maintenance cost default to 10 instead of 3
+2) monthly income - monthly expenses - mortgage(loan pmt) = +green, -red Cash flow
+3) get rid of the gauge for cashflow and replace with "How much did I make in: 5 yrs, 15yrs, 30yrs," 
+4) What is your house worth in 30years from now? to label calculator
+1)for total return, include profits from forced appreciation from CAPEX
+		- if this is not done today, get specifics from jason 
+
+
 
 Backlog:
-	- prevent API attacks
+	
+	-prevent API attacks
 	- add MOST POPULAR capability
 	- db check for javascript?
 	- Add replies to comments
@@ -48,7 +76,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 285
+	Coding: 300 hrs
 
 Read Me:
 - install: pyton, PILL, GAE, github, text editor

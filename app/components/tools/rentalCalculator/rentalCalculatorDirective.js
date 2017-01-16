@@ -10,11 +10,11 @@
 });
 
 /* Income Sources
- * Loads template into incomeSources.html
+ * Loads template into cashflow.html
  */
  App.directive('moneyFlow', function() {
   return {
-    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/incomeSources.html'
+    templateUrl: '/app/components/tools/rentalCalculator/sectionViews/cashflow.html'
   };
 });
 
@@ -83,7 +83,7 @@ App.directive("mpTooltip", function($timeout) {
               createTotalReturnTable();
               createTotalReturnStackedBarChart();
 
-              drawGauge('cashFlowGauge', scope.data.cashFlowAvg, '%', 0, 5, 5, 10, 10, 100, 20);
+              //drawGauge('cashFlowGauge', scope.data.cashFlowAvg, '%', 0, 5, 5, 10, 10, 100, 20);
               drawGauge('totalReturnGauge', scope.data.totalReturnAvg, '%', 0, 10, 10, 15, 15, 100, 30);
 
               //Stop the page loader

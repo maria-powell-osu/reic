@@ -2,7 +2,7 @@
 <mp-charts data="rentalCalculator.chartData" calculating="rentalCalculator.calculating" income-pie-chart-labels="rentalCalculator.incomePieChartsLabels" 
 expense-pie-chart-labels="rentalCalculator.expensePieChartLabels">
 	<div class="row">
-		<div class="col-md-2 mpBoxSpacing ">
+		<div class="col-md-2 mpBoxSpacing" ng-class="{mpGreen: rentalCalculator.chartData.summaryData.cashFlow > 0, mpRed: rentalCalculator.chartData.summaryData.cashFlow < 0}">
 			CASH FLOW
 			<div class="dollarValueLarge">
 				$ {{rentalCalculator.chartData.summaryData.cashFlow}}
@@ -44,12 +44,23 @@ expense-pie-chart-labels="rentalCalculator.expensePieChartLabels">
 			<h2>CASH FLOW <span class="glyphicon glyphicon-facetime-video"></span></h2>
 			<p>Am I making more money or loosing money?</p>
 		</div>
-		<div class="col-md-3 col-md-offset-3" id="cashFlowGauge"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-3 col-md-offset-9">
-			{{rentalCalculator.chartData.cashFlowAvg}}% Cash Return
-		</div>
+		<!-- <div class="col-md-3 col-md-offset-3" id="cashFlowGauge"></div> -->
+		 <div class="col-md-4 col-md-offset-2">
+		 	<div class="row">
+		 		<div class="col-md-12">
+		 			<h4>HOW MUCH DID I MAKE IN:</h4>
+		 		</div>
+		 	</div>
+		 	<div class="row" ng-repeat="cashflowSum in rentalCalculator.chartData.cashFlowSummary">
+		 		<div class="col-md-12">
+		 			{{cashflowSum.years}} years: 
+		 			<span ng-class="{mpGreen: cashflowSum.totalCashflow > 0, mpRed: cashflowSum.totalCashflow < 0}">
+		 				${{cashflowSum.totalCashflow}}
+		 			</span>
+		 		</div>
+		 	</div>
+		 	
+		 </div>
 	</div>
 	<hr>
 	<div class="row">
