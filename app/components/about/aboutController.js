@@ -15,7 +15,7 @@ App.controller("AboutController", function($scope, Comments, Blog, $location, $r
         hyphenatedBlogTitle = blog.title.split(' ').join('-');
 
         //Update route
-        $location.path( "blog/" + hyphenatedBlogTitle);
+        $location.path( "blogs/" + hyphenatedBlogTitle);
 
         //Change view to specific blog
         vm.view = "viewBlog";

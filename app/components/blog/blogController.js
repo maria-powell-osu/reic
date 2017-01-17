@@ -36,7 +36,7 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
         hyphenatedBlogTitle = blog.title.split(' ').join('-');
 
         //Update route
-        $location.path( "blog/" + hyphenatedBlogTitle);
+        $location.path( "blogs/" + hyphenatedBlogTitle);
 
         //Change view to specific blog
         vm.view = "viewBlog";
