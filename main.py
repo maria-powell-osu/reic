@@ -20,7 +20,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class PlanPassive(webapp2.RequestHandler):
 	template_variables = {}
 
-	def get(self):
+	def get(self, **kwargs):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render())
 
@@ -42,6 +42,6 @@ application.router.add(webapp2.Route('/rental-property-calculator',PlanPassive))
 application.router.add(webapp2.Route('/investment-calculators',PlanPassive))
 application.router.add(webapp2.Route('/investment-return-calculator',PlanPassive))
 application.router.add(webapp2.Route('/blogs',PlanPassive))
-application.router.add(webapp2.Route('/blogs/<id:[0-9]+><:/?>',PlanPassive))
+application.router.add(webapp2.Route(r'/blogs/<blogname:.*><:/?>',PlanPassive))
 application.router.add(webapp2.Route('/admin',PlanPassive))
 application.router.add(webapp2.Route('/contact',PlanPassive))
