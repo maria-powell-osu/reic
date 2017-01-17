@@ -3,7 +3,7 @@ App.factory('Admin', function($http) {
 		isAdmin: function (){
 			return $http({
 				method: 'GET',
-				url: "/admin"
+				url: "/adminData"
 			});
 		}
 	}

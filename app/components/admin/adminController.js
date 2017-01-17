@@ -58,7 +58,9 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
                     vm.notification = "This account does not have administrative permissions.";
                 }
             } 
-            vm.link = response.link
+            
+                vm.link = response.link
+            
         })
         .error (function (error) {
             vm.notification = "Oops. Something went wrong. Contact Maria."

@@ -14,7 +14,7 @@ class Admin(webapp2.RequestHandler):
         raw_data = {}
         
         if user:
-            logout_url = users.create_logout_url('/#/admin')
+            logout_url = users.create_logout_url('/admin')
             raw_data["isSignedIn"] = True
             raw_data["link"] = logout_url
 
@@ -24,7 +24,7 @@ class Admin(webapp2.RequestHandler):
             else:
                 raw_data["isAdmin"] = False
         else:
-            login_url = users.create_login_url('/#/admin')
+            login_url = users.create_login_url('/admin')
             raw_data["isAdmin"] = False
             raw_data["isSignedIn"] = False
             raw_data["link"] = login_url

@@ -3,26 +3,26 @@ App.factory('Blog', function($http) {
 		getBlogs: function (){
 			return $http({
 				method: 'GET',
-				url: "/blogs"
+				url: "/blogData"
 			});
 		},
 		deleteBlog: function (blogKey){
 			return $http({
 				method: 'DELETE',
-				url: "/blogs/" + blogKey
+				url: "/blogData/" + blogKey
 			});
 		},
 		editBlog: function (data){
 			return $http({
 				method: 'PUT',
-				url: "/blogs",
+				url: "/blogData",
 				data: data
 			});
 		},
 		postBlog: function (data){
 			return $http({
 				method: 'POST',
-				url: "/blogs",
+				url: "/blogData",
 				data: data,
 			});
 		}

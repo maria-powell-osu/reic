@@ -39,9 +39,6 @@ App.config(function($routeProvider,  $locationProvider) {
     controller: 'AdminController',
     controllerAs: 'admin',
   });
-  $routeProvider.when('/videos', {
-    templateUrl: '../app/components/videos/videos.html',
-  });
   $routeProvider.when('/contact', {
     templateUrl: '../app/components/contact/contact.html',
   });
