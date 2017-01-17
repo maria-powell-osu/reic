@@ -16,6 +16,12 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
         //Get the data for the tables, graphs etc.
         var results = RentalCalculator.calculateResults(vm.input);
 
+        //Whenever we calculate new tables, I am resetting the tabs to show graph first
+        //the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
+        vm.cashFlowView = 'graph';
+        vm.cashOnEquityView = 'graph';
+        vm.totalReturnView = 'graph';
+
         //A watch has been added in the mp-charts directive that triggers drawing of the graphs
         vm.chartData = results;
 
@@ -47,6 +53,8 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     vm.input.supplementalIncomes = [{}];
     vm.input.specialTermsLoans = [{stl_interestOption: "no"}];
     vm.input.capitalExpenditures = [{}];
+    vm.input.capitalExpenditures[0].ce_date = getCurrentDate();
+    vm.input.capitalExpenditures[0].ce_description = "Rehab";
     vm.input.loans = [];
     vm.input.utilities = [];
     vm.input.expenses = [];
@@ -110,7 +118,7 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator) 
     };
 
     vm.addCapitalExpenditure = function() {
-      vm.input.capitalExpenditures.push({});
+      vm.input.capitalExpenditures.push({ce_date: getCurrentDate(), ce_description: "Rehab"});
     };
     vm.removeCapitalExpenditure = function() {
       var lastItem = vm.input.capitalExpenditures.length-1;

@@ -22,6 +22,10 @@ App.controller("FutureValueCalculatorController", function($scope, FutureValueCa
 			vm.result.costOfWaiting = result.costOfWaiting;
 			vm.result.resultPercent = result.resultPercent;
 
+			 //Whenever we calculate new tables, I am resetting the tabs to show graph first
+        	//the reason why I added this is because the sizing gets messed up when they are hidden as they get drawn
+			vm.view = "barGraph";
+
 			//A watch has been added in the mp-charts directive that triggers drawing of the graphs
         	vm.chartData = result.dataForVisuals;
 		}

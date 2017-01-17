@@ -1,16 +1,6 @@
 <!-- Loader showing when calculations are running -->
 <mp-loader ng-show="rentalCalculator.calculating"></mp-loader>
 <div class="container page-content">
-<!-- 	<div class="row">
-		<div class="progressbarContainer">
-			<ul class="progressbar" > -->
-				<!-- active: when the step has opened up and is editable (bubble to blue)
-					 selected: the currrently viewed step 
-					 completed: when step has all fields need to proceed (set the line to blue and cursor)-->
-	<!-- 			<li ng-repeat="step in rentalCalculator.steps" ng-attr-id="step.index" ng-class="{active: rentalCalculator.currStep>=step.index || step.activated, selected:rentalCalculator.currStep==step.index, completed: rentalCalculatorInputForm[step.view].$valid && step.activated}" ng-click="rentalCalculator.jumpTo(step.index, rentalCalculatorInputForm)">{{step.display}}</li> 
-			</ul>
-		</div>
-	</div> -->
 	<div class="row">
 		<div class="col-md-10">
 			<div class="btn-toolbar" >
@@ -46,6 +36,25 @@
 	  		</div>
 		</div>
 	</form>
+	<br/>
+	<br/>
+	<div class="row">
+		<div class="col-md-10">
+			<div class="btn-toolbar" >
+				<!-- BUTTON TABS -->
+		        <div class="btn-group" style="width:100%;" > 
+		        	<!-- To strech the tabs to whole width
+		        		  Each of the labels got a assigned a width percentage value. ones with longer names I gave more space -->
+		        	<!-- Loan-->
+		        	<label class="btn btn-default" style="width:25%;"  ng-class="{active: rentalCalculator.view === 'loan'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="loan">Loan</label>
+		        	<!-- Income/Expenses -->
+		        	<label class="btn btn-default" style="width:42%;" ng-class="{active: rentalCalculator.view === 'incomeExpenses'}"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="incomeExpenses">Cash Flow</label>
+		        	<!-- CASHFLOW SUMMARY -->
+		        	<label class="btn btn-default" style="width:33%;" ng-class="{active: rentalCalculator.view === 'cashFlowSummary'}" ng-click="rentalCalculator.calculate(rentalCalculatorInputForm)"><input type="radio" class="mpButtonGroupRadio" ng-model="rentalCalculator.view" value="cashFlowSummary" >Result</label>
+		        </div>
+		    </div>
+		</div>
+	</div>
 </div>
 <br/>
 <br/>

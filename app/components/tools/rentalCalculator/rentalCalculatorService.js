@@ -85,14 +85,14 @@ function calculateDownPayments (triggerIndicator, userInput){
 
 		//if the change event got triggered by dollar amount
 		if(triggerIndicator === "percent" && downPaymentPercent){
-			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
+			userInput.bl_downPaymentDollar = roundToNearestDecimal(2, (downPaymentPercent/100) * purchasePrice);
 		//if the change event got triggered by percentage
 		} else if (triggerIndicator === "dollar" && downPaymentDollar){
-			userInput.bl_downPaymentPercent = (downPaymentDollar/purchasePrice) *100;
+			userInput.bl_downPaymentPercent = roundToNearestDecimal(2, (downPaymentDollar/purchasePrice) *100);
 		//if the change event got trigger by the purchase price
 		} else if (triggerIndicator === "price" && downPaymentPercent){
-			userInput.bl_downPaymentDollar = (downPaymentPercent/100) * purchasePrice;
-			userInput.bl_downPaymentPercent = (userInput.bl_downPaymentDollar/purchasePrice) *100;
+			userInput.bl_downPaymentDollar = roundToNearestDecimal(2, (downPaymentPercent/100) * purchasePrice);
+			userInput.bl_downPaymentPercent = roundToNearestDecimal(2, (userInput.bl_downPaymentDollar/purchasePrice) *100);
 		//if the user deleted on of the two fields reset them both
 		}else{
 			//Delete the user inputs
@@ -122,16 +122,35 @@ function rentalCalculations(form) {
     result.cashFlowProjectionTable = createCashFlowTable(form);
     result.cashFlowProjectionChart = createCashFlowProjectionComboChart(form);
     result.cashFlowSummary = createCashFlowSummary(form);
-    result.cashFlowAvg = createCashFlowAvg(form);
     result.incomePieChart = createIncomePieChart(form);
     result.expensePieChart = createExpensePieChart(form);
     result.cashOnEquityTable = createCashOnEquityTable(form);
     result.cashOnEquityChart = createCashOnEquityComboChart(form);
     result.totalReturnTable = createTotalReturnTable(form);
     result.totalReturnStackedBarChart = createTotalReturnStackedBarChart(form);
-    result.totalReturnAvg = createTotalReturnAvg(form);
+    result.totalReturnSummary = createTotalReturnSummary(form);
     result.summaryData = createSummaryData(form);
 
+	return result;
+}
+
+function createTotalReturnSummary(form){
+	var totalReturnData = form.totalReturnTableData,
+		sum = 0,
+		totalReturn = 4,
+		result = [{years: 5, totalReturn: 0},
+					{years: 15, totalReturn: 0},
+					{years: 30, totalReturn: 0}];
+
+	for(var i = 0; i < totalReturnData.length; i ++){
+		sum += totalReturnData[i][totalReturn];
+		for(var j = 0; j < result.length; j++ ){
+			if((i+1) == result[j].years){
+				result[j].totalReturn = Math.round(sum);
+				break;
+			}
+		}
+	}
 	return result;
 }
 
@@ -161,6 +180,8 @@ function roundToNearestDecimal(precision, number){
     var roundedTempNumber = Math.round(tempNumber);
     return roundedTempNumber / factor;
 }
+
+
 
 function createSummaryData(form){
 	var resultData = [],
@@ -192,7 +213,7 @@ function createSummaryData(form){
 	return resultData;
 }
 
-function createCashFlowAvg(form){
+/*function createCashFlowAvg(form){
 	var resultAvg,
 		tableData = form.cashFlowTableData,
 		cashOnCash = 6,
@@ -222,7 +243,7 @@ function createTotalReturnAvg(form) {
 
 	return resultAvg;
 
-}
+}*/
 
 function createCashFlowTable(form) {
 	var tableData = {};
@@ -1445,11 +1466,14 @@ function calculateCapitalExpenditures (years, form) {
     var capExpArray = Array.apply(null, Array(years)).map(Number.prototype.valueOf, 0);
     
     for (var i = 0; i < capitalExpendituresLength; i++) {
-    	var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
-    	var capExpPosition = capExpYear - purchasDateYear;
-    	if(capExpPosition <= capExpArray.length){
-        	capExpArray[capExpPosition] = Math.round(form.capitalExpenditures[i].ce_cost);
-      	}
+    	//To ensure the user set a cost since desc and date are always given
+    	if(form.capitalExpenditures[i].ce_cost){
+	    	var capExpYear = (new Date(capitalExpenditures[i].ce_date)).getFullYear();
+	    	var capExpPosition = capExpYear - purchasDateYear;
+	    	if(capExpPosition <= capExpArray.length){
+	        	capExpArray[capExpPosition] = Math.round(form.capitalExpenditures[i].ce_cost);
+	      	}
+	    }
     }
     return capExpArray;
 }

@@ -41,14 +41,28 @@
   <label>Add Unit</label><br/><br/>
 </div>
 <!-- Advanced Income Options Button -->
+
+<!--       <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" ng-click="rentalCalculator.expenseOptions = !rentalCalculator.expenseOptions">    <span ng-if="!rentalCalculator.expenseOptions">Show More Expense Options</span>
+          <span ng-if="rentalCalculator.expenseOptions"> Hide Expense Options</span>
+      </button>
+    </div> 
+  </div>
+  <br/>
+  <br/>
+  <div ng-show="rentalCalculator.expenseOptions" class="animation-show-hide"> -->
+
 <div class="row">
   <div class="col-md-4 col-md-offset-3">
-    <button data-toggle="collapse" data-target="#incomeOptions" class="btn btn-block mpDesignBackground27314F whiteText" type="button">More Income Options</button>
+    <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" ng-click="rentalCalculator.incomeOptions = !rentalCalculator.incomeOptions">
+      <span ng-if="!rentalCalculator.incomeOptions">Show More Income Options</span>
+      <span ng-if="rentalCalculator.incomeOptions"> Hide Income Options</span>
+    </button>
   </div> 
 </div>
 <br/>
 <br/>
-<div id="incomeOptions" class="collapse">
+<!-- <div id="incomeOptions" class="collapse"> -->
+<div ng-show="rentalCalculator.incomeOptions" class="animation-show-hide">
   <h3>Supplemental Income</h3>
   <div ng-repeat="supplementalIncomes in rentalCalculator.input.supplementalIncomes track by $index">
     <div class="row">
@@ -249,13 +263,14 @@
     <!-- More Expense Options -->
   <div class="row">
     <div class="col-md-4 col-md-offset-3">
-      <button data-toggle="collapse" data-target="#expenseOptions" class="btn btn-block mpDesignBackground27314F whiteText" type="button">More Expense Options</button>
+      <button class="btn btn-block mpDesignBackground27314F whiteText" type="button" ng-click="rentalCalculator.expenseOptions = !rentalCalculator.expenseOptions">    <span ng-if="!rentalCalculator.expenseOptions">Show More Expense Options</span>
+          <span ng-if="rentalCalculator.expenseOptions"> Hide Expense Options</span>
+      </button>
     </div> 
   </div>
   <br/>
   <br/>
-<div id="expenseOptions" class="collapse">
-  
+  <div ng-show="rentalCalculator.expenseOptions" class="animation-show-hide">
   <h3>Repairs & Improvements</h3>
   <div ng-repeat="capitalExpenditures in rentalCalculator.input.capitalExpenditures">
     <br/>
@@ -275,19 +290,19 @@
                 <span class="glyphicon glyphicon-question-sign glyphiconBlueColor" aria-hidden="true"></span>
               </a>
               </label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="CAPEX" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost || rentalCalculator.input.capitalExpenditures[$index].ce_date" >
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_description" placeholder="Description" name="CAPEX" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost" >
             </div>
             <div class="col-md-4">
               <label>Cost</label>
               <div class="input-group">
-                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="CAPEX Cost" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_date">
+                <input type="number" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_cost" placeholder="$" name="CAPEX Cost">
                 <span class="input-group-addon">$</span>
               </div>
             </div>
             
             <div class="col-md-4">
               <label>Date</label>
-              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="CAPEX Date" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_description || rentalCalculator.input.capitalExpenditures[$index].ce_cost">
+              <input type="text" class="inpt form-control" ng-model="rentalCalculator.input.capitalExpenditures[$index].ce_date" ng-model="date" jqdatepicker placeholder="Date" name="CAPEX Date" ng-required="rentalCalculator.input.capitalExpenditures[$index].ce_cost">
             </div>
           </div>
         </fieldset>
@@ -374,16 +389,18 @@
   
 
   <!-- ASSUMPTIONS VALUES ************************************************************************************************************** -->
-  <div class="row">
+<!--   <div class="row">
     <div class="col-md-10">
-      <button data-toggle="collapse" data-target="#assumedValues" class="btn btn-block ppGradient whiteText" type="button">View Assumed Values</button>
+      <button data-toggle="collapse" data-target="#assumedValues" class="btn btn-block mpDesignBackground27314F whiteText" type="button">View Assumed Values</button>
     </div> 
   </div>
   <br/>
   <br/>
-<div id="assumedValues" class="collapse">
+<div id="assumedValues" class="collapse"> -->
+<div>
   <div class="row elemIndent">
       <div class="col-md-10 form-group">
+        <h3>Property Over Time</h3>
         <fieldset>
             <div class="row">
                 <div class="col-md-4">

@@ -1,5 +1,7 @@
 
 Where I left of:
+ 	- META TAGS
+ 	- URL FIX: remove # from calculator
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
 	- remove imagge blob should disapprea too
 	- make blog width bigger
@@ -16,39 +18,22 @@ Week Work List:
 	- contact page with email
 		
 Calculator:
-
-	4) why is the chart getting small?
-		- have the table result open
-		- change income amount
-		- go back to results tab and change the view to graph instead of table
 	5) loader bar needs to be the whole page
-	6) change assumed values bar color
-	7) make the buttons look like they toggles
-	2) down payment needs to be rounded for % and $...check if the others are doing the same thing
-	3) at the bottom need nexts without scrolling
-	8) remove gauge and instead do the same thing as for cashflow above
-		- CASHFLOW: Total net income in:
-		- RETURN: Total profit in: (appr, cashflow, loadn paydown)
+	
+	- the numbers need commas for readability in the results page
 	- whole row click for adding data in calculator is annoying and should be shorter 
 	- cash on equity table when paid all cash creates really small increments for (cash on equity %), they should be large therefore creating a straight line   instead of confusing up and down
 	- pie charts on the same line
 	- dollar signs by pie charts
+	- when add a field (such as utility and enter desc but not the other) it will show missing field but not highligth in red like the others
 
-
-DONE:
-1) cap rate indicator without judgment: ( (sum( pie chart incomes) - sum( pie chart expenses) )*12) / purchase price
-- maintenance cost default to 10 instead of 3
-2) monthly income - monthly expenses - mortgage(loan pmt) = +green, -red Cash flow
-3) get rid of the gauge for cashflow and replace with "How much did I make in: 5 yrs, 15yrs, 30yrs," 
-4) What is your house worth in 30years from now? to label calculator
-1)for total return, include profits from forced appreciation from CAPEX
-		- if this is not done today, get specifics from jason 
 
 
 
 Backlog:
-	
-	-prevent API attacks
+	- 
+	- REST route should also authenticate user
+	- prevent API attacks
 	- add MOST POPULAR capability
 	- db check for javascript?
 	- Add replies to comments

@@ -84,7 +84,7 @@ App.directive("mpTooltip", function($timeout) {
               createTotalReturnStackedBarChart();
 
               //drawGauge('cashFlowGauge', scope.data.cashFlowAvg, '%', 0, 5, 5, 10, 10, 100, 20);
-              drawGauge('totalReturnGauge', scope.data.totalReturnAvg, '%', 0, 10, 10, 15, 15, 100, 30);
+              //drawGauge('totalReturnGauge', scope.data.totalReturnAvg, '%', 0, 10, 10, 15, 15, 100, 30);
 
               //Stop the page loader
               setTimeout(function(){ 
