@@ -53,10 +53,6 @@ handlers:
 - url: /templates
   static_dir: templates
 
-- url: .*
-  static_files: index.html
-
-
   # [ the .app was added to specify that we are using a WSGI application
   #   which is needed to enable threadsafe actions]
 
