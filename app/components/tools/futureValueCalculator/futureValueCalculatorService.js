@@ -44,7 +44,7 @@ function futureValueCalculations(userInput){
 	
 
 		//data for future value return gauge
-		result.dataForVisuals.futureValueGauge = createFutureValueGauge(result.resultPercent);
+		//result.dataForVisuals.futureValueGauge = createFutureValueGauge(result.resultPercent);
 	} else {
 		result = 0;
 	}
@@ -231,6 +231,14 @@ function calculateTotalInvestmentReturn(futureValue, totalAmountContributed) {
 
 function calculateTotalAmountContributed(p, a, n){
 	var result;
+
+	if (a == null){
+		a = 0;
+	}
+
+	if (n == null){
+		n = 0;
+	}
 
 	if(p != null && a != null && n != null){
 		result = p + (a * n);

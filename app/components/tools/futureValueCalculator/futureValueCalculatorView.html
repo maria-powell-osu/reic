@@ -1,8 +1,8 @@
 <div class="container page-content">
-	<h4>Bread Crumbs need to go here</h4>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
+				<br/>
 				<div class="col-md-4">
 					<label>What is your starting balance?</label>
 					<div class="input-group">
@@ -38,13 +38,14 @@
 		            <!-- Calculate -->
 			    	<button type="button" ng-click="fv.calculate()" class="btn btn-info pull-right">Calculate</button>
 		        </div>
+		        <br/>
 		        <div class="col-md-7 col-md-offset-1">
 		        	<mp-future-value-charts data="fv.chartData" future-value-pie-chart-labels="fv.futureValuePieChartLabels">
 			        	<div class="row">
 			        		<div class="col-md-3" ng-show="fv.result.resultPercent || fv.result.resultPercent === 0">
 			        			<span>{{fv.result.resultPercent}}% RETURN</span>
-								<div id="futureValueGauge"></div>
-							</div>
+<!-- 								<div id="futureValueGauge"></div>
+ -->							</div>
 			        		<div class="col-md-3">
 					        	<span ng-show="fv.input.years">{{fv.input.years}}-YEAR</span> VALUE<br/>
 								<b class="dollarValueLarge">$ {{fv.result.futureValue}}</b>
