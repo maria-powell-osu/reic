@@ -138,9 +138,20 @@ function createTotalReturnSummary(form){
 	var totalReturnData = form.totalReturnTableData,
 		sum = 0,
 		totalReturn = 4,
-		result = [{years: 5, totalReturn: 0},
-					{years: 15, totalReturn: 0},
-					{years: 30, totalReturn: 0}];
+		result = [];
+
+	if(5 < totalReturnData.length){
+		result.push({years: 5, totalReturn: 0});
+	}
+
+	if(15 < totalReturnData.length){
+		result.push({years: 15, totalReturn: 0});
+	}
+
+	if(30< totalReturnData.length){
+		result.push({years: 30, totalReturn: 0});
+	}
+
 
 	for(var i = 0; i < totalReturnData.length; i ++){
 		sum += totalReturnData[i][totalReturn];
@@ -158,10 +169,20 @@ function createCashFlowSummary(form){
 	var cashflowData = form.cashFlowTableData,
 		sum = 0,
 		cashflow = 5,
-		result = [{years: 5, totalCashflow: 0},
-					{years: 15, totalCashflow: 0},
-					{years: 30, totalCashflow: 0}];
+		result = [];
 
+	if(5 < cashflowData.length){
+		result.push({years: 5, totalReturn: 0});
+	}
+
+	if(15 < cashflowData.length){
+		result.push({years: 15, totalReturn: 0});
+	}
+
+	if(30< cashflowData.length){
+		result.push({years: 30, totalReturn: 0});
+	}
+	
 	for(var i = 0; i < cashflowData.length; i ++){
 		sum += cashflowData[i][cashflow];
 		for(var j = 0; j < result.length; j++ ){

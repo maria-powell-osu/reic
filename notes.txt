@@ -1,7 +1,6 @@
 
 Where I left of:
  	- META TAGS
- 	- URL FIX: remove # from calculator
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
 	- remove imagge blob should disapprea too
 	- make blog width bigger
