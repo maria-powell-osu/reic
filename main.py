@@ -24,6 +24,21 @@ class PlanPassive(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render())
 
+# generates the site map for bots crawling the site (for SEO)
+class Sitemap(webapp2.RequestHandler):
+	template_variables = {}
+
+	def get(self, **kwargs):
+		template = JINJA_ENVIRONMENT.get_template('sitemap.xml')
+		self.response.write(template.render())
+
+# generates the robots.txt for bots crawling the site (for SEO)
+class Robot(webapp2.RequestHandler):
+	template_variables = {}
+
+	def get(self, **kwargs):
+		template = JINJA_ENVIRONMENT.get_template('robots.txt')
+		self.response.write(template.render())
 
 #Application Routing
 application = webapp2.WSGIApplication([], debug=True)
@@ -36,6 +51,8 @@ application.router.add(webapp2.Route(r'/images', 'images.Image'))
 application.router.add(webapp2.Route(r'/images/<filename:.*><:/?>', 'images.Image'))
 application.router.add(webapp2.Route(r'/blogData/<id:[0-9]+><:/?>', 'blog.Blog'))
 application.router.add(webapp2.Route(r'/adminData', 'admin.Admin'))
+application.router.add(webapp2.Route(r'/sitemap', Sitemap))
+application.router.add(webapp2.Route(r'/robots.txt', Robot))
 # Angularjs routes
 #this had to be added after I removed the /#/ so it recognizes those routes still
 application.router.add(webapp2.Route('/rental-property-calculator',PlanPassive))

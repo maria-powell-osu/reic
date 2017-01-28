@@ -1,5 +1,8 @@
 
 Where I left of:
+	- dynamic sitmap genertaion
+
+General TODOs
  	- META TAGS
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
 	- remove imagge blob should disapprea too
@@ -9,6 +12,11 @@ Where I left of:
 	-whys is listbucket function not working?
 	- how can I make the page load faster? (I suspect the front image is what takes long so see how we can improve that)
 	- need loader bars for the images
+	- minify files
+
+SEO:
+	- we need out generate sitemaps xml
+		- evertime jason adds a blog we should update the sitemap.xml
 
 Week Work List:	
 	- SEO for angularjs with work list for the two of us
@@ -60,7 +68,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 300 hrs
+	Coding: 309 hrs
 
 Read Me:
 - install: pyton, PILL, GAE, github, text editor
