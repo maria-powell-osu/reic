@@ -1,8 +1,14 @@
 
 Where I left of:
+	- make mobile routes
+	- make site load faster
+		- minify files?
+		- images
+	- test commenting service
 	- dynamic sitmap genertaion
 
 General TODOs
+ 	- make the put and post and delete routes authenticated
  	- META TAGS
  	- BLOG BUGdeleted the top one and it visually took out another one but actually deleted the right onw
 	- remove imagge blob should disapprea too
@@ -68,7 +74,7 @@ Sync with Master:
 
 
 Hours Tracking:
-	Coding: 309 hrs
+	Coding: 317 hrs
 
 Read Me:
 - install: pyton, PILL, GAE, github, text editor

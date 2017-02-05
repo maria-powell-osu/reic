@@ -75,7 +75,7 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
             vm.missingFields.push("Email");
         } 
 
-        if(blog.captchaResponse === ""){
+        if(!blog.captchaResponse || blog.captchaResponse === ""){
                 vm.error = true;
                 vm.missingFields.push("Captcha");
         }
