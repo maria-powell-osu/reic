@@ -101,6 +101,8 @@ class Blog(webapp2.RequestHandler):
 		jsonData = json.loads(self.request.body)
 		key = jsonData['key'] if ('key' in jsonData) else None
 		title = jsonData['title'] if ('title' in jsonData) else None
+		titleTag = jsonData['titleTag'] if ('titleTag' in jsonData) else None
+		metaTag = jsonData['metaTag'] if ('metaTag' in jsonData) else None
 		author = jsonData['author'] if ('author' in jsonData ) else None
 		date = jsonData['date'] if ('date' in jsonData) else None
 		img = str(jsonData['image']) if ('image' in jsonData) else None
@@ -219,6 +221,8 @@ class Blog(webapp2.RequestHandler):
 		Blog.date = date
 		Blog.image = img
 		Blog.content = content
+		Blog.titleTag = titleTag
+		Blog.metaTag = metaTag
 		Blog.put()
 		blogObject = Blog.to_dict()
 

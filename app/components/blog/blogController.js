@@ -1,30 +1,40 @@
-App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Comments, Blog, $location, $routeParams ) {
+App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Comments, Blog, $location, $routeParams, SEO) {
 	var vm = this;
     vm.newComment = {};
     vm.view = "blogList";
     vm.error = false;
     vm.missingFields = [];
     vm.publicKey = "6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH";
+    vm.metaTag = "Blogs";
+    vm.titleTag = "Blogs";
 
     Blog.getBlogs()
         .success(function (blogs) {
             //If the user routed to specific blog
             if ($routeParams.blogTitle){
                 vm.view = "viewBlog";
+
+                //extract the blog title from the URL
                 var blogTitle = $routeParams.blogTitle.split('-').join(' ');
 
+                //Iterate through the blogs to see which one should get shown
                 for(var i = 0; i < blogs.length; i++){
                     if(blogTitle == blogs[i].title){
+                        //set the blog for the view
                         vm.currentBlogView = blogs[i];
+
+                        //setup the seo tags
+                        SEO.set(vm.currentBlogView.metaTag, vm.currentBlogView.titleTag);
                         break;
                     }
                 }
                 //If blogTitle was given but it is not found in the results
                 if(!vm.currentBlogView){
-                    $location.path( "blog/");
+                    $location.path( "blogs/");
                 }
             }
             vm.blogs = blogs;
+            SEO.set(vm.metaTag, vm.titleTag);
         })
         .error (function (error) {
             //Need to add error handling here ***********************************
@@ -42,6 +52,8 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
         vm.view = "viewBlog";
 
         vm.currentBlogView = blog;
+
+        SEO.set(blog.metaTag, blog.titleTag);
 
     }
 

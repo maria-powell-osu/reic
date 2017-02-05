@@ -13,6 +13,7 @@ App.config(function($routeProvider,  $locationProvider) {
   });
   $routeProvider.when('/investment-calculators', {
     templateUrl: '../app/components/tools/tools.html',
+    controller: 'ToolsController',
   });
   $routeProvider.when('/rental-property-calculator', {
     templateUrl: '../app/components/tools/rentalCalculator/rentalCalculatorView.html',

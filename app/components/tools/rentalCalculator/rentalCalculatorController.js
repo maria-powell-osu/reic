@@ -1,7 +1,12 @@
-App.controller("RentalCalculatorController", function($scope, RentalCalculator) {
+App.controller("RentalCalculatorController", function($scope, RentalCalculator, SEO) {
     var vm = this;
     vm.input = {};  
-    vm.view = "loan";  
+    vm.view = "loan";
+    var titleTag = "RentalCalculatorController";
+    var metaTag = 'RentalCalculatorController';
+
+
+    SEO.set(metaTag, titleTag);  
 
     //Initialize all default values for view
     vm.calculating = false;

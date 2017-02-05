@@ -14,6 +14,15 @@ handlers:
 - url: /app
   static_dir: app
 
+- url: /components
+  static_dir: components
+
+- url: /tools
+  static_dir: tools
+
+- url: /rentalCalculator
+  static_dir: rentalCalculator
+
 - url: /controllers
   static_dir: controllers
 

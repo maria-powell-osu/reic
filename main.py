@@ -40,6 +40,13 @@ class Robot(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('robots.txt')
 		self.response.write(template.render())
 
+# class Test(webapp2.RequestHandler):
+# 	template_variables = {}
+
+# 	def get(self, **kwargs):
+# 		template = JINJA_ENVIRONMENT.get_template('app\components\tools\rentalCalculator\rentalCalculatorView.html')
+# 		self.response.write(template.render())
+
 #Application Routing
 application = webapp2.WSGIApplication([], debug=True)
 

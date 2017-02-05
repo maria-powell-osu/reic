@@ -1,7 +1,11 @@
-App.controller("FutureValueCalculatorController", function($scope, FutureValueCalculator) {
+App.controller("FutureValueCalculatorController", function($scope, FutureValueCalculator, SEO) {
 	var vm = this;
 	vm.input = {};
 	vm.result = {};
+
+	var titleTag = "FutureValueCalculatorController";
+    var metaTag = 'FutureValueCalculatorController';
+    SEO.set(metaTag, titleTag);  
 
 	//Default Values
 	vm.view = "barGraph";

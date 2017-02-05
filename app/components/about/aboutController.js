@@ -1,5 +1,7 @@
-App.controller("AboutController", function($scope, Comments, Blog, $location, $routeParams) {
+App.controller("AboutController", function($scope, Comments, Blog, $location, $routeParams, SEO) {
 	var vm = this;
+        vm.titleTag = "Plan Passive";
+        vm.metaTag = 'Plan Passive';
 
     Blog.getBlogs()
         .success(function (blogs) {
@@ -9,6 +11,8 @@ App.controller("AboutController", function($scope, Comments, Blog, $location, $r
             //Need to add error handling here ***********************************
             var test = error;
         });
+
+    SEO.set(vm.metaTag, vm.titleTag);
 
     vm.showBlog = function (blog) {
         //Create Blog Title for URL - add hyphen between each word for SEO

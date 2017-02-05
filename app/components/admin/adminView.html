@@ -186,8 +186,11 @@
 							</div>
 						</div>
 
-						<label>Author</label>
-						<input type="text" class="inpt form-control" ng-model="admin.input.author" placeholder="Pen Name" name="author" required mp-required>  
+						<label>Title Tag</label>
+						<textarea rows="4" cols="50" class="inpt form-control" placeholder="Title of the page. 50-60 chars typically" required mp-required ng-model="admin.input.titleTag"></textarea>
+
+						<label>Meta Tag</label>
+						<textarea rows="4" cols="50" class="inpt form-control" placeholder="Description of the page. 160 chars typically" required mp-required ng-model="admin.input.metaTag"></textarea>
 
 						<label>Date Posted</label>
 		            	<input type="text" class="inpt form-control" ng-model="admin.input.date" name="date" jqdatepicker required mp-required> 

@@ -105,6 +105,8 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
         vm.input.date = blog.date;
         vm.input.key = blog.key;
         vm.input.image = blog.image;
+        vm.input.titleTag = blog.titleTag;
+        vm.input.metaTag = blog.metaTag;
         vm.input.content = blog.content;
 
         //Show Post Blog Screen
@@ -192,8 +194,8 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
 
     function setupInputFormDefaultData(){
         vm.input = {};
-        //vm.input.paragraphs = [{}];
         vm.input.date = getCurrentDate();
+        vm.input.author = "Passive Investor";
         vm.blogAction = "new";
         vm.errorMessage = "";
         vm.input.blogBlobs = [];

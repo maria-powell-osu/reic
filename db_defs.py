@@ -5,6 +5,8 @@ class Blog(ndb.Model):
 	author = ndb.StringProperty(required=True)
 	image = ndb.BlobProperty(required=False)
 	date = ndb.StringProperty(required=True)
+	metaTag = ndb.StringProperty(required=False)
+	titleTag = ndb.StringProperty(required=False)
 	#this is a text property because it is not limited for 1500 like StringProperty is
 	content = ndb.TextProperty(required=True) 
 	def to_dict(self):
