@@ -3,8 +3,8 @@ App.controller("FutureValueCalculatorController", function($scope, FutureValueCa
 	vm.input = {};
 	vm.result = {};
 
-	var titleTag = "FutureValueCalculatorController";
-    var metaTag = 'FutureValueCalculatorController';
+	var titleTag = "Investment Return Calculator | Plan Passive";
+    var metaTag = 'Find out how much money will you have in your 401k? How long will it take you to become a millionaire? Cost you of waiting a few more years to invest?';
     SEO.set(metaTag, titleTag);  
 
 	//Default Values

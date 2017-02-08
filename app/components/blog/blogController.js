@@ -5,8 +5,8 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
     vm.error = false;
     vm.missingFields = [];
     vm.publicKey = "6Le7FCoTAAAAAJLEqXtMZeRkxnP_jg_DDqmqsuJH";
-    vm.metaTag = "Blogs";
-    vm.titleTag = "Blogs";
+    vm.metaTag = "Your source for information on the best passive income investments and personal finance topics on how to create a lifestyle free of money worries.";
+    vm.titleTag = "Plan Passive Blog";
 
     Blog.getBlogs()
         .success(function (blogs) {

@@ -2,8 +2,8 @@ App.controller("RentalCalculatorController", function($scope, RentalCalculator, 
     var vm = this;
     vm.input = {};  
     vm.view = "loan";
-    var titleTag = "RentalCalculatorController";
-    var metaTag = 'RentalCalculatorController';
+    var titleTag = "Rental Property Calculator | Plan Passive";
+    var metaTag = 'Use the best fee rental property calculator online. See customized graphs and charts of your cash flow, total return, and cash on equity over time.';
 
 
     SEO.set(metaTag, titleTag);  

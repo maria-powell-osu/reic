@@ -1,7 +1,7 @@
 App.controller("AboutController", function($scope, Comments, Blog, $location, $routeParams, SEO) {
 	var vm = this;
-        vm.titleTag = "Plan Passive";
-        vm.metaTag = 'Plan Passive';
+        vm.titleTag = "Plan Passive – Passive Income for a Free Life";
+        vm.metaTag = 'Plan your ideal lifestyle by creating passive income streams. Make your money work hard so you don’t have to. Home of the best Rental Property Calculator.';
 
     Blog.getBlogs()
         .success(function (blogs) {
