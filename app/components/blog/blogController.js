@@ -24,7 +24,8 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
                         vm.currentBlogView = blogs[i];
 
                         //setup the seo tags
-                        SEO.set(vm.currentBlogView.metaTag, vm.currentBlogView.titleTag);
+                        vm.metaTag = vm.currentBlogView.metaTag;
+                        vm.titleTag = vm.currentBlogView.titleTag; 
                         break;
                     }
                 }
