@@ -16,7 +16,7 @@ App.controller("AboutController", function($scope, Comments, Blog, $location, $r
 
     vm.showBlog = function (blog) {
         //Create Blog Title for URL - add hyphen between each word for SEO
-        hyphenatedBlogTitle = blog.title.split(' ').join('-');
+        hyphenatedBlogTitle = blog.title.split(' ').join('-').toLowerCase();
 
         //Update route
         $location.path( "blogs/" + hyphenatedBlogTitle);

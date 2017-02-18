@@ -19,7 +19,7 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
 
                 //Iterate through the blogs to see which one should get shown
                 for(var i = 0; i < blogs.length; i++){
-                    if(blogTitle == blogs[i].title){
+                    if(blogTitle.toLowerCase() == blogs[i].title.toLowerCase()){
                         //set the blog for the view
                         vm.currentBlogView = blogs[i];
 
@@ -44,7 +44,7 @@ App.controller("BlogController", function(vcRecaptchaService, $http, $scope, Com
 
     vm.showBlog = function (blog) {
         //Create Blog Title for URL - add hyphen between each word for SEO
-        hyphenatedBlogTitle = blog.title.split(' ').join('-');
+        hyphenatedBlogTitle = blog.title.split(' ').join('-').toLowerCase();;
 
         //Update route
         $location.path( "blogs/" + hyphenatedBlogTitle);
