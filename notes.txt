@@ -6,6 +6,9 @@ Where I left of:
 		- images
 	- test commenting service
 	- dynamic sitmap genertaion
+	- bing webmaster submission
+
+	-https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications
 
 General TODOs
  	- make the put and post and delete routes authenticated
