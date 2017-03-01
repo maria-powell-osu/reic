@@ -1,0 +1,952 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'gcloud-deploy' ]
+2 info using npm@3.10.3
+3 info using node@v6.3.1
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly fetchPackageMetaData gcloud-deploy@0.6.1
+8 silly fetchNamedPackageData gcloud-deploy
+9 silly mapToRegistry name gcloud-deploy
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry https://registry.npmjs.org/
+12 silly mapToRegistry data Result {
+12 silly mapToRegistry   raw: 'gcloud-deploy',
+12 silly mapToRegistry   scope: null,
+12 silly mapToRegistry   escapedName: 'gcloud-deploy',
+12 silly mapToRegistry   name: 'gcloud-deploy',
+12 silly mapToRegistry   rawSpec: '',
+12 silly mapToRegistry   spec: 'latest',
+12 silly mapToRegistry   type: 'tag' }
+13 silly mapToRegistry uri https://registry.npmjs.org/gcloud-deploy
+14 verbose request uri https://registry.npmjs.org/gcloud-deploy
+15 verbose request no auth needed
+16 info attempt registry request try #1 at 11:32:14 AM
+17 verbose request id eaea61a7992750ef
+18 verbose etag W/"572a4feb-5526"
+19 verbose lastModified Wed, 04 May 2016 19:39:23 GMT
+20 http request GET https://registry.npmjs.org/gcloud-deploy
+21 http 304 https://registry.npmjs.org/gcloud-deploy
+22 verbose headers { date: 'Mon, 27 Feb 2017 19:32:14 GMT',
+22 verbose headers   via: '1.1 varnish',
+22 verbose headers   'cache-control': 'max-age=300',
+22 verbose headers   etag: 'W/"572a4feb-5526"',
+22 verbose headers   age: '94',
+22 verbose headers   connection: 'keep-alive',
+22 verbose headers   'x-served-by': 'cache-den6023-DEN',
+22 verbose headers   'x-cache': 'HIT',
+22 verbose headers   'x-cache-hits': '1',
+22 verbose headers   'x-timer': 'S1488223934.811502,VS0,VE0',
+22 verbose headers   vary: 'Accept-Encoding' }
+23 silly get cb [ 304,
+23 silly get   { date: 'Mon, 27 Feb 2017 19:32:14 GMT',
+23 silly get     via: '1.1 varnish',
+23 silly get     'cache-control': 'max-age=300',
+23 silly get     etag: 'W/"572a4feb-5526"',
+23 silly get     age: '94',
+23 silly get     connection: 'keep-alive',
+23 silly get     'x-served-by': 'cache-den6023-DEN',
+23 silly get     'x-cache': 'HIT',
+23 silly get     'x-cache-hits': '1',
+23 silly get     'x-timer': 'S1488223934.811502,VS0,VE0',
+23 silly get     vary: 'Accept-Encoding' } ]
+24 verbose etag https://registry.npmjs.org/gcloud-deploy from cache
+25 verbose get saving gcloud-deploy to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\gcloud-deploy\.cache.json
+26 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+27 silly install normalizeTree
+28 silly loadCurrentTree Finishing
+29 silly loadIdealTree Starting
+30 silly install loadIdealTree
+31 silly cloneCurrentTree Starting
+32 silly install cloneCurrentTreeToIdealTree
+33 silly cloneCurrentTree Finishing
+34 silly loadShrinkwrap Starting
+35 silly install loadShrinkwrap
+36 silly loadShrinkwrap Finishing
+37 silly loadAllDepsIntoIdealTree Starting
+38 silly install loadAllDepsIntoIdealTree
+39 silly resolveWithNewModule gcloud-deploy@0.6.1 checking installable status
+40 silly cache add args [ 'gcloud-deploy@0.6.1', null ]
+41 verbose cache add spec gcloud-deploy@0.6.1
+42 silly cache add parsed spec Result {
+42 silly cache add   raw: 'gcloud-deploy@0.6.1',
+42 silly cache add   scope: null,
+42 silly cache add   escapedName: 'gcloud-deploy',
+42 silly cache add   name: 'gcloud-deploy',
+42 silly cache add   rawSpec: '0.6.1',
+42 silly cache add   spec: '0.6.1',
+42 silly cache add   type: 'version' }
+43 silly addNamed gcloud-deploy@0.6.1
+44 verbose addNamed "0.6.1" is a plain semver version for gcloud-deploy
+45 silly mapToRegistry name gcloud-deploy
+46 silly mapToRegistry using default registry
+47 silly mapToRegistry registry https://registry.npmjs.org/
+48 silly mapToRegistry data Result {
+48 silly mapToRegistry   raw: 'gcloud-deploy',
+48 silly mapToRegistry   scope: null,
+48 silly mapToRegistry   escapedName: 'gcloud-deploy',
+48 silly mapToRegistry   name: 'gcloud-deploy',
+48 silly mapToRegistry   rawSpec: '',
+48 silly mapToRegistry   spec: 'latest',
+48 silly mapToRegistry   type: 'tag' }
+49 silly mapToRegistry uri https://registry.npmjs.org/gcloud-deploy
+50 verbose addNameVersion registry:https://registry.npmjs.org/gcloud-deploy not in flight; fetching
+51 verbose get https://registry.npmjs.org/gcloud-deploy not expired, no request
+52 silly cache afterAdd gcloud-deploy@0.6.1
+53 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\gcloud-deploy\0.6.1\package\package.json not in flight; writing
+54 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+55 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\gcloud-deploy\0.6.1\package\package.json written
+56 silly fetchNamedPackageData archiver
+57 silly mapToRegistry name archiver
+58 silly mapToRegistry using default registry
+59 silly mapToRegistry registry https://registry.npmjs.org/
+60 silly mapToRegistry data Result {
+60 silly mapToRegistry   raw: 'archiver',
+60 silly mapToRegistry   scope: null,
+60 silly mapToRegistry   escapedName: 'archiver',
+60 silly mapToRegistry   name: 'archiver',
+60 silly mapToRegistry   rawSpec: '',
+60 silly mapToRegistry   spec: 'latest',
+60 silly mapToRegistry   type: 'tag' }
+61 silly mapToRegistry uri https://registry.npmjs.org/archiver
+62 silly fetchNamedPackageData async
+63 silly mapToRegistry name async
+64 silly mapToRegistry using default registry
+65 silly mapToRegistry registry https://registry.npmjs.org/
+66 silly mapToRegistry data Result {
+66 silly mapToRegistry   raw: 'async',
+66 silly mapToRegistry   scope: null,
+66 silly mapToRegistry   escapedName: 'async',
+66 silly mapToRegistry   name: 'async',
+66 silly mapToRegistry   rawSpec: '',
+66 silly mapToRegistry   spec: 'latest',
+66 silly mapToRegistry   type: 'tag' }
+67 silly mapToRegistry uri https://registry.npmjs.org/async
+68 silly fetchNamedPackageData deep-assign
+69 silly mapToRegistry name deep-assign
+70 silly mapToRegistry using default registry
+71 silly mapToRegistry registry https://registry.npmjs.org/
+72 silly mapToRegistry data Result {
+72 silly mapToRegistry   raw: 'deep-assign',
+72 silly mapToRegistry   scope: null,
+72 silly mapToRegistry   escapedName: 'deep-assign',
+72 silly mapToRegistry   name: 'deep-assign',
+72 silly mapToRegistry   rawSpec: '',
+72 silly mapToRegistry   spec: 'latest',
+72 silly mapToRegistry   type: 'tag' }
+73 silly mapToRegistry uri https://registry.npmjs.org/deep-assign
+74 silly fetchNamedPackageData gce-output-stream
+75 silly mapToRegistry name gce-output-stream
+76 silly mapToRegistry using default registry
+77 silly mapToRegistry registry https://registry.npmjs.org/
+78 silly mapToRegistry data Result {
+78 silly mapToRegistry   raw: 'gce-output-stream',
+78 silly mapToRegistry   scope: null,
+78 silly mapToRegistry   escapedName: 'gce-output-stream',
+78 silly mapToRegistry   name: 'gce-output-stream',
+78 silly mapToRegistry   rawSpec: '',
+78 silly mapToRegistry   spec: 'latest',
+78 silly mapToRegistry   type: 'tag' }
+79 silly mapToRegistry uri https://registry.npmjs.org/gce-output-stream
+80 silly fetchNamedPackageData multiline
+81 silly mapToRegistry name multiline
+82 silly mapToRegistry using default registry
+83 silly mapToRegistry registry https://registry.npmjs.org/
+84 silly mapToRegistry data Result {
+84 silly mapToRegistry   raw: 'multiline',
+84 silly mapToRegistry   scope: null,
+84 silly mapToRegistry   escapedName: 'multiline',
+84 silly mapToRegistry   name: 'multiline',
+84 silly mapToRegistry   rawSpec: '',
+84 silly mapToRegistry   spec: 'latest',
+84 silly mapToRegistry   type: 'tag' }
+85 silly mapToRegistry uri https://registry.npmjs.org/multiline
+86 silly fetchNamedPackageData slug
+87 silly mapToRegistry name slug
+88 silly mapToRegistry using default registry
+89 silly mapToRegistry registry https://registry.npmjs.org/
+90 silly mapToRegistry data Result {
+90 silly mapToRegistry   raw: 'slug',
+90 silly mapToRegistry   scope: null,
+90 silly mapToRegistry   escapedName: 'slug',
+90 silly mapToRegistry   name: 'slug',
+90 silly mapToRegistry   rawSpec: '',
+90 silly mapToRegistry   spec: 'latest',
+90 silly mapToRegistry   type: 'tag' }
+91 silly mapToRegistry uri https://registry.npmjs.org/slug
+92 silly fetchOtherPackageData gcloud@github:googlecloudplatform/gcloud-node
+93 silly cache add args [ 'gcloud@github:googlecloudplatform/gcloud-node', null ]
+94 verbose cache add spec gcloud@github:googlecloudplatform/gcloud-node
+95 silly cache add parsed spec Result {
+95 silly cache add   raw: 'gcloud@github:googlecloudplatform/gcloud-node',
+95 silly cache add   scope: null,
+95 silly cache add   escapedName: 'gcloud',
+95 silly cache add   name: 'gcloud',
+95 silly cache add   rawSpec: 'github:googlecloudplatform/gcloud-node',
+95 silly cache add   spec: 'github:googlecloudplatform/gcloud-node',
+95 silly cache add   type: 'hosted',
+95 silly cache add   hosted:
+95 silly cache add    { type: 'github',
+95 silly cache add      ssh: 'git@github.com:googlecloudplatform/gcloud-node.git',
+95 silly cache add      sshUrl: 'git+ssh://git@github.com/googlecloudplatform/gcloud-node.git',
+95 silly cache add      httpsUrl: 'git+https://github.com/googlecloudplatform/gcloud-node.git',
+95 silly cache add      gitUrl: 'git://github.com/googlecloudplatform/gcloud-node.git',
+95 silly cache add      shortcut: 'github:googlecloudplatform/gcloud-node',
+95 silly cache add      directUrl: 'https://raw.githubusercontent.com/googlecloudplatform/gcloud-node/master/package.json' } }
+96 verbose addRemoteGit caching github:googlecloudplatform/gcloud-node
+97 verbose addRemoteGit googlecloudplatform/gcloud-node is a repository hosted by github
+98 silly tryGitProto attempting to clone git://github.com/googlecloudplatform/gcloud-node.git
+99 silly tryClone cloning googlecloudplatform/gcloud-node via git://github.com/googlecloudplatform/gcloud-node.git
+100 verbose tryClone git-github-com-googlecloudplatform-gcloud-node-git-d4152fb1 not in flight; caching
+101 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes correctMkdir not in flight; initializing
+102 verbose request uri https://registry.npmjs.org/archiver
+103 verbose request no auth needed
+104 info attempt registry request try #1 at 11:32:15 AM
+105 verbose etag W/"58b3f473-143f3"
+106 verbose lastModified Mon, 27 Feb 2017 09:42:11 GMT
+107 http request GET https://registry.npmjs.org/archiver
+108 verbose request uri https://registry.npmjs.org/async
+109 verbose request no auth needed
+110 info attempt registry request try #1 at 11:32:15 AM
+111 verbose etag W/"58aeb2bf-1e041"
+112 verbose lastModified Thu, 23 Feb 2017 10:00:31 GMT
+113 http request GET https://registry.npmjs.org/async
+114 verbose request uri https://registry.npmjs.org/deep-assign
+115 verbose request no auth needed
+116 info attempt registry request try #1 at 11:32:15 AM
+117 verbose etag W/"57fda796-10af"
+118 verbose lastModified Wed, 12 Oct 2016 03:01:42 GMT
+119 http request GET https://registry.npmjs.org/deep-assign
+120 verbose request uri https://registry.npmjs.org/gce-output-stream
+121 verbose request no auth needed
+122 info attempt registry request try #1 at 11:32:15 AM
+123 verbose etag W/"58891c1b-196c"
+124 verbose lastModified Wed, 25 Jan 2017 21:43:55 GMT
+125 http request GET https://registry.npmjs.org/gce-output-stream
+126 verbose request uri https://registry.npmjs.org/multiline
+127 verbose request no auth needed
+128 info attempt registry request try #1 at 11:32:15 AM
+129 verbose etag W/"54e10ea0-459c"
+130 verbose lastModified Sun, 15 Feb 2015 21:24:48 GMT
+131 http request GET https://registry.npmjs.org/multiline
+132 verbose request uri https://registry.npmjs.org/slug
+133 verbose request no auth needed
+134 info attempt registry request try #1 at 11:32:15 AM
+135 verbose etag W/"58a6590c-63fd"
+136 verbose lastModified Fri, 17 Feb 2017 01:59:40 GMT
+137 http request GET https://registry.npmjs.org/slug
+138 info git [ 'config', '--get', 'remote.origin.url' ]
+139 http 304 https://registry.npmjs.org/archiver
+140 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+140 verbose headers   via: '1.1 varnish',
+140 verbose headers   'cache-control': 'max-age=300',
+140 verbose headers   etag: 'W/"58b3f473-143f3"',
+140 verbose headers   age: '208',
+140 verbose headers   connection: 'keep-alive',
+140 verbose headers   'x-served-by': 'cache-den6023-DEN',
+140 verbose headers   'x-cache': 'HIT',
+140 verbose headers   'x-cache-hits': '4',
+140 verbose headers   'x-timer': 'S1488223935.343890,VS0,VE0',
+140 verbose headers   vary: 'Accept-Encoding' }
+141 silly get cb [ 304,
+141 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+141 silly get     via: '1.1 varnish',
+141 silly get     'cache-control': 'max-age=300',
+141 silly get     etag: 'W/"58b3f473-143f3"',
+141 silly get     age: '208',
+141 silly get     connection: 'keep-alive',
+141 silly get     'x-served-by': 'cache-den6023-DEN',
+141 silly get     'x-cache': 'HIT',
+141 silly get     'x-cache-hits': '4',
+141 silly get     'x-timer': 'S1488223935.343890,VS0,VE0',
+141 silly get     vary: 'Accept-Encoding' } ]
+142 verbose etag https://registry.npmjs.org/archiver from cache
+143 verbose get saving archiver to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\archiver\.cache.json
+144 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+145 silly resolveWithNewModule archiver@0.15.1 checking installable status
+146 silly cache add args [ 'archiver@^0.15.1', null ]
+147 verbose cache add spec archiver@^0.15.1
+148 silly cache add parsed spec Result {
+148 silly cache add   raw: 'archiver@^0.15.1',
+148 silly cache add   scope: null,
+148 silly cache add   escapedName: 'archiver',
+148 silly cache add   name: 'archiver',
+148 silly cache add   rawSpec: '^0.15.1',
+148 silly cache add   spec: '>=0.15.1 <0.16.0',
+148 silly cache add   type: 'range' }
+149 silly addNamed archiver@>=0.15.1 <0.16.0
+150 verbose addNamed ">=0.15.1 <0.16.0" is a valid semver range for archiver
+151 silly addNameRange { name: 'archiver', range: '>=0.15.1 <0.16.0', hasData: false }
+152 silly mapToRegistry name archiver
+153 silly mapToRegistry using default registry
+154 silly mapToRegistry registry https://registry.npmjs.org/
+155 silly mapToRegistry data Result {
+155 silly mapToRegistry   raw: 'archiver',
+155 silly mapToRegistry   scope: null,
+155 silly mapToRegistry   escapedName: 'archiver',
+155 silly mapToRegistry   name: 'archiver',
+155 silly mapToRegistry   rawSpec: '',
+155 silly mapToRegistry   spec: 'latest',
+155 silly mapToRegistry   type: 'tag' }
+156 silly mapToRegistry uri https://registry.npmjs.org/archiver
+157 verbose addNameRange registry:https://registry.npmjs.org/archiver not in flight; fetching
+158 verbose get https://registry.npmjs.org/archiver not expired, no request
+159 silly addNameRange number 2 { name: 'archiver', range: '>=0.15.1 <0.16.0', hasData: true }
+160 silly addNameRange versions [ 'archiver',
+160 silly addNameRange   [ '0.1.0',
+160 silly addNameRange     '0.1.1',
+160 silly addNameRange     '0.2.0',
+160 silly addNameRange     '0.2.1',
+160 silly addNameRange     '0.2.2',
+160 silly addNameRange     '0.3.0',
+160 silly addNameRange     '0.4.0',
+160 silly addNameRange     '0.4.1',
+160 silly addNameRange     '0.4.2',
+160 silly addNameRange     '0.4.3',
+160 silly addNameRange     '0.4.4',
+160 silly addNameRange     '0.4.5',
+160 silly addNameRange     '0.4.6',
+160 silly addNameRange     '0.4.7',
+160 silly addNameRange     '0.4.8',
+160 silly addNameRange     '0.4.9',
+160 silly addNameRange     '0.4.10',
+160 silly addNameRange     '0.5.0-alpha',
+160 silly addNameRange     '0.5.0',
+160 silly addNameRange     '0.5.1',
+160 silly addNameRange     '0.5.2',
+160 silly addNameRange     '0.6.0',
+160 silly addNameRange     '0.6.1',
+160 silly addNameRange     '0.7.0',
+160 silly addNameRange     '0.7.1',
+160 silly addNameRange     '0.8.0',
+160 silly addNameRange     '0.8.1',
+160 silly addNameRange     '0.9.0',
+160 silly addNameRange     '0.9.1',
+160 silly addNameRange     '0.10.0-alpha',
+160 silly addNameRange     '0.10.0',
+160 silly addNameRange     '0.10.1',
+160 silly addNameRange     '0.11.0-alpha',
+160 silly addNameRange     '0.11.0',
+160 silly addNameRange     '0.12.0',
+160 silly addNameRange     '0.13.0',
+160 silly addNameRange     '0.13.1',
+160 silly addNameRange     '0.14.0',
+160 silly addNameRange     '0.14.1',
+160 silly addNameRange     '0.14.2',
+160 silly addNameRange     '0.14.3',
+160 silly addNameRange     '0.14.4',
+160 silly addNameRange     '0.15.0-1',
+160 silly addNameRange     '0.15.0',
+160 silly addNameRange     '0.15.1',
+160 silly addNameRange     '0.16.0',
+160 silly addNameRange     '0.17.0',
+160 silly addNameRange     '0.18.0',
+160 silly addNameRange     '0.19.0',
+160 silly addNameRange     '0.20.0',
+160 silly addNameRange     '0.21.0',
+160 silly addNameRange     '1.0.0',
+160 silly addNameRange     '1.0.1',
+160 silly addNameRange     '1.1.0',
+160 silly addNameRange     '1.2.0',
+160 silly addNameRange     '1.3.0' ] ]
+161 silly addNamed archiver@0.15.1
+162 verbose addNamed "0.15.1" is a plain semver version for archiver
+163 silly cache afterAdd archiver@0.15.1
+164 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\archiver\0.15.1\package\package.json not in flight; writing
+165 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+166 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\archiver\0.15.1\package\package.json written
+167 http 304 https://registry.npmjs.org/async
+168 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+168 verbose headers   via: '1.1 varnish',
+168 verbose headers   'cache-control': 'max-age=300',
+168 verbose headers   etag: 'W/"58aeb2bf-1e041"',
+168 verbose headers   age: '76',
+168 verbose headers   connection: 'keep-alive',
+168 verbose headers   'x-served-by': 'cache-den6026-DEN',
+168 verbose headers   'x-cache': 'HIT',
+168 verbose headers   'x-cache-hits': '20',
+168 verbose headers   'x-timer': 'S1488223935.416533,VS0,VE0',
+168 verbose headers   vary: 'Accept-Encoding' }
+169 silly get cb [ 304,
+169 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+169 silly get     via: '1.1 varnish',
+169 silly get     'cache-control': 'max-age=300',
+169 silly get     etag: 'W/"58aeb2bf-1e041"',
+169 silly get     age: '76',
+169 silly get     connection: 'keep-alive',
+169 silly get     'x-served-by': 'cache-den6026-DEN',
+169 silly get     'x-cache': 'HIT',
+169 silly get     'x-cache-hits': '20',
+169 silly get     'x-timer': 'S1488223935.416533,VS0,VE0',
+169 silly get     vary: 'Accept-Encoding' } ]
+170 verbose etag https://registry.npmjs.org/async from cache
+171 verbose get saving async to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\async\.cache.json
+172 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+173 http 304 https://registry.npmjs.org/multiline
+174 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+174 verbose headers   via: '1.1 varnish',
+174 verbose headers   'cache-control': 'max-age=300',
+174 verbose headers   etag: 'W/"54e10ea0-459c"',
+174 verbose headers   age: '160',
+174 verbose headers   connection: 'keep-alive',
+174 verbose headers   'x-served-by': 'cache-den6024-DEN',
+174 verbose headers   'x-cache': 'HIT',
+174 verbose headers   'x-cache-hits': '19',
+174 verbose headers   'x-timer': 'S1488223935.419554,VS0,VE0',
+174 verbose headers   vary: 'Accept-Encoding' }
+175 silly get cb [ 304,
+175 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+175 silly get     via: '1.1 varnish',
+175 silly get     'cache-control': 'max-age=300',
+175 silly get     etag: 'W/"54e10ea0-459c"',
+175 silly get     age: '160',
+175 silly get     connection: 'keep-alive',
+175 silly get     'x-served-by': 'cache-den6024-DEN',
+175 silly get     'x-cache': 'HIT',
+175 silly get     'x-cache-hits': '19',
+175 silly get     'x-timer': 'S1488223935.419554,VS0,VE0',
+175 silly get     vary: 'Accept-Encoding' } ]
+176 verbose etag https://registry.npmjs.org/multiline from cache
+177 verbose get saving multiline to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\multiline\.cache.json
+178 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+179 http 304 https://registry.npmjs.org/gce-output-stream
+180 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+180 verbose headers   via: '1.1 varnish',
+180 verbose headers   'cache-control': 'max-age=300',
+180 verbose headers   etag: 'W/"58891c1b-196c"',
+180 verbose headers   age: '93',
+180 verbose headers   connection: 'keep-alive',
+180 verbose headers   'x-served-by': 'cache-den6025-DEN',
+180 verbose headers   'x-cache': 'HIT',
+180 verbose headers   'x-cache-hits': '1',
+180 verbose headers   'x-timer': 'S1488223935.419533,VS0,VE0',
+180 verbose headers   vary: 'Accept-Encoding' }
+181 silly get cb [ 304,
+181 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+181 silly get     via: '1.1 varnish',
+181 silly get     'cache-control': 'max-age=300',
+181 silly get     etag: 'W/"58891c1b-196c"',
+181 silly get     age: '93',
+181 silly get     connection: 'keep-alive',
+181 silly get     'x-served-by': 'cache-den6025-DEN',
+181 silly get     'x-cache': 'HIT',
+181 silly get     'x-cache-hits': '1',
+181 silly get     'x-timer': 'S1488223935.419533,VS0,VE0',
+181 silly get     vary: 'Accept-Encoding' } ]
+182 verbose etag https://registry.npmjs.org/gce-output-stream from cache
+183 verbose get saving gce-output-stream to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\gce-output-stream\.cache.json
+184 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+185 http 304 https://registry.npmjs.org/slug
+186 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+186 verbose headers   via: '1.1 varnish',
+186 verbose headers   'cache-control': 'max-age=300',
+186 verbose headers   etag: 'W/"58a6590c-63fd"',
+186 verbose headers   age: '289',
+186 verbose headers   connection: 'keep-alive',
+186 verbose headers   'x-served-by': 'cache-den6022-DEN',
+186 verbose headers   'x-cache': 'HIT',
+186 verbose headers   'x-cache-hits': '2',
+186 verbose headers   'x-timer': 'S1488223935.420019,VS0,VE0',
+186 verbose headers   vary: 'Accept-Encoding' }
+187 silly get cb [ 304,
+187 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+187 silly get     via: '1.1 varnish',
+187 silly get     'cache-control': 'max-age=300',
+187 silly get     etag: 'W/"58a6590c-63fd"',
+187 silly get     age: '289',
+187 silly get     connection: 'keep-alive',
+187 silly get     'x-served-by': 'cache-den6022-DEN',
+187 silly get     'x-cache': 'HIT',
+187 silly get     'x-cache-hits': '2',
+187 silly get     'x-timer': 'S1488223935.420019,VS0,VE0',
+187 silly get     vary: 'Accept-Encoding' } ]
+188 verbose etag https://registry.npmjs.org/slug from cache
+189 verbose get saving slug to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\slug\.cache.json
+190 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+191 silly resolveWithNewModule gce-output-stream@0.1.1 checking installable status
+192 silly cache add args [ 'gce-output-stream@^0.1.0', null ]
+193 verbose cache add spec gce-output-stream@^0.1.0
+194 silly cache add parsed spec Result {
+194 silly cache add   raw: 'gce-output-stream@^0.1.0',
+194 silly cache add   scope: null,
+194 silly cache add   escapedName: 'gce-output-stream',
+194 silly cache add   name: 'gce-output-stream',
+194 silly cache add   rawSpec: '^0.1.0',
+194 silly cache add   spec: '>=0.1.0 <0.2.0',
+194 silly cache add   type: 'range' }
+195 silly addNamed gce-output-stream@>=0.1.0 <0.2.0
+196 verbose addNamed ">=0.1.0 <0.2.0" is a valid semver range for gce-output-stream
+197 silly addNameRange { name: 'gce-output-stream',
+197 silly addNameRange   range: '>=0.1.0 <0.2.0',
+197 silly addNameRange   hasData: false }
+198 silly mapToRegistry name gce-output-stream
+199 silly mapToRegistry using default registry
+200 silly mapToRegistry registry https://registry.npmjs.org/
+201 silly mapToRegistry data Result {
+201 silly mapToRegistry   raw: 'gce-output-stream',
+201 silly mapToRegistry   scope: null,
+201 silly mapToRegistry   escapedName: 'gce-output-stream',
+201 silly mapToRegistry   name: 'gce-output-stream',
+201 silly mapToRegistry   rawSpec: '',
+201 silly mapToRegistry   spec: 'latest',
+201 silly mapToRegistry   type: 'tag' }
+202 silly mapToRegistry uri https://registry.npmjs.org/gce-output-stream
+203 verbose addNameRange registry:https://registry.npmjs.org/gce-output-stream not in flight; fetching
+204 verbose get https://registry.npmjs.org/gce-output-stream not expired, no request
+205 silly addNameRange number 2 { name: 'gce-output-stream',
+205 silly addNameRange   range: '>=0.1.0 <0.2.0',
+205 silly addNameRange   hasData: true }
+206 silly addNameRange versions [ 'gce-output-stream', [ '0.1.0', '0.1.1', '0.2.0' ] ]
+207 silly addNamed gce-output-stream@0.1.1
+208 verbose addNamed "0.1.1" is a plain semver version for gce-output-stream
+209 silly resolveWithNewModule async@1.5.2 checking installable status
+210 silly cache add args [ 'async@^1.4.2', null ]
+211 verbose cache add spec async@^1.4.2
+212 silly cache add parsed spec Result {
+212 silly cache add   raw: 'async@^1.4.2',
+212 silly cache add   scope: null,
+212 silly cache add   escapedName: 'async',
+212 silly cache add   name: 'async',
+212 silly cache add   rawSpec: '^1.4.2',
+212 silly cache add   spec: '>=1.4.2 <2.0.0',
+212 silly cache add   type: 'range' }
+213 silly addNamed async@>=1.4.2 <2.0.0
+214 verbose addNamed ">=1.4.2 <2.0.0" is a valid semver range for async
+215 silly addNameRange { name: 'async', range: '>=1.4.2 <2.0.0', hasData: false }
+216 silly mapToRegistry name async
+217 silly mapToRegistry using default registry
+218 silly mapToRegistry registry https://registry.npmjs.org/
+219 silly mapToRegistry data Result {
+219 silly mapToRegistry   raw: 'async',
+219 silly mapToRegistry   scope: null,
+219 silly mapToRegistry   escapedName: 'async',
+219 silly mapToRegistry   name: 'async',
+219 silly mapToRegistry   rawSpec: '',
+219 silly mapToRegistry   spec: 'latest',
+219 silly mapToRegistry   type: 'tag' }
+220 silly mapToRegistry uri https://registry.npmjs.org/async
+221 verbose addNameRange registry:https://registry.npmjs.org/async not in flight; fetching
+222 silly validateExistingRemote googlecloudplatform/gcloud-node remote.origin.url: git://github.com/googlecloudplatform/gcloud-node.git
+223 verbose validateExistingRemote googlecloudplatform/gcloud-node is updating existing cached remote C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-d4152fb1
+224 silly resolveWithNewModule slug@0.9.1 checking installable status
+225 silly cache add args [ 'slug@^0.9.1', null ]
+226 verbose cache add spec slug@^0.9.1
+227 silly cache add parsed spec Result {
+227 silly cache add   raw: 'slug@^0.9.1',
+227 silly cache add   scope: null,
+227 silly cache add   escapedName: 'slug',
+227 silly cache add   name: 'slug',
+227 silly cache add   rawSpec: '^0.9.1',
+227 silly cache add   spec: '>=0.9.1 <0.10.0',
+227 silly cache add   type: 'range' }
+228 silly addNamed slug@>=0.9.1 <0.10.0
+229 verbose addNamed ">=0.9.1 <0.10.0" is a valid semver range for slug
+230 silly addNameRange { name: 'slug', range: '>=0.9.1 <0.10.0', hasData: false }
+231 silly mapToRegistry name slug
+232 silly mapToRegistry using default registry
+233 silly mapToRegistry registry https://registry.npmjs.org/
+234 silly mapToRegistry data Result {
+234 silly mapToRegistry   raw: 'slug',
+234 silly mapToRegistry   scope: null,
+234 silly mapToRegistry   escapedName: 'slug',
+234 silly mapToRegistry   name: 'slug',
+234 silly mapToRegistry   rawSpec: '',
+234 silly mapToRegistry   spec: 'latest',
+234 silly mapToRegistry   type: 'tag' }
+235 silly mapToRegistry uri https://registry.npmjs.org/slug
+236 verbose addNameRange registry:https://registry.npmjs.org/slug not in flight; fetching
+237 silly resolveWithNewModule multiline@1.0.2 checking installable status
+238 silly cache add args [ 'multiline@^1.0.2', null ]
+239 verbose cache add spec multiline@^1.0.2
+240 silly cache add parsed spec Result {
+240 silly cache add   raw: 'multiline@^1.0.2',
+240 silly cache add   scope: null,
+240 silly cache add   escapedName: 'multiline',
+240 silly cache add   name: 'multiline',
+240 silly cache add   rawSpec: '^1.0.2',
+240 silly cache add   spec: '>=1.0.2 <2.0.0',
+240 silly cache add   type: 'range' }
+241 silly addNamed multiline@>=1.0.2 <2.0.0
+242 verbose addNamed ">=1.0.2 <2.0.0" is a valid semver range for multiline
+243 silly addNameRange { name: 'multiline', range: '>=1.0.2 <2.0.0', hasData: false }
+244 silly mapToRegistry name multiline
+245 silly mapToRegistry using default registry
+246 silly mapToRegistry registry https://registry.npmjs.org/
+247 silly mapToRegistry data Result {
+247 silly mapToRegistry   raw: 'multiline',
+247 silly mapToRegistry   scope: null,
+247 silly mapToRegistry   escapedName: 'multiline',
+247 silly mapToRegistry   name: 'multiline',
+247 silly mapToRegistry   rawSpec: '',
+247 silly mapToRegistry   spec: 'latest',
+247 silly mapToRegistry   type: 'tag' }
+248 silly mapToRegistry uri https://registry.npmjs.org/multiline
+249 verbose addNameRange registry:https://registry.npmjs.org/multiline not in flight; fetching
+250 silly cache afterAdd gce-output-stream@0.1.1
+251 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\gce-output-stream\0.1.1\package\package.json not in flight; writing
+252 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+253 verbose get https://registry.npmjs.org/async not expired, no request
+254 silly addNameRange number 2 { name: 'async', range: '>=1.4.2 <2.0.0', hasData: true }
+255 silly addNameRange versions [ 'async',
+255 silly addNameRange   [ '0.1.0',
+255 silly addNameRange     '0.1.1',
+255 silly addNameRange     '0.1.2',
+255 silly addNameRange     '0.1.3',
+255 silly addNameRange     '0.1.4',
+255 silly addNameRange     '0.1.5',
+255 silly addNameRange     '0.1.6',
+255 silly addNameRange     '0.1.7',
+255 silly addNameRange     '0.1.8',
+255 silly addNameRange     '0.1.9',
+255 silly addNameRange     '0.1.10',
+255 silly addNameRange     '0.1.11',
+255 silly addNameRange     '0.1.12',
+255 silly addNameRange     '0.1.13',
+255 silly addNameRange     '0.1.14',
+255 silly addNameRange     '0.1.15',
+255 silly addNameRange     '0.1.16',
+255 silly addNameRange     '0.1.17',
+255 silly addNameRange     '0.1.18',
+255 silly addNameRange     '0.1.19',
+255 silly addNameRange     '0.1.20',
+255 silly addNameRange     '0.1.21',
+255 silly addNameRange     '0.1.22',
+255 silly addNameRange     '0.2.0',
+255 silly addNameRange     '0.2.1',
+255 silly addNameRange     '0.2.2',
+255 silly addNameRange     '0.2.3',
+255 silly addNameRange     '0.2.4',
+255 silly addNameRange     '0.2.5',
+255 silly addNameRange     '0.2.6',
+255 silly addNameRange     '0.2.7',
+255 silly addNameRange     '0.2.8',
+255 silly addNameRange     '0.2.9',
+255 silly addNameRange     '0.2.10',
+255 silly addNameRange     '0.3.0',
+255 silly addNameRange     '0.4.0',
+255 silly addNameRange     '0.4.1',
+255 silly addNameRange     '0.5.0',
+255 silly addNameRange     '0.6.0',
+255 silly addNameRange     '0.6.1',
+255 silly addNameRange     '0.6.2',
+255 silly addNameRange     '0.7.0',
+255 silly addNameRange     '0.8.0',
+255 silly addNameRange     '0.9.0',
+255 silly addNameRange     '0.9.2',
+255 silly addNameRange     '1.0.0',
+255 silly addNameRange     '1.1.0',
+255 silly addNameRange     '1.2.0',
+255 silly addNameRange     '1.1.1',
+255 silly addNameRange     '1.2.1',
+255 silly addNameRange     '1.3.0',
+255 silly addNameRange     '1.4.0',
+255 silly addNameRange     '1.4.1',
+255 silly addNameRange     '1.4.2',
+255 silly addNameRange     '1.5.0',
+255 silly addNameRange     '1.5.1',
+255 silly addNameRange     '1.5.2',
+255 silly addNameRange     '2.0.0-alpha.0',
+255 silly addNameRange     '2.0.0-rc.1',
+255 silly addNameRange     '2.0.0-rc.2',
+255 silly addNameRange     '2.0.0-rc.3',
+255 silly addNameRange     '2.0.0-rc.4',
+255 silly addNameRange     '2.0.0-rc.5',
+255 silly addNameRange     '2.0.0-rc.6',
+255 silly addNameRange     '2.0.0',
+255 silly addNameRange     '2.0.1',
+255 silly addNameRange     '2.1.0',
+255 silly addNameRange     '2.1.1',
+255 silly addNameRange     '2.1.2',
+255 silly addNameRange     '2.1.4',
+255 silly addNameRange     '2.1.5' ] ]
+256 silly addNamed async@1.5.2
+257 verbose addNamed "1.5.2" is a plain semver version for async
+258 verbose get https://registry.npmjs.org/slug not expired, no request
+259 silly addNameRange number 2 { name: 'slug', range: '>=0.9.1 <0.10.0', hasData: true }
+260 silly addNameRange versions [ 'slug',
+260 silly addNameRange   [ '0.1.0',
+260 silly addNameRange     '0.1.1',
+260 silly addNameRange     '0.2.0',
+260 silly addNameRange     '0.2.1',
+260 silly addNameRange     '0.2.2',
+260 silly addNameRange     '0.3.0',
+260 silly addNameRange     '0.3.1',
+260 silly addNameRange     '0.3.2',
+260 silly addNameRange     '0.3.3',
+260 silly addNameRange     '0.3.4',
+260 silly addNameRange     '0.4.0',
+260 silly addNameRange     '0.4.1',
+260 silly addNameRange     '0.4.2',
+260 silly addNameRange     '0.5.0',
+260 silly addNameRange     '0.6.0',
+260 silly addNameRange     '0.7.0',
+260 silly addNameRange     '0.7.1',
+260 silly addNameRange     '0.8.0',
+260 silly addNameRange     '0.9.0',
+260 silly addNameRange     '0.9.1' ] ]
+261 silly addNamed slug@0.9.1
+262 verbose addNamed "0.9.1" is a plain semver version for slug
+263 verbose get https://registry.npmjs.org/multiline not expired, no request
+264 silly addNameRange number 2 { name: 'multiline', range: '>=1.0.2 <2.0.0', hasData: true }
+265 silly addNameRange versions [ 'multiline',
+265 silly addNameRange   [ '0.1.0',
+265 silly addNameRange     '0.2.0',
+265 silly addNameRange     '0.3.0',
+265 silly addNameRange     '0.3.1',
+265 silly addNameRange     '0.3.2',
+265 silly addNameRange     '0.3.3',
+265 silly addNameRange     '0.3.4',
+265 silly addNameRange     '1.0.0',
+265 silly addNameRange     '1.0.1',
+265 silly addNameRange     '1.0.2' ] ]
+266 silly addNamed multiline@1.0.2
+267 verbose addNamed "1.0.2" is a plain semver version for multiline
+268 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\gce-output-stream\0.1.1\package\package.json written
+269 silly cache afterAdd async@1.5.2
+270 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\async\1.5.2\package\package.json not in flight; writing
+271 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+272 silly cache afterAdd slug@0.9.1
+273 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\slug\0.9.1\package\package.json not in flight; writing
+274 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+275 silly cache afterAdd multiline@1.0.2
+276 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\multiline\1.0.2\package\package.json not in flight; writing
+277 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+278 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\async\1.5.2\package\package.json written
+279 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\multiline\1.0.2\package\package.json written
+280 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\slug\0.9.1\package\package.json written
+281 http 304 https://registry.npmjs.org/deep-assign
+282 verbose headers { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+282 verbose headers   via: '1.1 varnish',
+282 verbose headers   'cache-control': 'max-age=300',
+282 verbose headers   etag: 'W/"57fda796-10af"',
+282 verbose headers   age: '0',
+282 verbose headers   connection: 'keep-alive',
+282 verbose headers   'x-served-by': 'cache-den6021-DEN',
+282 verbose headers   'x-cache': 'HIT',
+282 verbose headers   'x-cache-hits': '1',
+282 verbose headers   'x-timer': 'S1488223935.420411,VS0,VE52',
+282 verbose headers   vary: 'Accept-Encoding' }
+283 silly get cb [ 304,
+283 silly get   { date: 'Mon, 27 Feb 2017 19:32:15 GMT',
+283 silly get     via: '1.1 varnish',
+283 silly get     'cache-control': 'max-age=300',
+283 silly get     etag: 'W/"57fda796-10af"',
+283 silly get     age: '0',
+283 silly get     connection: 'keep-alive',
+283 silly get     'x-served-by': 'cache-den6021-DEN',
+283 silly get     'x-cache': 'HIT',
+283 silly get     'x-cache-hits': '1',
+283 silly get     'x-timer': 'S1488223935.420411,VS0,VE52',
+283 silly get     vary: 'Accept-Encoding' } ]
+284 verbose etag https://registry.npmjs.org/deep-assign from cache
+285 verbose get saving deep-assign to C:\Users\Maria Powell\AppData\Roaming\npm-cache\registry.npmjs.org\deep-assign\.cache.json
+286 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+287 info git [ 'fetch', '-a', 'origin' ]
+288 silly resolveWithNewModule deep-assign@1.0.0 checking installable status
+289 silly cache add args [ 'deep-assign@^1.0.0', null ]
+290 verbose cache add spec deep-assign@^1.0.0
+291 silly cache add parsed spec Result {
+291 silly cache add   raw: 'deep-assign@^1.0.0',
+291 silly cache add   scope: null,
+291 silly cache add   escapedName: 'deep-assign',
+291 silly cache add   name: 'deep-assign',
+291 silly cache add   rawSpec: '^1.0.0',
+291 silly cache add   spec: '>=1.0.0 <2.0.0',
+291 silly cache add   type: 'range' }
+292 silly addNamed deep-assign@>=1.0.0 <2.0.0
+293 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for deep-assign
+294 silly addNameRange { name: 'deep-assign', range: '>=1.0.0 <2.0.0', hasData: false }
+295 silly mapToRegistry name deep-assign
+296 silly mapToRegistry using default registry
+297 silly mapToRegistry registry https://registry.npmjs.org/
+298 silly mapToRegistry data Result {
+298 silly mapToRegistry   raw: 'deep-assign',
+298 silly mapToRegistry   scope: null,
+298 silly mapToRegistry   escapedName: 'deep-assign',
+298 silly mapToRegistry   name: 'deep-assign',
+298 silly mapToRegistry   rawSpec: '',
+298 silly mapToRegistry   spec: 'latest',
+298 silly mapToRegistry   type: 'tag' }
+299 silly mapToRegistry uri https://registry.npmjs.org/deep-assign
+300 verbose addNameRange registry:https://registry.npmjs.org/deep-assign not in flight; fetching
+301 verbose get https://registry.npmjs.org/deep-assign not expired, no request
+302 silly addNameRange number 2 { name: 'deep-assign', range: '>=1.0.0 <2.0.0', hasData: true }
+303 silly addNameRange versions [ 'deep-assign', [ '1.0.0', '2.0.0' ] ]
+304 silly addNamed deep-assign@1.0.0
+305 verbose addNamed "1.0.0" is a plain semver version for deep-assign
+306 silly cache afterAdd deep-assign@1.0.0
+307 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\deep-assign\1.0.0\package\package.json not in flight; writing
+308 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache correctMkdir not in flight; initializing
+309 verbose afterAdd C:\Users\Maria Powell\AppData\Roaming\npm-cache\deep-assign\1.0.0\package\package.json written
+310 verbose updateRemote git fetch -a origin (git://github.com/googlecloudplatform/gcloud-node.git)
+311 verbose setPermissions googlecloudplatform/gcloud-node skipping chownr on Windows
+312 verbose resolveHead googlecloudplatform/gcloud-node original treeish: master
+313 info git [ 'rev-list', '-n1', 'master' ]
+314 silly resolveHead googlecloudplatform/gcloud-node resolved treeish: fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+315 verbose resolveHead googlecloudplatform/gcloud-node resolved Git URL: git://github.com/googlecloudplatform/gcloud-node.git#fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+316 silly resolveHead Git working directory: C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-e7a746a9\fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+317 info git [ 'clone',
+317 info git   'C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-googlecloudplatform-gcloud-node-git-d4152fb1',
+317 info git   'C:\\Users\\MARIAP~1\\AppData\\Local\\Temp\\npm-8900-f7ff9543\\git-cache-e7a746a9\\fa9aabedb25bf5e2106f805c8dad785ba8b7d020' ]
+318 verbose cloneResolved googlecloudplatform/gcloud-node clone Cloning into 'C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-e7a746a9\fa9aabedb25bf5e2106f805c8dad785ba8b7d020'...
+318 verbose cloneResolved done.
+318 verbose cloneResolved Checking out files:  38% (125/327)   Checking out files:  39% (128/327)   Checking out files:  40% (131/327)   Checking out files:  41% (135/327)   Checking out files:  42% (138/327)   Checking out files:  43% (141/327)   Checking out files:  44% (144/327)   Checking out files:  45% (148/327)   Checking out files:  46% (151/327)   Checking out files:  47% (154/327)   Checking out files:  48% (157/327)   Checking out files:  49% (161/327)   Checking out files:  50% (164/327)   Checking out files:  51% (167/327)   Checking out files:  52% (171/327)   Checking out files:  53% (174/327)   Checking out files:  54% (177/327)   Checking out files:  55% (180/327)   Checking out files:  56% (184/327)   Checking out files:  57% (187/327)   Checking out files:  58% (190/327)   Checking out files:  59% (193/327)   Checking out files:  60% (197/327)   Checking out files:  61% (200/327)   Checking out files:  62% (203/327)   Checking out files:  63% (207/327)   Checking out files:  64% (210/327)   Checking out files:  65% (213/327)   Checking out files:  66% (216/327)   Checking out files:  67% (220/327)   Checking out files:  68% (223/327)   Checking out files:  69% (226/327)   Checking out files:  70% (229/327)   Checking out files:  71% (233/327)   Checking out files:  72% (236/327)   Checking out files:  73% (239/327)   Checking out files:  74% (242/327)   Checking out files:  75% (246/327)   Checking out files:  76% (249/327)   Checking out files:  77% (252/327)   Checking out files:  78% (256/327)   Checking out files:  79% (259/327)   Checking out files:  80% (262/327)   Checking out files:  81% (265/327)   Checking out files:  82% (269/327)   Checking out files:  82% (271/327)   Checking out files:  83% (272/327)   Checking out files:  84% (275/327)   Checking out files:  85% (278/327)   Checking out files:  86% (282/327)   Checking out files:  87% (285/327)   Checking out files:  88% (288/327)   Checking out files:  89% (292/327)   Checking out files:  90% (295/327)   Checking out files:  91% (298/327)   Checking out files:  92% (301/327)   Checking out files:  93% (305/327)   Checking out files:  94% (308/327)   Checking out files:  95% (311/327)   Checking out files:  96% (314/327)   Checking out files:  97% (318/327)   Checking out files:  98% (321/327)   Checking out files:  99% (324/327)   Checking out files: 100% (327/327)   Checking out files: 100% (327/327), done.
+319 info git [ 'checkout', 'fa9aabedb25bf5e2106f805c8dad785ba8b7d020' ]
+320 verbose checkoutTreeish googlecloudplatform/gcloud-node checkout Note: checking out 'fa9aabedb25bf5e2106f805c8dad785ba8b7d020'.
+320 verbose checkoutTreeish
+320 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+320 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+320 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+320 verbose checkoutTreeish
+320 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+320 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+320 verbose checkoutTreeish
+320 verbose checkoutTreeish   git checkout -b <new-branch-name>
+320 verbose checkoutTreeish
+320 verbose checkoutTreeish HEAD is now at fa9aabe... Fix race condition in ServiceObject.prototype.get (#2030)
+321 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+322 verbose updateSubmodules googlecloudplatform/gcloud-node submodule update
+323 error addLocal Could not install C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-e7a746a9\fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+324 silly tryHTTPS attempting to clone git+https://github.com/googlecloudplatform/gcloud-node.git
+325 silly tryClone cloning googlecloudplatform/gcloud-node via git+https://github.com/googlecloudplatform/gcloud-node.git
+326 verbose tryClone git-https-github-com-googlecloudplatform-gcloud-node-git-fa7e6fe8 not in flight; caching
+327 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes correctMkdir not in flight; initializing
+328 info git [ 'config', '--get', 'remote.origin.url' ]
+329 silly validateExistingRemote googlecloudplatform/gcloud-node remote.origin.url: https://github.com/googlecloudplatform/gcloud-node.git
+330 verbose validateExistingRemote googlecloudplatform/gcloud-node is updating existing cached remote C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-https-github-com-googlecloudplatform-gcloud-node-git-fa7e6fe8
+331 info git [ 'fetch', '-a', 'origin' ]
+332 verbose updateRemote git fetch -a origin (https://github.com/googlecloudplatform/gcloud-node.git)
+333 verbose setPermissions googlecloudplatform/gcloud-node skipping chownr on Windows
+334 verbose resolveHead googlecloudplatform/gcloud-node original treeish: master
+335 info git [ 'rev-list', '-n1', 'master' ]
+336 silly resolveHead googlecloudplatform/gcloud-node resolved treeish: fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+337 verbose resolveHead googlecloudplatform/gcloud-node resolved Git URL: git+https://github.com/googlecloudplatform/gcloud-node.git#fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+338 silly resolveHead Git working directory: C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-89eeb7fd\fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+339 info git [ 'clone',
+339 info git   'C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-https-github-com-googlecloudplatform-gcloud-node-git-fa7e6fe8',
+339 info git   'C:\\Users\\MARIAP~1\\AppData\\Local\\Temp\\npm-8900-f7ff9543\\git-cache-89eeb7fd\\fa9aabedb25bf5e2106f805c8dad785ba8b7d020' ]
+340 verbose cloneResolved googlecloudplatform/gcloud-node clone Cloning into 'C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-89eeb7fd\fa9aabedb25bf5e2106f805c8dad785ba8b7d020'...
+340 verbose cloneResolved done.
+340 verbose cloneResolved Checking out files:  40% (133/327)   Checking out files:  41% (135/327)   Checking out files:  42% (138/327)   Checking out files:  43% (141/327)   Checking out files:  44% (144/327)   Checking out files:  45% (148/327)   Checking out files:  46% (151/327)   Checking out files:  47% (154/327)   Checking out files:  48% (157/327)   Checking out files:  49% (161/327)   Checking out files:  50% (164/327)   Checking out files:  51% (167/327)   Checking out files:  52% (171/327)   Checking out files:  53% (174/327)   Checking out files:  54% (177/327)   Checking out files:  55% (180/327)   Checking out files:  56% (184/327)   Checking out files:  57% (187/327)   Checking out files:  58% (190/327)   Checking out files:  59% (193/327)   Checking out files:  60% (197/327)   Checking out files:  61% (200/327)   Checking out files:  62% (203/327)   Checking out files:  63% (207/327)   Checking out files:  64% (210/327)   Checking out files:  65% (213/327)   Checking out files:  66% (216/327)   Checking out files:  67% (220/327)   Checking out files:  68% (223/327)   Checking out files:  69% (226/327)   Checking out files:  70% (229/327)   Checking out files:  71% (233/327)   Checking out files:  72% (236/327)   Checking out files:  73% (239/327)   Checking out files:  74% (242/327)   Checking out files:  75% (246/327)   Checking out files:  76% (249/327)   Checking out files:  77% (252/327)   Checking out files:  78% (256/327)   Checking out files:  79% (259/327)   Checking out files:  80% (262/327)   Checking out files:  81% (265/327)   Checking out files:  82% (269/327)   Checking out files:  83% (272/327)   Checking out files:  84% (275/327)   Checking out files:  85% (278/327)   Checking out files:  86% (282/327)   Checking out files:  87% (285/327)   Checking out files:  88% (288/327)   Checking out files:  89% (292/327)   Checking out files:  90% (295/327)   Checking out files:  91% (298/327)   Checking out files:  92% (301/327)   Checking out files:  93% (305/327)   Checking out files:  94% (308/327)   Checking out files:  95% (311/327)   Checking out files:  96% (314/327)   Checking out files:  97% (318/327)   Checking out files:  98% (321/327)   Checking out files:  99% (324/327)   Checking out files: 100% (327/327)   Checking out files: 100% (327/327), done.
+341 info git [ 'checkout', 'fa9aabedb25bf5e2106f805c8dad785ba8b7d020' ]
+342 verbose checkoutTreeish googlecloudplatform/gcloud-node checkout Note: checking out 'fa9aabedb25bf5e2106f805c8dad785ba8b7d020'.
+342 verbose checkoutTreeish
+342 verbose checkoutTreeish You are in 'detached HEAD' state. You can look around, make experimental
+342 verbose checkoutTreeish changes and commit them, and you can discard any commits you make in this
+342 verbose checkoutTreeish state without impacting any branches by performing another checkout.
+342 verbose checkoutTreeish
+342 verbose checkoutTreeish If you want to create a new branch to retain commits you create, you may
+342 verbose checkoutTreeish do so (now or later) by using -b with the checkout command again. Example:
+342 verbose checkoutTreeish
+342 verbose checkoutTreeish   git checkout -b <new-branch-name>
+342 verbose checkoutTreeish
+342 verbose checkoutTreeish HEAD is now at fa9aabe... Fix race condition in ServiceObject.prototype.get (#2030)
+343 info git [ 'submodule', '-q', 'update', '--init', '--recursive' ]
+344 verbose updateSubmodules googlecloudplatform/gcloud-node submodule update
+345 error addLocal Could not install C:\Users\MARIAP~1\AppData\Local\Temp\npm-8900-f7ff9543\git-cache-89eeb7fd\fa9aabedb25bf5e2106f805c8dad785ba8b7d020
+346 silly trySSH attempting to clone git@github.com:googlecloudplatform/gcloud-node.git
+347 silly tryClone cloning googlecloudplatform/gcloud-node via git@github.com:googlecloudplatform/gcloud-node.git
+348 verbose tryClone git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14 not in flight; caching
+349 verbose correctMkdir C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes correctMkdir not in flight; initializing
+350 info git [ 'config', '--get', 'remote.origin.url' ]
+351 warn addRemoteGit Error: Command failed: git -c core.longpaths=true config --get remote.origin.url
+351 warn addRemoteGit
+351 warn addRemoteGit     at ChildProcess.exithandler (child_process.js:202:12)
+351 warn addRemoteGit     at emitTwo (events.js:106:13)
+351 warn addRemoteGit     at ChildProcess.emit (events.js:191:7)
+351 warn addRemoteGit     at maybeClose (internal/child_process.js:852:16)
+351 warn addRemoteGit     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+351 warn addRemoteGit  googlecloudplatform/gcloud-node resetting remote C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14 because of error: { Error: Command failed: git -c core.longpaths=true config --get remote.origin.url
+351 warn addRemoteGit
+351 warn addRemoteGit     at ChildProcess.exithandler (child_process.js:202:12)
+351 warn addRemoteGit     at emitTwo (events.js:106:13)
+351 warn addRemoteGit     at ChildProcess.emit (events.js:191:7)
+351 warn addRemoteGit     at maybeClose (internal/child_process.js:852:16)
+351 warn addRemoteGit     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+351 warn addRemoteGit   killed: false,
+351 warn addRemoteGit   code: 1,
+351 warn addRemoteGit   signal: null,
+351 warn addRemoteGit   cmd: 'git -c core.longpaths=true config --get remote.origin.url' }
+352 info resetRemote resetting C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14 for googlecloudplatform/gcloud-node
+353 silly gentlyRm C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14 is being purged
+354 verbose gentlyRm don't care about contents; nuking C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+355 silly vacuum-fs purging C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+356 silly vacuum-fs quitting because other entries in C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes
+357 info git [ 'clone',
+357 info git   '--template=C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates',
+357 info git   '--mirror',
+357 info git   'git@github.com:googlecloudplatform/gcloud-node.git',
+357 info git   'C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14' ]
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14: Cloning into bare repository 'C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14'...
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14: Host key verification failed.
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14: fatal: Could not read from remote repository.
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14:
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14: Please make sure you have the correct access rights
+358 error git clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14: and the repository exists.
+359 silly fetchPackageMetaData Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+359 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14'...
+359 silly fetchPackageMetaData Host key verification failed.
+359 silly fetchPackageMetaData fatal: Could not read from remote repository.
+359 silly fetchPackageMetaData
+359 silly fetchPackageMetaData Please make sure you have the correct access rights
+359 silly fetchPackageMetaData and the repository exists.
+359 silly fetchPackageMetaData
+359 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:202:12)
+359 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+359 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+359 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:852:16)
+359 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+359 silly fetchPackageMetaData  error for gcloud@github:googlecloudplatform/gcloud-node { Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+359 silly fetchPackageMetaData Cloning into bare repository 'C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14'...
+359 silly fetchPackageMetaData Host key verification failed.
+359 silly fetchPackageMetaData fatal: Could not read from remote repository.
+359 silly fetchPackageMetaData
+359 silly fetchPackageMetaData Please make sure you have the correct access rights
+359 silly fetchPackageMetaData and the repository exists.
+359 silly fetchPackageMetaData
+359 silly fetchPackageMetaData     at ChildProcess.exithandler (child_process.js:202:12)
+359 silly fetchPackageMetaData     at emitTwo (events.js:106:13)
+359 silly fetchPackageMetaData     at ChildProcess.emit (events.js:191:7)
+359 silly fetchPackageMetaData     at maybeClose (internal/child_process.js:852:16)
+359 silly fetchPackageMetaData     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+359 silly fetchPackageMetaData   killed: false,
+359 silly fetchPackageMetaData   code: 128,
+359 silly fetchPackageMetaData   signal: null,
+359 silly fetchPackageMetaData   cmd: 'git -c core.longpaths=true clone --template=C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\\Users\\Maria Powell\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14' }
+360 silly rollbackFailedOptional Starting
+361 silly rollbackFailedOptional Finishing
+362 silly runTopLevelLifecycles Starting
+363 silly runTopLevelLifecycles Finishing
+364 silly install printInstalled
+365 verbose stack Error: Command failed: git -c core.longpaths=true clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+365 verbose stack Cloning into bare repository 'C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14'...
+365 verbose stack Host key verification failed.
+365 verbose stack fatal: Could not read from remote repository.
+365 verbose stack
+365 verbose stack Please make sure you have the correct access rights
+365 verbose stack and the repository exists.
+365 verbose stack
+365 verbose stack     at ChildProcess.exithandler (child_process.js:202:12)
+365 verbose stack     at emitTwo (events.js:106:13)
+365 verbose stack     at ChildProcess.emit (events.js:191:7)
+365 verbose stack     at maybeClose (internal/child_process.js:852:16)
+365 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+366 verbose cwd C:\Users\Maria Powell\Code\reic
+367 error Windows_NT 10.0.14393
+368 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "gcloud-deploy"
+369 error node v6.3.1
+370 error npm  v3.10.3
+371 error code 128
+372 error Command failed: git -c core.longpaths=true clone --template=C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\_templates --mirror git@github.com:googlecloudplatform/gcloud-node.git C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14
+372 error Cloning into bare repository 'C:\Users\Maria Powell\AppData\Roaming\npm-cache\_git-remotes\git-github-com-googlecloudplatform-gcloud-node-git-aaac9b14'...
+372 error Host key verification failed.
+372 error fatal: Could not read from remote repository.
+372 error
+372 error Please make sure you have the correct access rights
+372 error and the repository exists.
+373 error If you need help, you may report this error at:
+373 error     <https://github.com/npm/npm/issues>
+374 verbose exit [ 1, true ]

@@ -10,6 +10,7 @@ from google.appengine.api import users
 
 class Admin(webapp2.RequestHandler):
     def get(self):
+        self.response.headers.add_header('Access-Control-Allow-Origin', '*')
         user = users.get_current_user()
         raw_data = {}
         

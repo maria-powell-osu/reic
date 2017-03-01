@@ -7,6 +7,7 @@ from google.appengine.api import urlfetch
 
 class Comment(webapp2.RequestHandler):
 	def post(self):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 
 		#Check request format

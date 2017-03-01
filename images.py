@@ -14,6 +14,7 @@ from google.appengine.ext import blobstore
 
 class Image(webapp2.RequestHandler):
 	def post(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		#Returns list of  images with in form Note: had to use getall that returns a list for it to work with multiform data type form
 		image = self.request.POST.getall('image')
 
@@ -35,6 +36,7 @@ class Image(webapp2.RequestHandler):
 		return
 
 	def get(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		bucketContents = gcs.listbucket('/realestatecalculator-1256.appspot.com')
 		result = []
 		for img in bucketContents:
@@ -48,6 +50,7 @@ class Image(webapp2.RequestHandler):
 		self.response.write(json.dumps(result))
 
 	def delete(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 
 		#Validation check that filename was sent

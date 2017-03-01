@@ -29,6 +29,7 @@ class Sitemap(webapp2.RequestHandler):
 	template_variables = {}
 
 	def get(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		template = JINJA_ENVIRONMENT.get_template('sitemap.xml')
 		self.response.write(template.render())
 
@@ -37,6 +38,7 @@ class Robot(webapp2.RequestHandler):
 	template_variables = {}
 
 	def get(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		template = JINJA_ENVIRONMENT.get_template('robots.txt')
 		self.response.write(template.render())
 

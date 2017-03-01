@@ -10,6 +10,7 @@ class Blog(webapp2.RequestHandler):
 	
 
 	def get(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 
 		#Check request format
@@ -82,6 +83,7 @@ class Blog(webapp2.RequestHandler):
 		return
 
 	def put(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 
 		#Check request format
@@ -232,6 +234,7 @@ class Blog(webapp2.RequestHandler):
 		return
 
 	def post(self):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 		#Check request format
 		if 'application/json' not in self.request.accept:
@@ -320,6 +323,7 @@ class Blog(webapp2.RequestHandler):
 		return
 		
 	def delete(self, **kwargs):
+		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 		#Check request format
 		if 'application/json' not in self.request.accept:
