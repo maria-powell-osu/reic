@@ -13,74 +13,97 @@ class Blog(webapp2.RequestHandler):
 		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
 		errorObject = {}
 
-		#Check request format
-		if 'application/json' not in self.request.accept:
-			#Setup proper response code
-			self.response.set_status(406)
+		#if no name provided, get all blogs, else get specific blog
+		if not ('name' in kwargs) or not isinstance(kwargs['name'], (basestring)):
 
-			#Setup error details
-			errorObject['code'] = 406
-			errorObject['message'] = "Data format does not match required type"
+			#Check request format
+			if 'application/json' not in self.request.accept:
+				#Setup proper response code
+				self.response.set_status(406)
 
-			#return details
-			self.response.write(json.dumps(errorObject))
+				#Setup error details
+				errorObject['code'] = 406
+				errorObject['message'] = "Data format does not match required type"
+
+				#return details
+				self.response.write(json.dumps(errorObject))
+				return
+
+			#Get all blogs from DB
+			blogs = db_defs.Blog.query().fetch()
+			listOfBlogObjects = []
+
+			#create response Object containing all blogs and corresponding paragraphs
+			for i, blog in enumerate(blogs):
+
+				#add current blog to list
+				listOfBlogObjects.append(blog.to_dict())
+
+				img = images.Image(blog.image)
+
+				#get comments associated with blog
+				comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).fetch()
+
+				#if the blog has comments, convert to dictionary to make it json serializable
+				commentDictionary = []
+				if comments:
+					for comment in comments:
+						
+						#convert to dictionary
+						com = comment.to_dict()
+
+						#add new field to allow for list of comments of comments
+						com['responses'] = []
+
+						#append to result list
+						commentDictionary.append(com)
+
+
+				#Order the comments based on level (e.g. comment of a comment)
+				listOfComments = []
+				if commentDictionary:
+					for comment in commentDictionary:
+						
+						#if the comment contains this field, it is a comment to a comment
+						if comment['respondsTo']:
+							#finds the original comment
+							for comm in commentDictionary:
+								if comm['key'] == comment['respondsTo']:
+									#add the comment to the original comment
+									comm['responses'].append(comment)
+
+						#if it is not a comment of a comment, then add this original comment to the list
+						else:
+							listOfComments.append(comment)
+						
+
+				#add comments to the blog object
+				listOfBlogObjects[i]['comments'] = listOfComments
+
+			#Return reponse with proper code
+			self.response.set_status(200)
+			self.response.write(json.dumps(listOfBlogObjects))
 			return
+		else:
 
-		#Get all blogs from DB
-		blogs = db_defs.Blog.query().fetch()
-		listOfBlogObjects = []
+			#Get the blog
+			blog = db_defs.Blog.query(db_defs.Blog.url == kwargs['name']).get()
+		
+			#Validation check for blogKey
+			if not blog or blog == None:
+				#Setup proper response code
+				self.response.set_status(404)
 
-		#create response Object containing all blogs and corresponding paragraphs
-		for i, blog in enumerate(blogs):
-
-			#add current blog to list
-			listOfBlogObjects.append(blog.to_dict())
-
-			img = images.Image(blog.image)
-
-			#get comments associated with blog
-			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).fetch()
-
-			#if the blog has comments, convert to dictionary to make it json serializable
-			commentDictionary = []
-			if comments:
-				for comment in comments:
-					
-					#convert to dictionary
-					com = comment.to_dict()
-
-					#add new field to allow for list of comments of comments
-					com['responses'] = []
-
-					#append to result list
-					commentDictionary.append(com)
+				#Setup error details
+				errorObject['code'] = 404
+				errorObject['message'] = "Blog record could not be found."
+				#return details
+				self.response.write(json.dumps(errorObject))
+				return
 
 
-			#Order the comments based on level (e.g. comment of a comment)
-			listOfComments = []
-			if commentDictionary:
-				for comment in commentDictionary:
-					
-					#if the comment contains this field, it is a comment to a comment
-					if comment['respondsTo']:
-						#finds the original comment
-						for comm in commentDictionary:
-							if comm['key'] == comment['respondsTo']:
-								#add the comment to the original comment
-								comm['responses'].append(comment)
-
-					#if it is not a comment of a comment, then add this original comment to the list
-					else:
-						listOfComments.append(comment)
-					
-
-			#add comments to the blog object
-			listOfBlogObjects[i]['comments'] = listOfComments
-
-		#Return reponse with proper code
-		self.response.set_status(200)
-		self.response.write(json.dumps(listOfBlogObjects))
-		return
+			self.response.write(blog)
+			return 
 
 	def put(self, **kwargs):
 		self.response.headers.add_header('Access-Control-Allow-Origin', '*')
