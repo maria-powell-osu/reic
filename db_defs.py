@@ -7,6 +7,7 @@ class Blog(ndb.Model):
 	date = ndb.StringProperty(required=True)
 	metaTag = ndb.StringProperty(required=False)
 	titleTag = ndb.StringProperty(required=False)
+	url = ndb.StringProperty(required=True) #needs to be true after test period
 	#this is a text property because it is not limited for 1500 like StringProperty is
 	content = ndb.TextProperty(required=True) 
 	def to_dict(self):

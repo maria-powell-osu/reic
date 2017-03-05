@@ -103,6 +103,7 @@ class Blog(webapp2.RequestHandler):
 		jsonData = json.loads(self.request.body)
 		key = jsonData['key'] if ('key' in jsonData) else None
 		title = jsonData['title'] if ('title' in jsonData) else None
+		url = jsonData['url'] if ('url' in jsonData) else None
 		titleTag = jsonData['titleTag'] if ('titleTag' in jsonData) else None
 		metaTag = jsonData['metaTag'] if ('metaTag' in jsonData) else None
 		author = jsonData['author'] if ('author' in jsonData ) else None
@@ -131,6 +132,19 @@ class Blog(webapp2.RequestHandler):
 			#Setup error details
 			errorObject['code'] = 400
 			errorObject['message'] = "Title attribute is missing or in unacceptable format"
+
+			#return details
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Title Validation
+		if url == "" or url is None or not isinstance(url, (basestring)):
+			#Setup proper response code
+			self.response.set_status(400)
+
+			#Setup error details
+			errorObject['code'] = 400
+			errorObject['message'] = "Url attribute is missing or in unacceptable format"
 
 			#return details
 			self.response.write(json.dumps(errorObject))
@@ -219,6 +233,7 @@ class Blog(webapp2.RequestHandler):
 			return
 
 		Blog.title = title
+		Blog.url = url
 		Blog.author = author
 		Blog.date = date
 		Blog.image = img
@@ -253,6 +268,7 @@ class Blog(webapp2.RequestHandler):
 		#Get data sent with request or set it to None
 		jsonData = json.loads(self.request.body)
 		title = jsonData['title'] if ('title' in jsonData) else None
+		url = jsonData['url'] if ('url' in jsonData) else None
 		author = jsonData['author'] if ('author' in jsonData ) else None
 		date = jsonData['date'] if ('date' in jsonData) else None
 		img = str(jsonData['image']) if ('image' in jsonData) else None
@@ -261,6 +277,14 @@ class Blog(webapp2.RequestHandler):
 
 		#Blog Title Validation
 		if title == None or title == "" or not isinstance(title, (basestring)): 
+			self.response.set_status(400)
+			errorObject['code'] = 400
+			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
+			self.response.write(json.dumps(errorObject))
+			return
+
+		#Blog url Validation
+		if url == None or url == "" or not isinstance(url, (basestring)): 
 			self.response.set_status(400)
 			errorObject['code'] = 400
 			errorObject['message'] = "BAD REQUEST: Required parameter is missing."
@@ -309,6 +333,7 @@ class Blog(webapp2.RequestHandler):
 		#Write Blog data to datastore					
 		Blog = db_defs.Blog()
 		Blog.title = title
+		Blog.url = url
 		Blog.author = author
 		Blog.date = date
 		Blog.image = img

@@ -120,11 +120,10 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
             vm.errorMessage = "Title Image is missing.";
             return;
         }
-        //add order indices for paragraphs
-/*        for(i = 0; i < vm.input.paragraphs.length; i++){
-            vm.input.paragraphs[i].index = i;
-        }*/
         
+        //set the blog url field from title field
+        vm.input.url = vm.input.title.split(' ').join('-').toLowerCase();
+
         var jsonData = JSON.stringify(vm.input);
         
         Blog.editBlog(jsonData)
@@ -150,6 +149,7 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
         });
     };
 
+
     //Post New Blog
     vm.postBlog = function (){
          vm.errorMessage = "";
@@ -157,6 +157,9 @@ App.controller("AdminController", function($scope, Blog, Admin, Image) {
             vm.errorMessage = "Title Image is missing.";
             return;
         }
+
+        //set the blog url field from title field
+        vm.input.url = vm.input.title.split(' ').join('-').toLowerCase();
 
         var jsonData = JSON.stringify(vm.input);
         
