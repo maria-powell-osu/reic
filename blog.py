@@ -101,8 +101,48 @@ class Blog(webapp2.RequestHandler):
 				self.response.write(json.dumps(errorObject))
 				return
 
+			#get comments associated with blog
+			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).fetch()
 
-			self.response.write(blog)
+			#if the blog has comments, convert to dictionary to make it json serializable
+			commentDictionary = []
+			if comments:
+				for comment in comments:
+					
+					#convert to dictionary
+					com = comment.to_dict()
+
+					#add new field to allow for list of comments of comments
+					com['responses'] = []
+
+					#append to result list
+					commentDictionary.append(com)
+
+
+			#Order the comments based on level (e.g. comment of a comment)
+			listOfComments = []
+			if commentDictionary:
+				for comment in commentDictionary:
+					
+					#if the comment contains this field, it is a comment to a comment
+					if comment['respondsTo']:
+						#finds the original comment
+						for comm in commentDictionary:
+							if comm['key'] == comment['respondsTo']:
+								#add the comment to the original comment
+								comm['responses'].append(comment)
+
+					#if it is not a comment of a comment, then add this original comment to the list
+					else:
+						listOfComments.append(comment)
+
+			returnBlog = blog.to_dict()
+
+			#add comments to the blog object
+			returnBlog['comments'] = listOfComments
+
+			self.response.set_status(200)
+			self.response.write(json.dumps(returnBlog))
 			return 
 
 	def put(self, **kwargs):
