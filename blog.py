@@ -102,8 +102,7 @@ class Blog(webapp2.RequestHandler):
 				return
 
 			#get comments associated with blog
-			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).fetch()
-
+			comments = db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).order(-db_defs.Comment.date)
 			#if the blog has comments, convert to dictionary to make it json serializable
 			commentDictionary = []
 			if comments:
