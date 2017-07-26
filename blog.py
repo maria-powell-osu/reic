@@ -30,7 +30,9 @@ class Blog(webapp2.RequestHandler):
 				return
 
 			#Get all blogs from DB
-			blogs = db_defs.Blog.query().fetch()
+			# db_defs.Comment.query(db_defs.Comment.blogKey == blog.key).order(-db_defs.Comment.date)
+			#blogs = db_defs.Blog.query().fetch()
+			blogs = db_defs.Blog.query().order(-db_defs.Blog.date)
 			listOfBlogObjects = []
 
 			#create response Object containing all blogs and corresponding paragraphs
